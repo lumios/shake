@@ -21,18 +21,18 @@ public class XMLParser {
     static final String EPICENTER = "epicenter_code";
     static final String MAGNITUDE = "magnitude";
     static final String SEISMIC = "seismic_scale";
-    static final String TEST = "training_type";
+    static final String TESTMODE = "training_type";
     static final String LATITUDE = "epicenter_lat";
     static final String LONGITUDE = "epicenter_lng";
     static final String DEPTH = "depth";
     static final String ID = "quake_id";
 
-    /*
+    // Deprecated
     static final String MODE = "mode";
     static final String UNIT = "unit";
     static final String CURRENT = "current";
     static final String INTERACTIVE = "interactive";
-    */
+
 
     @SuppressWarnings({ "unchecked" })
     public List<Item> readConfig(InputStream stream) {
