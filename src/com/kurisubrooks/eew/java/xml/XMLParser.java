@@ -27,11 +27,12 @@ public class XMLParser {
     static final String DEPTH = "depth";
     static final String ID = "quake_id";
 
-    // Deprecated
+    /*
     static final String MODE = "mode";
     static final String UNIT = "unit";
     static final String CURRENT = "current";
     static final String INTERACTIVE = "interactive";
+    */
 
 
     @SuppressWarnings({ "unchecked" })
@@ -69,30 +70,66 @@ public class XMLParser {
 
                     if (event.isStartElement()) {
                         if (event.asStartElement().getName().getLocalPart()
-                                .equals(MODE)) {
+                                .equals(DATE)) {
                             event = eventReader.nextEvent();
-                            item.setMode(event.asCharacters().getData());
+                            item.setDate(event.asCharacters().getData());
                             continue;
                         }
                     }
+
                     if (event.asStartElement().getName().getLocalPart()
-                            .equals(UNIT)) {
+                            .equals(EPICENTER)) {
                         event = eventReader.nextEvent();
-                        item.setUnit(event.asCharacters().getData());
+                        item.setEpicenter(event.asCharacters().getData());
                         continue;
                     }
 
                     if (event.asStartElement().getName().getLocalPart()
-                            .equals(CURRENT)) {
+                            .equals(MAGNITUDE)) {
                         event = eventReader.nextEvent();
-                        item.setCurrent(event.asCharacters().getData());
+                        item.setMagnitude(event.asCharacters().getData());
                         continue;
                     }
 
                     if (event.asStartElement().getName().getLocalPart()
-                            .equals(INTERACTIVE)) {
+                            .equals(SEISMIC)) {
                         event = eventReader.nextEvent();
-                        item.setInteractive(event.asCharacters().getData());
+                        item.setSeismic(event.asCharacters().getData());
+                        continue;
+                    }
+
+                    if (event.asStartElement().getName().getLocalPart()
+                            .equals(TESTMODE)) {
+                        event = eventReader.nextEvent();
+                        item.setTestMode(event.asCharacters().getData());
+                        continue;
+                    }
+
+                    if (event.asStartElement().getName().getLocalPart()
+                            .equals(LATITUDE)) {
+                        event = eventReader.nextEvent();
+                        item.setLatitude(event.asCharacters().getData());
+                        continue;
+                    }
+
+                    if (event.asStartElement().getName().getLocalPart()
+                            .equals(LONGITUDE)) {
+                        event = eventReader.nextEvent();
+                        item.setLongitude(event.asCharacters().getData());
+                        continue;
+                    }
+
+                    if (event.asStartElement().getName().getLocalPart()
+                            .equals(DEPTH)) {
+                        event = eventReader.nextEvent();
+                        item.setDepth(event.asCharacters().getData());
+                        continue;
+                    }
+
+                    if (event.asStartElement().getName().getLocalPart()
+                            .equals(ID)) {
+                        event = eventReader.nextEvent();
+                        item.setID(event.asCharacters().getData());
                         continue;
                     }
                 }
