@@ -14,9 +14,7 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 public class XMLParser {
-    // Main Element
     static final String ITEM = "quake";
-
     static final String DATE = "eq_date";
     static final String EPICENTER = "epicenter_code";
     static final String MAGNITUDE = "magnitude";
@@ -27,13 +25,6 @@ public class XMLParser {
     static final String DEPTH = "depth";
     static final String ID = "quake_id";
 
-    /*
-    static final String MODE = "mode";
-    static final String UNIT = "unit";
-    static final String CURRENT = "current";
-    static final String INTERACTIVE = "interactive";
-    */
-
 
     @SuppressWarnings({ "unchecked" })
     public List<Item> readConfig(InputStream stream) {
@@ -41,9 +32,11 @@ public class XMLParser {
         try {
             // First, create a new XMLInputFactory
             XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+
             // Setup a new eventReader
             InputStream in = stream;
             XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
+
             // read the XML document
             Item item = null;
 
@@ -52,9 +45,11 @@ public class XMLParser {
 
                 if (event.isStartElement()) {
                     StartElement startElement = event.asStartElement();
+
                     // If we have an item element, we create a new item
                     if (startElement.getName().getLocalPart() == (ITEM)) {
                         item = new Item();
+
                         // We read the attributes from this tag and add the date
                         // attribute to our object
                         Iterator<Attribute> attributes = startElement
