@@ -14,6 +14,7 @@ import com.kurisubrooks.eew.java.xml.*;
 public class EEWListener {
 	String api = "http://api.quake.twiple.jp/quake/index.xml";
     String alert = "../resources/alert.mp3";
+	String chime = "../resources/chime.mp3";
     
     public EEWListener() throws MalformedURLException {
     	

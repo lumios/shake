@@ -88,4 +88,23 @@ public class Item {
                 "depth=" + depth + ", " +
                 "id=" + id + "]";
     }
+
+    /* Useless JSON Formatting
+    @Override
+    public String toString() {
+        return  "{" + "\n" +
+                  " \"quake\": {" + "\n" +
+                    "  \"date\": " + "\"" + date + "\"," + "\n" +
+                    "  \"epicenter\": " + "\"" + epicenter + "\"," + "\n" +
+                    "  \"magnitude\": " + "\"" + magnitude + "\"," + "\n" +
+                    "  \"seismic\": " + "\"" + seismic + "\"," + "\n" +
+                    "  \"test_mode\": " + "\"" + testMode + "\"," + "\n" +
+                    "  \"latitude\": " + "\"" + latitude + "\"," + "\n" +
+                    "  \"longitude\": " + "\"" + longitude + "\"," + "\n" +
+                    "  \"depth\": " + "\"" + depth + "\"," + "\n" +
+                    "  \"id\": " + "\"" + id + "\"" + "\n" +
+                  " }" + "\n" +
+                "}";
+    }
+    */
 }
