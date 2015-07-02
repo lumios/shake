@@ -1,0 +1,18 @@
+notify.title="Earthquake Early Warning"
+notify.subtitle="Prepare for strong tremors"
+notify.message.1="An Earthquake is about to occur in "
+notify.message.2=""
+
+core.lang.select="Choose your language"
+core.install.files="Installing Audio Files"
+
+quake.date="Date"
+quake.epicenter="Epicenter"
+quake.magnitude="Magnitude"
+quake.seismic="Seismic Intensity"
+quake.testMode="False Alarm"
+quake.latitude="Latitude"
+quake.longitude="Longitude"
+quake.depth="Depth"
+quake.depth.scale="km"
+quake.id="Quake ID"
