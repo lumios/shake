@@ -1,0 +1,20 @@
+{
+    "ja_JP": {
+        "notify.title": "緊急地震速報",
+        "notify.subtitle": "強い揺れに警戒してください",
+        "notify.message.1": "地震がまもなく",
+        "notify.message.2": "で発生します。",
+        "core.lang.select": "あなたの言語を選択します",
+        "core.install.files": "インストール。待ってください。",
+        "quake.date": "日付",
+        "quake.epicenter": "震源地",
+        "quake.magnitude": "マグニチュード",
+        "quake.seismic": "震度",
+        "quake.testMode": "虚報",
+        "quake.latitude": "緯度",
+        "quake.longitude": "経度",
+        "quake.depth": "深さ",
+        "quake.depth.scale": "キロ",
+        "quake.id": "地震識別子"
+    }
+}
