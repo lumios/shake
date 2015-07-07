@@ -17,7 +17,8 @@ import com.kurisubrooks.eew.java.xml.*;
 public class EEWListener {
 	String api = "http://api.quake.twiple.jp/quake/index.xml";
     String alert = "../resources/alert.mp3";
-	String chime = "../resources/chime.mp3";
+	String nhk = "../resources/nhk.mp3";
+	String reic = "../resources/reic.mp3";
     
     public EEWListener() throws MalformedURLException {
     	
@@ -37,7 +38,7 @@ public class EEWListener {
 					
 					Constant.compareQuakes((ArrayList<Quake>) receivedXML);
 					
-					System.out.println("Got quakes data.");
+					System.out.println("Received Earthquake Data.");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -48,7 +49,7 @@ public class EEWListener {
     
     public static void newQuake(Quake nQ) throws Exception {
     	Notify n = notify.Notify.getInstance();
-    	//System.out.println("Earthquake Magnitude " + Integer.valueOf(nQ.getMagnitude()) / 10 +  "Epicenter: " + nQ.getEpicenter() + ", Depth: " + nQ.getDepth() + ", Scale: " + nQ.getSeismic());
-    	n.notify(notify.MessageType.INFO, "Earthquake Magnitude " + Integer.valueOf(nQ.getMagnitude()) / 10, "Epicenter: " + nQ.getEpicenter() + ", Depth: " + nQ.getDepth() + ", Scale: " + nQ.getSeismic());
+    	             //System.out.println("Magnitude: " + Integer.valueOf(nQ.getMagnitude()) / 10 + "Epicenter: " + nQ.getEpicenter() + ", Depth: " + nQ.getDepth() + ", Seismic Intensity: " + nQ.getSeismic());
+    	n.notify(notify.MessageType.INFO, "Magnitude: " + Integer.valueOf(nQ.getMagnitude()) / 10 , "Epicenter: " + nQ.getEpicenter() + ", Depth: " + nQ.getDepth() + ", Seismic Intensity: " + nQ.getSeismic());
     }
 }

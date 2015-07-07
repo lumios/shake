@@ -10,7 +10,7 @@ public class Constant {
 	public static boolean compareQuakes(ArrayList<Quake> qs) {
 		
 		if (rQ.isEmpty()) {
-			System.out.println("Recent quake list empty - building quake list");
+			System.out.println("Recent Earthquakes list is Empty - Building List");
 			rQ = qs;
 			return false;
 		}
