@@ -10,13 +10,13 @@ public class Constant {
 	public static boolean compareQuakes(ArrayList<Quake> qs) {
 		
 		if (rQ.isEmpty()) {
-			System.out.println("Recent Earthquakes list is Empty - Building List");
+			System.out.println("  Recent Earthquakes list is Empty - Building List");
 			rQ = qs;
 			return false;
 		}
 		
 		if (checkForNewItem(qs, rQ)) {
-			System.out.println("Quake list updated! Triggering event.");
+			System.out.println("  New Quake Detected, Triggering Event");
 			try {
 				EEWListener.newQuake(qs.get(0));
 				rQ = qs;

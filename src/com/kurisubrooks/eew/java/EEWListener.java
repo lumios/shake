@@ -15,10 +15,10 @@ import notify.Notify;
 import com.kurisubrooks.eew.java.xml.*;
 
 public class EEWListener {
-	String api = "http://api.quake.twiple.jp/quake/index.xml";
-    String alert = "../resources/alert.mp3";
-	String nhk = "../resources/nhk.mp3";
-	String reic = "../resources/reic.mp3";
+	String api = 	"http://api.quake.twiple.jp/quake/index.xml";
+    String alert = 	"../resources/alert.mp3";
+	String nhk = 	"../resources/nhk.mp3";
+	String reic = 	"../resources/reic.mp3";
     
     public EEWListener() throws MalformedURLException {
     	
@@ -38,7 +38,7 @@ public class EEWListener {
 					
 					Constant.compareQuakes((ArrayList<Quake>) receivedXML);
 					
-					System.out.println("Received Earthquake Data.");
+					System.out.println("  Received Earthquake Data.");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
