@@ -10,7 +10,7 @@ An Application built to Notify you when an Earthquake is about to occur.
 ##### Installation
 1. `cd ~/folder`
 2. `git clone -b node --single-branch git@github.com:kurisubrooks/eew.git`
-3. `npm install`
+3. `sudo npm install`
 
 ##### Run
 1. `cd ~/folder`
