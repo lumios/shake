@@ -70,9 +70,14 @@ function read(error, response, body) {
     oldQuakes = result.quakes.quake
 }
 
-
+/*
 function search() {
     request('http://127.0.0.1:8000/test.xml', read)
+}
+*/
+
+function search() {
+    request('http://api.quake.twiple.jp/quake/index.xml', read)
 }
 
 setInterval(search, 2000)
