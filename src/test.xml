@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quakes>
+    <quake>
+        <eq_date>1416311222</eq_date>
+        <epicenter_code>902</epicenter_code>
+        <magnitude>72</magnitude>
+        <seismic_scale>05+</seismic_scale>
+        <training_type>0</training_type>
+        <epicenter_lat>36.1</epicenter_lat>
+        <epicenter_lng>139.9</epicenter_lng>
+        <depth>10</depth>
+        <quake_id>20150712234207</quake_id>
+    </quake>
+    <quake>
+        <eq_date>1435647902</eq_date>
+        <epicenter_code>911</epicenter_code>
+        <magnitude>49</magnitude>
+        <seismic_scale>02</seismic_scale>
+        <training_type>0</training_type>
+        <epicenter_lat>27.6</epicenter_lat>
+        <epicenter_lng>141.4</epicenter_lng>
+        <depth>10</depth>
+        <quake_id>20150630160517</quake_id>
+    </quake>
+</quakes>
