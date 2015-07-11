@@ -1,8 +1,11 @@
-- Installation Window
+- Installation (First time run, system dependant)
 	- Moves core files into place
 	- Choose language (English, Japanese)
 	- Choose area/location
 	- Choose minimum magnitude (to notify above)
+
+- OS Only notifications
+	(Have different notifications depending on system)
 
 - GUI Window Popup
 	- Shows Map with Epicenter location and estimated effect radius
@@ -14,12 +17,31 @@
 - Silent Mode
 	- After hours, warning sound will only play if above specified magnitude
 
-- Only show notification is testMode = 0
+- Epoch Converter
+	- Automatically convert quake.eq_date to readable format
+
+- Only show notification if quake.training_type = 0
 
 - Determine effected area and only notify those within or near the specified area. (eg, quake is in tokyo, notify saitama, akita, shibuya, and surrounding prefectures)
 
 - Run in Daemon/Background
+	(Figure out a way to have the programs be open, without the program window needing to be open)
 
 - Internet connection
 	- Notification if failed to get API
 	- If failed to get api, try again in 5 minutes
+
+- GUI Window
+	- Opens when the event is triggered
+	- Google Maps API, place Epicenter (from lat,long) and draws Radius (eqradius.json)
+
+- Localization
+	- Implement a way to use different language strings from files in /localization
+
+- Epicenter Codes
+	- Be able to translate "epicenter_code" to the string in /localization/epicenter.json
+		(quake.epicenter_code (42) turns into "Fukuoka Prefecture")
+
+- Local Alerts
+	- Only shows notification if you're within 250km of the epicenter, and it's under magnitude 6.4
+		(If quake is above 6.4, show the event anyway [regardless of location])
