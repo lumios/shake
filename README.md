@@ -1,6 +1,6 @@
 # Early Earthquake Warning
-An Application built to Notify you when an Earthquake is about to occur.   
-このプログラムは、コンピュータに緊急地震速報通知を配信します。
+A program made to Notify you when an Earthquake is about to occur, through the use of Earthquake Early Warnings, provided by the Japanese Meteorological Agency.  
+このプログラムは、あなたのコンピュータに緊急地震速報通知を配信します。
 
 #### Installation
 ##### Prerequisites
