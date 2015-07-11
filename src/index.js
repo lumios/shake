@@ -49,6 +49,11 @@ function newQuake(quake) {
 }
 
 function read(error, response, body) {
+    
+    if (error) {
+        console.log(error);
+    }
+    
     var result = JSON.parse(parse.toJson(body))
     if (oldQuakes.length !== 0) {
         for (var o in result.quakes.quake) {
