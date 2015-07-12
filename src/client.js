@@ -23,10 +23,8 @@ win.on('minimize', function() {
 		});
 });
 
-function penguin(){
-	console.log("hey")
+function init(){
+	console.log("Event Received, GUI Starting")
 }
-function penguinasdf(){
-	console.log("heay")
-}
-penguin()
+
+init()
