@@ -47,8 +47,8 @@
               position: epicenter,
               map: map
             });
-            
-            var radius = eqPerceptionRadius(4);
+
+            var radius = eqPerceptionRadius(7);
 
             var eqRadius = {
               strokeColor: '#FF0000',
@@ -63,7 +63,7 @@
 
             cityCircle = new google.maps.Circle(eqRadius);
         }
-        
+
         function eqPerceptionRadius(y) {
             return (Math.floor(Math.exp(y/1.01 - 0.13 ) + 0.5));
         }
