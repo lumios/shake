@@ -1,12 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hello, World!</title>
+    <meta charset="utf-8">
+    <title>Installation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="resources/web/css/caramel.min.css" rel="stylesheet">
+    <link href="resources/web/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+
+        body {
+            font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Meiryo", "メイリオ", "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+        }
+        .center {
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            position: absolute;
+            min-width: 400px;
+            overflow: hidden;
+            text-align: center;
+            top: 50%;
+            left: 50%;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        .fa {
+          font-size: 22px;
+        }
+
+        /*.screen-1, .screen-2 {
+          display: hidden;
+          visibility: hidden;
+        }*/
+  </style>
 </head>
 <body>
-    
-    <h1>Hello, World.</h1>
-    <p>This window is brought to you by Node JS & nw.js</p>
+class='jp' will only be showed if the user's language is Japanese
+    <div class="center">
+
+        <div class="screen-1">
+            <p>Choose your Language</p>
+            <p class="jp">言語を選択してください</p>
+            <input type="radio" name="lang" value="en"> English
+            &nbsp;&nbsp;
+            <input type="radio" name="lang" value="jp"> 日本語
+        </div>
+
+        <br><br>
+
+        <div class="screen-2">
+            <p>Choose your Prefecture</p>
+            <p class="jp">あなたの県を選択してください。</p>
+
+            <select>
+                <option value="1">Tokyo</option>
+                <option value="2">Saitama</option>
+                <option value="3">Chibu</option>
+                <option value="4">Akita</option>
+                <option value="5">Fukushima</option>
+            </select>
+        </div>
+
+        <br><br>
+
+        <div class="screen-3">
+            <p>Choose the minimum magnitude to be notified of</p>
+            <p class="jp">通知を受ける最小震度を選択ください</p>
+
+            <select>
+                <option value="3">Magnitude 3+</option>
+                <option value="4">Magnitude 4+</option>
+                <option value="5">Magnitude 5+</option>
+                <option value="6">Magnitude 6+</option>
+                <option value="7">Magnitude 7+</option>
+            </select>
+
+            <br>
+
+            <select class="jp">
+                <option value="2">震度2</option>
+                <option value="3">震度3</option>
+                <option value="4">震度4</option>
+                <option value="5-">震度5弱</option>
+                <option value="5+">震度5強</option>
+                <option value="6-">震度6弱</option>
+                <option value="6+">震度6強</option>
+                <option value="7">震度7</option>
+            </select>
+
+        </div>
+
+        <br><br>
+
+        <div class="screen-4">
+            <p>Installing</p>
+            <p class="jp">インストール</p><br>
+            <i class="fa fa-spinner fa-spin"></i>
+        </div>
+
+    </div>
 
 </body>
 <script src="client.js" type="text/javascript"></script>
