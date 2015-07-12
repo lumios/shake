@@ -7,9 +7,11 @@ var oldQuakes = []
 require("babel/polyfill");
 
 function getDateTime() {
-    return moment().format("DD/MM/YYYY  hh:mm:ss") 
+    return moment().utcOffset(600).format("DD/MM/YYYY  hh:mm:ss");
 }
+
 console.log(getDateTime())
+
 function newQuake(quake) {
     notifier.notify({
         'title': 'Earthquake Early Warning',
