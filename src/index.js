@@ -2,33 +2,14 @@ var request = require("request")
 var notifier = require("node-notifier")
 var parse = require("xml2json")
 var path = require("path");
-
+var moment = require("moment");
 var oldQuakes = []
 require("babel/polyfill");
 
 function getDateTime() {
-    var date = new Date();
-
-    var hour = date.getHours();
-    hour = (hour < 10 ? "0" : "") + hour;
-
-    var min  = date.getMinutes();
-    min = (min < 10 ? "0" : "") + min;
-
-    var sec  = date.getSeconds();
-    sec = (sec < 10 ? "0" : "") + sec;
-
-    var year = date.getFullYear();
-
-    var month = date.getMonth() + 1;
-    month = (month < 10 ? "0" : "") + month;
-
-    var day  = date.getDate();
-    day = (day < 10 ? "0" : "") + day;
-
-    return day + "/" + month + "/" + year + " " + hour + ":" + min + ":" + sec;
+    return moment().format("DD/MM/YYYY  hh:mm:ss") 
 }
-
+console.log(getDateTime())
 function newQuake(quake) {
     notifier.notify({
         'title': 'Earthquake Early Warning',
@@ -40,7 +21,7 @@ function newQuake(quake) {
     });
 
     console.log(getDateTime() + " [!] Earthquake Detected, Triggering Event");
-    console.log(getDateTime() + " [-] Date/Time: " + quake.eq_date);
+    console.log(getDateTime() + " [-] Date/Time: " + moment(quake.eq_date, "X").fromNow() );
     console.log(getDateTime() + " [-] Magnitude: " + quake.magnitude / 10 + "M");
     console.log(getDateTime() + " [-] Seismic: " + quake.seismic_scale);
     console.log(getDateTime() + " [-] Latitude: " + quake.epicenter_lat);
