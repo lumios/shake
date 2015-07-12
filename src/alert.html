@@ -33,15 +33,21 @@
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script>
         function initialize() {
+            var epicenter = new google.maps.LatLng(35.6585, 139.7454);
             var mapCanvas = document.getElementById('map-canvas');
             var mapOptions = {
-                center: new google.maps.LatLng(35.6833, 139.7667),
+                center: new google.maps.LatLng(38.1389, 140.3130),
                 zoom: 5,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             }
             var map = new google.maps.Map(mapCanvas, mapOptions);
+            
+              var marker = new google.maps.Marker({
+                position: epicenter,
+                map: map
+            });
         }
-        
+
         google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 </head>
