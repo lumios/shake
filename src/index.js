@@ -1,14 +1,14 @@
 var request = require("request")
 var notifier = require("node-notifier")
 var parse = require("xml2json")
-var path = require("path");
-var moment = require("moment");
-var os = require('os');
+var path = require("path")
+var moment = require("moment")
+var os = require('os')
 var oldQuakes = []
-require("babel/polyfill");
+require("babel/polyfill")
 
 function getDateTime() {
-    return moment().utcOffset(600).format("DD/MM/YYYY  hh:mm:ss");
+    return moment().utcOffset(600).format("DD/MM/YYYY  hh:mm:ss")
 }
 
 console.log(getDateTime())
@@ -32,18 +32,18 @@ function newQuake(quake) {
         })
     }
 
-    console.log(getDateTime() + " [!] Earthquake Detected, Triggering Event");
-    console.log(getDateTime() + " [-] Date/Time: " + moment(quake.eq_date, "X").fromNow() );
-    console.log(getDateTime() + " [-] Magnitude: " + quake.magnitude / 10 + "M");
-    console.log(getDateTime() + " [-] Seismic: " + quake.seismic_scale);
-    console.log(getDateTime() + " [-] Latitude: " + quake.epicenter_lat);
-    console.log(getDateTime() + " [-] Longitude: " + quake.epicenter_lng);
-    console.log(getDateTime() + " [-] Depth: " + quake.depth + "km");
+    console.log(getDateTime() + " [!] Earthquake Detected, Triggering Event")
+    console.log(getDateTime() + " [-] Date/Time: " + moment(quake.eq_date, "X").fromNow() )
+    console.log(getDateTime() + " [-] Magnitude: " + quake.magnitude / 10 + "M")
+    console.log(getDateTime() + " [-] Seismic: " + quake.seismic_scale)
+    console.log(getDateTime() + " [-] Latitude: " + quake.epicenter_lat)
+    console.log(getDateTime() + " [-] Longitude: " + quake.epicenter_lng)
+    console.log(getDateTime() + " [-] Depth: " + quake.depth + "km")
 }
 
 function read(error, response, body) {
     if (error) {
-        console.log(error);
+        console.log(error)
     }
 
     var result = JSON.parse(parse.toJson(body))
