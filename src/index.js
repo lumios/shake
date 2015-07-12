@@ -22,7 +22,7 @@ function newQuake(quake) {
             'sound': 'eew',
             'icon': path.join(__dirname, 'icon.png')
         })
-    };
+    }
 
     else if (os.platform() == 'win32') {
         notifier.notify({
@@ -30,7 +30,7 @@ function newQuake(quake) {
             'message': 'A Magnitude ' + quake.magnitude / 10 +' Earthquake (Shindo' + quake.seismic_scale + ') is about to occur in ' + quake.epicenter_code + '. Please prepare for strong shaking.',
             'icon': path.join(__dirname, 'icon.png')
         })
-    };
+    }
 
     console.log(getDateTime() + " [!] Earthquake Detected, Triggering Event");
     console.log(getDateTime() + " [-] Date/Time: " + moment(quake.eq_date, "X").fromNow() );
@@ -48,11 +48,9 @@ function read(error, response, body) {
 
     var result = JSON.parse(parse.toJson(body))
     if (oldQuakes.length !== 0) {
-        for (var o in result.quakes.quake) {
-            var quake = result.quakes.quake[o]
+        for (var quake of result.quakes.quake) {
             var notfound = true
-            for (var i in oldQuakes) {
-                var oldQuake = oldQuakes[i]
+            for (var oldQuake of oldQuakes) {
                 if (oldQuake.quake_id === quake.quake_id) {
                     notfound = false
                     break

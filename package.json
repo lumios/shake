@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "A cross platform early earthquake warning",
   "scripts": {
-    "start": "./node_modules/.bin/nw ./src/",
-    "prepublish": "./node_modules/.bin/gulp ./"
+    "start": "./node_modules/.bin/nw ./src/"
   },
   "repository": {
     "type": "git",
