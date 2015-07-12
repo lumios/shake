@@ -1,15 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hello World!</title>
+    <title>Earthquake Early Warning</title>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            border: none;
+            
+            font-family: Arial, Helvetica, sans-serif;
+            overflow: hidden;
+        }
+        
+        .alert {
+            height: 3vh;
+            display: block;
+            vertical-align: middle;
+            padding: 20px;
+            color: #FFF;
+            border: 1px solid #d83532;
+            background: #DC4A47;
+        }
+        
+        #map-canvas {
+            height: 96vh;
+            width: 100%;
+            background-color: darkgrey;
+        }
+    </style>
+    
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script>
+        function initialize() {
+            var mapCanvas = document.getElementById('map-canvas');
+            var mapOptions = {
+                center: new google.maps.LatLng(35.6833, 139.7667),
+                zoom: 5,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+        }
+        
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
 </head>
 <body>
+    <audio hidden autoplay preload="auto">
+        <source src="resources/audio/nhk.ogg" type="audio/ogg">
+    </audio>
+    
+    <div class="alert">
+        Earthquake has occured in blah blah
+    </div>
 
-    <h1>Hello World!</h1> We are using node.js
+    <div id="map-canvas"></div>
 
-
-
-
-    <script src="client.js" , type="text/javascript"></script>.
 </body>
+<script src="client.js" type="text/javascript"></script>
 </html>
