@@ -23,16 +23,16 @@
 	- Notification Sound will not play after 12am (00:00) unless quake is above Magnitude 5 (Seismic Scale 5-)
 
 - Calculate Earthquake Radius
-	- Find better formula to calculate estimated damage radius from epicenter
+	- Find [better formula to calculate estimated damage radius from epicenter](http://wauke.org/493) (line 242)
 	- Only notify users within the affected and surrounding areas
 
 - Run in Daemon/Background
 	- Find a way to keep the program running whilst not being visibly open
 
 - Internet connection
-	- Give notification if program failed to get API, and try again every 3 minutes
+	- Give warning notification if program failed to get API, and try again every 3 minutes
 
-- Map GUI
+- Map GUI (alert.html)
 	- Opens when the event is triggered
 
 - Localization
