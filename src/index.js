@@ -15,21 +15,21 @@ console.log(getDateTime())
 
 function newQuake(quake) {
     if (os.platform() === 'linux' || os.platform() === 'darwin') {
-        notifier.notify({
+        notifier.notify( {
             'title': 'Earthquake Early Warning',
             'subtitle': 'An Earthquake is about to occur in ' + quake.epicenter_code,
             'message': 'Magnitude: ' + quake.magnitude / 10 + ', Seismic Scale: ' + quake.seismic_scale,
             'sound': 'eew',
             'icon': path.join(__dirname, 'icon.png')
-        })
+        } )
     }
 
     else if (os.platform() == 'win32') {
-        notifier.notify({
+        notifier.notify( {
             'title': 'Earthquake Early Warning',
             'message': 'A Magnitude ' + quake.magnitude / 10 +' Earthquake (Shindo' + quake.seismic_scale + ') is about to occur in ' + quake.epicenter_code + '. Please prepare for strong shaking.',
             'icon': path.join(__dirname, 'icon.png')
-        })
+        } )
     }
 
     console.log(getDateTime() + " [!] Earthquake Detected, Triggering Event")
