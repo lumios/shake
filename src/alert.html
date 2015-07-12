@@ -34,6 +34,7 @@
     <script>
         function initialize() {
             var epicenter = new google.maps.LatLng(35.6585, 139.7454);
+            var magnitude = 4;
             var mapCanvas = document.getElementById('map-canvas');
             var mapOptions = {
                 center: new google.maps.LatLng(38.1389, 140.3130),
@@ -46,6 +47,8 @@
               position: epicenter,
               map: map
             });
+            
+            var radius = eqPerceptionRadius(4);
 
             var eqRadius = {
               strokeColor: '#FF0000',
@@ -54,11 +57,15 @@
               fillColor: '#FF0000',
               fillOpacity: 0.35,
               map: map,
-              center: citymap[city].center,
-              radius: Math.sqrt(citymap[city].population) * 100
+              center: epicenter,
+              radius: radius
             };
 
             cityCircle = new google.maps.Circle(eqRadius);
+        }
+        
+        function eqPerceptionRadius(y) {
+            return (Math.floor(Math.exp(y/1.01 - 0.13 ) + 0.5));
         }
 
         google.maps.event.addDomListener(window, 'load', initialize);
