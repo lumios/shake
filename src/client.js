@@ -22,9 +22,15 @@ win.on('minimize', function() {
 				tray = null;
 		});
 });
-
-function init(){
-	console.log("Event Received, GUI Starting")
+function setLanguage() {
+	if ($("input[name='lang']:checked").val() == "en") {
+                            $(".en").show()
+							$(".jp").hide()
+                        }
+                        else {
+							$(".jp").show()
+							$(".en").hide()
+                        }
 }
-
-init()
+$("input[name='lang']").change(setLanguage)
+setLanguage()

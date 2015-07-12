@@ -2,7 +2,7 @@
 
 - Installation (First time run)
 	(Design finished, please make functional, only showing one 'screen' at a time)
-	
+
 	- Moves core files into place
 		- (Mac only ) Move core audio notification files into `~/Library/Sounds`
 	- Choose language (English, Japanese)
@@ -41,6 +41,6 @@
 - Epicenter Code Translation
 	- Translate `epicenter_code` to a place string (`/localization/epicenter.json`)
 		e.g `quake.epicenter_code(42)` returns 'Fukuoka Prefecture'
-		
+
 - Advanced Notifications
 	- If quake is above Magnitude 5.4 (Seismic 5+), post earthquake to all users, regardless of location

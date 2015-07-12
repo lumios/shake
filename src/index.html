@@ -39,21 +39,20 @@
   </style>
 </head>
 <body>
-class='jp' will only be showed if the user's language is Japanese
     <div class="center">
 
         <div class="screen-1">
-            <p>Choose your Language</p>
+            <p  class="en">Choose your Language</p>
             <p class="jp">言語を選択してください</p>
-            <input type="radio" name="lang" value="en"> English
+            <input type="radio" name="lang" value="en" checked="checked" /> English
             &nbsp;&nbsp;
-            <input type="radio" name="lang" value="jp"> 日本語
+            <input type="radio" name="lang" value="jp" /> 日本語
         </div>
 
         <br><br>
 
         <div class="screen-2">
-            <p>Choose your Prefecture</p>
+            <p class="en">Choose your Prefecture</p>
             <p class="jp">あなたの県を選択してください。</p>
 
             <select>
@@ -68,10 +67,10 @@ class='jp' will only be showed if the user's language is Japanese
         <br><br>
 
         <div class="screen-3">
-            <p>Choose the minimum magnitude to be notified of</p>
+            <p class="en">Choose the minimum magnitude to be notified of</p>
             <p class="jp">通知を受ける最小震度を選択ください</p>
 
-            <select>
+            <select  class="en">
                 <option value="3">Magnitude 3+</option>
                 <option value="4">Magnitude 4+</option>
                 <option value="5">Magnitude 5+</option>
@@ -97,7 +96,7 @@ class='jp' will only be showed if the user's language is Japanese
         <br><br>
 
         <div class="screen-4">
-            <p>Installing</p>
+            <p  class="en">Installing</p>
             <p class="jp">インストール</p><br>
             <i class="fa fa-spinner fa-spin"></i>
         </div>
@@ -105,5 +104,7 @@ class='jp' will only be showed if the user's language is Japanese
     </div>
 
 </body>
+<script src="resources/web/js/zepto.js" type="text/javascript"></script>
+
 <script src="client.js" type="text/javascript"></script>
 </html>
