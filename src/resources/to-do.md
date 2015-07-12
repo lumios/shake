@@ -1,3 +1,5 @@
+- ###[Bugs](https://gist.github.com/kurisubrooks/dd8c74a19a6b49be099f)
+
 - Installation (First time run)
 	(Design finished, please make functional, only showing one 'screen' at a time)
 	
