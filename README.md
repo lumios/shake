@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Early Earthquake Warning
 A program made to Notify you when an Earthquake is about to occur, through the use of Earthquake Early Warnings, provided by the Japanese Meteorological Agency.  
 このプログラムは、あなたのコンピュータに緊急地震速報通知を配信します。
@@ -21,4 +20,3 @@ A program made to Notify you when an Earthquake is about to occur, through the u
 ##### Run - CLI
 1. `cd ~/folder/eew/src`
 2. `node index.js`
->>>>>>> c88dd37cd0b1235bbe41564ac6b3a7f855b08518
