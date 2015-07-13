@@ -28,6 +28,8 @@
 	- Find [better formula to calculate estimated damage radius from epicenter](http://wauke.org/493) (line 242)
 	- Only notify users within the affected and surrounding areas
 
+- Cut down load time with NW.JS from 58 seconds (mac) to a maximum of 5.
+
 - Run in Daemon/Background
 	- Find a way to keep the program running whilst not being visibly open
 
