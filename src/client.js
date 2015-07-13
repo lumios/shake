@@ -1,6 +1,6 @@
 // Load library
 var gui = require('nw.gui');
-require('nw.gui').Window.get().showDevTools()
+//require('nw.gui').Window.get().showDevTools()
 // Reference to window and tray
 var win = gui.Window.get();
 var tray;
