@@ -17,7 +17,7 @@
 		- NHK - Under Magnitude 5 (Seismic 5-)
 		- REIC - Above Magnitude 5 (Seismic 5-)
 
-- Use Electron.IO rather than NW.JS
+- Make NW.JS Faster (Maybe load the binary in the background, then open when needed?)
 
 - Encorporate [Tsunami API](https://doc01.pf.iij-engineering.co.jp/pub/sdkdoc/v1/ja_JP/websocketapi/websockif_pub_tsunami_receiver.html)
 
