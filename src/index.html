@@ -1,117 +1,131 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <title>Installation</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<title>Settings [設定]</title>
+  <link rel="icon" type="image/png" href="icon.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="resources/web/css/caramel.min.css" rel="stylesheet">
-    <link href="resources/web/css/font-awesome.min.css" rel="stylesheet">
-    <style>
+	<link href="resources/web/css/caramel.min.css" rel="stylesheet">
+	<link href="resources/web/css/font-awesome.min.css" rel="stylesheet">
+	<style>
+		body {
+			padding: 10px 20px;
+			font-family: sans-serif;
+		}
 
-        body {
-            font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Meiryo", "メイリオ", "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-        }
-        .center {
-            -webkit-transform: translate(-50%, -50%);
-            -moz-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-            position: absolute;
-            min-width: 400px;
-            overflow: hidden;
-            text-align: center;
-            top: 50%;
-            left: 50%;
-        }
+		.center {
+			-webkit-transform: translate(-50%, -50%);
+			-moz-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+			position: absolute;
+			min-width: 400px;
+			overflow: hidden;
+			text-align: center;
+			top: 50%;
+			left: 50%;
+		}
 
-        p {
-            font-size: 16px;
-        }
+		.content {
+			margin-left: 10px;
+		}
 
-        .fa {
-          font-size: 22px;
-        }
-
-        /*.screen-1, .screen-2 {
-          display: hidden;
-          visibility: hidden;
-        }*/
-  </style>
+		jp, .jp {
+			font-size: 15px;
+		}
+	</style>
 </head>
+
 <body>
-    <div class="center">
+	<h4>Language (<jp>言語</jp>)</h4>
+	<div class="content">
+		<input type="radio" name="lang" value="en" checked> English
+		<br>
+		<input type="radio" name="lang" value="jp">
+		<jp>日本語</jp>
+	</div>
 
-        <div class="screen-1">
-            <p  class="en">Choose your Language</p>
-            <p class="jp">言語を選択してください</p>
-            <input type="radio" name="lang" value="en" checked="checked" /> English
-            &nbsp;&nbsp;
-            <input type="radio" name="lang" value="jp" /> 日本語
-        </div>
+	<br>
 
-        <br><br>
+	<h4>Area (<jp>県</jp>)</h4>
+	<div class="content">
+    <h6>Choose the area you want to be notified of when an Earthquake occurs.</h6>
+		<select class='en'>
+			<option value="1">Tokyo</option>
+			<option value="2">Saitama</option>
+			<option value="3">Chiba</option>
+			<option value="4">Akita</option>
+			<option value="5">Fukushima</option>
+		</select>
 
-        <div class="screen-2">
-            <p class="en">Choose your Prefecture</p>
-            <p class="jp">あなたの県を選択してください。</p>
+		<select class='jp'>
+			<option value="1">東京</option>
+			<option value="2">埼玉</option>
+			<option value="3">千葉</option>
+			<option value="4">秋田</option>
+			<option value="5">福島</option>
+		</select>
+	</div>
 
-            <select class='en'>
-                <option value="1">Tokyo</option>
-                <option value="2">Saitama</option>
-                <option value="3">Chibu</option>
-                <option value="4">Akita</option>
-                <option value="5">Fukushima</option>
-            </select>
-            <select class='jp'>
-                <option value="1">東京</option>
-                <option value="2">埼玉</option>
-                <option value="3">Chibu</option>
-                <option value="4">秋田</option>
-                <option value="5">福島</option>
-            </select>
-        </div>
+	<br>
 
-        <br><br>
+	<h4>Alert Magnitude (<jp>最小震度を選択</jp>)</h4>
+	<div class="content">
+    <h6>Choose a Minimum Magnitude and Seismic Intensity to be notified by. You will not receive alerts for Earthquakes under the given Magnitude/Seismic Intensity.</h6>
+		<span class="en">Magnitude </span><span class="jp">マグニチュード</span>
+			<select>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+			</select>
 
-        <div class="screen-3">
-            <p class="en">Choose the minimum magnitude to be notified of</p>
-            <p class="jp">通知を受ける最小震度を選択ください</p>
+			<span> OR
+        <span class="en">Seismic </span>
+        <span class="jp">震度</span>
+      </span>
 
-            <select  class="en">
-                <option value="3">Magnitude 3+</option>
-                <option value="4">Magnitude 4+</option>
-                <option value="5">Magnitude 5+</option>
-                <option value="6">Magnitude 6+</option>
-                <option value="7">Magnitude 7+</option>
-            </select>
+			<select>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5-">5-</option>
+				<option value="5+">5+</option>
+				<option value="6-">6-</option>
+				<option value="6+">6+</option>
+				<option value="7">7</option>
+			</select>
+	</div>
 
-            <br>
+    <hr>
 
-            <select class="jp">
-                <option value="2">震度2</option>
-                <option value="3">震度3</option>
-                <option value="4">震度4</option>
-                <option value="5-">震度5弱</option>
-                <option value="5+">震度5強</option>
-                <option value="6-">震度6弱</option>
-                <option value="6+">震度6強</option>
-                <option value="7">震度7</option>
-            </select>
+    <h4>Night Mode (<jp>ナイトモード</jp>)</h4>
+    <div class="content">
+      <h6>Silences Notifications if after 12am, unless Earthquake is above Magnitude 6</h6>
+      <input type="checkbox" value="mode_night"> Enable Night Mode
+    </div>
 
-        </div>
+    <br>
 
-        <br><br>
+    <h4>Notification Sound (<jp>通知音</jp>)</h4>
+    <div class="content">
+      <h6>Choose which Notification sound you want to alert you, when an Earthquake is about to occur.</h6>
+      <input type="radio" value="sound_nhk" checked> NHK<br>
+      <input type="radio" value="sound_reic"> REIC
+    </div>
 
-        <div class="screen-4">
-            <p  class="en">Installing</p>
-            <p class="jp">インストール</p><br>
-            <i class="fa fa-spinner fa-spin"></i>
-        </div>
+    <br>
 
+    <h4>Tsunami Beta (<jp>津波</jp>)</h4>
+    <div class="content">
+      <h6>Work In Progress Tsunami Alerts.</h6>
+      <input type="checkbox" value="beta_tsunami"> Participate in Beta
     </div>
 
 </body>
 <script src="resources/web/js/zepto.js" type="text/javascript"></script>
-
 <script src="client.js" type="text/javascript"></script>
 </html>
