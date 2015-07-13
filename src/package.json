@@ -5,7 +5,7 @@
   "main": "index.html",
   "window": {
     "title": "node-webkit demo",
-    "icon": "link.png",
+    "icon": "icon.png",
     "toolbar": true,
     "frame": true,
     "width": 440,
