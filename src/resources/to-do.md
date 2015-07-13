@@ -17,6 +17,8 @@
 		- NHK - Under Magnitude 5 (Seismic 5-)
 		- REIC - Above Magnitude 5 (Seismic 5-)
 
+- Encorporate [Tsunami API](https://doc01.pf.iij-engineering.co.jp/pub/sdkdoc/v1/ja_JP/websocketapi/websockif_pub_tsunami_receiver.html)
+
 - Only trigger event if `quake.training_type` = `0`
 
 - Silent Mode
