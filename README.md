@@ -10,9 +10,13 @@ A program made to Notify you when an Earthquake is about to occur, through the u
 ##### Installation
 1. `cd ~/folder`
 2. `git clone -b node --single-branch git@github.com:kurisubrooks/eew.git`
-3. `sudo npm install`
+3. `cd eew`
+4. `sudo npm install`
 
-##### Run
-1. `cd ~/folder`
-2. `sudo python -m SimpleHTTPServer`
-3. `node index.js`
+##### Run - GUI
+1. `cd ~/folder/eew`
+2. `npm start`
+
+##### Run - CLI
+1. `cd ~/folder/eew/src`
+2. `node index.js`
