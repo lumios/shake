@@ -1,6 +1,6 @@
 var request = require("request")
 var notifier = require("node-notifier")
-var parse = require("xml2json")
+var parse = require('xml2js').parseString
 var path = require("path")
 var moment = require("moment")
 var os = require('os')
@@ -46,23 +46,24 @@ function read(error, response, body) {
         console.log(error)
     }
 
-    var result = JSON.parse(parse.toJson(body))
-    if (oldQuakes.length !== 0) {
-        for (var quake of result.quakes.quake) {
-            var notfound = true
-            for (var oldQuake of oldQuakes) {
-                if (oldQuake.quake_id === quake.quake_id) {
-                    notfound = false
+    parse(parse.toJson(body), function(err, result){
+        if (oldQuakes.length !== 0) {
+            for (var quake of result.quakes.quake) {
+                var notfound = true
+                for (var oldQuake of oldQuakes) {
+                    if (oldQuake.quake_id === quake.quake_id) {
+                        notfound = false
+                        break
+                    }
+                }
+                if (notfound) {
+                    newQuake(quake)
                     break
                 }
             }
-            if (notfound) {
-                newQuake(quake)
-                break
-            }
         }
-    }
-    oldQuakes = result.quakes.quake
+        oldQuakes = result.quakes.quake
+    }); 
 }
 
 /*
