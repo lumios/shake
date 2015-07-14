@@ -4,8 +4,8 @@
   "description": "A cross platform early earthquake warning",
   "main": "index.html",
   "window": {
-    "title": "node-webkit demo",
-    "icon": "resources.png",
+    "title": "eew",
+    "icon": "resources/icon.png",
     "toolbar": true,
     "frame": true,
     "width": 440,

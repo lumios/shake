@@ -12,7 +12,7 @@ win.on('minimize', function() {
 
 		// Show tray
 		tray = new gui.Tray({
-				icon: 'icon.png'
+				icon: 'resources/icon.png'
 		});
 
 		// Show window and remove tray when clicked
