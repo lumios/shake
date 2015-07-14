@@ -1,5 +1,11 @@
 - ###[Bugs](https://gist.github.com/kurisubrooks/dd8c74a19a6b49be099f)
 
+- Find better Earthquake API [
+	- Earthquake occurred at 1:42am
+	- SignalNowExpress alert at 1:45am
+	- EEW (twiple api) alert at 1:46am
+
+
 - Installation (First time run)
 	(Design finished, please make functional, only showing one 'screen' at a time)
 
