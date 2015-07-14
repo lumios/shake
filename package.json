@@ -32,7 +32,8 @@
     "request": "^2.58.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "xml2js": "^0.4.9"
+    "xml2js": "^0.4.9",
+    "zepto-browserify": "^1.1.6-1"
   },
   "browser": {
     "zepto": "./src/resources/web/js/zepto.js"
