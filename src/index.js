@@ -22,13 +22,13 @@ function newQuake(quake) {
             'subtitle': 'An Earthquake is about to occur in ' + quake.epicenter_code,
             'message': 'Magnitude: ' + quake.magnitude / 10 + ', Seismic Scale: ' + quake.seismic_scale,
             'sound': 'eew',
-            'icon': path.join(__dirname, 'icon.png')
+            'icon': path.join(__dirname, 'resources/icon.png')
         })
     } else if (os.platform() == 'win32') {
         notifier.notify({
             'title': 'Earthquake Early Warning',
             'message': 'A Magnitude ' + quake.magnitude / 10 + ' Earthquake (Shindo' + quake.seismic_scale + ') is about to occur in ' + quake.epicenter_code + '. Please prepare for strong shaking.',
-            'icon': path.join(__dirname, 'icon.png')
+            'icon': path.join(__dirname, 'resources/icon.png')
         })
     }
 
