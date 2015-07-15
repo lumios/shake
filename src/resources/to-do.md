@@ -1,6 +1,6 @@
 - ###[Bugs](https://gist.github.com/kurisubrooks/dd8c74a19a6b49be099f)
 
-- Find better Earthquake API [
+- Use a Better API [1](http://api.p2pquake.com/v1/human-readable), [2](https://doc01.pf.iij-engineering.co.jp/pub/sdkdoc/v1/ja_JP/websocketapi/websockif_pub_eq_receiver.html), [3](https://doc01.pf.iij-engineering.co.jp/pub/sdkdoc/v1/ja_JP/websocketapi/eq_ver1.html), [4](http://www.p2pquake.com/dev/?q=json-api):
 	- Earthquake occurred at 1:42am
 	- SignalNowExpress alert at 1:45am
 	- EEW (twiple api) alert at 1:46am
