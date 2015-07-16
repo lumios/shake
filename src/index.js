@@ -63,7 +63,7 @@ function read(error, response, body) {
             }
         }
         oldQuakes = result.quakes.quake
-    }); 
+    });
 }
 
 /*
