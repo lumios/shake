@@ -1,4 +1,4 @@
-- ###[Bugs](https://gist.github.com/kurisubrooks/dd8c74a19a6b49be099f) (Updated 12:30am 16 July)
+- ~~###[Bugs](https://gist.github.com/kurisubrooks/dd8c74a19a6b49be099f) (Updated 12:30am 16 July)~~
 
 - Switch to a _more reliable_ [WebSocket API](https://doc01.pf.iij-engineering.co.jp/pub/sdkdoc/v1/ja_JP/websocketapi/websockif_pub_eq_receiver.html):
 	- Earthquake occurred at 1:42am
@@ -23,7 +23,7 @@
 		- NHK - Under Magnitude 5 (Seismic 5-)
 		- REIC - Above Magnitude 5 (Seismic 5-)
 
-- Make NW.JS Faster (Maybe load the binary in the background, then open when needed?)
+- ~~Make NW.JS Faster (Maybe load the binary in the background, then open when needed?)~~
 
 - Encorporate [Tsunami API](https://doc01.pf.iij-engineering.co.jp/pub/sdkdoc/v1/ja_JP/websocketapi/websockif_pub_tsunami_receiver.html)
 
