@@ -1,0 +1,332 @@
+// http://seismo.cqu.edu.au/CQSRG/PerceptionRadius/
+[
+    {
+        "Magnitude": "1.0",
+        "Shindo": "1",
+        "Radius": "2km"
+    },
+    {
+        "Magnitude": "1.5",
+        "Shindo": "2",
+        "Radius": "4km"
+    },
+    {
+        "Magnitude": "2.0",
+        "Shindo": "2",
+        "Radius": "6km"
+    },
+    {
+        "Magnitude": "2.5",
+        "Shindo": "3",
+        "Radius": "10km"
+    },
+    {
+        "Magnitude": "3.0",
+        "Shindo": "3",
+        "Radius": "17km"
+    },
+    {
+        "Magnitude": "3.5",
+        "Shindo": "4",
+        "Radius": "28km"
+    },
+    {
+        "Magnitude": "3.6",
+        "Shindo": "4",
+        "Radius": "31km"
+    },
+    {
+        "Magnitude": "3.7",
+        "Shindo": "4",
+        "Radius": "34km"
+    },
+    {
+        "Magnitude": "3.8",
+        "Shindo": "4",
+        "Radius": "38km"
+    },
+    {
+        "Magnitude": "3.9",
+        "Shindo": "4",
+        "Radius": "42km"
+    },
+    {
+        "Magnitude": "4.0",
+        "Shindo": "4",
+        "Radius": "46km"
+    },
+    {
+        "Magnitude": "4.1",
+        "Shindo": "4",
+        "Radius": "51km"
+    },
+    {
+        "Magnitude": "4.2",
+        "Shindo": "4",
+        "Radius": "56km"
+    },
+    {
+        "Magnitude": "4.3",
+        "Shindo": "4",
+        "Radius": "62km"
+    },
+    {
+        "Magnitude": "4.4",
+        "Shindo": "4",
+        "Radius": "68km"
+    },
+    {
+        "Magnitude": "4.5",
+        "Shindo": "5-",
+        "Radius": "76km"
+    },
+    {
+        "Magnitude": "4.6",
+        "Shindo": "5-",
+        "Radius": "83km"
+    },
+    {
+        "Magnitude": "4.7",
+        "Shindo": "5-",
+        "Radius": "92km"
+    },
+    {
+        "Magnitude": "4.8",
+        "Shindo": "5-",
+        "Radius": "102km"
+    },
+    {
+        "Magnitude": "4.9",
+        "Shindo": "5-",
+        "Radius": "112km"
+    },
+    {
+        "Magnitude": "5.0",
+        "Shindo": "5+",
+        "Radius": "124km"
+    },
+    {
+        "Magnitude": "5.1",
+        "Shindo": "5+",
+        "Radius": "137km"
+    },
+    {
+        "Magnitude": "5.2",
+        "Shindo": "5+",
+        "Radius": "151km"
+    },
+    {
+        "Magnitude": "5.3",
+        "Shindo": "5+",
+        "Radius": "167km"
+    },
+    {
+        "Magnitude": "5.4",
+        "Shindo": "5+",
+        "Radius": "184km"
+    },
+    {
+        "Magnitude": "5.5",
+        "Shindo": "6-",
+        "Radius": "203km"
+    },
+    {
+        "Magnitude": "5.6",
+        "Shindo": "6-",
+        "Radius": "225km"
+    },
+    {
+        "Magnitude": "5.7",
+        "Shindo": "6-",
+        "Radius": "248km"
+    },
+    {
+        "Magnitude": "5.8",
+        "Shindo": "6-",
+        "Radius": "274km"
+    },
+    {
+        "Magnitude": "5.9",
+        "Shindo": "6-",
+        "Radius": "302km"
+    },
+    {
+        "Magnitude": "6.0",
+        "Shindo": "6+",
+        "Radius": "334km"
+    },
+    {
+        "Magnitude": "6.1",
+        "Shindo": "6+",
+        "Radius": "369km"
+    },
+    {
+        "Magnitude": "6.2",
+        "Shindo": "6+",
+        "Radius": "407km"
+    },
+    {
+        "Magnitude": "6.3",
+        "Shindo": "6+",
+        "Radius": "449km"
+    },
+    {
+        "Magnitude": "6.4",
+        "Shindo": "6+",
+        "Radius": "496km"
+    },
+    {
+        "Magnitude": "6.5",
+        "Shindo": "7",
+        "Radius": "548km"
+    },
+    {
+        "Magnitude": "6.6",
+        "Shindo": "7",
+        "Radius": "605km"
+    },
+    {
+        "Magnitude": "6.7",
+        "Shindo": "7",
+        "Radius": "668km"
+    },
+    {
+        "Magnitude": "6.8",
+        "Shindo": "7",
+        "Radius": "737km"
+    },
+    {
+        "Magnitude": "6.9",
+        "Shindo": "7",
+        "Radius": "812km"
+    },
+    {
+        "Magnitude": "7.0",
+        "Shindo": "7",
+        "Radius": "898km"
+    },
+    {
+        "Magnitude": "7.1",
+        "Shindo": "7",
+        "Radius": "992km"
+    },
+    {
+        "Magnitude": "7.2",
+        "Shindo": "7",
+        "Radius": "1095km"
+    },
+    {
+        "Magnitude": "7.3",
+        "Shindo": "7",
+        "Radius": "1209km"
+    },
+    {
+        "Magnitude": "7.4",
+        "Shindo": "7",
+        "Radius": "1335km"
+    },
+    {
+        "Magnitude": "7.5",
+        "Shindo": "7",
+        "Radius": "1474km"
+    },
+    {
+        "Magnitude": "7.6",
+        "Shindo": "7",
+        "Radius": "1627km"
+    },
+    {
+        "Magnitude": "7.7",
+        "Shindo": "7",
+        "Radius": "1797km"
+    },
+    {
+        "Magnitude": "7.8",
+        "Shindo": "7",
+        "Radius": "1984km"
+    },
+    {
+        "Magnitude": "7.9",
+        "Shindo": "7",
+        "Radius": "2190km"
+    },
+    {
+        "Magnitude": "8.0",
+        "Shindo": "7",
+        "Radius": "2418km"
+    },
+    {
+        "Magnitude": "8.1",
+        "Shindo": "7",
+        "Radius": "2670km"
+    },
+    {
+        "Magnitude": "8.2",
+        "Shindo": "7",
+        "Radius": "2948km"
+    },
+    {
+        "Magnitude": "8.3",
+        "Shindo": "7",
+        "Radius": "3255km"
+    },
+    {
+        "Magnitude": "8.4",
+        "Shindo": "7",
+        "Radius": "3593km"
+    },
+    {
+        "Magnitude": "8.5",
+        "Shindo": "7",
+        "Radius": "3967km"
+    },
+    {
+        "Magnitude": "8.6",
+        "Shindo": "7",
+        "Radius": "4380km"
+    },
+    {
+        "Magnitude": "8.7",
+        "Shindo": "7",
+        "Radius": "4836km"
+    },
+    {
+        "Magnitude": "8.8",
+        "Shindo": "7",
+        "Radius": "5339km"
+    },
+    {
+        "Magnitude": "8.9",
+        "Shindo": "7",
+        "Radius": "5895km"
+    },
+    {
+        "Magnitude": "9.0",
+        "Shindo": "7",
+        "Radius": "6509km"
+    },
+    {
+        "Magnitude": "9.1",
+        "Shindo": "7",
+        "Radius": "7186km"
+    },
+    {
+        "Magnitude": "9.2",
+        "Shindo": "7",
+        "Radius": "7934km"
+    },
+    {
+        "Magnitude": "9.3",
+        "Shindo": "7",
+        "Radius": "8760km"
+    },
+    {
+        "Magnitude": "9.4",
+        "Shindo": "7",
+        "Radius": "9671km"
+    },
+    {
+        "Magnitude": "9.5",
+        "Shindo": "10678km"
+    }
+]

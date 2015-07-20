@@ -1,0 +1,19 @@
+{
+  "name": "eew",
+  "version": "1.0.0",
+  "description": "A cross platform early earthquake warning",
+  "main": "index.html",
+  "window": {
+    "title": "eew",
+    "icon": "resources/icon.png",
+    "toolbar": true,
+    "frame": true,
+    "width": 440,
+    "height": 440,
+    "position": "mouse",
+    "min_width": 400,
+    "min_height": 200,
+    "max_width": 800,
+    "max_height": 600
+    }
+}

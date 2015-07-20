@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Earthquake Early Warning</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            border: none;
+
+            font-family: Arial, Helvetica, sans-serif;
+            overflow: hidden;
+        }
+
+        .alert {
+            height: 3vh;
+            display: block;
+            vertical-align: middle;
+            padding: 20px;
+            color: #FFF;
+            border: 1px solid #d83532;
+            background: #DC4A47;
+        }
+
+        #map-canvas {
+            height: 96vh;
+            width: 100%;
+            background-color: darkgrey;
+        }
+    </style>
+
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script>
+        function initialize() {
+            var epicenter = new google.maps.LatLng(35.6585, 139.7454);
+            var magnitude = 4;
+            var mapCanvas = document.getElementById('map-canvas');
+            var mapOptions = {
+                center: new google.maps.LatLng(38.1389, 140.3130),
+                zoom: 5,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+
+            var marker = new google.maps.Marker({
+              position: epicenter,
+              map: map
+            });
+
+            var radius = eqPerceptionRadius(magnitude) * 1000;
+
+            var eqRadius = {
+              strokeColor: '#FF0000',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: '#FF0000',
+              fillOpacity: 0.35,
+              map: map,
+              center: epicenter,
+              radius: radius
+            };
+
+            cityCircle = new google.maps.Circle(eqRadius);
+        }
+
+        function eqPerceptionRadius(y) {
+            return (Math.floor(Math.exp(y/1.01 - 0.13 ) + 0.5));
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+</head>
+<body>
+    <audio hidden autoplay preload="auto">
+        <source src="resources/audio/nhk.ogg" type="audio/ogg">
+    </audio>
+
+    <div class="alert">
+        An Earthquake is about to occur in Tokyo, Magnitude 4.
+    </div>
+
+    <div id="map-canvas"></div>
+
+</body>
+<script src="client.js" type="text/javascript"></script>
+</html>

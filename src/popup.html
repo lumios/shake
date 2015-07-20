@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Earthquake Early Warning</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            border: none;
+
+            font-family: Arial, Helvetica, sans-serif;
+            overflow: hidden;
+        }
+
+        .alert {
+            height: 3vh;
+            display: block;
+            vertical-align: middle;
+            padding: 20px;
+            color: #FFF;
+            border: 1px solid #d83532;
+            background: #DC4A47;
+        }
+
+        #map-canvas {
+            height: 96vh;
+            width: 100%;
+            background-color: darkgrey;
+        }
+    </style>
+</head>
+<body>
+    <audio hidden autoplay preload="auto">
+        <source src="resources/audio/nhk.ogg" type="audio/ogg">
+    </audio>
+    <div class="alert">
+        An Earthquake is about to occur in Tokyo, Magnitude 4.
+    </div>
+
+
+</body>
+<script src="client.js" type="text/javascript"></script>
+</html>
