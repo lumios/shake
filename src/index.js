@@ -1,6 +1,3 @@
-
-
-
 var request = require("request");
 var notifier = require("node-notifier");
 var parseString = require('xml2js').parseString;
@@ -13,7 +10,6 @@ require("babel/polyfill");
 
 function getDateTime() {
     return moment().utcOffset(600).format("DD/MM/YY h:m:ss");
-    //return moment().utcOffset(600).format("Do MMM YYYY h:m:ssa");
 }
 
 console.log(getDateTime() + ' - Process Started');
@@ -77,17 +73,4 @@ function search() {
     request('http://api.quake.twiple.jp/quake/index.xml', read);
 }
 
-setInterval(function() {
-    console.log("run")
-    newQuake({
-        "eq_date": "1437066950",
-        "epicenter_code": "476",
-        "magnitude": "47",
-        "seismic_scale": "03",
-        "training_type": "0",
-        "epicenter_lat": "33.3",
-        "epicenter_lng": "139.5",
-        "depth": "10",
-        "quake_id": "20150717021556"
-    })
-}, 15000);
+setInterval(search, 2000);
