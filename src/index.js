@@ -43,6 +43,7 @@ function read(error, response, body) {
     if (error) {
         console.log(error);
     }
+    
     parseString(body, function(err, result) {
         if (oldQuakes.length !== 0) {
             for (var quake of result.quakes.quake) {
