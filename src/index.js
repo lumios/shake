@@ -8,7 +8,6 @@ var path = require("path");
 var moment = require("moment");
 var os = require('os');
 var oldQuakes = [];
-var ipc = require('ipc')
 
 require("babel/polyfill");
 
@@ -35,7 +34,6 @@ function newQuake(quake) {
             'icon': path.join(__dirname, 'icon.png')
         });
     }
-    ipc.send('alert' );
     console.log(getDateTime() + " [!] Earthquake Detected, Triggering Event");
     console.log(getDateTime() + " [-] Date/Time: " + moment(quake.eq_date, "X").fromNow());
     console.log(getDateTime() + " [-] Magnitude: " + quake.magnitude / 10 + "M");
@@ -49,7 +47,6 @@ function read(error, response, body) {
     if (error) {
         console.log(error);
     }
- 	ipc.send('alert')
     parseString(xml, function(err, result) {
         if (oldQuakes.length !== 0) {
             for (var quake of result.quakes.quake) {
