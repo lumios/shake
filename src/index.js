@@ -5,22 +5,21 @@ var path = require("path");
 var moment = require("moment");
 var os = require('os');
 var oldQuakes = [];
-
 require("babel/polyfill");
 
-function getDateTime() {
-    return moment().utcOffset(600).format("DD/MM/YY h:mm:ss");
-}
-
+function getDateTime() {return moment().utcOffset(600).format("DD/MM/YY h:mm:ss");}
 console.log(getDateTime() + '  [#] Process Started, Checking for Quakes...');
 
 function newQuake(quake) {
+    if (quake.magnitude > 50) {var sound = 'reic';}
+    if (quake.magnitude < 50) {var sound = 'nhk';}
+
     if (false && os.platform() === 'linux' || os.platform() === 'darwin') {
         notifier.notify({
             'title': 'Earthquake Early Warning',
             'subtitle': 'An Earthquake has occured in ' + quake.epicenter_code,
             'message': 'Magnitude: ' + quake.magnitude / 10 + ', Seismic Scale: ' + quake.seismic_scale,
-            'sound': 'nhk',
+            'sound': sound,
             'icon': path.join(__dirname, 'resources/icon2.png')
         });
     }
@@ -79,3 +78,19 @@ function search() {
 }
 
 setInterval(search, 2000);
+
+/*
+setInterval(function() {
+    newQuake({
+        "eq_date": "1438008000",
+        "epicenter_code": "476",
+        "magnitude": "72",
+        "seismic_scale": "07",
+        "training_type": "0",
+        "epicenter_lat": "33.3",
+        "epicenter_lng": "139.5",
+        "depth": "10",
+        "quake_id": "20150717021556"
+    })
+}, 5000);
+*/
