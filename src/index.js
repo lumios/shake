@@ -9,41 +9,51 @@ var oldQuakes = [];
 require("babel/polyfill");
 
 function getDateTime() {
-    return moment().utcOffset(600).format("DD/MM/YY h:m:ss");
+    return moment().utcOffset(600).format("DD/MM/YY h:mm:ss");
 }
 
-console.log(getDateTime() + ' - Process Started');
+console.log(getDateTime() + '  [#] Process Started, Checking for Quakes...');
 
 function newQuake(quake) {
     if (false && os.platform() === 'linux' || os.platform() === 'darwin') {
         notifier.notify({
             'title': 'Earthquake Early Warning',
-            'subtitle': 'An Earthquake is about to occur in ' + quake.epicenter_code,
+            'subtitle': 'An Earthquake has occured in ' + quake.epicenter_code,
             'message': 'Magnitude: ' + quake.magnitude / 10 + ', Seismic Scale: ' + quake.seismic_scale,
-            'sound': 'eew',
-            'icon': path.join(__dirname, 'icon.png')
+            'sound': 'nhk',
+            'icon': path.join(__dirname, 'resources/icon2.png')
         });
-    } else if (false && os.platform() == 'win32') {
+    }
+
+    else if (false && os.platform() == 'win32') {
         notifier.notify({
             'title': 'Earthquake Early Warning',
             'message': 'A Magnitude ' + quake.magnitude / 10 + ' Earthquake (Shindo' + quake.seismic_scale + ') is about to occur in ' + quake.epicenter_code + '. Please prepare for strong shaking.',
-            'icon': path.join(__dirname, 'icon.png')
+            'icon': path.join(__dirname, 'resources/icon2.png')
         });
     }
+
+    console.log(getDateTime() + " [[*]] Received Earthquake Data");
+    console.log(getDateTime() + "  [-] Time: " + moment(quake.eq_date, "X").fromNow());
+    console.log(getDateTime() + "  [-] Area: " + quake.epicenter_code + " (" + quake.epicenter_lat + "," + quake.epicenter_lng + ")");
+    console.log(getDateTime() + "  [-] Magnitude: " + quake.magnitude / 10 + "M");
+    console.log(getDateTime() + "  [-] Seismic: " + quake.seismic_scale);
+
+    /*
     console.log(getDateTime() + " [!] Earthquake Detected, Triggering Event");
     console.log(getDateTime() + " [-] Date/Time: " + moment(quake.eq_date, "X").fromNow());
     console.log(getDateTime() + " [-] Magnitude: " + quake.magnitude / 10 + "M");
     console.log(getDateTime() + " [-] Seismic: " + quake.seismic_scale);
     console.log(getDateTime() + " [-] Latitude: " + quake.epicenter_lat);
     console.log(getDateTime() + " [-] Longitude: " + quake.epicenter_lng);
-    console.log(getDateTime() + " [-] Depth: " + quake.depth + "km");
+    console.log(getDateTime() + " [-] Depth: " + quake.depth + "km");*/
 }
 
 function read(error, response, body) {
     if (error) {
         console.log(error);
     }
-    
+
     parseString(body, function(err, result) {
         if (oldQuakes.length !== 0) {
             for (var quake of result.quakes.quake) {
@@ -63,12 +73,6 @@ function read(error, response, body) {
         oldQuakes = result.quakes.quake;
     });
 }
-
-/*
-function search() {
-    request('http://127.0.0.1:8000/test.xml', read)
-}
-*/
 
 function search() {
     request('http://api.quake.twiple.jp/quake/index.xml', read);
