@@ -34,10 +34,10 @@
     <script>
         function initialize() {
             var epicenter = new google.maps.LatLng(35.6585, 139.7454);
-            var magnitude = 4;
+            var magnitude = 6.7;
             var mapCanvas = document.getElementById('map-canvas');
             var mapOptions = {
-                center: new google.maps.LatLng(38.1389, 140.3130),
+                center: new google.maps.LatLng(38.322, 142.369),
                 zoom: 5,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             }
@@ -73,11 +73,11 @@
 </head>
 <body>
     <audio hidden autoplay preload="auto">
-        <source src="resources/audio/nhk.ogg" type="audio/ogg">
+        <source src="resources/audio/keitai.mp3" type="audio/mp3">
     </audio>
 
     <div class="alert">
-        An Earthquake is about to occur in Tokyo, Magnitude 4.
+        A MAGNITUDE 9 EARTHQUAKE IS ABOUT TO OCCUR IN, %err_large_size.
     </div>
 
     <div id="map-canvas"></div>
