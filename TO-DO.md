@@ -1,6 +1,6 @@
-- Create Twitter Bot (Read @eewbot)
+- [!] Create Twitter Bot (Read @eewbot)
 
-- Create Twitter Bot CSV decoder
+- [!] Create Twitter Bot CSV decoder
 ```
 data url: https://twitter.com/eewbot
 
@@ -26,16 +26,16 @@ ND20150810113456, 		(6 - Earthquake ID)
 ----------------
 
 1:
-	35 = Seismic Intensity, no magnitude,
-	36/37 = Seismic Intensity, Estimated magnitude,
+	35 = Seismic Intensity, no magnitude
+	36/37 = Seismic Intensity, Estimated magnitude
 	37 = False Alarm
 2:
-	0 = Normal,
+	0 = Normal
 	1 = Training mode (False alarm)
 3 = Announcement time
 4:
-	0 = Normal,
-	7 = More Details coming,
+	0 = Normal
+	7 = More Details coming
 	8/9 = Final Report
 5 = earthquake update ID
 6 = earthquake ID
@@ -47,22 +47,19 @@ ND20150810113456, 		(6 - Earthquake ID)
 12 = magnitude (M)
 13 = seismic intensity (震度)
 14:
-	0 = On Land,
+	0 = On Land
 	1 = In the Ocean
 15:
-	0 = No public alarm,
+	0 = No public alarm
 	1 = Public alarm (eew published via tv)
 ```
 
 - Save Settings/Remember User Settings
 
 - Installation (First time run)
-
 	- Moves core files into place
 		- (Mac only) Move core audio notification files into `~/Library/Sounds`
 	- Select Language & Location
-
-- Only trigger event if `quake.training_type` == `0`
 
 - Silent Mode
 	- Notification Sound will not play after 12am (00:00) unless quake is above Magnitude 5 (Seismic Scale 5-)
