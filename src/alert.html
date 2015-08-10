@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Earthquake Early Warning</title>
+    <meta charset="utf-8">
+    <title>Earthquake Warning</title>
 
     <style>
         body {
+            font-family: Arial, Helvetica, Verdana, sans-serif;
             margin: 0;
-            padding: 0;
-            border: none;
-
-            font-family: Arial, Helvetica, sans-serif;
-            overflow: hidden;
         }
 
         .alert {
-            height: 3vh;
+            height: 48px;
             display: block;
-            vertical-align: middle;
             padding: 20px;
             color: #FFF;
             border: 1px solid #d83532;
@@ -24,7 +20,7 @@
         }
 
         #map-canvas {
-            height: 96vh;
+            min-height: 500px;
             width: 100%;
             background-color: darkgrey;
         }
@@ -37,7 +33,7 @@
             var magnitude = 6.7;
             var mapCanvas = document.getElementById('map-canvas');
             var mapOptions = {
-                center: new google.maps.LatLng(38.322, 142.369),
+                center: new google.maps.LatLng(38.0167, 138.3667),
                 zoom: 5,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             }
@@ -47,25 +43,6 @@
               position: epicenter,
               map: map
             });
-
-            var radius = eqPerceptionRadius(magnitude);
-
-            var eqRadius = {
-              strokeColor: '#FF0000',
-              strokeOpacity: 0.8,
-              strokeWeight: 2,
-              fillColor: '#FF0000',
-              fillOpacity: 0.35,
-              map: map,
-              center: epicenter,
-              radius: radius
-            };
-
-            cityCircle = new google.maps.Circle(eqRadius);
-        }
-
-        function eqPerceptionRadius(y) {
-            return (Math.sqrt(10^(y - 4) / Math.pi));
         }
 
         google.maps.event.addDomListener(window, 'load', initialize);
@@ -77,7 +54,8 @@
     </audio>
 
     <div class="alert">
-        A MAGNITUDE 9 EARTHQUAKE IS ABOUT TO OCCUR IN, %err_large_size.
+        緊急地震速報です。強い揺れに警戒して下さい。<br>
+        和歌山県南方沖。マグニチュード４.５、震度４。津波の心配はありません。
     </div>
 
     <div id="map-canvas"></div>
