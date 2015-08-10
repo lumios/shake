@@ -6,8 +6,8 @@ A program made to Notify you when an Earthquake is about to occur.
 
 #### Installation
 ##### Prerequisites
-- Windows 7 (or newer) OR
-- Mac OS X 10.8 (or newer) OR
+- Windows 7 (or newer)
+- Mac OS X 10.8 (or newer)
 - Linux _(Any Popular Distro)_
 - NodeJS v0.10.2 +
 
