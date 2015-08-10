@@ -48,7 +48,7 @@
               map: map
             });
 
-            var radius = eqPerceptionRadius(magnitude) * 1000;
+            var radius = eqPerceptionRadius(magnitude);
 
             var eqRadius = {
               strokeColor: '#FF0000',
@@ -65,7 +65,7 @@
         }
 
         function eqPerceptionRadius(y) {
-            return (Math.floor(Math.exp(y/1.01 - 0.13 ) + 0.5));
+            return (Math.sqrt(10^(y - 4) / Math.pi));
         }
 
         google.maps.event.addDomListener(window, 'load', initialize);
@@ -73,7 +73,7 @@
 </head>
 <body>
     <audio hidden autoplay preload="auto">
-        <source src="resources/audio/keitai.mp3" type="audio/mp3">
+        <source src="resources/audio/nhk.mp3" type="audio/mp3">
     </audio>
 
     <div class="alert">
