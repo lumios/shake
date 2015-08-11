@@ -9,7 +9,7 @@
   },
   "keywords": [
     "earthquake",
-    "jishin"
+    "jishin",
     "地震",
     "japan",
     "日本",
@@ -18,11 +18,13 @@
     "earthquake warning"
   ],
   "author": "lumios",
+  "license": "SEE LICENSE IN README.md",
   "bugs": {
     "url": "https://github.com/lumios/eew/issues"
   },
   "homepage": "https://github.com/lumios/eew#readme",
   "dependencies": {
-    "twitter": "^1.2.5"
+    "twitter": "^1.2.5",
+    "node-notifier": "^4.2.3"
   }
 }
