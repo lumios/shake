@@ -1,47 +1,29 @@
 {
   "name": "eew",
-  "main": "./src/client.js",
+  "main": "./main.js",
   "version": "1.0.0",
   "description": "A cross-platform Earthquake Early Warning notifier for your computer.",
-  "scripts": {
-    "start": "./node_modules/.bin/electron ./src/launch.js"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kurisubrooks/eew.git"
+    "url": "git+https://github.com/lumios/eew.git"
   },
   "keywords": [
     "earthquake",
-    "japan"
+    "jishin"
+    "地震",
+    "japan",
+    "日本",
+    "緊急地震速報",
+    "earthquake early warning",
+    "earthquake warning"
   ],
-  "author": "kurisubrooks, penagwin",
+  "author": "lumios",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kurisubrooks/eew/issues"
+    "url": "https://github.com/lumios/eew/issues"
   },
-  "homepage": "https://github.com/kurisubrooks/eew#readme",
+  "homepage": "https://github.com/lumios/eew#readme",
   "dependencies": {
-    "browserify-shim": "~3.2.0",
-    "electron-prebuilt": "^0.29.2",
-    "gulp": "^3.9.0",
-    "gulp-uglify": "^1.2.0",
-    "moment": "^2.10.3",
-    "node-notifier": "^4.2.3",
-    "request": "^2.58.0",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "xml2js": "^0.4.9",
-    "zepto-browserify": "^1.1.6-1"
-  },
-  "browser": {
-    "zepto": "./src/resources/web/js/zepto.js"
-  },
-  "browserify-shim": {
-    "zepto": "$"
-  },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
+    "twitter": "^1.2.5"
   }
 }
