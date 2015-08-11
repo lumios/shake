@@ -9,13 +9,18 @@ var client = new twitter({
     access_token_secret: ''
 });
 
-client.stream('statuses/filter', {follow: '214358709', filter_level: 'low'}, function(stream) {
+var userID = '1875425748';
+client.stream('statuses/filter', {follow: userID, filter_level: 'low'}, function(stream) {
     console.log('Connected.');
-    newQuake();
 
     stream.on('data', function(tweet) {
-        console.log(tweet.text);
-        newQuake(tweet.text);
+        if (tweet.delete != undefined) {
+            return;
+        }
+
+        if (tweet.user.id_str == userID) {
+            console.log(tweet.text);
+        }
     });
 
     stream.on('error', function(error) {
