@@ -4,6 +4,10 @@
 ```
 data url: https://twitter.com/eewbot
 
+notif.title = "緊急地震速報（更新" + quake.updateNo + "番）"
+notif.subtitle = "緊急地震速報です。強い揺れに警戒して下さい。"
+notif.message = "マグニチュード" + quake.magnitude + ", 震度" + quake.seismic + 津波警報が発令されました
+
 String: 37,00,2015/08/10 11:35:01,0,1,ND20150810113456,2015/08/10 11:34:44,38.9,141.6,宮城県北部,80,4.3,3,0,0
 
 Format:
