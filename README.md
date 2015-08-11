@@ -4,7 +4,7 @@ A program made to Notify you when an Earthquake is about to occur.
 
 (Please note, if the Earthquake Epicenter is in your local area, you may experience the Earthquake before an Early Warning can be issued. This is a small percent of the time, though.)
 
-#### Installation
+### Installation
 ##### Prerequisites
 - Windows 7 (or newer)
 - Mac OS X 10.8 (or newer)
