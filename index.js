@@ -1,6 +1,11 @@
 var twitter = require('twitter');
 var notifier = require('node-notifier');
+var moment = require("moment");
 var path = require('path');
+
+function getDateTime() {
+    return moment().utcOffset(600).format("DD/MM/YY h:mm:ss");
+}
 
 var client = new twitter({
     consumer_key: '',
@@ -9,7 +14,7 @@ var client = new twitter({
     access_token_secret: ''
 });
 
-var userID = '1875425748';
+var userID = '214358709';
 client.stream('statuses/filter', {follow: userID, filter_level: 'low'}, function(stream) {
     console.log('Connected.');
 
@@ -19,7 +24,9 @@ client.stream('statuses/filter', {follow: userID, filter_level: 'low'}, function
         }
 
         if (tweet.user.id_str == userID) {
+            console.log(getDateTime());
             console.log(tweet.text);
+            newQuake(tweet.text)
         }
     });
 
@@ -55,7 +62,8 @@ function newQuake(quake) {
     notifier.notify({
         'title': titleString,
         'subtitle': subtitleString,
-        'message': magnitudeString + "4.5, " + seismicString + 3 + ", " + tsunamiFalseString,
+        'message': quake,
+        //'message': magnitudeString + "4.5, " + seismicString + 3 + ", " + tsunamiFalseString,
         'sound': 'nhk',
         'icon': path.join(__dirname, 'icon.png')
     }, function(error, response) {
