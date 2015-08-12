@@ -2,18 +2,16 @@
 - Update Audio
     - Update 1,     'nhk-alert'
     - Update 2+     'nhk'
-
-- If greater than Magnitude 6   // Seismic 5+
+- If greater than Seismic 6-
     - Play          'keitai'
-
-- If greater than Magnitude 6.5 // Seismic 5+
-    - Ignore Location, Publish to all clients
 
 ## Alerts
 - Format
     - Title     : "Earthquake Early Warning"
     - Subtitle  : "Please be alert to strong shaking."
     - Message   : "Magnitude %, Max Seismic %, % Tsunami"
+- If greater than Seismic 6+
+    - Ignore Location, Publish to all clients
 
 ## Parsing
 - Format: CSV
@@ -37,19 +35,19 @@
         0                       (15 - Alarm)
     ```
     ```
-    1 = (35 = Seismic No Mag, 36/37 = Seismic with Mag, 37 = False Alarm)
-    2 = (0 = Normal, 1 = Test Mode)
-    3 = Announcement Time
-    4 = (0 = Normal, 7 = Details Pending, 8/9 = Final Report)
-    5 = Earthquake Data Update ID
-    6 = Earthquake ID
-    7 = Earthquake Occurrence time
-    8 = Latitude
-    9 = Longitude
-    10 = Epicenter Place Name (jp)
-    11 = Depth (km)
-    12 = Magnitude (M)
-    13 = Seismic Intensity (震度)
-    14 = (0 = On Land, 1 = In the Sea)
-    15 = (0 = No Alarm, 1 = Public Alarm)
+        1 = (35 = Seismic No Mag, 36/37 = Seismic with Mag, 37 = False Alarm)
+        2 = (0 = Normal, 1 = Test Mode)
+        3 = Announcement Time
+        4 = (0 = Normal, 7 = Details Pending, 8/9 = Final Report)
+        5 = Earthquake Data Update ID
+        6 = Earthquake ID
+        7 = Earthquake Occurrence time
+        8 = Latitude
+        9 = Longitude
+        10 = Epicenter Place Name (jp)
+        11 = Depth (km)
+        12 = Magnitude (M)
+        13 = Seismic Intensity (震度)
+        14 = (0 = On Land, 1 = In the Sea)
+        15 = (0 = No Alarm, 1 = Public Alarm)
     ```
