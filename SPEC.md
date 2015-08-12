@@ -40,7 +40,7 @@ type,training_mode,announce_time,situation,revision,earthquake_id,earthquake_tim
 ```
 
 ```
-37,                     (35 = Seismic No Magnitude, 36/37 = Seismic with Magnitude, 37 = False Alarm)
+37,                     (35 = Seismic, 36/37 = Seismic & Magnitude, 37 = False Alarm)
 00,                     (0 = Normal, 1 = Test Mode)
 2015/08/10 11:35:01,    (Announcement Time)
 0,                      (0 = Normal, 7 = Details Pending, 8/9 = Final Report)
