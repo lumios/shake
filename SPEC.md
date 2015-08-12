@@ -2,7 +2,7 @@
 - Update Audio
     - Update 1,     'nhk-alert'
     - Update 2+     'nhk'
-- If greater than Seismic 6-
+- If greater than Seismic 5-
     - Play          'keitai'
 
 ## Alerts
