@@ -1,11 +1,9 @@
-var twitter = require('twitter');
 var notifier = require('node-notifier');
+var twitter = require('twitter');
 var moment = require("moment");
 var path = require('path');
 
-function getDateTime() {
-    return moment().utcOffset(600).format("DD/MM/YY h:mm:ss");
-}
+function getDateTime() {return moment().utcOffset(600).format("DD/MM/YY h:mm:ss");}
 
 var client = new twitter({
     consumer_key: '',
@@ -63,7 +61,6 @@ function newQuake(quake) {
         'title': titleString,
         'subtitle': subtitleString,
         'message': quake,
-        //'message': magnitudeString + "4.5, " + seismicString + 3 + ", " + tsunamiFalseString,
         'sound': 'nhk',
         'icon': path.join(__dirname, 'icon.png')
     }, function(error, response) {
