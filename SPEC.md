@@ -41,7 +41,9 @@ type,training_mode,announce_time,situation,revision,earthquake_id,earthquake_tim
 ```
 
 ```
-37,                     (35 = Seismic, 36/37 = Seismic & Magnitude, 37 = False Alarm)
+"type", "training_mode", "announce_time", "situation", "revision", "earthquake_id", "earthquake_time", "latitude", "longitude", "epicenter", "depth", "magnitude", "semismic", "geography", "alarm"
+
+37,                     (35 = Seismic, 36/37 = Seismic & Magnitude, 39 = False Alarm)
 00,                     (0 = Normal, 1 = Test Mode)
 2015/08/10 11:35:01,    (Announcement Time)
 0,                      (0 = Normal, 7 = Details Pending, 8/9 = Final Report)
