@@ -34,9 +34,12 @@
 
 ## Parsing
 - Format: CSV
-    - `37,00,2015/08/10 11:35:01,0,1,ND20150810113456,2015/08/10 11:34:44,38.9,141.6,宮城県北部,80,4.3,3,0,0`
     ```
-    Format:
+    type,training_mode,announce_time,situation,revision,earthquake_id,earthquake_time,latitude,longitude,epicenter,depth,magnitude,semismic,geography,alarm
+    37,00,2015/08/10 11:35:01,0,1,ND20150810113456,2015/08/10 11:34:44,38.9,141.6,宮城県北部,80,4.3,3,0,0
+    ```
+    ```
+    CSV Format:
         37,                     (1 - Type of Message)
         00,                     (2 - Training Mode?)
         2015/08/10 11:35:01,    (3 - Announcement Time)
