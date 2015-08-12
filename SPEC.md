@@ -1,36 +1,36 @@
-## Installation
+## Program
+- Run in Daemon
+
+#### Installation
 - Installing Files
     - [MAC] Move Sound Files to `~/Library/Sounds`
 - Choose Settings
     - Save to file
 
-## Program
-- Run in Daemon
-
 #### Connectivity
-    - If Internet Drops out, Deliver Silent Notification, Retry every 10 seconds
+- Internet Drops out, deliver Silent Notification, retry every 10 seconds
 
-## Sounds
+#### Settings
+- Language (en/jp)
+- Location
+- Alert Size (Magnitude, Seismic)
+- Night Mode (Silent after 12am, unless above M6)
+
+## Notifications
+#### Sounds
 - Alert Audio
     - Update #1      'nhk-alert'
     - Update #2+     'nhk'
 - If Earthquake greater than Seismic 5-
-    - Play          'keitai'
+    - Play           'keitai'
 
-## Alerts
+#### Alerts
 - Format
     - Title     : "Earthquake Early Warning"
     - Subtitle  : "Please be alert to strong shaking."
     - Message   : "Magnitude, Max Seismic, Tsunami"
 - If greater than Magnitude 6.5, Seismic 6+
     - Ignore Location, Publish to all clients
-
-## Settings
-- Language (en/jp)
-- Location
-- Alert Size (Magnitude, Seismic)
-
-- Night Mode (Silent after 12am, unless above M6)
 
 ## Parsing
 - Format: CSV
