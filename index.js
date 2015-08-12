@@ -1,7 +1,6 @@
 var notifier = require('node-notifier');
 var twitter = require('twitter');
 var moment = require("moment");
-var parse = require('csv-parse');
 var path = require('path');
 
 function getDateTime() {return moment().utcOffset(600).format("DD/MM/YY h:mm:ss");}
@@ -13,9 +12,9 @@ var client = new twitter({
     access_token_secret: ''
 });
 
-var userID = '3313238022'; // LighterBot1
+//var userID = '3313238022'; // LighterBot1
 //var userID = '1875425748'; // kurisubrooks
-//var userID = '214358709'; // eewbot
+var userID = '214358709'; // eewbot
 client.stream('statuses/filter', {follow: userID, filter_level: 'low'}, function(stream) {
     console.log('Connected.');
 
@@ -26,8 +25,11 @@ client.stream('statuses/filter', {follow: userID, filter_level: 'low'}, function
 
         if (tweet.user.id_str == userID) {
             console.log(getDateTime());
-            console.log("\"" + tweet.text + "\"");
             dataParse(tweet.text);
+
+            if (training_mode == 0) {
+                newQuake(dataParse);
+            }
         }
     });
 
@@ -37,25 +39,26 @@ client.stream('statuses/filter', {follow: userID, filter_level: 'low'}, function
 });
 
 function dataParse(inputData) {
-    var headers = 'type,training_mode,announce_time,situation,revision,earthquake_id,earthquake_time,latitude,longitude,epicenter,depth,magnitude,semismic,geography,alarm';
-    var input = headers + inputData;
+    var parsedInput = inputData.split(',');
 
-    parse(input, function(err, output){
-        //console.log(output);
-        var outputData = output;
-        console.log(outputData);
-        /*
-        var results = {};
-        for (var i = 0; i < outputData[0].length; i++) {
-            results[outputData[0][i]] = outputData[1][i];
-        }
+    var i, item, j, len, ref;
+    ref = ["type", "training_mode", "announce_time", "situation", "revision", "earthquake_id", "earthquake_time", "latitude", "longitude", "epicenter", "depth", "magnitude", "seismic", "geography", "alarm"];
 
-        console.log(results);*/
-    });
+    for (i = j = 0, len = ref.length; j < len; i = ++j) {
+        item = ref[i];
+        global[item] = parsedInput[i];
+    }
+
+         if(situation==0){var situationString = "Preliminary"}
+    else if(situation==7){var situationString = "Cancelled"}
+    else if(situation==8||9){var situationString = "Final"}
+
+    console.log("Time: " + earthquake_time + ", Situation: " + situationString + ", Revision: " + revision);
+    console.log("Epicenter: " + epicenter + " (" + latitude + "," + longitude + "), Magnitude: " + magnitude + ", Seismic: " + seismic);
 }
 
 function newQuake(quake) {
-    var lang = 'jp';
+    var lang = 'en';
     switch (lang) {
         case 'en':
             var titleString = 'Earthquake Early Warning';
@@ -78,11 +81,14 @@ function newQuake(quake) {
             break;
     }
 
+         if(revision==1){var soundString = "nhk-alert"}
+    else if(revision!=1){var soundString = "nhk"}
+
     notifier.notify({
         'title': titleString,
         'subtitle': subtitleString,
-        'message': quake,
-        'sound': 'nhk',
+        'message': magnitudeString + ": " + magnitude + ", " + seismicString + ": " + seismic,
+        'sound': soundString,
         'icon': path.join(__dirname, 'icon.png')
     }, function(error, response) {
         console.log(response);
