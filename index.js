@@ -38,10 +38,19 @@ client.stream('statuses/filter', {follow: userID, filter_level: 'low'}, function
 
 function dataParse(inputData) {
     var headers = 'type,training_mode,announce_time,situation,revision,earthquake_id,earthquake_time,latitude,longitude,epicenter,depth,magnitude,semismic,geography,alarm';
-    var input = inputData;
+    var input = headers + inputData;
 
     parse(input, function(err, output){
-        console.log(output);
+        //console.log(output);
+        var outputData = output;
+        console.log(outputData);
+        /*
+        var results = {};
+        for (var i = 0; i < outputData[0].length; i++) {
+            results[outputData[0][i]] = outputData[1][i];
+        }
+
+        console.log(results);*/
     });
 }
 
