@@ -1,3 +1,15 @@
+## Installation
+- Installing Files
+    - Move Sounds to `~/Library/Sounds`
+- Choose Settings
+    - Save to file
+
+## Program
+- Run in Daemon
+
+## Connectivity
+- If Internet Drops out, Deliver Silent Notification, Retry every 10 seconds
+
 ## Sounds
 - Update Audio
     - Update 1,     'nhk-alert'
@@ -12,6 +24,13 @@
     - Message   : "Magnitude %, Max Seismic %, % Tsunami"
 - If greater than Seismic 6+
     - Ignore Location, Publish to all clients
+
+## Settings
+- Language (en/jp)
+- Location
+- Alert Size (Magnitude, Seismic)
+
+- Night Mode (Silent after 12am, unless above M6)
 
 ## Parsing
 - Format: CSV
