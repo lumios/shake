@@ -1,6 +1,7 @@
 var notifier = require('node-notifier');
 var twitter = require('twitter');
 var moment = require("moment");
+var parse = require('csv-parse');
 var path = require('path');
 
 function getDateTime() {return moment().utcOffset(600).format("DD/MM/YY h:mm:ss");}
@@ -12,7 +13,9 @@ var client = new twitter({
     access_token_secret: ''
 });
 
-var userID = '214358709';
+var userID = '3313238022'; // LighterBot1
+//var userID = '1875425748'; // kurisubrooks
+//var userID = '214358709'; // eewbot
 client.stream('statuses/filter', {follow: userID, filter_level: 'low'}, function(stream) {
     console.log('Connected.');
 
@@ -23,8 +26,8 @@ client.stream('statuses/filter', {follow: userID, filter_level: 'low'}, function
 
         if (tweet.user.id_str == userID) {
             console.log(getDateTime());
-            console.log(tweet.text);
-            newQuake(tweet.text);
+            console.log("\"" + tweet.text + "\"");
+            dataParse(tweet.text);
         }
     });
 
@@ -32,6 +35,15 @@ client.stream('statuses/filter', {follow: userID, filter_level: 'low'}, function
         console.log(error);
     });
 });
+
+function dataParse(inputData) {
+    var headers = 'type,training_mode,announce_time,situation,revision,earthquake_id,earthquake_time,latitude,longitude,epicenter,depth,magnitude,semismic,geography,alarm';
+    var input = inputData;
+
+    parse(input, function(err, output){
+        console.log(output);
+    });
+}
 
 function newQuake(quake) {
     var lang = 'jp';
