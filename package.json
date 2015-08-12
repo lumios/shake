@@ -1,30 +1,40 @@
 {
-  "name": "eew",
-  "main": "./main.js",
-  "version": "1.0.0",
-  "description": "A cross-platform Earthquake Early Warning notifier for your computer.",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lumios/eew.git"
-  },
-  "keywords": [
-    "earthquake",
-    "jishin",
-    "地震",
-    "japan",
-    "日本",
-    "緊急地震速報",
-    "earthquake early warning",
-    "earthquake warning"
-  ],
-  "author": "lumios",
-  "license": "SEE LICENSE IN README.md",
-  "bugs": {
-    "url": "https://github.com/lumios/eew/issues"
-  },
-  "homepage": "https://github.com/lumios/eew#readme",
-  "dependencies": {
-    "twitter": "^1.2.5",
-    "node-notifier": "^4.2.3"
-  }
+    "name": "eew",
+    "version": "0.0.1",
+    "description": "A cross-platform Earthquake Early Warning notifier for your computer.",
+    "author": "lumios",
+    "license": "private",
+    "main": "./main.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/lumios/eew"
+    },
+    "bugs": {
+        "url": "https://github.com/lumios/eew/issues"
+    },
+    "homepage": "https://github.com/lumios/eew#readme",
+    "keywords": [
+        "mac",
+        "windows",
+        "linux",
+        "ubuntu",
+        "warnings",
+        "alerts",
+        "earthquake",
+        "jishin",
+        "地震",
+        "japan",
+        "日本",
+        "緊急地震速報",
+        "earthquake early warning",
+        "earthquake warning"
+    ],
+    "dependencies": {
+        "twitter": "^1.2.5",
+        "node-notifier": "^4.2.3",
+        "moment": "^2.10.6"
+    }
 }
