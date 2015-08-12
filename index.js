@@ -26,7 +26,7 @@ client.stream('statuses/filter', {follow: userID, filter_level: 'low'}, function
         if (tweet.user.id_str == userID) {
             console.log(getDateTime());
             console.log(tweet.text);
-            newQuake(tweet.text)
+            newQuake(tweet.text);
         }
     });
 
@@ -55,7 +55,7 @@ function newQuake(quake) {
             var tsunamiTrueString = '津波警報が発令されました';
             break;
         default:
-            var titleString, subtitleString, magnitudeString, seismicString, tsunamiFalseString, tsunamiTrueString = 'no lang selected';
+            var titleString, subtitleString, magnitudeString, seismicString, tsunamiFalseString, tsunamiTrueString = 'error - no lang selected';
             break;
     }
 
