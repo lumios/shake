@@ -21,39 +21,21 @@ ND20150810113456,       (6 - Earthquake ID)
 
 ----------------
 
-1:
-	35 = Seismic Intensity Estimated, No Magnitude Estimation
-	36/37 = Seismic Intensity Calculated, Magnitude Estimated
-	37 = False Alarm
-
-2:
-	0 = Normal
-	1 = Training mode (False Alarm)
-
+1 = (35 = Seismic No Mag, 36/37 = Seismic with Mag, 37 = False Alarm)
+2 = (0 = Normal, 1 = Test Mode)
 3 = Announcement Time
-
-4:
-	0 = Normal
-	7 = More Details coming
-	8/9 = Final Report
-
+4 = (0 = Normal, 7 = Details Pending, 8/9 = Final Report)
 5 = Earthquake Data Update ID
 6 = Earthquake ID
 7 = Earthquake Occurrence time
 8 = Latitude
 9 = Longitude
-10  = Epicenter Place Name (jp)
+10 = Epicenter Place Name (jp)
 11 = Depth (km)
 12 = Magnitude (M)
 13 = Seismic Intensity (震度)
-
-14:
-	0 = Earthquake occurred On Land
-	1 = Earthquake occurred In the Ocean
-
-15:
-	0 = No Public Alarm
-	1 = Public Alarm (EEW Published via TV)
+14 = (0 = On Land, 1 = In the Sea)
+15 = (0 = No Alarm, 1 = Public Alarm)
 ```
 
 - Settings
