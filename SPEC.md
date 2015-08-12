@@ -1,5 +1,6 @@
 ## Program
 - Run in Daemon
+- Run on Startup
 
 #### Installation
 - Installing Files
