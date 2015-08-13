@@ -49,11 +49,11 @@ function dataParse(inputData) {
         global[item] = parsedInput[i];
     }
 
-         if(situation==0){var situationString = "Preliminary"}
-    else if(situation==7){var situationString = "Cancelled"}
+         if(situation==0)   {var situationString = "Estimate"}
+    else if(situation==7)   {var situationString = "Cancelled"}
     else if(situation==8||9){var situationString = "Final"}
 
-    console.log("Time: " + earthquake_time + ", Situation: " + situationString + ", Revision: " + revision);
+    console.log("Time: " + earthquake_time + ", Situation: " + situationString + " (Update #" + revision + ")");
     console.log("Epicenter: " + epicenter + " (" + latitude + "," + longitude + "), Magnitude: " + magnitude + ", Seismic: " + seismic);
 }
 
@@ -65,29 +65,34 @@ function newQuake(quake) {
             var subtitleString = 'Please be alert to strong shaking.';
             var magnitudeString = 'Magnitude';
             var seismicString = 'Max Seismic';
-            var tsunamiFalseString = 'No Tsunami Threat';
-            var tsunamiTrueString = 'Tsunami Warning';
             break;
         case 'jp':
             var titleString = '緊急地震速報';
             var subtitleString = '緊急地震速報です。強い揺れに警戒して下さい。';
             var magnitudeString = 'マグニチュド';
             var seismicString = '最大震度';
-            var tsunamiFalseString = '津波の心配はありません';
-            var tsunamiTrueString = '津波警報が発令されました';
             break;
         default:
-            var titleString, subtitleString, magnitudeString, seismicString, tsunamiFalseString, tsunamiTrueString = 'error - no lang selected';
+            var titleString, subtitleString, magnitudeString, seismicString = 'error - no lang selected';
             break;
     }
 
-         if(revision==1){var soundString = "nhk-alert"}
-    else if(revision!=1){var soundString = "nhk"}
+             if (magnitude > 5.2) {var soundString = "keitai";}
+        else if (type == 39 || situation == 7) {var soundString = "simple";}
+        else if (magnitude < 5.2 && revision == 1) {var soundString = "nhk-alert";}
+        else if (magnitude < 5.2 && revision != 1) {var soundString = "nhk";}
+
+        if (type == 39 || situation == 7) {
+            var subtitleTemplate, messageTemplate = "The Earthquake Warning has been cancelled.";
+        } else {
+            var subtitleTemplate = subtitleString;
+            var messageTemplate = epicenter + ", " + magnitudeString + ": " + magnitude + ", " + seismicString + ": " + seismic;
+        }
 
     notifier.notify({
         'title': titleString,
         'subtitle': subtitleString,
-        'message': magnitudeString + ": " + magnitude + ", " + seismicString + ": " + seismic,
+        'message': messageTemplate,
         'sound': soundString,
         'icon': path.join(__dirname, 'icon.png')
     }, function(error, response) {
