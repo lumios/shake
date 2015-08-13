@@ -32,10 +32,8 @@
     "earthquake warning"
   ],
   "dependencies": {
-    "cardboardbox": "0.0.4",
-    "csv-parse": "^1.0.0",
-    "moment": "^2.10.6",
+    "twitter": "^1.2.5",
     "node-notifier": "^4.2.3",
-    "twitter": "^1.2.5"
+    "moment": "^2.10.6"
   }
 }
