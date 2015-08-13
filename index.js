@@ -1,6 +1,6 @@
 var notifier = require('node-notifier');
 var twitter = require('twitter');
-var moment = require("moment");
+var moment = require('moment');
 var path = require('path');
 
 function getDateTime() {return moment().utcOffset(600).format("DD/MM/YY h:mm:ss");}
@@ -73,7 +73,10 @@ function newQuake(quake) {
             var seismicString = '最大震度';
             break;
         default:
-            var titleString, subtitleString, magnitudeString, seismicString = 'error - no lang selected';
+            var titleString = 'error - no lang selected';
+            var subtitleString = 'error - no lang selected';
+            var magnitudeString = 'error';
+            var seismicString = 'error';
             break;
     }
 
@@ -83,7 +86,7 @@ function newQuake(quake) {
         else if (magnitude < 5.2 && revision != 1) {var soundString = "nhk";}
 
         if (type == 39 || situation == 7) {
-            var subtitleTemplate, messageTemplate = "The Earthquake Warning has been cancelled.";
+            var subtitleTemplate = "The Earthquake Warning has been cancelled."; var messageTemplate = "The Earthquake Warning has been cancelled.";
         } else {
             var subtitleTemplate = subtitleString;
             var messageTemplate = epicenter + ", " + magnitudeString + ": " + magnitude + ", " + seismicString + ": " + seismic;
