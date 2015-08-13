@@ -17,6 +17,7 @@ var client = new twitter({
 var userID = '214358709'; // eewbot
 client.stream('statuses/filter', {follow: userID, filter_level: 'low'}, function(stream) {
     console.log('Connected.');
+    console.log('Monitor Started, Waiting for Earthquake.')
 
     stream.on('data', function(tweet) {
         if (tweet.delete != undefined) {
@@ -24,7 +25,7 @@ client.stream('statuses/filter', {follow: userID, filter_level: 'low'}, function
         }
 
         if (tweet.user.id_str == userID) {
-            console.log(getDateTime());
+            console.log(getDateTime() + " Earthquake Detected, Triggering Event:");
             dataParse(tweet.text);
 
             if (training_mode == 0) {
