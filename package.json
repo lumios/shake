@@ -1,9 +1,9 @@
 {
   "name": "eew",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A cross-platform Earthquake Early Warning notifier for your computer.",
   "author": "lumios",
-  "main": "./main.js",
+  "main": "./index.js",
   "scripts": {
     "start": "node index.js"
   },
