@@ -15,14 +15,19 @@ var client = new twitter({
 });
 
 // Which User to Track
-var userID = '214358709'; // eewbot
-//var userID = '3313238022'; // LighterBot1
-//var userID = '1875425748'; // kurisubrooks
+var userID = 214358709; // eewbot
+//var userID = 3313238022; // LighterBot1
+//var userID = 1875425748; // kurisubrooks
+
+if(userID == 214358709){
+    var userName = 'eewbot';}
+else if(userID == 3313238022){
+    var userName = 'lighterbot1';}
+else {var userName = userID;}
 
 // Twitter Stream
 client.stream('statuses/filter', {follow: userID, filter_level: 'low'}, function(stream) {
-    // Posting to console if program is running
-    console.log('Connected.');
+    console.log('Connected to ' + userName);
     console.log('Monitor Started, Waiting for Earthquake.')
 
     stream.on('data', function(tweet) {
@@ -55,7 +60,7 @@ function dataParse(inputData) {
     // Parsing CSV to Array
     var parsedInput = inputData.split(',');
 
-    // Assigning CSV Headers
+    // Assigning Values to Variables
     var i, item, j, len, ref;
     ref = ["type", "training_mode", "announce_time", "situation", "revision", "earthquake_id", "earthquake_time", "latitude", "longitude", "epicenter", "depth", "magnitude", "seismic", "geography", "alarm"];
 
@@ -64,17 +69,14 @@ function dataParse(inputData) {
         global[item] = parsedInput[i];
     }
 
-    // Assigning Situation ID
-         if(situation==0)   {var situationString = "Estimate"}
-    else if(situation==7)   {var situationString = "Cancelled"}
-    else if(situation==8||9){var situationString = "Final"}
+    if (situation == 9){var situationString = "Final";} else {var situationString = "#" + revision;}
 
     // Printing Quake Data to Console
-    console.log("Time: " + earthquake_time + ", Situation: " + situationString + " (Update #" + revision + ")");
+    console.log("Time: " + earthquake_time + ", Update: " + situationString);
     console.log("Epicenter: " + epicenter + " (" + latitude + "," + longitude + "), Magnitude: " + magnitude + ", Seismic: " + seismic);
-    console.log("");
 }
 
+// Notification
 function newQuake(quake) {
     // Language Strings
     var lang = 'en';
@@ -84,30 +86,40 @@ function newQuake(quake) {
             var subtitleString = 'Please be alert to strong shaking.';
             var magnitudeString = 'Magnitude';
             var seismicString = 'Max Seismic';
+            var cancelledString = 'This Earthquake Warning has been cancelled.'
             break;
         case 'jp':
             var titleString = '緊急地震速報';
             var subtitleString = '緊急地震速報です。強い揺れに警戒して下さい。';
             var magnitudeString = 'マグニチュド';
             var seismicString = '最大震度';
+            var cancelledString = '先ほどの地震速報は誤報です。';
             break;
         default:
             var titleString = 'error - no lang selected';
             var subtitleString = 'error - no lang selected';
             var magnitudeString = 'error';
             var seismicString = 'error';
+            var cancelledString = 'error - no lang selected';
             break;
     }
 
-             // Assigning Alert Tones
-             if (magnitude > 5.2) {var soundString = "keitai";}
-        else if (type == 39 || situation == 7) {var soundString = "simple";}
-        else if (magnitude < 5.2 && revision == 1) {var soundString = "nhk-alert";}
-        else if (magnitude < 5.2 && revision != 1) {var soundString = "nhk";}
+        // Assigning Alert Tones
+        var seismicScale = ['1', '2', '3', '4', '5-', '5+', '6-', '6+', '7'];
 
-        // If EEW was cancelled, tell user
+        if (seismicScale.indexOf(seismic) >= 4) {
+            var soundString = "keitai";}
+        else if (type == 39 || situation == 7) {
+            var soundString = "simple";}
+        else if (magnitude < 5.2 && revision == 1) {
+            var soundString = "nhk-alert";}
+        else {
+            var soundString = "nhk";}
+
+        // Warning Cancellation
         if (type == 39 || situation == 7) {
-            var subtitleTemplate = "The Earthquake Warning has been cancelled."; var messageTemplate = "The Earthquake Warning has been cancelled.";
+            var subtitleTemplate = cancelledString;
+            var messageTemplate = cancelledString;
         } else {
             var subtitleTemplate = subtitleString;
             var messageTemplate = epicenter + ", " + magnitudeString + ": " + magnitude + ", " + seismicString + ": " + seismic;
