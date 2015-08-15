@@ -19,22 +19,22 @@
 
 ## Notifications
 #### Sounds
-- Alert Audio
-    - Update #1      'nhk-alert'
-    - Update #2+     'nhk'
-- If Earthquake greater than Seismic 5-
-    - Play           'keitai'
+- ~Alert Audio~
+    - ~Update #1~      'nhk-alert'
+    - ~Update #2+~     'nhk'
+- ~If Earthquake greater than Seismic 5-~
+    - ~Play~           'keitai'
 
 #### Alerts
-- Format
-    - Title     : "Earthquake Early Warning"
-    - Subtitle  : "Please be alert to strong shaking."
-    - Message   : "Magnitude, Max Seismic, Tsunami"
+- ~Format~
+    - ~Title~     : ~"Earthquake Early Warning"~
+    - ~Subtitle~  : ~"Please be alert to strong shaking."~
+    - ~Message~   : ~"Magnitude, Max Seismic, Tsunami"~
 - If greater than Magnitude 6.5, Seismic 6+
     - Ignore Location, Publish to all clients
 
 ## Parsing
-- CSV Format
+- ~CSV Format~
 ```
 type,training_mode,announce_time,situation,revision,earthquake_id,earthquake_time,latitude,longitude,epicenter,depth,magnitude,semismic,geography,alarm
 37,00,2015/08/10 11:35:01,0,1,ND20150810113456,2015/08/10 11:34:44,38.9,141.6,宮城県北部,80,4.3,3,0,0
