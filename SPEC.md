@@ -39,6 +39,7 @@
 付近 - Near
 地方 - Region/Area
 沖   - Off the Coast
+市   - City
 県   - Prefecture
 支庁 - Subprefecture
 
@@ -53,9 +54,9 @@
 島 - Island
 洋 - Ocean
 海 - Sea
-海峡 - Strait
+沿岸 - Coast
 内陸 - Inland
-
+海峡 - Strait
 ```
 
 - ~Data~
