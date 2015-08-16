@@ -34,7 +34,31 @@
     - Ignore Location, Publish to all clients
 
 ## Parsing
-- ~CSV Format~
+- Epicenter Kanji
+```
+付近 - Near
+地方 - Region/Area
+沖   - Off the Coast
+県   - Prefecture
+支庁 - Subprefecture
+
+北部 - North
+中部 - Middle / Central
+南部 - South
+東部 - East
+西部 - West
+
+湾 - Bay
+灘 - Beach
+島 - Island
+洋 - Ocean
+海 - Sea
+海峡 - Strait
+内陸 - Inland
+
+```
+
+- ~Data~
 ```
 type,training_mode,announce_time,situation,revision,earthquake_id,earthquake_time,latitude,longitude,epicenter,depth,magnitude,semismic,geography,alarm
 37,00,2015/08/10 11:35:01,0,1,ND20150810113456,2015/08/10 11:34:44,38.9,141.6,宮城県北部,80,4.3,3,0,0
