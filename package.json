@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "A cross-platform Earthquake Early Warning notifier for your computer.",
   "author": "lumios",
-  "main": "./index.js",
+  "main": "./src/index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node ./src/index.js"
   },
   "repository": {
     "type": "git",
@@ -32,8 +32,8 @@
     "earthquake warning"
   ],
   "dependencies": {
-    "twitter": "^1.2.5",
-    "node-notifier": "^4.2.3",
-    "moment": "^2.10.6"
+    "electron-prebuilt": "^0.30.4",
+    "moment": "^2.10.6",
+    "twitter": "^1.2.5"
   }
 }
