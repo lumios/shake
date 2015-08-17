@@ -1,8 +1,4 @@
-<<<<<<< HEAD:src/index.js
 var notifier = require('../lib/node-notifier');
-=======
-var notifier = require('./lib/node-notifier');
->>>>>>> origin/master:index.js
 var twitter = require('twitter');
 var moment = require('moment');
 var path = require('path');
@@ -37,8 +33,6 @@ client.stream('statuses/filter', {follow: userID, filter_level: 'low'}, function
         }
 
         if (tweet.user.id_str == userID) {
-            console.log(getDateTime() + " Earthquake Detected, Triggering Event:");
-
             dataParse(tweet.text);
 
             if (training_mode == 0) {
@@ -129,13 +123,9 @@ function newQuake(quake) {
         var messageTemplate = magnitudeString + ": " + magnitude + ", " + seismicString + ": " + seismicLocale;}
 
     console.log(
-        "Time: " + earthquake_time + ", " +
-        "Update: " + situationString);
+        earthquake_time + " - " + epicenterLocale);
     console.log(
-        "Epicenter: " + epicenterLocale + " " +
-        "(" + latitude + "," + longitude + "), " +
-        "Magnitude: " + magnitude + ", " +
-        "Seismic: " + seismic);
+        "Update " + situationString + ", Magnitude: " + magnitude + ", Seismic: " + seismicLocale);
 
     notifier.notify({
         'title': titleString,
