@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/index.js
 var notifier = require('../lib/node-notifier');
+=======
+var notifier = require('./lib/node-notifier');
+>>>>>>> origin/master:index.js
 var twitter = require('twitter');
 var moment = require('moment');
 var path = require('path');
