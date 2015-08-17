@@ -32,13 +32,8 @@
     "earthquake warning"
   ],
   "dependencies": {
-<<<<<<< HEAD
     "electron-prebuilt": "^0.30.4",
     "moment": "^2.10.6",
     "twitter": "^1.2.5"
-=======
-    "twitter": "^1.2.5",
-    "moment": "^2.10.6"
->>>>>>> origin/master
   }
 }
