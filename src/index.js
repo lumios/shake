@@ -1,4 +1,4 @@
-var notifier = require('node-notifier');
+var notifier = require('../lib/node-notifier');
 var twitter = require('twitter');
 var moment = require('moment');
 var path = require('path');
@@ -137,8 +137,8 @@ function newQuake(quake) {
         'title': titleString,
         'subtitle': subtitleTemplate,
         'message': messageTemplate,
-        'sound': soundString,
-        'icon': path.join(__dirname, 'icon.png')
+        'sound': soundString//,
+        //'icon': path.join(__dirname, 'icon.png')
     }, function(error, response) {
         console.log(response);
     });
