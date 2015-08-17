@@ -2,12 +2,6 @@
 A program made to Notify you when an Earthquake is about to occur.  
 このプログラムは、あなたのコンピュータに緊急地震速報通知を配信します。
 
-### Information
-- You will only be notified of Earthquakes above Magnitude 4.5, Seismic 3
-- You can choose a location that you want to be notified about
-
-- Please Note: If the Earthquake Epicenter is in your local area, you may experience the Earthquake before an Early Warning can be issued.
-
 ### Installation
 ##### Prerequisites
 - Windows 7 (or newer)
