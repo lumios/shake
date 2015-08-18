@@ -10,7 +10,7 @@
         - Map
         - Flash Report (zish.in)
     - Live updates with updated quake details
-        - Shows tweets from twitter account that provides twitter quake updates (quake_alert / quake_alert_en)
+        - Auto Refresh & Update with New Details
     - Pop Up with Crash Log on error
 
 - Internet Connectivity Notification
