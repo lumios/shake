@@ -2,11 +2,13 @@
 A program made to Notify you when an Earthquake is about to occur.  
 このプログラムは、あなたのコンピュータに緊急地震速報通知を配信します。
 
+Earthquake Warnings are only sent if an Earthquake is large enough to affect a large area. Additionally, you will not receive alerts for Earthquakes too small to feel, instead, you will only receive alerts for Earthquakes above Magnitude 3.5, or Seismic Intensity 2.
+
 ### Installation
 ##### Prerequisites
 - Windows 7 (or newer)
 - Mac OS X 10.8 (or newer)
-- Linux _(Any Popular Distro)_
+- Linux _(Ubuntu, Debian, Arch)_
 - NodeJS v0.10.2 +
 
 ##### Installation
