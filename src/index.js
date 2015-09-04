@@ -1,7 +1,9 @@
 var notifier = require('../lib/node-notifier');
+
 var twitter = require('twitter');
 var moment = require('moment');
 var path = require('path');
+var os = require('os');
 
 var keys = require('./keys.js');
 var trans = require('./resources/epicenter.json');
@@ -9,8 +11,8 @@ var trans = require('./resources/epicenter.json');
 function getDateTime() {return moment().utcOffset(600).format('DD/MM/YY h:mm:ss')}
 
 var lang = 'en';
-var twitID = '3313238022'; //testbot
-//var twitID = '214358709'; //eew
+var twitID1 = '3313238022'; //testbot
+var twitID2 = '214358709'; //eew
 
 var client = new twitter({
     consumer_key: keys.twit_conkey,
@@ -19,28 +21,32 @@ var client = new twitter({
     access_token_secret: keys.twit_accsec
 });
 
-if (twitID == 214358709) var userName = 'eewbot';
-else if (twitID == 3313238022) var userName = 'test';
-else var userName = twitID;
-
-client.stream('statuses/filter', {follow: twitID}, function(stream) {
-    console.log('Connected to ' + userName);
-
+client.stream('statuses/filter', {follow: twitID1}, function(stream) {
+    console.log('Connected to ' + twitID1);
     stream.on('data', function(tweet) {
         if (tweet.delete != undefined) return;
-        if (tweet.user.id_str == twitID) {
+        if (tweet.user.id_str == twitID1) {
             console.log(tweet.text);
             newQuake(tweet.text);
         }
     });
 
-    stream.on('error', function(error) {
-        throw error;
+    stream.on('error', function(error) {throw error;});
+    stream.on('end', function(response) {console.log(response);});
+});
+
+client.stream('statuses/filter', {follow: twitID2}, function(stream) {
+    console.log('Connected to ' + twitID2);
+    stream.on('data', function(tweet) {
+        if (tweet.delete != undefined) return;
+        if (tweet.user.id_str == twitID2) {
+            console.log(tweet.text);
+            newQuake(tweet.text);
+        }
     });
 
-    stream.on('end', function(response) {
-        console.log(response);
-    });
+    stream.on('error', function(error) {throw error;});
+    stream.on('end', function(response) {console.log(response);});
 });
 
 function newQuake(inputData) {
@@ -119,13 +125,28 @@ function newQuake(inputData) {
     console.log(earthquake_time + ' - ' + epicenterLocale);
     console.log('Update ' + situationString + ', Magnitude: ' + magnitude + ', Seismic: ' + seismicLocale);
 
-    notifier.notify({
-        'title': titleString,
-        'subtitle': subtitleTemplate,
-        'message': messageTemplate,
-        'sound': soundString//,
-        //'icon': path.join(__dirname, 'icon.png')
-    }, function(error, response) {
-        console.log(response);
-    });
+    if (false && os.platform() === 'linux' || os.platform() === 'darwin') {
+        notifier.notify({
+            'title': titleString,
+            'subtitle': subtitleTemplate,
+            'message': messageTemplate,
+            'sound': soundString
+        });
+    }
+
+    else if (false && os.platform() == 'win32') {
+        notifier.notify({
+            'title': titleString,
+            'message': subtitleTemplate + '\n' + messageTemplate,
+            'icon': path.join(__dirname, 'resources/icon.png')
+        });
+    }
+
+    else {
+        notifier.notify({
+            'title': titleString,
+            'message': subtitleTemplate + '\n' + messageTemplate,
+            'icon': path.join(__dirname, 'resources/icon.png')
+        });
+    }
 }
