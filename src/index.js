@@ -1,4 +1,5 @@
 var notifier = require('../lib/node-notifier');
+
 var twitter = require('twitter');
 var moment = require('moment');
 var path = require('path');
@@ -20,7 +21,12 @@ var client = new twitter({
     access_token_secret: keys.twit_accsec
 });
 
-// Test Stream
+notifier.notify({
+    'title': 'Earthquake Early Warning',
+    'message': 'Connected to Twitter.',
+    'sound': false
+});
+
 client.stream('statuses/filter', {follow: twitID1}, function(stream) {
     console.log('Connected to ' + twitID1);
     stream.on('data', function(tweet) {
@@ -35,7 +41,6 @@ client.stream('statuses/filter', {follow: twitID1}, function(stream) {
     stream.on('end', function(response) {console.log(response);});
 });
 
-// EEW Stream
 client.stream('statuses/filter', {follow: twitID2}, function(stream) {
     console.log('Connected to ' + twitID2);
     stream.on('data', function(tweet) {
@@ -113,8 +118,8 @@ function newQuake(inputData) {
     if (situation == 9) var situationString = 'Final';
     else                var situationString = '#' + revision;
 
-    if (seismic == '不明') var seismicLocale = 'Unknown';
-    else                   var seismicLocale = seismic;
+    if (seismic == '不明')      var seismicLocale = 'Unknown';
+    else                        var seismicLocale = seismic;
 
     if (type == 39 || situation == 7) {
         var subtitleTemplate = cancelledString;
