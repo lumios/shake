@@ -3,71 +3,73 @@ var twitter = require('twitter');
 var moment = require('moment');
 var path = require('path');
 
+var keys = require('./keys.js');
 var trans = require('./resources/epicenter.json');
-function getDateTime(){return moment().utcOffset(600).format("DD/MM/YY h:mm:ss");}
+
+function getDateTime() {return moment().utcOffset(600).format('DD/MM/YY h:mm:ss')}
+
+var lang = 'en';
+var twitID = '3313238022'; //testbot
+//var twitID = '214358709'; //eew
 
 var client = new twitter({
-    consumer_key: '',
-    consumer_secret: '',
-    access_token_key: '',
-    access_token_secret: ''
+    consumer_key: keys.twit_conkey,
+    consumer_secret: keys.twit_consec,
+    access_token_key: keys.twit_acckey,
+    access_token_secret: keys.twit_accsec
 });
 
-var userID = 214358709; // eewbot
-//var userID = 3313238022; // LighterBot1
-//var userID = 1875425748; // kurisubrooks
+if (twitID == 214358709) var userName = 'eewbot';
+else if (twitID == 3313238022) var userName = 'test';
+else var userName = twitID;
 
-if(userID == 214358709){
-    var userName = 'eewbot';}
-else if(userID == 3313238022){
-    var userName = 'lighterbot1';}
-else {var userName = userID;}
-
-client.stream('statuses/filter', {follow: userID, filter_level: 'low'}, function(stream) {
+client.stream('statuses/filter', {follow: twitID}, function(stream) {
     console.log('Connected to ' + userName);
-    console.log('Monitor Started, Waiting for Earthquake.')
 
     stream.on('data', function(tweet) {
-        if (tweet.delete != undefined) {
-            return;
-        }
-
-        if (tweet.user.id_str == userID) {
-            dataParse(tweet.text);
-
-            if (training_mode == 0) {
-                newQuake(dataParse);
-            }
+        if (tweet.delete != undefined) return;
+        if (tweet.user.id_str == twitID) {
+            console.log(tweet.text);
+            newQuake(tweet.text);
         }
     });
 
     stream.on('error', function(error) {
-        console.log(error);
+        throw error;
+    });
+
+    stream.on('end', function(response) {
+        console.log(response);
     });
 });
 
-function dataParse(inputData) {
+function newQuake(inputData) {
     var parsedInput = inputData.split(',');
 
     var i, item, j, len, ref;
-    ref = ["type", "training_mode", "announce_time", "situation", "revision", "earthquake_id", "earthquake_time", "latitude", "longitude", "epicenter", "depth", "magnitude", "seismic", "geography", "alarm"];
+    ref = ['type', 'training_mode', 'announce_time', 'situation', 'revision', 'earthquake_id', 'earthquake_time', 'latitude', 'longitude', 'epicenter', 'depth', 'magnitude', 'seismic', 'geography', 'alarm'];
 
     for (i = j = 0, len = ref.length; j < len; i = ++j) {
         item = ref[i];
         global[item] = parsedInput[i];
     }
 
+    var translationNotFound = true;
     for (var i = 0; i < trans.length; i++) {
-        var item =  trans[i];
-        if (item.jp == epicenter){
-             epicenterJP = item.jp;
-             epicenterEN = item.en;
+        var item = trans[i];
+
+        if (item.jp == epicenter) {
+            translationNotFound = false;
+            var epicenterJP = item.jp;
+            var epicenterEN = item.en;
         }
     }
-}
 
-function newQuake(quake) {
-    var lang = 'en';
+    if (translationNotFound) {
+        var epicenterJP = epicenter;
+        var epicenterEN = epicenter;
+    }
+
     switch (lang) {
         case 'en':
             var titleString = 'Earthquake Early Warning';
@@ -95,37 +97,27 @@ function newQuake(quake) {
             break;
     }
 
-    var scale = ['1', '2', '3', '4', '5-', '5+', '6-', '6+', '7'];
-    if (scale.indexOf(seismic) >= 4) {
-        var soundString = "keitai";}
-    else if (type == 39 || situation == 7) {
-        var soundString = "simple";}
-    else if (magnitude < 5.2 && revision == 1) {
-        var soundString = "nhk-alert";}
-    else {
-        var soundString = "nhk";}
+    var scale = ['1', '2', '3', '4', '5弱', '5強', '6弱', '6強', '7'];
+         if (scale.indexOf(seismic) >= 4)       var soundString = 'keitai';
+    else if (type == 39 || situation == 7)      var soundString = 'simple';
+    else if (magnitude < 5.2 && revision == 1)  var soundString = 'nhk-alert';
+    else                                        var soundString = 'nhk';
 
-    if (situation == 9){
-        var situationString = "Final";}
-    else {
-        var situationString = "#" + revision;}
+    if (situation == 9) var situationString = 'Final';
+    else                var situationString = '#' + revision;
 
-    if (seismic == '不明') {
-        var seismicLocale = "Unknown";}
-    else {
-        var seismicLocale = seismic;}
+    if (seismic == '不明')      var seismicLocale = 'Unknown';
+    else                        var seismicLocale = seismic;
 
     if (type == 39 || situation == 7) {
         var subtitleTemplate = cancelledString;
-        var messageTemplate = cancelledString;}
-    else {
-        var subtitleTemplate = subtitleString + " " + epicenterLocale;
-        var messageTemplate = magnitudeString + ": " + magnitude + ", " + seismicString + ": " + seismicLocale;}
+        var messageTemplate = cancelledString;
+    } else {
+        var subtitleTemplate = epicenterLocale;
+        var messageTemplate = magnitudeString + ': ' + magnitude + ', ' + seismicString + ': ' + seismicLocale;}
 
-    console.log(
-        earthquake_time + " - " + epicenterLocale);
-    console.log(
-        "Update " + situationString + ", Magnitude: " + magnitude + ", Seismic: " + seismicLocale);
+    console.log(earthquake_time + ' - ' + epicenterLocale);
+    console.log('Update ' + situationString + ', Magnitude: ' + magnitude + ', Seismic: ' + seismicLocale);
 
     notifier.notify({
         'title': titleString,
