@@ -1,5 +1,4 @@
 var notifier = require('../lib/node-notifier');
-
 var twitter = require('twitter');
 var moment = require('moment');
 var path = require('path');
@@ -21,6 +20,7 @@ var client = new twitter({
     access_token_secret: keys.twit_accsec
 });
 
+// Test Stream
 client.stream('statuses/filter', {follow: twitID1}, function(stream) {
     console.log('Connected to ' + twitID1);
     stream.on('data', function(tweet) {
@@ -35,6 +35,7 @@ client.stream('statuses/filter', {follow: twitID1}, function(stream) {
     stream.on('end', function(response) {console.log(response);});
 });
 
+// EEW Stream
 client.stream('statuses/filter', {follow: twitID2}, function(stream) {
     console.log('Connected to ' + twitID2);
     stream.on('data', function(tweet) {
@@ -112,8 +113,8 @@ function newQuake(inputData) {
     if (situation == 9) var situationString = 'Final';
     else                var situationString = '#' + revision;
 
-    if (seismic == '不明')      var seismicLocale = 'Unknown';
-    else                        var seismicLocale = seismic;
+    if (seismic == '不明') var seismicLocale = 'Unknown';
+    else                   var seismicLocale = seismic;
 
     if (type == 39 || situation == 7) {
         var subtitleTemplate = cancelledString;
@@ -125,7 +126,7 @@ function newQuake(inputData) {
     console.log(earthquake_time + ' - ' + epicenterLocale);
     console.log('Update ' + situationString + ', Magnitude: ' + magnitude + ', Seismic: ' + seismicLocale);
 
-    if (false && os.platform() === 'linux' || os.platform() === 'darwin') {
+    if (os.platform() === 'linux' || os.platform() === 'darwin') {
         notifier.notify({
             'title': titleString,
             'subtitle': subtitleTemplate,
@@ -134,7 +135,7 @@ function newQuake(inputData) {
         });
     }
 
-    else if (false && os.platform() == 'win32') {
+    else if (os.platform() == 'win32') {
         notifier.notify({
             'title': titleString,
             'message': subtitleTemplate + '\n' + messageTemplate,
