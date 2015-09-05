@@ -1,9 +1,10 @@
-var notifier = require('../lib/node-notifier');
-
 var twitter = require('twitter');
 var moment = require('moment');
 var path = require('path');
 var os = require('os');
+
+if (os.platform() === 'darwin') var notifier = require('../lib/node-notifier');
+else var notifier = require('node-notifier');
 
 var keys = require('./keys.js');
 var trans = require('./resources/epicenter.json');
@@ -11,7 +12,7 @@ var trans = require('./resources/epicenter.json');
 function getDateTime() {return moment().utcOffset(600).format('DD/MM/YY h:mm:ss')}
 
 var lang = 'en';
-var twitID1 = '3313238022'; //testbot
+var twitID1 = '3313238022'; //test
 var twitID2 = '214358709'; //eew
 
 var client = new twitter({
@@ -23,12 +24,12 @@ var client = new twitter({
 
 notifier.notify({
     'title': 'Earthquake Early Warning',
-    'message': 'Connected to Twitter.',
+    'message': 'EEW has started.',
     'sound': false
 });
 
 client.stream('statuses/filter', {follow: twitID1}, function(stream) {
-    console.log('Connected to ' + twitID1);
+    console.log('Connected to test');
     stream.on('data', function(tweet) {
         if (tweet.delete != undefined) return;
         if (tweet.user.id_str == twitID1) {
@@ -37,12 +38,12 @@ client.stream('statuses/filter', {follow: twitID1}, function(stream) {
         }
     });
 
-    stream.on('error', function(error) {throw error;});
-    stream.on('end', function(response) {console.log(response);});
+    stream.on('error', function(error) {notifier.notify({'title': 'Earthquake Early Warning','message': 'Crashed: ' + error,'sound': 'Ping'});throw error;});
+    //stream.on('end', function(response) {console.log(response);});
 });
 
 client.stream('statuses/filter', {follow: twitID2}, function(stream) {
-    console.log('Connected to ' + twitID2);
+    console.log('Connected to eew');
     stream.on('data', function(tweet) {
         if (tweet.delete != undefined) return;
         if (tweet.user.id_str == twitID2) {
@@ -51,8 +52,8 @@ client.stream('statuses/filter', {follow: twitID2}, function(stream) {
         }
     });
 
-    stream.on('error', function(error) {throw error;});
-    stream.on('end', function(response) {console.log(response);});
+    stream.on('error', function(error) {notifier.notify({'title': 'Earthquake Early Warning','message': 'Crashed: ' + error,'sound': 'Ping'});throw error;});
+    //stream.on('end', function(response) {console.log(response);});
 });
 
 function newQuake(inputData) {
@@ -110,10 +111,10 @@ function newQuake(inputData) {
     }
 
     var scale = ['1', '2', '3', '4', '5弱', '5強', '6弱', '6強', '7'];
-         if (scale.indexOf(seismic) >= 4)       var soundString = 'keitai';
-    else if (type == 39 || situation == 7)      var soundString = 'simple';
-    else if (magnitude < 5.2 && revision == 1)  var soundString = 'nhk-alert';
-    else                                        var soundString = 'nhk';
+    if      (revision == 1)                        var soundString = 'nhk-alert';
+    else if (type == 39 || situation == 7)         var soundString = 'simple';
+    else if (scale.indexOf(seismic) >= 4)          var soundString = 'keitai';
+    else                                           var soundString = 'nhk';
 
     if (situation == 9) var situationString = 'Final';
     else                var situationString = '#' + revision;
@@ -122,7 +123,7 @@ function newQuake(inputData) {
     else                        var seismicLocale = seismic;
 
     if (type == 39 || situation == 7) {
-        var subtitleTemplate = cancelledString;
+        var subtitleTemplate = '';
         var messageTemplate = cancelledString;
     } else {
         var subtitleTemplate = epicenterLocale;
