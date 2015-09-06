@@ -1,5 +1,6 @@
 var twitter = require('twitter');
 var moment = require('moment');
+var osenv = require('osenv');
 var path = require('path');
 var fse = require('fs-extra');
 var os = require('os');
@@ -10,11 +11,20 @@ else var notifier = require('node-notifier');
 var keys = require('./keys.js');
 var trans = require('./resources/epicenter.json');
 
-function getDateTime() {return moment().utcOffset(600).format('DD/MM/YY h:mm:ss')}
-
 var lang = 'en';
+var copyFiles = './resources/audio/';
+var pasteFiles = osenv.home() + '/Library/Sounds/';
 var twitID1 = '3313238022'; //test
 var twitID2 = '214358709'; //eew
+
+function getDateTime() {return moment().utcOffset(600).format('DD/MM/YY h:mm:ss')}
+
+if (os.platform() === 'darwin') {
+    fse.copy(copyFiles, pasteFiles, function(err) {
+        if (err) throw console.error(err);
+        console.log("Installed Audio Files to " + pasteFiles);
+    });
+}
 
 var client = new twitter({
     consumer_key: keys.twit_conkey,
@@ -27,11 +37,6 @@ notifier.notify({
     'title': 'Earthquake Early Warning',
     'message': 'EEW has started.',
     'sound': false
-});
-
-fse.copy(__dirname + '/resources/audio/', '~/Library/Sounds/', function (err) {
-    if (err) return console.error(err)
-    console.log("Audio files copied successfully.")
 });
 
 client.stream('statuses/filter', {follow: twitID1}, function(stream) {
