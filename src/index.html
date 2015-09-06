@@ -63,6 +63,18 @@
             display: block;
             margin-bottom: 3px;
         }
+
+        td {
+            margin: 0;
+        }
+
+        div {
+            display: inline-block;
+        }
+
+        div > a > div > img, .gmnoprint {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -72,16 +84,23 @@
     </audio>
 
     <div class="alert">
-        <table style="width:100%">
-            <tr>
-                <td style="width:50px"><img src="resources/icon.png" height="40px" width="40px"></td>
-                <td><b>Offshore Miyagi Prefecture</b>
-                <t>Magnitude 3.5, Seismic 2</t></td>
-            </tr>
+        <table>
+            <tbody>
+                <tr>
+                    <td style="width:50px">
+                        <img src="resources/icon.png" height="40px" width="40px">
+                    </td>
+                    <td>
+                        <b>Offshore Miyagi Prefecture</b>
+                        <div align="left">Magnitude 3.5</div>
+                        <div align="right">Seismic 2</div>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 
     <div id="map"></div>
-    
+
 </body>
 </html>
