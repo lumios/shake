@@ -1,31 +1,25 @@
 var app = require('app');
-var path = require('path');
 var BrowserWindow = require('browser-window');
-
-// Report crashes to our server.
 require('crash-reporter').start();
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is GCed.
+// Keeps reference of Window Object
 var mainWindow = null;
 
-// Quit when all windows are closed.
+// Quits when Window is Closed
 app.on('window-all-closed', function() {
-    // On OS X it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q
+    // Keeps Program Active when window closed on Mac until CMD + Q
     //if (process.platform != 'darwin') {
         app.quit();
     //}
 });
 
-// When Electron finishes Init
+// Finished Init
 app.on('ready', function() {
     // Create the Window.
     mainWindow = new BrowserWindow({
-        'title': 'EEW',
-        'icon': path.join(__dirname, 'resources/icon.png'),
-        'center': true,
-        'width': 650,
+        'title': 'Earthquake Alert',
+        'icon': __dirname + '/resources/icon.png',
+        'width': 700,
         'height': 550,
         'resizable': false,
         'always-on-top': true,

@@ -3,9 +3,8 @@ var moment = require('moment');
 var osenv = require('osenv');
 var path = require('path');
 var fse = require('fs-extra');
-var os = require('os');
 
-if (os.platform() === 'darwin') var notifier = require('../lib/node-notifier');
+if (process.platform === 'darwin') var notifier = require('../lib/node-notifier');
 else var notifier = require('node-notifier');
 
 var keys = require('./keys.js');
@@ -19,7 +18,7 @@ var twitID2 = '214358709'; //eew
 
 function getDateTime() {return moment().utcOffset(600).format('DD/MM/YY h:mm:ss')}
 
-if (os.platform() === 'darwin') {
+if (process.platform === 'darwin') {
     fse.copy(copyFiles, pasteFiles, function(err) {
         if (err) throw console.error(err);
         console.log("Installed Audio Files to " + pasteFiles);
@@ -143,7 +142,7 @@ function newQuake(inputData) {
     console.log(earthquake_time + ' - ' + epicenterLocale);
     console.log('Update ' + situationString + ', Magnitude: ' + magnitude + ', Seismic: ' + seismicLocale);
 
-    if (os.platform() === 'linux' || os.platform() === 'darwin') {
+    if (process.platform === 'linux' || process.platform === 'darwin') {
         notifier.notify({
             'title': titleString,
             'subtitle': subtitleTemplate,
@@ -152,7 +151,7 @@ function newQuake(inputData) {
         });
     }
 
-    else if (os.platform() == 'win32') {
+    else if (process.platform == 'win32') {
         notifier.notify({
             'title': titleString,
             'message': subtitleTemplate + '\n' + messageTemplate,
