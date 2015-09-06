@@ -20,9 +20,9 @@ app.on('ready', function() {
         'title': 'Earthquake Alert',
         'icon': __dirname + '/resources/icon.png',
         'width': 700,
-        'height': 550,
+        'height': 500,
         'resizable': false,
-        'always-on-top': true,
+        //'always-on-top': true,
         'fullscreen': false,
         'skip-taskbar': true
     });
