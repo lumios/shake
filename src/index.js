@@ -1,6 +1,7 @@
 var twitter = require('twitter');
 var moment = require('moment');
 var path = require('path');
+var fse = require('fs-extra');
 var os = require('os');
 
 if (os.platform() === 'darwin') var notifier = require('../lib/node-notifier');
@@ -26,6 +27,11 @@ notifier.notify({
     'title': 'Earthquake Early Warning',
     'message': 'EEW has started.',
     'sound': false
+});
+
+fse.copy(__dirname + '/resources/audio/', '~/Library/Sounds/', function (err) {
+    if (err) return console.error(err)
+    console.log("Audio files copied successfully.")
 });
 
 client.stream('statuses/filter', {follow: twitID1}, function(stream) {

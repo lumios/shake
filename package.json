@@ -6,6 +6,7 @@
         "electron-prebuilt": "^0.30.6",
         "moment": "^2.10.6",
         "node-notifier": "^4.2.3",
+        "fs-extra": "^0.24.0",
         "twitter": "^1.2.5"
     },
 
