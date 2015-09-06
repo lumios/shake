@@ -3,8 +3,8 @@
 - Run on Startup
 
 #### Installation
-- Installing Files
-    - [MAC] Move Sound Files to `~/Library/Sounds`
+- ~Installing Files~
+    - ~[MAC] Move Sound Files to `~/Library/Sounds`~
 - Choose Settings
     - Save to file
 
@@ -30,8 +30,6 @@
     - ~Title~     : ~"Earthquake Early Warning"~
     - ~Subtitle~  : ~"Please be alert to strong shaking."~
     - ~Message~   : ~"Magnitude, Max Seismic, Tsunami"~
-- If greater than Magnitude 6.5, Seismic 6+
-    - Ignore Location, Publish to all clients
 
 ## Parsing
 - Epicenter Kanji
