@@ -49,7 +49,6 @@ client.stream('statuses/filter', {follow: twitID1}, function(stream) {
     });
 
     stream.on('error', function(error) {notifier.notify({'title': 'Earthquake Early Warning','message': 'Crashed: ' + error,'sound': 'Ping'});throw error;});
-    //stream.on('end', function(response) {console.log(response);});
 });
 
 client.stream('statuses/filter', {follow: twitID2}, function(stream) {
@@ -63,7 +62,6 @@ client.stream('statuses/filter', {follow: twitID2}, function(stream) {
     });
 
     stream.on('error', function(error) {notifier.notify({'title': 'Earthquake Early Warning','message': 'Crashed: ' + error,'sound': 'Ping'});throw error;});
-    //stream.on('end', function(response) {console.log(response);});
 });
 
 function newQuake(inputData) {
@@ -155,7 +153,7 @@ function newQuake(inputData) {
         notifier.notify({
             'title': titleString,
             'message': subtitleTemplate + '\n' + messageTemplate,
-            'icon': path.join(__dirname, 'resources/icon.png')
+            'icon': path.join(__dirname, './resources/icon.png')
         });
     }
 
@@ -163,7 +161,7 @@ function newQuake(inputData) {
         notifier.notify({
             'title': titleString,
             'message': subtitleTemplate + '\n' + messageTemplate,
-            'icon': path.join(__dirname, 'resources/icon.png')
+            'icon': path.join(__dirname, './resources/icon.png')
         });
     }
 }
