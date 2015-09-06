@@ -1,20 +1,16 @@
-- Start from compiled binary
+- Run on Startup
+- Run in Daemon
+- Start from Compiled Binary
 - System Tray Icon
-- Run in daemon
-- Run on startup
 
-- Single server for receiving tweets, then pushing to clients
-
-- GUI
-    - Pop Up with new Quake
+- On Quake
+    - Send Notification
+    - Open Electron Map Window
         - Map
-        - Flash Report (zish.in)
-    - Live updates with updated quake details
-        - Auto Refresh & Update with New Details
-    - Pop Up with Crash Log on error
+        - Updates with Revisions
 
-- Internet Connectivity Notification
-    - Alert if internet disconnected, reconnect every 5 seconds
+- Internet Connection Notification
+    - Alert if can't connect to server
+    - Retry every 5 seconds, Don't drop socket
 
-### Future
-- Licensing for Pro version
+- Server for Receiving Tweets, Creates Sockets to Clients
