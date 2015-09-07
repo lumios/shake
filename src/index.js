@@ -1,8 +1,10 @@
-var twitter = require('twitter');
-var moment = require('moment');
-var osenv = require('osenv');
-var path = require('path');
-var fse = require('fs-extra');
+var twitter = require('twitter');   // Twitter
+var request = require('request');   // Twitter Get Bearer Token
+var moment = require('moment');     // Formatted Date & Time
+var colors = require('colors');     // Terminal Text Formatting
+var osenv = require('osenv');       // OS Specific Globals
+var path = require('path');         // File System Paths
+var fse = require('fs-extra');      // File System Extras
 
 if (process.platform === 'darwin') var notifier = require('../lib/node-notifier');
 else var notifier = require('node-notifier');
@@ -18,16 +20,24 @@ var twitID2 = '214358709'; //eew
 
 function getDateTime() {return moment().utcOffset(600).format('DD/MM/YY h:mm:ss')}
 
+colors.setTheme({
+    tweet: 'cyan', success: 'green', error: ['red', 'bold'], warn: 'yellow', info: 'blue'
+});
+
 if (process.platform === 'darwin') {
-    fse.copy(copyFiles, pasteFiles, function(err) {
-        if (err) throw console.error(err);
-        console.log("Installed Audio Files to " + pasteFiles);
+    fse.copy(copyFiles, pasteFiles, function(error) {
+        console.log("[*] Installed Audio Files to ".success + pasteFiles.success);
+        if (error) throw console.error(error.error);
     });
 }
+
+var enc_secret = new Buffer(keys.twit_conkey + ':' + keys.twit_consec).toString('base64');
+var oauthOptions = {url: 'https://api.twitter.com/oauth2/token',headers: {'Authorization': 'Basic ' + enc_secret, 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},body: 'grant_type=client_credentials'};
 
 var client = new twitter({
     consumer_key: keys.twit_conkey,
     consumer_secret: keys.twit_consec,
+    //bearer_token: request.post(oauthOptions, function(e, r, body) {JSON.parse(body).access_token})
     access_token_key: keys.twit_acckey,
     access_token_secret: keys.twit_accsec
 });
@@ -38,30 +48,20 @@ notifier.notify({
     'sound': false
 });
 
-client.stream('statuses/filter', {follow: twitID1}, function(stream) {
-    console.log('Connected to test');
+client.stream('statuses/filter', {follow: twitID2 && twitID1}, function(stream) {
+    console.log('[*] Connecting to Twitter..'.success);
     stream.on('data', function(tweet) {
         if (tweet.delete != undefined) return;
-        if (tweet.user.id_str == twitID1) {
-            console.log(tweet.text);
+        if (tweet.user.id_str == twitID2 || tweet.user.id_str == twitID1) {
+            console.log(('[>] ' + tweet.text).tweet);
             newQuake(tweet.text);
         }
     });
 
-    stream.on('error', function(error) {notifier.notify({'title': 'Earthquake Early Warning','message': 'Crashed: ' + error,'sound': 'Ping'});throw error;});
-});
-
-client.stream('statuses/filter', {follow: twitID2}, function(stream) {
-    console.log('Connected to eew');
-    stream.on('data', function(tweet) {
-        if (tweet.delete != undefined) return;
-        if (tweet.user.id_str == twitID2) {
-            console.log(tweet.text);
-            newQuake(tweet.text);
-        }
+    stream.on('error', function(error) {
+        notifier.notify({'title': 'Earthquake Early Warning','message': 'Crashed: ' + error.source,'sound': 'Ping'});
+        console.error(('[!] ERROR - ' + error.source).error);
     });
-
-    stream.on('error', function(error) {notifier.notify({'title': 'Earthquake Early Warning','message': 'Crashed: ' + error,'sound': 'Ping'});throw error;});
 });
 
 function newQuake(inputData) {
@@ -95,6 +95,7 @@ function newQuake(inputData) {
         case 'en':
             var titleString = 'Earthquake Early Warning';
             var subtitleString = 'Earthquake occurred';
+            var epicenterString = 'Epicenter';
             var magnitudeString = 'Magnitude';
             var seismicString = 'Max Seismic';
             var cancelledString = 'This Earthquake Warning has been cancelled.'
@@ -103,22 +104,24 @@ function newQuake(inputData) {
         case 'jp':
             var titleString = '緊急地震速報（強い揺れに警戒して下さい）';
             var subtitleString = 'Earthquake occurred';
+            var epicenterString = '震源';
             var magnitudeString = 'マグニチュド';
             var seismicString = '最大震度';
             var cancelledString = '先ほどの地震速報は誤報です。';
             var epicenterLocale = epicenterJP;
             break;
         default:
-            var titleString = 'error - no lang selected';
-            var subtitleString = 'error - no lang selected';
-            var magnitudeString = 'error';
-            var seismicString = 'error';
-            var cancelledString = 'error - no lang selected';
+            var titleString = 'errnolang';
+            var subtitleString = 'errnolang';
+            var epicenterString = 'errnolang';
+            var magnitudeString = 'errnolang';
+            var seismicString = 'errnolang';
+            var cancelledString = 'errnolang';
             var epicenterLocale = epicenterJP;
             break;
     }
-
-    var scale = ['1', '2', '3', '4', '5弱', '5強', '6弱', '6強', '7'];
+    //            0    1    2    3    4      5     6     7     8      9     10     11    12
+    var scale = ['1', '2', '3', '4', '5弱', '5-', '5強', '5+', '6弱', '6-', '6強', '6+', '7'];
     if      (revision == 1)                        var soundString = 'nhk-alert';
     else if (type == 39 || situation == 7)         var soundString = 'simple';
     else if (scale.indexOf(seismic) >= 4)          var soundString = 'keitai';
@@ -137,8 +140,8 @@ function newQuake(inputData) {
         var subtitleTemplate = epicenterLocale;
         var messageTemplate = magnitudeString + ': ' + magnitude + ', ' + seismicString + ': ' + seismicLocale;}
 
-    console.log(earthquake_time + ' - ' + epicenterLocale);
-    console.log('Update ' + situationString + ', Magnitude: ' + magnitude + ', Seismic: ' + seismicLocale);
+    console.log(('[~] ' + earthquake_time + ' - ' + epicenterLocale).yellow);
+    console.log(('[~] Update ' + situationString + ', Magnitude: ' + magnitude + ', Seismic: ' + seismicLocale).yellow);
 
     if (process.platform === 'linux' || process.platform === 'darwin') {
         notifier.notify({

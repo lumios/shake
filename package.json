@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "main": "./src/index.js",
   "dependencies": {
+    "colors": "^1.1.2",
     "electron-prebuilt": "^0.30.6",
     "fs-extra": "^0.24.0",
     "moment": "^2.10.6",
     "node-notifier": "^4.2.3",
     "osenv": "^0.1.3",
+    "request": "^2.61.0",
     "twitter": "^1.2.5"
   },
   "author": "lumios",
