@@ -48,7 +48,7 @@ notifier.notify({
     'sound': false
 });
 
-client.stream('statuses/filter', {follow: twitID2 && twitID1}, function(stream) {
+client.stream('statuses/filter', {follow: twitID2}, function(stream) {
     console.log('[*] Connecting to Twitter..'.success);
     stream.on('data', function(tweet) {
         if (tweet.delete != undefined) return;
