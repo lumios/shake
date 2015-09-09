@@ -16,9 +16,13 @@ Earthquake Warnings are only sent if an Earthquake is large enough to affect a l
 2. `git clone git@github.com:lumios/eew.git`
 3. `sudo npm install`
 
-##### Run
+##### CLI
 1. `cd ~/.../eew`
 2. `npm start`
+
+##### GUI
+1. `cd ~/.../eew/src`
+2. `electron .`
 
 ### Legal
 ```text
