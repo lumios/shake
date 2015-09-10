@@ -6,10 +6,6 @@ var osenv = require('osenv');       // OS Specific Globals
 var path = require('path');         // File System Paths
 var fse = require('fs-extra');      // File System Extras
 
-//var app = require('app');
-//var BrowserWindow = require('browser-window');
-//require('crash-reporter').start();
-
 if (process.platform === 'darwin') var notifier = require('../lib/node-notifier');
 else var notifier = require('node-notifier');
 
@@ -60,7 +56,7 @@ client.stream('statuses/filter', {follow: twitID1}, function(stream) {
     });
 
     stream.on('error', function(error) {
-        notifier.notify({'title': 'Earthquake Early Warning','message': 'Crashed: ' + error.source,'sound': 'Ping'});
+        notifier.notify({'title': 'Earthquake Early Warning','message': 'Error: ' + error.source,'sound': 'Ping'});
         console.error(('[!] ERROR - ' + error.source).error);
     });
 });
@@ -76,7 +72,7 @@ client.stream('statuses/filter', {follow: twitID2}, function(stream) {
     });
 
     stream.on('error', function(error) {
-        notifier.notify({'title': 'Earthquake Early Warning','message': 'Crashed: ' + error.source,'sound': 'Ping'});
+        notifier.notify({'title': 'Earthquake Early Warning','message': 'Error: ' + error.source,'sound': 'Ping'});
         console.error(('[!] ERROR - ' + error.source).error);
     });
 });
@@ -159,50 +155,6 @@ function newQuake(inputData) {
 
     console.log(('[~] ' + earthquake_time + ' - ' + epicenterLocale).yellow);
     console.log(('[~] Update ' + situationString + ', Magnitude: ' + magnitude + ', Seismic: ' + seismicLocale).yellow);
-
-    if (revision == '1') {
-        var win = null;
-
-        var win = new BrowserWindow({
-            'title': 'Earthquake Alert',
-            'icon': __dirname + '/resources/icon.png',
-            'width': 700,
-            'height': 500,
-            'resizable': false,
-            //'always-on-top': true,
-            'fullscreen': false,
-            'skip-taskbar': true
-        });
-
-        win.on('closed', function() {
-            win = null;
-        });
-
-        win.loadUrl('file://' + __dirname + '/index.html');
-        win.show();
-
-        /*
-        app.on('ready', function() {
-            mainWindow = new BrowserWindow({
-                'title': 'Earthquake Alert',
-                'icon': __dirname + '/resources/icon.png',
-                'width': 700,
-                'height': 500,
-                'resizable': false,
-                //'always-on-top': true,
-                'fullscreen': false,
-                'skip-taskbar': true
-            });
-
-            mainWindow.loadUrl('file://' + __dirname + '/index.html');
-            //mainWindow.openDevTools();
-
-            mainWindow.on('closed', function() {
-                mainWindow = null;
-            });
-        });
-        */
-    }
 
     if (process.platform === 'linux' || process.platform === 'darwin') {
         notifier.notify({
