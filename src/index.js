@@ -6,6 +6,10 @@ var osenv = require('osenv');       // OS Specific Globals
 var path = require('path');         // File System Paths
 var fse = require('fs-extra');      // File System Extras
 
+//var app = require('app');
+//var BrowserWindow = require('browser-window');
+//require('crash-reporter').start();
+
 if (process.platform === 'darwin') var notifier = require('../lib/node-notifier');
 else var notifier = require('node-notifier');
 
@@ -18,11 +22,8 @@ var pasteFiles = osenv.home() + '/Library/Sounds/';
 var twitID1 = '3313238022'; //test
 var twitID2 = '214358709'; //eew
 
-function getDateTime() {return moment().utcOffset(600).format('DD/MM/YY h:mm:ss')}
-
-colors.setTheme({
-    tweet: 'cyan', success: 'green', error: ['red', 'bold'], warn: 'yellow', info: 'blue'
-});
+function getDateTime() {return moment().utcOffset(600).format('DD/MM/YY h:mm:ss');}
+colors.setTheme({tweet: 'cyan', success: 'green', error: ['red', 'bold'], warn: 'yellow', info: 'blue'});
 
 if (process.platform === 'darwin') {
     fse.copy(copyFiles, pasteFiles, function(error) {
@@ -48,11 +49,27 @@ notifier.notify({
     'sound': false
 });
 
-client.stream('statuses/filter', {follow: twitID2}, function(stream) {
-    console.log('[*] Connecting to Twitter..'.success);
+client.stream('statuses/filter', {follow: twitID1}, function(stream) {
+    console.log('[*] Connecting to test..'.success);
     stream.on('data', function(tweet) {
         if (tweet.delete != undefined) return;
-        if (tweet.user.id_str == twitID2 || tweet.user.id_str == twitID1) {
+        if (tweet.user.id_str == twitID1) {
+            console.log(('[>] ' + tweet.text).tweet);
+            newQuake(tweet.text);
+        }
+    });
+
+    stream.on('error', function(error) {
+        notifier.notify({'title': 'Earthquake Early Warning','message': 'Crashed: ' + error.source,'sound': 'Ping'});
+        console.error(('[!] ERROR - ' + error.source).error);
+    });
+});
+
+client.stream('statuses/filter', {follow: twitID2}, function(stream) {
+    console.log('[*] Connecting to eew..'.success);
+    stream.on('data', function(tweet) {
+        if (tweet.delete != undefined) return;
+        if (tweet.user.id_str == twitID2) {
             console.log(('[>] ' + tweet.text).tweet);
             newQuake(tweet.text);
         }
@@ -142,6 +159,50 @@ function newQuake(inputData) {
 
     console.log(('[~] ' + earthquake_time + ' - ' + epicenterLocale).yellow);
     console.log(('[~] Update ' + situationString + ', Magnitude: ' + magnitude + ', Seismic: ' + seismicLocale).yellow);
+
+    if (revision == '1') {
+        var win = null;
+
+        var win = new BrowserWindow({
+            'title': 'Earthquake Alert',
+            'icon': __dirname + '/resources/icon.png',
+            'width': 700,
+            'height': 500,
+            'resizable': false,
+            //'always-on-top': true,
+            'fullscreen': false,
+            'skip-taskbar': true
+        });
+
+        win.on('closed', function() {
+            win = null;
+        });
+
+        win.loadUrl('file://' + __dirname + '/index.html');
+        win.show();
+
+        /*
+        app.on('ready', function() {
+            mainWindow = new BrowserWindow({
+                'title': 'Earthquake Alert',
+                'icon': __dirname + '/resources/icon.png',
+                'width': 700,
+                'height': 500,
+                'resizable': false,
+                //'always-on-top': true,
+                'fullscreen': false,
+                'skip-taskbar': true
+            });
+
+            mainWindow.loadUrl('file://' + __dirname + '/index.html');
+            //mainWindow.openDevTools();
+
+            mainWindow.on('closed', function() {
+                mainWindow = null;
+            });
+        });
+        */
+    }
 
     if (process.platform === 'linux' || process.platform === 'darwin') {
         notifier.notify({
