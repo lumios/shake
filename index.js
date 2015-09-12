@@ -22,7 +22,7 @@ if (process.platform === 'darwin') {
 }
 
 socket.on('connect', function() {
-    console.log('[*] Connected to EEW.'.success);
+    console.log(('[*] Connected to Server').success);
 });
 
 socket.on('data', function(data) {
@@ -31,7 +31,7 @@ socket.on('data', function(data) {
 });
 
 socket.on('disconnect', function() {
-    console.log('Connection Dropped.');
+    console.log(('[!] Socket Dropped').error);
 });
 
 function newQuake(input) {
