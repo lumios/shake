@@ -3,7 +3,8 @@
 A program to Notify you when an Earthquake has occurred.  
 このプログラムは、あなたのコンピュータに緊急地震速報通知を配信します。
 
-Earthquake Warnings are only sent if an Earthquake is large enough to affect a large area. Additionally, you will not receive alerts for Earthquakes too small to feel, instead, you will only receive alerts for Earthquakes above Magnitude 3.5, or Seismic Intensity 2.
+You will only be notified for Earthquakes larger than Magnitude 3.5.
+This is in place to keep you from being flooded with spam from Earthquakes too small to feel/be noticed.
 
 ### Installation
 ##### Prerequisites
