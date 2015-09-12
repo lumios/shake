@@ -1,47 +1,21 @@
 {
   "name": "eew",
-  "version": "1.0.0",
-  "main": "./src/index.js",
+  "version": "0.0.1",
+  "description": "Get Notified the moment an Earthquake Happens.",
+  "main": "index.js",
+  "keywords": [
+    "earthquake",
+    "client",
+    "socket"
+  ],
+  "author": "lumios",
+  "license": "ISC",
   "dependencies": {
+    "socket.io-client": "^1.3.6",
     "colors": "^1.1.2",
     "electron-prebuilt": "^0.30.6",
-    "socket.io": "^1.3.6",
     "fs-extra": "^0.24.0",
-    "moment": "^2.10.6",
     "node-notifier": "^4.2.3",
-    "osenv": "^0.1.3",
-    "request": "^2.61.0",
-    "twitter": "^1.2.5"
-  },
-  "author": "lumios",
-  "license": "SEE LICENSE IN <README.md>",
-  "description": "A cross-platform Earthquake Early Warning notifier for your computer.",
-  "homepage": "https://github.com/lumios/eew#readme",
-  "keywords": [
-    "mac",
-    "windows",
-    "linux",
-    "ubuntu",
-    "warnings",
-    "alerts",
-    "earthquake",
-    "jishin",
-    "地震",
-    "japan",
-    "日本",
-    "緊急地震速報",
-    "earthquake early warning",
-    "earthquake warning"
-  ],
-  "scripts": {
-    "start": "node ./src/index.js",
-    "gui": "node ./src/gui.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/lumios/eew"
-  },
-  "bugs": {
-    "url": "https://github.com/lumios/eew/issues"
+    "osenv": "^0.1.3"
   }
 }
