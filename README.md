@@ -1,5 +1,6 @@
 # Earthquake Early Warnings
-A program made to Notify you when an Earthquake is about to occur.  
+
+A program to Notify you when an Earthquake has occurred.  
 このプログラムは、あなたのコンピュータに緊急地震速報通知を配信します。
 
 Earthquake Warnings are only sent if an Earthquake is large enough to affect a large area. Additionally, you will not receive alerts for Earthquakes too small to feel, instead, you will only receive alerts for Earthquakes above Magnitude 3.5, or Seismic Intensity 2.
@@ -11,18 +12,18 @@ Earthquake Warnings are only sent if an Earthquake is large enough to affect a l
 - Linux _(Ubuntu, Debian, Arch)_
 - NodeJS v0.10.2 +
 
-##### Installation
+##### Install
 1. `cd ~/.../eew`
 2. `git clone git@github.com:lumios/eew.git`
-3. `sudo npm install`
+3. `npm i`
 
 ##### CLI
 1. `cd ~/.../eew`
 2. `npm start`
 
 ##### GUI
-1. `cd ~/.../eew/src`
-2. `electron .`
+1. `cd ~/.../eew`
+2. `electron gui.js`
 
 ### Legal
 ```text
