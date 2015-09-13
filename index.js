@@ -47,13 +47,13 @@ function newQuake(input) {
                 var cancelled_string = 'This Earthquake Warning has been cancelled.'
                 var epicenter_locale = data.epicenter_en;
                 break;
-            case 'jp':
+            case 'ja':
                 var title_string = '緊急地震速報（強い揺れに警戒して下さい）';
                 var epicenter_string = '震源';
                 var magnitude_string = 'マグニチュド';
                 var seismic_string = '最大震度';
                 var cancelled_string = '先ほどの地震速報は誤報です。';
-                var epicenter_locale = data.epicenter_jp;
+                var epicenter_locale = data.epicenter_ja;
                 break;
             default:
                 var title_string = 'errnolang';
@@ -62,7 +62,7 @@ function newQuake(input) {
                 var magnitude_string = 'errnolang';
                 var seismic_string = 'errnolang';
                 var cancelled_string = 'errnolang';
-                var epicenter_locale = data.epicenter_jp;
+                var epicenter_locale = data.epicenter_ja;
                 break;
         }
 
@@ -70,24 +70,21 @@ function newQuake(input) {
         var scale = ['1', '2', '3', '4', '5-', '5+', '6-', '6+', '7'];
         if      (data.revision == 1)                            var sound_string = 'nhk-alert';
         else if (data.type == 39 || data.situation == 7)        var sound_string = 'simple';
-        else if (scale.indexOf(data.seismic) >= 4)              var sound_string = 'keitai';
+        else if (scale.indexOf(data.seismic_en) >= 4)              var sound_string = 'keitai';
         else                                                    var sound_string = 'nhk';
 
         if (data.situation == 1)    var situation_string = 'Final';
         else                        var situation_string = '#' + data.revision;
-
-        if (data.seismic == '不明')       var seismic_locale = 'Unknown';
-        else                             var seismic_locale = data.seismic;
 
         if (data.type == 1 || data.situation == 2) {
             var subtitle_template = '';
             var message_template = cancelled_string;
         } else {
             var subtitle_template = epicenter_locale;
-            var message_template = magnitude_string + ': ' + data.magnitude + ', ' + seismic_string + ': ' + seismic_locale;}
+            var message_template = magnitude_string + ': ' + data.magnitude + ', ' + seismic_string + ': ' + data.seismic_en;}
 
         console.log(('[~] ' + data.earthquake_time + ' - ' + epicenter_locale).yellow);
-        console.log(('[~] Update ' + situation_string + ', Magnitude: ' + data.magnitude + ', Seismic: ' + seismic_locale).yellow);
+        console.log(('[~] Update ' + situation_string + ', Magnitude: ' + data.magnitude + ', Seismic: ' + data.seismic_en).yellow);
 
         if (process.platform === 'darwin') {
             notifier.notify({
