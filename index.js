@@ -11,7 +11,6 @@ var lang = 'en';
 var copyFiles = './resources/audio/';
 var pasteFiles = osenv.home() + '/Library/Sounds/';
 
-notifier.notify({'title': 'Earthquake Early Warning', 'message': 'EEW has started.', 'sound': false});
 colors.setTheme({tweet: 'cyan', success: 'green', error: ['red', 'bold'], warn: 'yellow', info: 'blue'});
 
 if (process.platform === 'darwin') {
@@ -21,51 +20,65 @@ if (process.platform === 'darwin') {
     });
 }
 
+switch (lang) {
+	case 'en':
+		var title_string = 'Earthquake Early Warning';
+		var connect_string = 'Connected to Server.';
+		var disconn_string = 'Cannot Connect to Server. We\'ll keep trying.';
+		var epicenter_string = 'Epicenter';
+		var magnitude_string = 'Magnitude';
+		var seismic_string = 'Max Seismic';
+		var cancelled_string = 'This Earthquake Warning has been cancelled.';
+		break;
+	case 'ja':
+		var title_string = '緊急地震速報（強い揺れに警戒して下さい）';
+		var connect_string = '';
+		var disconn_string = '';
+		var epicenter_string = '震源';
+		var magnitude_string = 'マグニチュド';
+		var seismic_string = '最大震度';
+		var cancelled_string = '先ほどの地震速報は誤報です。';
+		break;
+	default:
+		var title_string = 'errnolang';
+		var connect_string = 'errnolang';
+		var disconn_string = 'errnolang';
+		var epicenter_string = 'errnolang';
+		var magnitude_string = 'errnolang';
+		var seismic_string = 'errnolang';
+		var cancelled_string = 'errnolang';
+		break;
+}
+
 socket.on('connect', function() {
     console.log(('[*] Connected to Server').success);
+
+	notifier.notify({
+		'title': title_string,
+		'message': 'Connected to Server.',
+		'sound': false
+	});
 });
 
 socket.on('data', function(data) {
-    console.log(('[>]' + data).info);
-    newQuake(data);
+    console.log(('[>] Data Received from Server').info);
+    parse(data);
 });
 
 socket.on('disconnect', function() {
     console.log(('[!] Socket Dropped').error);
+
+	notifier.notify({
+		'title': title_string,
+		'message': 'Cannot Connect to Server. We\'ll keep trying.',
+		'sound': false
+	});
 });
 
-function newQuake(input) {
+function parse(input) {
     var data = JSON.parse(input);
 
     try {
-        switch (lang) {
-            case 'en':
-                var title_string = 'Earthquake Early Warning';
-                var epicenter_string = 'Epicenter';
-                var magnitude_string = 'Magnitude';
-                var seismic_string = 'Max Seismic';
-                var cancelled_string = 'This Earthquake Warning has been cancelled.'
-                var epicenter_locale = data.epicenter_en;
-                break;
-            case 'ja':
-                var title_string = '緊急地震速報（強い揺れに警戒して下さい）';
-                var epicenter_string = '震源';
-                var magnitude_string = 'マグニチュド';
-                var seismic_string = '最大震度';
-                var cancelled_string = '先ほどの地震速報は誤報です。';
-                var epicenter_locale = data.epicenter_ja;
-                break;
-            default:
-                var title_string = 'errnolang';
-                var subtitle_string = 'errnolang';
-                var epicenter_string = 'errnolang';
-                var magnitude_string = 'errnolang';
-                var seismic_string = 'errnolang';
-                var cancelled_string = 'errnolang';
-                var epicenter_locale = data.epicenter_ja;
-                break;
-        }
-
         //            0    1    2    3    4     5     6     7     8
         var scale = ['1', '2', '3', '4', '5-', '5+', '6-', '6+', '7'];
         if      (data.revision == 1)                            var sound_string = 'nhk-alert';
