@@ -3,59 +3,32 @@ var colors = require('colors');     // Terminal Text Formatting
 var osenv = require('osenv');       // OS Specific Globals
 var path = require('path');         // File System Paths
 var fse = require('fs-extra');      // File System Extras
+var fs = require('fs');				// File System
 
 if (process.platform === 'darwin') var notifier = require('./lib/node-notifier');
 else var notifier = require('node-notifier');
 
+var date = new Date();
 var lang = 'en';
-var copyFiles = './resources/audio/';
-var pasteFiles = osenv.home() + '/Library/Sounds/';
+var local = JSON.parse(fs.readFileSync('./resources/lang.json') + '');
+var copy = './resources/audio/';
+var paste = osenv.home() + '/Library/Sounds/';
 
 colors.setTheme({tweet: 'cyan', success: 'green', error: ['red', 'bold'], warn: 'yellow', info: 'blue'});
 
 if (process.platform === 'darwin') {
-    fse.copy(copyFiles, pasteFiles, function(error) {
-        console.log("[*] Installed Audio Files to ".success + pasteFiles.success);
+    fse.copy(copy, paste, function(error) {
+        console.log(("[*] Installed Audio Files to " + paste).success);
         if (error) throw console.error(error.error);
     });
-}
-
-switch (lang) {
-	case 'en':
-		var title_string = 'Earthquake Early Warning';
-		var connect_string = 'Connected to Server.';
-		var disconn_string = 'Cannot Connect to Server. We\'ll keep trying.';
-		var epicenter_string = 'Epicenter';
-		var magnitude_string = 'Magnitude';
-		var seismic_string = 'Max Seismic';
-		var cancelled_string = 'This Earthquake Warning has been cancelled.';
-		break;
-	case 'ja':
-		var title_string = '緊急地震速報（強い揺れに警戒して下さい）';
-		var connect_string = '';
-		var disconn_string = '';
-		var epicenter_string = '震源';
-		var magnitude_string = 'マグニチュド';
-		var seismic_string = '最大震度';
-		var cancelled_string = '先ほどの地震速報は誤報です。';
-		break;
-	default:
-		var title_string = 'errnolang';
-		var connect_string = 'errnolang';
-		var disconn_string = 'errnolang';
-		var epicenter_string = 'errnolang';
-		var magnitude_string = 'errnolang';
-		var seismic_string = 'errnolang';
-		var cancelled_string = 'errnolang';
-		break;
 }
 
 socket.on('connect', function() {
     console.log(('[*] Connected to Server').success);
 
 	notifier.notify({
-		'title': title_string,
-		'message': 'Connected to Server.',
+		'title': local.en.title,
+		'message': local.en.connect,
 		'sound': false
 	});
 });
@@ -69,8 +42,8 @@ socket.on('disconnect', function() {
     console.log(('[!] Socket Dropped').error);
 
 	notifier.notify({
-		'title': title_string,
-		'message': 'Cannot Connect to Server. We\'ll keep trying.',
+		'title': local.en.title,
+		'message': local.en.disconnect,
 		'sound': false
 	});
 });
@@ -81,54 +54,69 @@ function parse(input) {
     try {
         //            0    1    2    3    4     5     6     7     8
         var scale = ['1', '2', '3', '4', '5-', '5+', '6-', '6+', '7'];
-        if      (data.revision == 1)                            var sound_string = 'nhk-alert';
-        else if (data.type == 39 || data.situation == 7)        var sound_string = 'simple';
-        else if (scale.indexOf(data.seismic_en) >= 4)              var sound_string = 'keitai';
-        else                                                    var sound_string = 'nhk';
+        if (data.revision == 1)							var sound_string = 'nhk-alert';
+        else if (data.type == 2 || data.situation == 1)	var sound_string = 'simple';
+        else if (scale.indexOf(data.seismic_en) >= 4)	var sound_string = 'keitai';
+        else 											var sound_string = 'nhk';
 
-        if (data.situation == 1)    var situation_string = 'Final';
+        if (data.situation == 1)    var situation_string = local.en.units.final;
         else                        var situation_string = '#' + data.revision;
 
         if (data.type == 1 || data.situation == 2) {
-            var subtitle_template = '';
-            var message_template = cancelled_string;
+            var subtitle_template 	= '';
+            var message_template 	= local.en.cancelled;
         } else {
-            var subtitle_template = epicenter_locale;
-            var message_template = magnitude_string + ': ' + data.magnitude + ', ' + seismic_string + ': ' + data.seismic_en;}
+            var subtitle_template 	= data.epicenter_en;
+            var message_template 	= local.en.units.magnitude + ': ' + data.magnitude + ', ' + local.en.units.seismic + ': ' + data.seismic_en;}
 
-        console.log(('[~] ' + data.earthquake_time + ' - ' + epicenter_locale).yellow);
-        console.log(('[~] Update ' + situation_string + ', Magnitude: ' + data.magnitude + ', Seismic: ' + data.seismic_en).yellow);
+        console.log(('[~] ' + data.earthquake_time + ' - ' + data.epicenter_en).yellow);
+        console.log(('[~] ' + local.en.units.update + ' ' + situation_string + ', ' + local.en.units.magnitude + ': ' + data.magnitude + ', ' + local.en.units.seismic + ': ' + data.seismic_en).yellow);
 
-        if (process.platform === 'darwin') {
-            notifier.notify({
-                'title': title_string,
-                'subtitle': subtitle_template,
-                'message': message_template,
-                'sound': sound_string
-            });
-        }
-
-        else if (process.platform === 'linux') {
-            notifier.notify({
-                'title': title_string,
-                'subtitle': subtitle_template,
-                'message': message_template,
-                'sound': sound_string,
-                'urgency': 'critical',
-                'time': 10000
-            });
-        }
-
-        else {
-            notifier.notify({
-                'title': title_string,
-                'message': subtitle_template + '\n' + message_template,
-                'icon': path.join(__dirname, './resources/icon.png'),
-                'time': 5000,
-                'wait': true
-            });
-        }
+		// Night Mode Check
+		if (date.getHours() >= '06' || scale.indexOf(data.seismic_en) >= 4) {
+			if (process.platform === 'darwin') {
+	            notifier.notify({
+	                'title': local.en.title,
+	                'subtitle': subtitle_template,
+	                'message': message_template,
+	                'sound': sound_string,
+					'time': 10000,
+					'wait': true
+	            });
+	        } else {
+	            notifier.notify({
+	                'title': local.en.title,
+	                'subtitle': subtitle_template,
+	                'message': message_template,
+					'icon': path.join(__dirname, './resources/icon.png'),
+	                'sound': sound_string,
+	                'urgency': 'critical',
+	                'time': 10000
+	            });
+	        }
+		} else {
+			if (process.platform === 'darwin') {
+	            notifier.notify({
+	                'title': local.en.title,
+	                'subtitle': subtitle_template,
+	                'message': message_template,
+	                'sound': false,
+					'time': 10000,
+					'wait': true
+	            });
+	        } else {
+	            notifier.notify({
+	                'title': local.en.title,
+	                'subtitle': subtitle_template,
+	                'message': message_template,
+					'icon': path.join(__dirname, './resources/icon.png'),
+	                'sound': false,
+	                'urgency': 'critical',
+	                'time': 10000
+	            });
+			}
+		}
     } catch (err) {
-        notifier.notify({'title': 'Earthquake Early Warning', 'message': 'Error: ' + err.message, 'sound': false});
+        notifier.notify({'title': 'Earthquake Early Warning', 'message': local.en.error + ': ' + err.message, 'sound': false});
     }
 }

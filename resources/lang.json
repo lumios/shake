@@ -1,0 +1,31 @@
+{
+	"en": {
+		"title": "Earthquake Early Warning",
+		"connect": "Connected to Server.",
+		"disconnect": "Cannot Connect to Server. We'll keep trying.",
+		"cancelled": "This Earthquake Warning has been cancelled.",
+		"error": "Error",
+		"units": {
+			"epicenter": "Epicenter",
+			"magnitude": "Magnitude",
+			"seismic": "Max Seismic",
+			"update": "Update",
+			"final": "Final"
+		}
+	},
+
+	"ja": {
+		"title": "緊急地震速報（強い揺れに警戒して下さい）",
+		"connect": "サーバー接続完了！",
+		"disconnect": "サーバーに接続出来ません。接続を継続します。",
+		"cancelled": "先ほどの地震速報は誤報です。",
+		"error": "エラー",
+		"units": {
+			"epicenter": "震源",
+			"magnitude": "マグニチュド",
+			"seismic": "最大震度",
+			"update": "更新",
+			"final": "最後"
+		}
+	}
+}
