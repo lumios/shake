@@ -155,10 +155,13 @@ app.on('ready', function() {
     electronReady = true;
 });
 
-/*
+
 app.on('window-all-closed', function() {
+	return;
+	/*
     if (process.platform != 'darwin') {
         app.quit();
     }
+    */
 });
-*/
+
