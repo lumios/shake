@@ -20,12 +20,6 @@ var paste = osenv.home() + '/Library/Sounds/';
 var alertWindow = null;
 var electronReady = false;
 
-app.on('window-all-closed', function() {
-    if (process.platform != 'darwin') {
-        app.quit();
-    }
-});
-
 colors.setTheme({tweet: 'cyan', success: 'green', error: ['red', 'bold'], warn: 'yellow', info: 'blue'});
 
 if (process.platform === 'darwin') {
@@ -133,7 +127,7 @@ function parse(input) {
 			}
 		}
         
-        if(data.revision === 1 && electronReady === true) {
+        if(data.revision == 1 && electronReady === true) {
             alertWindow = new BrowserWindow({
                 'title': 'Earthquake Alert',
                 'icon': __dirname + '/resources/icon.png',
@@ -158,3 +152,11 @@ app.on('ready', function() {
         alertWindow = null;
     });
 });
+
+/*
+app.on('window-all-closed', function() {
+    if (process.platform != 'darwin') {
+        app.quit();
+    }
+});
+*/
