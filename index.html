@@ -6,8 +6,8 @@
     <link rel="shortcut icon" type="image/png" href="resources/icon.png"/>
 
     <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     <script>
         require('ipc').on('data', function(data) {
             $("location").update(data.epicenter_en);
@@ -15,7 +15,7 @@
             $("seismic").update(data.seismic_en);
         });
     </script>
-    <link href="https://developers.google.com/maps/styles/common.css" rel="stylesheet" type="text/css">
+	
     <script>
         function initialize() {
             var epicenter = new google.maps.LatLng(38.0,141.9);
