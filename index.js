@@ -5,6 +5,7 @@ var fse = require('fs-extra');                 // File System Extras
 var osenv = require('osenv');                  // OS Specific Globals
 var path = require('path');                    // File System Paths
 var app = require('app');                      // Electron GUI
+var ipc = require('ipc');                      // Electron inter-process comm
 var fs = require('fs');				           // File System
 
 require('crash-reporter').start(); // Electron Crash Reporter
@@ -136,8 +137,14 @@ function parse(input) {
                 'resizable': false,
                 'skip-taskbar': true
             });
-            alertWindow.loadUrl('file://' + __dirname + '/index.html');
 			if (process.platform == 'darwin') app.dock.show();
+            alertWindow.loadUrl('file://' + __dirname + '/index.html');
+
+            var webContents = alertWindow.webContents;
+            webContents.on('did-finish-load', function() {
+                webContents.send('data', data);
+            });
+
             alertWindow.on('closed', function() {
                 if (process.platform == 'darwin') app.dock.hide();
                 alertWindow = null;
@@ -147,7 +154,7 @@ function parse(input) {
 		else if (data.revision != 1 && electronReady === true) {
 			alertWindow.loadUrl('file://' + __dirname + '/index.html');
 		}
-		
+
     } catch (err) {
         notifier.notify({'title': local.en.title, 'message': local.en.error + ': ' + err.message, 'sound': false});
     }
