@@ -79,7 +79,7 @@ function parse(input) {
         console.log(('[~] ' + local.en.units.update + ' ' + situation_string + ', ' + local.en.units.magnitude + ': ' + data.magnitude + ', ' + local.en.units.seismic + ': ' + data.seismic_en).yellow);
 
 		// Night Mode Check
-		if (date.getHours() >= '06' || scale.indexOf(data.seismic_en) >= 4) {
+		if (date.getHours() >= '06' || scale.indexOf(data.seismic_en) >= 5) {
 			// Mac Day Notification
 			if (process.platform === 'darwin') {
 	            notifier.notify({
@@ -126,31 +126,34 @@ function parse(input) {
 	            });
 			}
 		}
-        
-        if(data.revision == 1 && electronReady === true) {
+
+        if (data.revision == 1 && electronReady === true) {
             alertWindow = new BrowserWindow({
-                'title': 'Earthquake Alert',
+                'title': 'Earthquake Early Warning',
                 'icon': __dirname + '/resources/icon.png',
-                'width': 700,
-                'height': 500,
+                'width': 600,
+                'height': 625,
                 'resizable': false,
-                'fullscreen': false,
                 'skip-taskbar': true
             });
             alertWindow.loadUrl('file://' + __dirname + '/index.html');
-            app.dock.show();
+			if (process.platform == 'darwin') app.dock.show();
             alertWindow.on('closed', function() {
-                app.dock.hide();
+                if (process.platform == 'darwin') app.dock.hide();
                 alertWindow = null;
             });
         }
-	// If something didn't work, send an error
+
+		else if (data.revision != 1 && electronReady === true) {
+			alertWindow.loadUrl('file://' + __dirname + '/index.html');
+		}
+		
     } catch (err) {
         notifier.notify({'title': local.en.title, 'message': local.en.error + ': ' + err.message, 'sound': false});
     }
 }
 
-app.dock.hide();
+if (process.platform == 'darwin') app.dock.hide();
 
 app.on('ready', function() {
     electronReady = true;
@@ -159,10 +162,5 @@ app.on('ready', function() {
 
 app.on('window-all-closed', function() {
 	return;
-	/*
-    if (process.platform != 'darwin') {
-        app.quit();
-    }
-    */
+	//if (process.platform != 'darwin') app.quit();
 });
-

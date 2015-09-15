@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Earthquake Alert</title>
+    <title>Earthquake Early Warning</title>
     <link rel="shortcut icon" type="image/png" href="resources/icon.png"/>
 
     <script src="https://maps.googleapis.com/maps/api/js"></script>
@@ -13,19 +13,35 @@
             var magnitude = 6.7;
             var mapCanvas = document.getElementById('map');
             var mapOptions = {
-                center: new google.maps.LatLng(38.00, 136.60),
-                zoom: 5,
+                center: epicenter,
+                zoom: 6,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
-                disableDefaultUI: true
+				mapTypeControl: true,
+			    mapTypeControlOptions: {
+			        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+			        position: google.maps.ControlPosition.TOP_RIGHT
+			    },
+			    zoomControl: true,
+			    zoomControlOptions: {
+			        style: google.maps.ZoomControlStyle.LARGE,
+			        position: google.maps.ControlPosition.RIGHT_CENTER
+			    },
+			    scaleControl: false,
+				panControl: false,
+			    streetViewControl: false
             }
             var map = new google.maps.Map(mapCanvas, mapOptions);
             var marker = new google.maps.Marker({
-              position: epicenter,
-              map: map
+				position: epicenter,
+                map: map
             });
         }
 
         google.maps.event.addDomListener(window, 'load', initialize);
+
+		if (process.platform == 'win32') {
+			document.write('<audio hidden autoplay preload="auto"><source src="resources/audio/nhk.mp3" type="audio/mp3"></audio>');
+		}
     </script>
 
     <style>
@@ -43,9 +59,17 @@
             background-color: darkgrey;
         }
 
+		/*.logo {
+			position: absolute;
+			opacity: 0.1;
+			z-index: 10;
+			bottom: 6px;
+			right: 10px;
+		}*/
+
         .alert {
             position: absolute;
-            z-index: 20;
+            z-index: 10;
             top: 0;
             left: 0;
             width: inherit;
@@ -73,23 +97,19 @@
             display: inline-block;
         }
 
-        div > a > div > img, .gmnoprint {
+        /*div > a > div > img, .gmnoprint {
             display: none;
-        }
+        }*/
     </style>
 </head>
 <body>
-
-    <audio hidden autoplay preload="auto">
-        <source src="resources/audio/nhk.mp3" type="audio/mp3">
-    </audio>
 
     <div class="alert">
         <table>
             <tbody>
                 <tr>
                     <td style="width:50px">
-                        <img src="resources/icon.png" height="40px" width="40px">
+                        <img src="resources/eew-icon.png" height="40px" width="40px">
                     </td>
                     <td>
                         <b>Offshore Miyagi Prefecture</b>
