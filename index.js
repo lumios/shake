@@ -34,7 +34,7 @@ socket.on('connect', function() {
 });
 
 socket.on('data', function(data) {
-    console.log(('[>] Data Received from Server').info);
+    console.log(('[>] Received New Data from Server').info);
     parse(data);
 });
 
@@ -74,6 +74,7 @@ function parse(input) {
 
 		// Night Mode Check
 		if (date.getHours() >= '06' || scale.indexOf(data.seismic_en) >= 4) {
+			// Mac Day Notification
 			if (process.platform === 'darwin') {
 	            notifier.notify({
 	                'title': local.en.title,
@@ -83,6 +84,7 @@ function parse(input) {
 					'time': 10000,
 					'wait': true
 	            });
+			// Linux & Windows Day Notification
 	        } else {
 	            notifier.notify({
 	                'title': local.en.title,
@@ -95,6 +97,7 @@ function parse(input) {
 	            });
 	        }
 		} else {
+			// Mac Night Notifiction
 			if (process.platform === 'darwin') {
 	            notifier.notify({
 	                'title': local.en.title,
@@ -104,6 +107,7 @@ function parse(input) {
 					'time': 10000,
 					'wait': true
 	            });
+			// Linux & Windows Night Notification
 	        } else {
 	            notifier.notify({
 	                'title': local.en.title,
@@ -116,7 +120,8 @@ function parse(input) {
 	            });
 			}
 		}
+	// If something didn't work, send an error
     } catch (err) {
-        notifier.notify({'title': 'Earthquake Early Warning', 'message': local.en.error + ': ' + err.message, 'sound': false});
+        notifier.notify({'title': local.en.title, 'message': local.en.error + ': ' + err.message, 'sound': false});
     }
 }
