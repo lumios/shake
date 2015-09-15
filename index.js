@@ -138,7 +138,9 @@ function parse(input) {
                 'skip-taskbar': true
             });
             alertWindow.loadUrl('file://' + __dirname + '/index.html');
+            app.dock.show();
             alertWindow.on('closed', function() {
+                app.dock.hide();
                 alertWindow = null;
             });
         }
