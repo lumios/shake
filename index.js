@@ -1,9 +1,13 @@
 var socket = require('socket.io-client')('http://ssh.kurisubrooks.com:3080');
-var colors = require('colors');     // Terminal Text Formatting
-var osenv = require('osenv');       // OS Specific Globals
-var path = require('path');         // File System Paths
-var fse = require('fs-extra');      // File System Extras
-var fs = require('fs');				// File System
+var BrowserWindow = require('browser-window'); // Electron Browser Windows
+var colors = require('colors');                // Terminal Text Formatting
+var fse = require('fs-extra');                 // File System Extras
+var osenv = require('osenv');                  // OS Specific Globals
+var path = require('path');                    // File System Paths
+var app = require('app');                      // Electron GUI
+var fs = require('fs');				           // File System
+
+require('crash-reporter').start(); // Electron Crash Reporter
 
 if (process.platform === 'darwin') var notifier = require('./lib/node-notifier');
 else var notifier = require('node-notifier');
@@ -13,6 +17,14 @@ var lang = 'en';
 var local = JSON.parse(fs.readFileSync('./resources/lang.json') + '');
 var copy = './resources/audio/';
 var paste = osenv.home() + '/Library/Sounds/';
+var alertWindow = null;
+var electronReady = false;
+
+app.on('window-all-closed', function() {
+    if (process.platform != 'darwin') {
+        app.quit();
+    }
+});
 
 colors.setTheme({tweet: 'cyan', success: 'green', error: ['red', 'bold'], warn: 'yellow', info: 'blue'});
 
@@ -120,8 +132,29 @@ function parse(input) {
 	            });
 			}
 		}
+        
+        if(data.revision === 1 && electronReady === true) {
+            alertWindow = new BrowserWindow({
+                'title': 'Earthquake Alert',
+                'icon': __dirname + '/resources/icon.png',
+                'width': 700,
+                'height': 500,
+                'resizable': false,
+                'fullscreen': false,
+                'skip-taskbar': true
+            });
+            alertWindow.loadUrl('file://' + __dirname + '/index.html');
+        }
 	// If something didn't work, send an error
     } catch (err) {
         notifier.notify({'title': local.en.title, 'message': local.en.error + ': ' + err.message, 'sound': false});
     }
 }
+
+app.on('ready', function() {
+    app.dock.hide();
+    electronReady = true;
+    alertWindow.on('closed', function() {
+        alertWindow = null;
+    });
+});
