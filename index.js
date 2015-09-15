@@ -5,6 +5,7 @@ var fse = require('fs-extra');                 // File System Extras
 var osenv = require('osenv');                  // OS Specific Globals
 var path = require('path');                    // File System Paths
 var app = require('app');                      // Electron GUI
+var ipc = require('ipc');                      // Electron inter-process comm
 var fs = require('fs');				           // File System
 
 require('crash-reporter').start(); // Electron Crash Reporter
@@ -138,6 +139,10 @@ function parse(input) {
                 'skip-taskbar': true
             });
             alertWindow.loadUrl('file://' + __dirname + '/index.html');
+            var webContents = alertWindow.webContents;
+            webContents.on('did-finish-load', function() {
+                webContents.send('data', data);
+            });
             app.dock.show();
             alertWindow.on('closed', function() {
                 app.dock.hide();
