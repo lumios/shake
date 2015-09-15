@@ -150,8 +150,11 @@ function parse(input) {
     }
 }
 
-app.on('ready', function() {
+app.on('will-finish-launching', function() {
     app.dock.hide();
+});
+
+app.on('ready', function() {
     electronReady = true;
 });
 
