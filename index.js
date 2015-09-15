@@ -138,6 +138,9 @@ function parse(input) {
                 'skip-taskbar': true
             });
             alertWindow.loadUrl('file://' + __dirname + '/index.html');
+            alertWindow.on('closed', function() {
+                alertWindow = null;
+            });
         }
 	// If something didn't work, send an error
     } catch (err) {
@@ -148,9 +151,6 @@ function parse(input) {
 app.on('ready', function() {
     app.dock.hide();
     electronReady = true;
-    alertWindow.on('closed', function() {
-        alertWindow = null;
-    });
 });
 
 /*
