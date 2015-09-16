@@ -13,7 +13,7 @@
             var data = all[0];
             var template = all[1];
             document.getElementById("location").textContent = template[0];
-            document.getElementById("magnitudeseismic").textContent = template[1] + " Rev#" + data.revision;
+            document.getElementById("magnitudeseismic").textContent = template[1];
             loadMap(data.latitude, data.longitude, data.magnitude);
         });
     </script>
