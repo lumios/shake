@@ -17,7 +17,7 @@
             loadMap(data.latitude, data.longitude, data.magnitude);
         });
     </script>
-	
+
     <script>
         function loadMap(latitude, longitude, magnitude) {
             var epicenter = new google.maps.LatLng(latitude, longitude);
@@ -45,6 +45,40 @@
 				position: epicenter,
                 map: map
             });
+			var marker2 = new google.maps.Marker({
+				position: new google.maps.LatLng(35.41, 139.41),
+				map: map,
+				label: 'H'
+			})
+			var styles = [
+			  {
+			    "featureType": "water",
+			    "stylers": [
+			      { "gamma": 0.52 },
+			      { "hue": "#0091ff" },
+			      { "saturation": 100 },
+			      { "lightness": 42 }
+			    ]
+			  },{
+			    "featureType": "road.highway",
+			    "stylers": [
+			      { "hue": "#ff9900" },
+			      { "visibility": "simplified" }
+			    ]
+			  },{
+			    "featureType": "landscape",
+			    "stylers": [
+			      { "visibility": "simplified" },
+			      { "saturation": -30 },
+			      { "lightness": 62 }
+			    ]
+			  },{
+			    "featureType": "landscape.natural.terrain",
+			    "stylers": [
+			      { "visibility": "off" }
+			    ]
+			  }
+			]
         }
 
 		if (process.platform == 'win32') {
