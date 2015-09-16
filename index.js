@@ -21,6 +21,7 @@ var copy = './resources/audio/';
 var paste = osenv.home() + '/Library/Sounds/';
 var alertWindow = null;
 var electronReady = false;
+var webContents = null;
 
 colors.setTheme({tweet: 'cyan', success: 'green', error: ['red', 'bold'], warn: 'yellow', info: 'blue'});
 
@@ -130,7 +131,7 @@ function parse(input) {
 			if (process.platform == 'darwin') app.dock.show();
             alertWindow.loadUrl('file://' + __dirname + '/index.html');
 
-            var webContents = alertWindow.webContents;
+            webContents = alertWindow.webContents;
             webContents.on('did-finish-load', function() {
                 webContents.send('data', [data, template]);
             });
@@ -138,11 +139,11 @@ function parse(input) {
             alertWindow.on('closed', function() {
                 alertWindow = null;
             });
+        } else if(electronReady === true && alertWindow != null && webContents != null) {
+            webContents.on('did-finish-load', function() {
+                webContents.send('data', [data, template]);
+            });
         }
-
-		else if (data.revision != 1 && electronReady === true) {
-			alertWindow.loadUrl('file://' + __dirname + '/index.html');
-		}
 
     } catch (err) {
         notifier.notify({'title': locale.en.title, 'message': locale.en.error + ': ' + err.message, 'sound': false});
