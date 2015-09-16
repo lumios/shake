@@ -8,7 +8,8 @@
     <script src="https://maps.googleapis.com/maps/api/js"></script>
 
     <script>
-        require('ipc').on('data', function(all) {
+        var ipc = require('ipc');
+        ipc.on('data', function(all) {
             var data = all[0];
             var template = all[1];
             document.getElementById("location").textContent = template[0];

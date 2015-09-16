@@ -19,9 +19,8 @@ var lang = 'en';
 var locale = JSON.parse(fs.readFileSync('./resources/lang.json') + '');
 var copy = './resources/audio/';
 var paste = osenv.home() + '/Library/Sounds/';
-var alertWindow = null;
+var alertWindows = {};
 var electronReady = false;
-var webContents = null;
 
 colors.setTheme({tweet: 'cyan', success: 'green', error: ['red', 'bold'], warn: 'yellow', info: 'blue'});
 
@@ -120,7 +119,7 @@ function parse(input) {
 		}
 
         if (data.revision == 1 && electronReady === true) {
-            alertWindow = new BrowserWindow({
+            var alertWindow = new BrowserWindow({
                 'title': 'Earthquake Early Warning',
                 'icon': __dirname + '/resources/icon.png',
                 'width': 600,
@@ -128,10 +127,14 @@ function parse(input) {
                 'resizable': false,
                 'skip-taskbar': true
             });
+            
+            alertWindows[data.earthquake_id] = alertWindow;
+            
 			if (process.platform == 'darwin') app.dock.show();
+            
             alertWindow.loadUrl('file://' + __dirname + '/index.html');
 
-            webContents = alertWindow.webContents;
+            var webContents = alertWindow.webContents;
             webContents.on('did-finish-load', function() {
                 webContents.send('data', [data, template]);
             });
@@ -139,7 +142,9 @@ function parse(input) {
             alertWindow.on('closed', function() {
                 alertWindow = null;
             });
-        } else if(electronReady === true && alertWindow != null && webContents != null) {
+        } else if(electronReady === true && alertWindows[data.earthquake_id] != undefined) {
+            alertWindow = alertWindows[data.earthquake_id];
+            var webContents = alertWindow.webContents;
             webContents.on('did-finish-load', function() {
                 webContents.send('data', [data, template]);
             });
