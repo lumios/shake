@@ -1,4 +1,4 @@
-var socket = require('socket.io-client')('http://ssh.kurisubrooks.com:3080');
+var socket = require('socket.io-client')('http://eew.kurisubrooks.com:3080');
 var parser = require('./parser.js');           	// Code to parse EEW data
 var colors = require('colors');                	// Terminal Text Formatting
 var fse = require('fs-extra');                 	// File System Extras
@@ -187,8 +187,8 @@ app.on('ready', function() {
 	appIcon.setToolTip('EEW');
 	appIcon.setContextMenu(contextMenu);
 
-	appIcon.on('clicked', function() {
-		console.log(in);
+	appIcon.on('clicked', function(event) {
+		console.log(event);
 	});
 
 });
