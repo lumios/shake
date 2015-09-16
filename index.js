@@ -155,9 +155,9 @@ function parse(input) {
         } else if(electronReady === true) {
             if(alertWindows[data.earthquake_id] === undefined) {
                 newWindow(data);
-                
+
                 var webContents = alertWindows[data.earthquake_id].webContents;
-                
+
                 webContents.on('did-finish-load', function() {
                     webContents.send('data', [data, template, locale]);
                 });
@@ -179,7 +179,7 @@ if (process.platform == 'darwin') app.dock.hide();
 app.on('ready', function() {
     electronReady = true;
 
-	appIcon = new Tray('./resources/eew-icon.png');
+	appIcon = new Tray('./resources/dock16.png');
 	var contextMenu = Menu.buildFromTemplate([
 	  { label: 'Item1', type: 'radio' },
 	  { label: 'Item2', type: 'radio' },
