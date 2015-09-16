@@ -148,7 +148,7 @@ function parse(input) {
             });
 
             var alertWindow = alertWindows[data.earthquake_id]
-            
+
             alertWindow.on('closed', function() {
                 alertWindow = null;
             });
@@ -181,13 +181,16 @@ app.on('ready', function() {
 
 	appIcon = new Tray('./resources/dock16.png');
 	var contextMenu = Menu.buildFromTemplate([
-	  { label: 'Item1', type: 'radio' },
-	  { label: 'Item2', type: 'radio' },
-	  { label: 'Item3', type: 'radio', checked: true },
-	  { label: 'Item4', type: 'radio' }
+		{label: 'Open Settings', id: '1'},
 	]);
+
 	appIcon.setToolTip('EEW');
 	appIcon.setContextMenu(contextMenu);
+
+	appIcon.on('clicked', function() {
+		console.log(in);
+	});
+
 });
 
 
