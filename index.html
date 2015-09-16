@@ -10,17 +10,16 @@
     <script>
         require('ipc').on('data', function(all) {
             var data = all[0];
-            var locale = all[1];
-            var template = all[2];
+            var template = all[1];
             document.getElementById("location").textContent = template[0];
             document.getElementById("magnitudeseismic").textContent = template[1];
+            loadMap(data.latitude, data.longitude, data.magnitude);
         });
     </script>
 	
     <script>
-        function initialize() {
-            var epicenter = new google.maps.LatLng(38.0,141.9);
-            var magnitude = 6.7;
+        function loadMap(latitude, longitude, magnitude) {
+            var epicenter = new google.maps.LatLng(latitude, longitude);
             var mapCanvas = document.getElementById('map');
             var mapOptions = {
                 center: epicenter,

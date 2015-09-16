@@ -132,7 +132,7 @@ function parse(input) {
 
             var webContents = alertWindow.webContents;
             webContents.on('did-finish-load', function() {
-                webContents.send('data', [data, locale, template]);
+                webContents.send('data', [data, template]);
             });
 
             alertWindow.on('closed', function() {
