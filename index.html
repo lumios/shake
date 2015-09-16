@@ -10,9 +10,9 @@
 
     <script>
         require('ipc').on('data', function(data) {
-            $("location").update(data.epicenter_en);
-            $("magnitude").update(data.magnitude);
-            $("seismic").update(data.seismic_en);
+            $(".location").text(data.epicenter_en);
+            $(".magnitude").text(data.magnitude);
+            $(".seismic").text(data.seismic_en);
         });
     </script>
 	
