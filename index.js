@@ -1,4 +1,4 @@
-var socket = require('socket.io-client')('http://ssh.kurisubrooks.com:3080');
+var socket = require('socket.io-client')('http://127.0.0.1:3080');
 var parser = require('./parser.js');           	// Code to parse EEW data
 var colors = require('colors');                	// Terminal Text Formatting
 var fse = require('fs-extra');                 	// File System Extras
@@ -22,7 +22,7 @@ var locale = JSON.parse(fs.readFileSync('./resources/lang.json') + '');
 var copy = './resources/audio/';
 var paste = osenv.home() + '/Library/Sounds/';
 var alertWindows = {};
-var alertRev = {};
+var alertRevision = {};
 var appIcon = null;
 var electronReady = false;
 
@@ -37,7 +37,7 @@ function newWindow(data) {
     });
 
     alertWindows[data.earthquake_id] = alertWindow;
-    alertRev[data.earthquake_id] = data.revision;
+    alertRevision[data.earthquake_id] = data.revision;
 
     if (process.platform == 'darwin') app.dock.show();
 
@@ -140,7 +140,7 @@ function parse(input) {
 			}
 		}
 
-        if (data.revision == 1 && electronReady === true) {
+        if (data.revision == 1 && (alertRevision[data.earthquake_id] == undefined || data.revision > alertRevision[data.earthquake_id]) && electronReady === true) {
             newWindow(data);
             var webContents = alertWindows[data.earthquake_id].webContents;
             webContents.on('did-finish-load', function() {
@@ -151,11 +151,19 @@ function parse(input) {
                 alertWindow = null;
             });
         } else if(electronReady === true) {
-            if(alertWindows[data.earthquake_id] === undefined) newWindow(data);
-            if(alertRev[data.earthquake_id] < data.revision) {
+            if(alertWindows[data.earthquake_id] === undefined) {
+                newWindow(data);
+                
+                var webContents = alertWindows[data.earthquake_id].webContents;
+                
+                webContents.on('did-finish-load', function() {
+                    webContents.send('data', [data, template]);
+                });
+            } else if(alertRevision[data.earthquake_id] != undefined && data.revision > alertRevision[data.earthquake_id]) {
                 alertWindow = alertWindows[data.earthquake_id];
                 var webContents = alertWindow.webContents;
                 webContents.send('data', [data, template]);
+                alertRevision[data.earthquake_id] = data.revision;
             }
         }
 
