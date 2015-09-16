@@ -22,8 +22,27 @@ var locale = JSON.parse(fs.readFileSync('./resources/lang.json') + '');
 var copy = './resources/audio/';
 var paste = osenv.home() + '/Library/Sounds/';
 var alertWindows = {};
+var alertRev = {};
 var appIcon = null;
 var electronReady = false;
+
+function newWindow(data) {
+    var alertWindow = new BrowserWindow({
+        'title': 'Earthquake Early Warning',
+        'icon': __dirname + '/resources/icon.png',
+        'width': 600,
+        'height': 625,
+        'resizable': false,
+        'skip-taskbar': true
+    });
+
+    alertWindows[data.earthquake_id] = alertWindow;
+    alertRev[data.earthquake_id] = data.revision;
+
+    if (process.platform == 'darwin') app.dock.show();
+
+    alertWindow.loadUrl('file://' + __dirname + '/index.html');
+}
 
 colors.setTheme({tweet: 'cyan', success: 'green', error: ['red', 'bold'], warn: 'yellow', info: 'blue'});
 
@@ -122,21 +141,7 @@ function parse(input) {
 		}
 
         if (data.revision == 1 && electronReady === true) {
-            var alertWindow = new BrowserWindow({
-                'title': 'Earthquake Early Warning',
-                'icon': __dirname + '/resources/icon.png',
-                'width': 600,
-                'height': 625,
-                'resizable': false,
-                'skip-taskbar': true
-            });
-
-            alertWindows[data.earthquake_id] = alertWindow;
-
-			if (process.platform == 'darwin') app.dock.show();
-
-            alertWindow.loadUrl('file://' + __dirname + '/index.html');
-
+            newWindow(data);
             var webContents = alertWindows[data.earthquake_id].webContents;
             webContents.on('did-finish-load', function() {
                 webContents.send('data', [data, template]);
@@ -145,10 +150,13 @@ function parse(input) {
             alertWindow.on('closed', function() {
                 alertWindow = null;
             });
-        } else if(electronReady === true && alertWindows[data.earthquake_id] !== undefined) {
-            alertWindow = alertWindows[data.earthquake_id];
-            var webContents = alertWindow.webContents;
-            webContents.send('data', [data, template]);
+        } else if(electronReady === true) {
+            if(alertWindows[data.earthquake_id] === undefined) newWindow(data);
+            if(alertRev[data.earthquake_id] < data.revision) {
+                alertWindow = alertWindows[data.earthquake_id];
+                var webContents = alertWindow.webContents;
+                webContents.send('data', [data, template]);
+            }
         }
 
     } catch (err) {
