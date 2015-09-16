@@ -15,9 +15,9 @@ exports.soundString = function(data) {
 
 exports.situationString = function(data, locale) {
     if (data.situation == 1) {
-        var situation_string = locale.en.units.final;
+        return locale.en.units.final;
     } else {
-        var situation_string = '#' + data.revision;
+        return '#' + data.revision;
     }
 }
 
