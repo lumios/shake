@@ -137,7 +137,7 @@ function parse(input) {
 
             alertWindow.loadUrl('file://' + __dirname + '/index.html');
 
-            var webContents = alertWindow.webContents;
+            var webContents = alertWindows[data.earthquake_id].webContents;
             webContents.on('did-finish-load', function() {
                 webContents.send('data', [data, template]);
             });
@@ -148,9 +148,7 @@ function parse(input) {
         } else if(electronReady === true && alertWindows[data.earthquake_id] !== undefined) {
             alertWindow = alertWindows[data.earthquake_id];
             var webContents = alertWindow.webContents;
-            webContents.on('did-finish-load', function() {
-                webContents.send('data', [data, template]);
-            });
+            webContents.send('data', [data, template]);
         }
 
     } catch (err) {
