@@ -136,7 +136,6 @@ function parse(input) {
             });
 
             alertWindow.on('closed', function() {
-                if (process.platform == 'darwin') app.dock.hide();
                 alertWindow = null;
             });
         }
@@ -158,6 +157,6 @@ app.on('ready', function() {
 
 
 app.on('window-all-closed', function() {
+    if (process.platform == 'darwin') app.dock.hide();
 	return;
-	//if (process.platform != 'darwin') app.quit();
 });
