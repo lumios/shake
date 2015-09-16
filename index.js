@@ -1,4 +1,4 @@
-var socket = require('socket.io-client')('http://127.0.0.1:3080');
+var socket = require('socket.io-client')('http://ssh.kurisubrooks.com:3080');
 var parser = require('./parser.js');           	// Code to parse EEW data
 var colors = require('colors');                	// Terminal Text Formatting
 var fse = require('fs-extra');                 	// File System Extras
@@ -144,9 +144,11 @@ function parse(input) {
             newWindow(data);
             var webContents = alertWindows[data.earthquake_id].webContents;
             webContents.on('did-finish-load', function() {
-                webContents.send('data', [data, template]);
+                webContents.send('data', [data, template, locale]);
             });
 
+            var alertWindow = alertWindows[data.earthquake_id]
+            
             alertWindow.on('closed', function() {
                 alertWindow = null;
             });
@@ -157,12 +159,12 @@ function parse(input) {
                 var webContents = alertWindows[data.earthquake_id].webContents;
                 
                 webContents.on('did-finish-load', function() {
-                    webContents.send('data', [data, template]);
+                    webContents.send('data', [data, template, locale]);
                 });
             } else if(alertRevision[data.earthquake_id] != undefined && data.revision > alertRevision[data.earthquake_id]) {
                 alertWindow = alertWindows[data.earthquake_id];
                 var webContents = alertWindow.webContents;
-                webContents.send('data', [data, template]);
+                webContents.send('data', [data, template, locale]);
                 alertRevision[data.earthquake_id] = data.revision;
             }
         }

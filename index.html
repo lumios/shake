@@ -12,6 +12,7 @@
         ipc.on('data', function(all) {
             var data = all[0];
             var template = all[1];
+            var locale = all[2];
             if(data.type == 1 || data.situation == 2) {
                 document.getElementById("location").textContent = locale.en.cancelled;
                 document.getElementById("magnitudeseismic").textContent = "";
