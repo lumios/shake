@@ -1,15 +1,17 @@
 var socket = require('socket.io-client')('http://ssh.kurisubrooks.com:3080');
-var BrowserWindow = require('browser-window'); // Electron Browser Windows
-var parser = require('./parser.js');           // Code to parse EEW data
-var colors = require('colors');                // Terminal Text Formatting
-var fse = require('fs-extra');                 // File System Extras
-var osenv = require('osenv');                  // OS Specific Globals
-var path = require('path');                    // File System Paths
-var app = require('app');                      // Electron GUI
-var ipc = require('ipc');                      // Electron inter-process comm
-var fs = require('fs');				           // File System
+var parser = require('./parser.js');           	// Code to parse EEW data
+var colors = require('colors');                	// Terminal Text Formatting
+var fse = require('fs-extra');                 	// File System Extras
+var osenv = require('osenv');                  	// OS Specific Globals
+var path = require('path');                    	// File System Paths
+var fs = require('fs');				          	// File System
 
-require('crash-reporter').start(); // Electron Crash Reporter
+var BrowserWindow = require('browser-window'); 	// Electron Browser Windows
+var app = require('app');                      	// Electron GUI
+var Menu = require('menu');					   	// Electron Menu API
+var Tray = require('tray');						// Electron Tray API
+var ipc = require('ipc');                      	// Electron inter-process comm
+require('crash-reporter').start(); 			   	// Electron Crash Reporter
 
 if (process.platform === 'darwin') var notifier = require('./lib/node-notifier');
 else var notifier = require('node-notifier');
@@ -20,6 +22,7 @@ var locale = JSON.parse(fs.readFileSync('./resources/lang.json') + '');
 var copy = './resources/audio/';
 var paste = osenv.home() + '/Library/Sounds/';
 var alertWindows = {};
+var appIcon = null;
 var electronReady = false;
 
 colors.setTheme({tweet: 'cyan', success: 'green', error: ['red', 'bold'], warn: 'yellow', info: 'blue'});
@@ -127,11 +130,11 @@ function parse(input) {
                 'resizable': false,
                 'skip-taskbar': true
             });
-            
+
             alertWindows[data.earthquake_id] = alertWindow;
-            
+
 			if (process.platform == 'darwin') app.dock.show();
-            
+
             alertWindow.loadUrl('file://' + __dirname + '/index.html');
 
             var webContents = alertWindow.webContents;
@@ -142,7 +145,7 @@ function parse(input) {
             alertWindow.on('closed', function() {
                 alertWindow = null;
             });
-        } else if(electronReady === true && alertWindows[data.earthquake_id] != undefined) {
+        } else if(electronReady === true && alertWindows[data.earthquake_id] !== undefined) {
             alertWindow = alertWindows[data.earthquake_id];
             var webContents = alertWindow.webContents;
             webContents.on('did-finish-load', function() {
@@ -159,6 +162,16 @@ if (process.platform == 'darwin') app.dock.hide();
 
 app.on('ready', function() {
     electronReady = true;
+
+	appIcon = new Tray('./resources/eew-icon.png');
+	var contextMenu = Menu.buildFromTemplate([
+	  { label: 'Item1', type: 'radio' },
+	  { label: 'Item2', type: 'radio' },
+	  { label: 'Item3', type: 'radio', checked: true },
+	  { label: 'Item4', type: 'radio' }
+	]);
+	appIcon.setToolTip('EEW');
+	appIcon.setContextMenu(contextMenu);
 });
 
 
