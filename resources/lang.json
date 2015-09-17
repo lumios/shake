@@ -2,7 +2,7 @@
 	"en": {
 		"title": "Earthquake Early Warning",
 		"connect": "Connected to Server.",
-		"disconnect": "Cannot Connect to Server. We'll keep trying.",
+		"disconnect": "Connection to server lost. We'll keep trying.",
 		"cancelled": "This Earthquake Warning has been cancelled.",
 		"error": "Error",
 		"units": {
