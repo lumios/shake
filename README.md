@@ -15,16 +15,12 @@ This is in place to keep you from being flooded with spam from Earthquakes too s
 
 ##### Install
 1. `cd ~/.../eew`
-2. `git clone git@github.com:lumios/eew.git`
+2. `git clone https://github.com/lumios/eew.git`
 3. `npm i`
 
-##### CLI
+##### Run
 1. `cd ~/.../eew`
-2. `npm start`
-
-##### GUI
-1. `cd ~/.../eew`
-2. `electron gui.js`
+2. `electron .`
 
 ### Legal
 ```text
