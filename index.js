@@ -28,7 +28,7 @@ var electronReady = false;
 
 function newWindow(data) {
     var alertWindow = new BrowserWindow({
-        'title': 'Earthquake Early Warning',
+        'title': locale.en.title,
         'icon': __dirname + '/resources/icon.png',
         'width': 600,
         'height': 625,
@@ -56,11 +56,8 @@ if (process.platform === 'darwin') {
 socket.on('connect', function() {
     console.log(('[*] Connected to Server').success);
 
-	notifier.notify({
-		'title': locale.en.title,
-		'message': locale.en.connect,
-		'sound': false
-	});
+	if (process.platform == 'darwin') notifier.notify({'title': locale.en.title,'message': locale.en.connect,'sound': false});
+	else notifier.notify({'title': locale.en.title,'message': locale.en.connect,'sound': false, 'icon': path.join(__dirname, './resources/icon.png')});
 });
 
 socket.on('data', function(data) {
@@ -71,11 +68,8 @@ socket.on('data', function(data) {
 socket.on('disconnect', function() {
     console.log(('[!] Socket Dropped').error);
 
-	notifier.notify({
-		'title': locale.en.title,
-		'message': locale.en.disconnect,
-		'sound': false
-	});
+	if (process.platform == 'darwin') notifier.notify({'title': locale.en.title,'message': locale.en.disconnect,'sound': false});
+	else notifier.notify({'title': locale.en.title,'message': locale.en.disconnect,'sound': false, 'icon': path.join(__dirname, './resources/icon.png')});
 });
 
 function parse(input) {
@@ -170,7 +164,8 @@ function parse(input) {
         }
 
     } catch (err) {
-        notifier.notify({'title': locale.en.title, 'message': locale.en.error + ': ' + err.message, 'sound': false});
+		if (process.platform == 'darwin') notifier.notify({'title': locale.en.title,'message': locale.en.error + ': ' + err.message,'sound': false});
+		else notifier.notify({'title': locale.en.title,'message': locale.en.error + ': ' + err.message,'sound': false, 'icon': path.join(__dirname, './resources/icon.png')});
     }
 }
 
@@ -192,7 +187,6 @@ app.on('ready', function() {
 	});
 
 });
-
 
 app.on('window-all-closed', function() {
     if (process.platform == 'darwin') app.dock.hide();
