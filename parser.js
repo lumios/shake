@@ -1,6 +1,6 @@
 exports.soundString = function(data) {
     //            0    1    2    3    4     5     6     7     8
-    var scale = ['1', '2', '3', '4', '5-', '5+', '6-', '6+', '7'];
+    //var scale = ['1', '2', '3', '4', '5-', '5+', '6-', '6+', '7'];
 
     if (data.revision == 1) return 'nhk-alert';
     else if (data.type == 1 || data.situation == 2) return 'simple';

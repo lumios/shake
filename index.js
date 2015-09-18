@@ -86,7 +86,7 @@ function parse(input) {
         console.log(('[~] ' + locale.en.units.update + ' ' + situation_string + ', ' + locale.en.units.magnitude + ': ' + data.magnitude + ', ' + locale.en.units.seismic + ': ' + data.seismic_en).yellow);
 
 		// Night Mode Check
-		if (date.getHours() >= '06' || scale.indexOf(data.seismic_en) >= 5) {
+		if (date.getHours() >= '06' || data.magnitude >= 6) {
 			// Mac Day Notification
 			if (process.platform === 'darwin') {
 	            notifier.notify({
