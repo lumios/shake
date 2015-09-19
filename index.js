@@ -1,5 +1,5 @@
 var socket = require('socket.io-client')('http://eew.kurisubrooks.com:3080');
-var parser = require('./parser.js');           	// Code to parse EEW data
+var parser = require('./parser.js');			// Quake Data Parsing
 var colors = require('colors');                	// Terminal Text Formatting
 var fse = require('fs-extra');                 	// File System Extras
 var osenv = require('osenv');                  	// OS Specific Globals
@@ -13,13 +13,13 @@ var Tray = require('tray');						// Electron Tray API
 var ipc = require('ipc');                      	// Electron inter-process comm
 require('crash-reporter').start(); 			   	// Electron Crash Reporter
 
-if (process.platform === 'darwin') var notifier = require('./lib/node-notifier');
+if (process.platform === 'darwin') var notifier = require(path.join(__dirname, 'lib', 'node-notifier'));
 else var notifier = require('node-notifier');
 
 var date = new Date();
 var lang = 'en';
-var locale = JSON.parse(fs.readFileSync('./resources/lang.json') + '');
-var copy = './resources/audio/';
+var locale = JSON.parse(fs.readFileSync(path.join(__dirname, 'resources', 'lang.json')) + '');
+var copy = path.join(__dirname, 'resources', 'audio');
 var paste = osenv.home() + '/Library/Sounds/';
 var alertWindows = {};
 var alertRevision = {};
@@ -28,20 +28,34 @@ var electronReady = false;
 
 function newWindow(data) {
     var alertWindow = new BrowserWindow({
-        'title': locale.en.title,
-        'icon': __dirname + '/resources/icon.png',
+        'title': locale[lang].title,
+        'icon': path.join(__dirname, 'resources', 'icon.png'),
         'width': 600,
         'height': 625,
         'resizable': false,
+		'auto-hide-menu-bar': true,
         'skip-taskbar': true
     });
 
+	if (process.platform == 'darwin') app.dock.show();
     alertWindows[data.earthquake_id] = alertWindow;
     alertRevision[data.earthquake_id] = data.revision;
-
-    if (process.platform == 'darwin') app.dock.show();
-
     alertWindow.loadUrl('file://' + __dirname + '/index.html');
+}
+
+function newSettings() {
+    var settingsWindow = new BrowserWindow({
+        'title': locale[lang].title + ' — ' + locale[lang].settings,
+        'icon': path.join(__dirname, 'resources', 'icon.png'),
+        'width': 500,
+        'height': 500,
+        'resizable': false,
+		'auto-hide-menu-bar': true,
+        'skip-taskbar': false
+    });
+
+	if (process.platform == 'darwin') app.dock.show();
+    settingsWindow.loadUrl('file://' + __dirname + '/settings.html');
 }
 
 colors.setTheme({tweet: 'cyan', success: 'green', error: ['red', 'bold'], warn: 'yellow', info: 'blue'});
@@ -56,8 +70,8 @@ if (process.platform === 'darwin') {
 socket.on('connect', function() {
     console.log(('[*] Connected to Server').success);
 
-	if (process.platform == 'darwin') notifier.notify({'title': locale.en.title,'message': locale.en.connect,'sound': false});
-	else notifier.notify({'title': locale.en.title,'message': locale.en.connect,'sound': false, 'icon': path.join(__dirname, './resources/icon.png')});
+	if (process.platform == 'darwin') notifier.notify({'title': locale[lang].title,'message': locale[lang].connect,'sound': false});
+	else notifier.notify({'title': locale[lang].title,'message': locale[lang].connect,'sound': false, 'icon': path.join(__dirname, 'resources', 'icon.png')});
 });
 
 socket.on('data', function(data) {
@@ -68,8 +82,8 @@ socket.on('data', function(data) {
 socket.on('disconnect', function() {
     console.log(('[!] Socket Dropped').error);
 
-	if (process.platform == 'darwin') notifier.notify({'title': locale.en.title,'message': locale.en.disconnect,'sound': false});
-	else notifier.notify({'title': locale.en.title,'message': locale.en.disconnect,'sound': false, 'icon': path.join(__dirname, './resources/icon.png')});
+	if (process.platform == 'darwin') notifier.notify({'title': locale[lang].title,'message': locale[lang].disconnect,'sound': false});
+	else notifier.notify({'title': locale[lang].title,'message': locale[lang].disconnect,'sound': false, 'icon': path.join(__dirname, 'resources', 'icon.png')});
 });
 
 function parse(input) {
@@ -83,14 +97,14 @@ function parse(input) {
         var message_template = template[1];
 
         console.log(('[~] ' + data.earthquake_time + ' - ' + data.epicenter_en).yellow);
-        console.log(('[~] ' + locale.en.units.update + ' ' + situation_string + ', ' + locale.en.units.magnitude + ': ' + data.magnitude + ', ' + locale.en.units.seismic + ': ' + data.seismic_en).yellow);
+        console.log(('[~] ' + locale[lang].units.update + ' ' + situation_string + ', ' + locale[lang].units.magnitude + ': ' + data.magnitude + ', ' + locale[lang].units.seismic + ': ' + data.seismic_en).yellow);
 
 		// Night Mode Check
-		if (date.getHours() >= '06' || data.magnitude >= 6) {
+		if (date.getHours() >= '07' || data.magnitude >= 6) {
 			// Mac Day Notification
 			if (process.platform === 'darwin') {
 	            notifier.notify({
-	                'title': locale.en.title,
+	                'title': locale[lang].title,
 	                'subtitle': subtitle_template,
 	                'message': message_template,
 	                'sound': sound_string,
@@ -100,10 +114,10 @@ function parse(input) {
 			// Linux & Windows Day Notification
 	        } else {
 	            notifier.notify({
-	                'title': locale.en.title,
+	                'title': locale[lang].title,
 	                'subtitle': subtitle_template,
 	                'message': message_template,
-					'icon': path.join(__dirname, './resources/icon.png'),
+					'icon': path.join(__dirname, 'resources', 'icon.png'),
 	                'sound': sound_string,
 	                'urgency': 'critical',
 	                'time': 10000
@@ -113,7 +127,7 @@ function parse(input) {
 			// Mac Night Notifiction
 			if (process.platform === 'darwin') {
 	            notifier.notify({
-	                'title': locale.en.title,
+	                'title': locale[lang].title,
 	                'subtitle': subtitle_template,
 	                'message': message_template,
 	                'sound': false,
@@ -123,10 +137,10 @@ function parse(input) {
 			// Linux & Windows Night Notification
 	        } else {
 	            notifier.notify({
-	                'title': locale.en.title,
+	                'title': locale[lang].title,
 	                'subtitle': subtitle_template,
 	                'message': message_template,
-					'icon': path.join(__dirname, './resources/icon.png'),
+					'icon': path.join(__dirname, 'resources', 'icon.png'),
 	                'sound': false,
 	                'urgency': 'critical',
 	                'time': 10000
@@ -134,7 +148,7 @@ function parse(input) {
 			}
 		}
 
-        if (data.revision == 1 && (alertRevision[data.earthquake_id] == undefined || data.revision > alertRevision[data.earthquake_id]) && electronReady === true) {
+        if (data.revision == 1 && (alertRevision[data.earthquake_id] === undefined || data.revision > alertRevision[data.earthquake_id]) && electronReady === true) {
             newWindow(data);
             var webContents = alertWindows[data.earthquake_id].webContents;
             webContents.on('did-finish-load', function() {
@@ -155,7 +169,7 @@ function parse(input) {
                 webContents.on('did-finish-load', function() {
                     webContents.send('data', [data, template, locale]);
                 });
-            } else if(alertRevision[data.earthquake_id] != undefined && data.revision > alertRevision[data.earthquake_id]) {
+            } else if(alertRevision[data.earthquake_id] !== undefined && data.revision > alertRevision[data.earthquake_id]) {
                 alertWindow = alertWindows[data.earthquake_id];
                 var webContents = alertWindow.webContents;
                 webContents.send('data', [data, template, locale]);
@@ -164,8 +178,8 @@ function parse(input) {
         }
 
     } catch (err) {
-		if (process.platform == 'darwin') notifier.notify({'title': locale.en.title,'message': locale.en.error + ': ' + err.message,'sound': false});
-		else notifier.notify({'title': locale.en.title,'message': locale.en.error + ': ' + err.message,'sound': false, 'icon': path.join(__dirname, './resources/icon.png')});
+		if (process.platform == 'darwin') notifier.notify({'title': locale[lang].title,'message': locale[lang].error + ': ' + err.message,'sound': false});
+		else notifier.notify({'title': locale[lang].title,'message': locale[lang].error + ': ' + err.message,'sound': false, 'icon': path.join(__dirname, 'resources', 'icon.png')});
     }
 }
 
@@ -174,9 +188,14 @@ if (process.platform == 'darwin') app.dock.hide();
 app.on('ready', function() {
     electronReady = true;
 
-	appIcon = new Tray('./resources/dock16.png');
+	appIcon = new Tray(path.join(__dirname, 'resources', 'dock16.png'));
 	var contextMenu = Menu.buildFromTemplate([
-		{label: 'Open Settings', id: '1'},
+		{label: 'Settings', click: function(){newSettings();}},
+		{type: 'separator'},
+		{label: 'Quit', click: function(){
+			console.log(('[!] Closed due to user request.').error);
+			process.exit(0);
+		}}
 	]);
 
 	appIcon.setToolTip('EEW');
