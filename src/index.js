@@ -13,7 +13,7 @@ var Tray = require('tray');						// Electron Tray API
 var ipc = require('ipc');                      	// Electron inter-process comm
 require('crash-reporter').start(); 			   	// Electron Crash Reporter
 
-if (process.platform === 'darwin') var notifier = require(path.join(__dirname, 'lib', 'node-notifier'));
+if (process.platform === 'darwin') var notifier = require(path.join(__dirname, '../lib', 'node-notifier'));
 else var notifier = require('node-notifier');
 
 var date = new Date();
