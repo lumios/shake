@@ -1,7 +1,7 @@
 {
   "name": "eew",
-  "version": "0.0.1",
-  "description": "Get Notified the moment an Earthquake Happens.",
+  "version": "0.1.0",
+  "description": "Get Alerted for impending Earthquakes in Japan through the use of Earthquake Early Warnings.",
   "main": "index.js",
   "keywords": [
     "earthquake",
