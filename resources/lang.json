@@ -5,6 +5,7 @@
 		"disconnect": "Connection to server lost. We'll keep trying.",
 		"cancelled": "This Earthquake Warning has been cancelled.",
 		"error": "Error",
+		"settings": "Settings",
 		"units": {
 			"epicenter": "Epicenter",
 			"magnitude": "Magnitude",
@@ -20,9 +21,10 @@
 		"disconnect": "サーバーに接続出来ません。接続を継続します。",
 		"cancelled": "先ほどの地震速報は誤報です。",
 		"error": "エラー",
+		"settings": "設定",
 		"units": {
 			"epicenter": "震源",
-			"magnitude": "マグニチュド",
+			"magnitude": "マグニチュード",
 			"seismic": "最大震度",
 			"update": "更新",
 			"final": "最後"

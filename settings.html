@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Earthquake Early Warning — Settings</title>
+    <link rel="shortcut icon" type="image/png" href="resources/icon.png"/>
+
+    <style>
+        body {
+            font-family: "Helvetica", "Arial", "Verdana", sans-serif;
+			padding: 10px 20px;
+			color: #424242;
+            margin: 0;
+        }
+
+		h2 {
+			font-weight: 200;
+			font-size: 28px;
+			margin: 5px 0 20px;
+		}
+
+		h4 {
+			margin: 0;
+			margin-top: 25px;
+		}
+
+		p {
+			font-size: 12px;
+		}
+
+		hr {
+			margin: 0;
+			border: none;
+			border-top: 1px solid #999;
+		}
+
+		blockquote {
+			margin-left: 10px;
+		}
+
+		select {
+			font-family: inherit;
+		  width: 176px;
+		  height: 30px;
+		  font-size: 14px;
+		  line-height: 1.4;
+		  padding: 5px 14px 4px;
+		  margin-top: 5px;
+		  color: #525252;
+		  border: 1px solid #ededed;
+		  overflow: hidden;
+		  background-color: white;
+		  -webkit-border-radius: 4px;
+		  -moz-border-radius: 4px;
+		  -ms-border-radius: 4px;
+		  border-radius: 4px;
+		  -webkit-border-radius: 4px;
+		  -moz-border-radius: 4px;
+		  -ms-border-radius: 4px;
+		  border-radius: 4px;
+		  margin-bottom: 10px; }
+		  select:focus {
+		    outline: none; }
+    </style>
+</head>
+<body>
+
+    <h2>Settings</h2>
+	<hr>
+
+	<h4>Language</h4>
+	<blockquote>
+		<label><input type="radio" name="lang" value="en" checked> English</label><br>
+		<label><input type="radio" name="lang" value="jp"> 日本語</label>
+	</blockquote>
+
+	<!--
+	<h4>Location</h4>
+	<blockquote>
+		<label><input type="radio" name="location" value="tokyo"> Tokyo</label><br>
+		<label><input type="radio" name="location" value="saitama"> Saitama</label>
+	</blockquote>
+
+	<br>
+	-->
+
+	<h4>Minimum Alert Size</h4>
+	<!--Minimum Magnitude-->
+	<!--最小マグニチュードを選択-->
+
+	<p>Choose a Minimum Magnitude Size to be notified of. <br>
+		(You will only be notified of Earthquakes of this size and higher.)</p>
+		<!--通知を受ける最低マグニチュードを選んでください。-->
+
+	<select>
+		<option value="35" selected>3.5</option>
+		<option value="40">4.0</option>
+		<option value="45">4.5</option>
+		<option value="50">5.0</option>
+		<option value="55">5.5</option>
+		<option value="60">6.0</option>
+		<option value="65">6.5</option>
+		<option value="70">7.0</option>
+	</select>
+
+	<br><br><hr>
+
+	<h4>Night Mode</h4>
+	<p>If enabled, Notification Sounds will be muted between Midnight and 7am.<br>
+		(This setting is ignored if an Earthquake is above Magnitude 6)</p>
+	<!--通知音は、午前0時の後に発生しません（地震はマグニチュード6以上である場合を除き）-->
+
+	<label><input type="checkbox" value="mode_night"> Enable</label>
+
+</body>
+</html>
