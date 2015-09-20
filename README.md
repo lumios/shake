@@ -1,4 +1,4 @@
-# Earthquake Early Warnings
+# Earthquake Early Warnings [![Build Status](https://travis-ci.org/lumios/eew.svg?branch=master)](https://travis-ci.org/lumios/eew)
 
 A program to Notify you when an Earthquake has occurred.  
 このプログラムは、あなたのコンピュータに緊急地震速報通知を配信します。
