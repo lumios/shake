@@ -84,23 +84,78 @@
 		    border-radius: 4px;
 		    display: inline-block;
 		}
+
+		button:hover, button:active {
+		    border: 1px solid #4cae4c;
+		    background: #63bb63;
+		}
     </style>
     <script>
-        var fs = require("fs");
-        var path = require("path");
-        var settingsPath = path.join(__dirname, "settings.json");
+        var fs = require('fs');
+        var path = require('path');
+		var settingsPath = path.join(__dirname, 'settings.json');
         var settingsFile;
 
+		try {
+			settingsFile = require('./settings.json');
+			console.log('Read settings successfully')
+		} catch (err) {
+			console.log('Error' + err)
+			settingsFile = {"lang":"en","min_alert":"35","night_mode":true,"dev_mode":false};
+			fs.writeFile(settingsPath, JSON.stringify(settingsFile), function(err) {
+                if(err) {
+                    alert("There was an error saving your settings.");
+                }
+            });
+		}
+
+		/*
+
+		fs.stat('./settings.json', function(err, stat) {
+			if (stat.isFile()) console.log('File Exists')
+
+		    if (!err) {
+		        console.log('File exists');
+
+				var settingsFile = JSON.parse(require('./settings.json'));
+
+				if (settingsFile.lang !== undefined) console.log('lang is defined');
+				else console.log('lang is undefined');
+		    } else {
+		        console.log('Error: ', err.code);
+		    }
+		});
+
+		*/
+
+		//{"lang":"en","min_alert":"35","night_mode":true,"dev_mode":false}
+
+		/*
+		try {
+			settingsFile = JSON.parse(settingsPath)
+			if (!stats.isDirectory()) {
+				settingsFile = {"lang":"en","min_alert":"35","night_mode":true,"dev_mode":false};
+	            fs.writeFile(settingsPath, JSON.stringify(settingsFile), function(err) {
+	                if(err) {
+	                    alert("There was an error saving your settings.");
+	                }
+	            });
+			}
+		} catch (error) {
+			console.log(error);
+		}
+
         try {
-            settingsFile = JSON.parse(require(settingsPath));
+            settingsFile = JSON.parse(require('./settings.json'));
         } catch(e) {
-            settingsFile = {"lang": "en", "min_alert": "35", "night_mode": true, "dev_mode": false};
+            settingsFile = {"lang":"en","min_alert":"35","night_mode":true,"dev_mode":false};
             fs.writeFile(settingsPath, JSON.stringify(settingsFile), function(err) {
                 if(err) {
                     alert("There was an error saving your settings.");
                 }
             });
         }
+		*/
 
         function save() {
             try {
