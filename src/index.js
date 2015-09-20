@@ -205,6 +205,13 @@ app.on('ready', function() {
 		console.log(event);
 	});
 
+	try {
+		var setting = require('./settings.json');
+	}
+	catch(e){
+		newSettings();
+	}
+
 });
 
 app.on('window-all-closed', function() {
