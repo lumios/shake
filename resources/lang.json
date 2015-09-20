@@ -1,0 +1,71 @@
+{
+	"en": {
+		"title": "Earthquake Early Warning",
+		"connect": "Connected to Server.",
+		"disconnect": "Connection to server lost. We'll keep trying.",
+		"cancelled": "This Earthquake Warning has been cancelled.",
+		"error": "Error",
+		"settings": "Settings",
+		"quit": "Quit",
+		"setup": {
+			"language": "Language",
+			"english": "English",
+			"japanese": "Japanese",
+			"enable": "Enable",
+			"save": "Save",
+			"min_alert": {
+				"title": "Minimum Alert Magnitude",
+				"line1": "Choose a Minimum Magnitude Size to be notified of.",
+				"line2": "(You will only be notified of Earthquakes of this size and higher.)"
+			},
+			"nightmode": {
+				"title": "Night Mode",
+				"line1": "If enabled, Notification Sounds will be muted between Midnight and 7am.",
+				"line2": "(This setting is ignored if an Earthquake is above Magnitude 6)"
+			}
+		},
+
+		"units": {
+			"epicenter": "Epicenter",
+			"magnitude": "Magnitude",
+			"seismic": "Max Seismic",
+			"update": "Update",
+			"final": "Final"
+		}
+	},
+
+	"ja": {
+		"title": "緊急地震速報（強い揺れに警戒して下さい）",
+		"connect": "サーバー接続完了！",
+		"disconnect": "サーバーに接続出来ません。接続を継続します。",
+		"cancelled": "先ほどの地震速報は誤報です。",
+		"error": "エラー",
+		"settings": "設定",
+		"quit": "終了",
+		"setup": {
+			"language": "言語",
+			"english": "英語",
+			"japanese": "日本語",
+			"enable": "有効にします",
+			"save": "セーブ",
+			"min_alert": {
+				"title": "最小マグニチュードを選択",
+				"line1": "通知を受ける最低マグニチュードを選んでください。",
+				"line2": ""
+			},
+			"nightmode": {
+				"title": "ナイトモード",
+				"line1": "通知音は、午前0時の後に発生しません",
+				"line2": "(地震はマグニチュード6以上である場合を除き)"
+			}
+		},
+
+		"units": {
+			"epicenter": "震源",
+			"magnitude": "マグニチュード",
+			"seismic": "最大震度",
+			"update": "更新",
+			"final": "最後"
+		}
+	}
+}
