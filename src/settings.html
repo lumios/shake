@@ -8,25 +8,25 @@
     <style>
         body {
             font-family: "Helvetica", "Arial", "Verdana", sans-serif;
-			padding: 10px 20px;
-			color: #424242;
+            padding: 10px 20px;
+            color: #424242;
             margin: 0;
         }
 
-		h2 {
-			font-weight: 200;
-			font-size: 28px;
-			margin: 5px 0 20px;
+        h2 {
+            font-weight: 200;
+            font-size: 28px;
+            margin: 5px 0 20px;
+        }
+
+        h4 {
+            margin: 0;
+            margin-top: 25px;
 		}
 
-		h4 {
-			margin: 0;
-			margin-top: 25px;
-		}
-
-		p {
-			font-size: 12px;
-		}
+        p {
+            font-size: 12px;
+        }
 
 		hr {
 			margin: 0;
@@ -38,79 +38,140 @@
 			margin-left: 10px;
 		}
 
-		select {
-			font-family: inherit;
-		  width: 176px;
-		  height: 30px;
-		  font-size: 14px;
-		  line-height: 1.4;
-		  padding: 5px 14px 4px;
-		  margin-top: 5px;
-		  color: #525252;
-		  border: 1px solid #ededed;
-		  overflow: hidden;
-		  background-color: white;
-		  -webkit-border-radius: 4px;
-		  -moz-border-radius: 4px;
-		  -ms-border-radius: 4px;
-		  border-radius: 4px;
-		  -webkit-border-radius: 4px;
-		  -moz-border-radius: 4px;
-		  -ms-border-radius: 4px;
-		  border-radius: 4px;
-		  margin-bottom: 10px; }
-		  select:focus {
-		    outline: none; }
+        select {
+            font-family: inherit;
+            width: 176px;
+            height: 30px;
+            font-size: 14px;
+            line-height: 1.4;
+            padding: 5px 14px 4px;
+            margin-top: 5px;
+            color: #525252;
+            border: 1px solid #ededed;
+            overflow: hidden;
+            background-color: white;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        select:focus {
+          outline: none;
+        }
+
+        button {
+            font-family: inherit;
+            width: 100%;
+            height: 35px;
+            font-size: 14px;
+            line-height: 1.4;
+            padding: 5px 14px 4px;
+            margin-top: 5px;
+            color: white;
+            border: 1px solid #ededed;
+            background-color: #5CB85C;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
     </style>
+    <script>
+        var fs = require("fs");
+        var path = require("path");
+        var settingsPath = path.join(__dirname, "settings.json");
+        var settingsFile;
+
+        try {
+            settingsFile = JSON.parse(require(settingsPath));
+        } catch(e) {
+            settingsFile = {"lang": "en", "minMagnitude": "35", "modeNight": true};
+            fs.writeFile(settingsPath, JSON.stringify(settingsFile), function(err) {
+                if(err) {
+                    alert("Unfortunately, the file could not be saved.");
+                }
+            });
+        }
+
+        function save() {
+            try {
+                var form = document.getElementById("settings");
+                var settings = {};
+                settings["lang"] = form["lang"].value;
+                settings["minMagnitude"] = form["minMagnitude"].value;
+                settings["modeNight"] = form["modeNight"].checked;
+                fs.writeFile(settingsPath, JSON.stringify(settings));
+            } catch(e) {
+                alert("Unfortunately, the file could not be saved.");
+            }
+        }
+    </script>
 </head>
 <body>
-
     <h2>Settings</h2>
-	<hr>
 
-	<h4>Language</h4>
-	<blockquote>
-		<label><input type="radio" name="lang" value="en" checked> English</label><br>
-		<label><input type="radio" name="lang" value="jp"> 日本語</label>
-	</blockquote>
+    <hr>
 
-	<!--
-	<h4>Location</h4>
-	<blockquote>
-		<label><input type="radio" name="location" value="tokyo"> Tokyo</label><br>
-		<label><input type="radio" name="location" value="saitama"> Saitama</label>
-	</blockquote>
+    <form action="javascript:save()" id="settings">
+	   <h4>Language</h4>
+	   <blockquote>
+		  <label><input type="radio" name="lang" value="en" checked> English</label><br>
+		  <label><input type="radio" name="lang" value="jp"> 日本語</label>
+	   </blockquote>
 
-	<br>
-	-->
+        <!--
+        <h4>Location</h4>
+        <blockquote>
+            <label><input type="radio" name="location" value="tokyo"> Tokyo</label><br>
+            <label><input type="radio" name="location" value="saitama"> Saitama</label>
+        </blockquote>
 
-	<h4>Minimum Alert Size</h4>
-	<!--Minimum Magnitude-->
-	<!--最小マグニチュードを選択-->
+	   <br>
+	   -->
 
-	<p>Choose a Minimum Magnitude Size to be notified of. <br>
-		(You will only be notified of Earthquakes of this size and higher.)</p>
-		<!--通知を受ける最低マグニチュードを選んでください。-->
+        <h4>Minimum Alert Size</h4>
+	   <!--Minimum Magnitude-->
+	   <!--最小マグニチュードを選択-->
 
-	<select>
-		<option value="35" selected>3.5</option>
-		<option value="40">4.0</option>
-		<option value="45">4.5</option>
-		<option value="50">5.0</option>
-		<option value="55">5.5</option>
-		<option value="60">6.0</option>
-		<option value="65">6.5</option>
-		<option value="70">7.0</option>
-	</select>
+	   <p>Choose a Minimum Magnitude Size to be notified of.
+        <br>
+        (You will only be notified of Earthquakes of this size and higher.)</p>
+        <!--通知を受ける最低マグニチュードを選んでください。-->
 
-	<br><br><hr>
+        <select name="minMagnitude">
+            <option value="35" selected>3.5</option>
+            <option value="40">4.0</option>
+            <option value="45">4.5</option>
+            <option value="50">5.0</option>
+            <option value="55">5.5</option>
+            <option value="60">6.0</option>
+            <option value="65">6.5</option>
+            <option value="70">7.0</option>
+        </select>
 
-	<h4>Night Mode</h4>
-	<p>If enabled, Notification Sounds will be muted between Midnight and 7am.<br>
-		(This setting is ignored if an Earthquake is above Magnitude 6)</p>
-	<!--通知音は、午前0時の後に発生しません（地震はマグニチュード6以上である場合を除き）-->
+        <br><br><hr>
 
-	<label><input type="checkbox" value="mode_night"> Enable</label>
+        <h4>Night Mode</h4>
+        <p>If enabled, Notification Sounds will be muted between Midnight and 7am.<br>
+        (This setting is ignored if an Earthquake is above Magnitude 6)</p>
+        <!--通知音は、午前0時の後に発生しません（地震はマグニチュード6以上である場合を除き）-->
 
+        <label><input type="checkbox" name="modeNight" checked> Enable</label>
+
+        <br><br><hr>
+
+        <button value="submit">Save</button>
+    </form>
 </body>
 </html>

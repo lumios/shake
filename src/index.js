@@ -48,7 +48,7 @@ function newSettings() {
         'title': locale[lang].title + ' — ' + locale[lang].settings,
         'icon': path.join(__dirname, 'resources', 'icon.png'),
         'width': 500,
-        'height': 500,
+        'height': 550,
         'resizable': false,
 		'auto-hide-menu-bar': true,
         'skip-taskbar': false
