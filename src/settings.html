@@ -62,7 +62,7 @@
         }
 
         select:focus {
-          outline: none;
+        	outline: none;
         }
 
         button {
@@ -74,6 +74,7 @@
             padding: 5px 14px 4px;
             margin-top: 5px;
             color: white;
+			cursor: pointer;
             border: 1px solid #ededed;
             background-color: #5CB85C;
             -webkit-border-radius: 4px;
@@ -99,7 +100,7 @@
             settingsFile = {"lang": "en", "minMagnitude": "35", "modeNight": true};
             fs.writeFile(settingsPath, JSON.stringify(settingsFile), function(err) {
                 if(err) {
-                    alert("Unfortunately, the file could not be saved.");
+                    alert("There was an error saving your settings.");
                 }
             });
         }
@@ -113,8 +114,10 @@
                 settings["modeNight"] = form["modeNight"].checked;
                 fs.writeFile(settingsPath, JSON.stringify(settings));
             } catch(e) {
-                alert("Unfortunately, the file could not be saved.");
-            }
+                alert("There was an error saving your settings.");
+            } finally {
+				location.reload();
+			}
         }
     </script>
 </head>
@@ -124,11 +127,11 @@
     <hr>
 
     <form action="javascript:save()" id="settings">
-	   <h4>Language</h4>
-	   <blockquote>
-		  <label><input type="radio" name="lang" value="en" checked> English</label><br>
-		  <label><input type="radio" name="lang" value="jp"> 日本語</label>
-	   </blockquote>
+		<h4>Language</h4>
+		<blockquote>
+			<label><input type="radio" name="lang" value="en" checked> English</label><br>
+			<label><input type="radio" name="lang" value="jp"> 日本語</label>
+		</blockquote>
 
         <!--
         <h4>Location</h4>
@@ -140,14 +143,10 @@
 	   <br>
 	   -->
 
-        <h4>Minimum Alert Size</h4>
-	   <!--Minimum Magnitude-->
-	   <!--最小マグニチュードを選択-->
+    	<h4>Minimum Alert Size</h4>
 
-	   <p>Choose a Minimum Magnitude Size to be notified of.
-        <br>
+		<p>Choose a Minimum Magnitude Size to be notified of.<br>
         (You will only be notified of Earthquakes of this size and higher.)</p>
-        <!--通知を受ける最低マグニチュードを選んでください。-->
 
         <select name="minMagnitude">
             <option value="35" selected>3.5</option>
@@ -165,11 +164,10 @@
         <h4>Night Mode</h4>
         <p>If enabled, Notification Sounds will be muted between Midnight and 7am.<br>
         (This setting is ignored if an Earthquake is above Magnitude 6)</p>
-        <!--通知音は、午前0時の後に発生しません（地震はマグニチュード6以上である場合を除き）-->
 
-        <label><input type="checkbox" name="modeNight" checked> Enable</label>
+        <label><input type="checkbox" name="modeNight" checked disabled> Enable</label>
 
-        <br><br><hr>
+        <br><br>
 
         <button value="submit">Save</button>
     </form>
