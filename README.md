@@ -1,4 +1,4 @@
-# EEW [![Build Status](https://travis-ci.org/lumios/eew.svg?branch=master)](https://travis-ci.org/lumios/eew)
+# EEW [![Build Status](https://drone.io/github.com/lumios/eew/status.png)](https://drone.io/github.com/lumios/eew/latest)
 
 A program to Notify you when an Earthquake has occurred.  
 このプログラムは、あなたのコンピュータに緊急地震速報通知を配信します。
