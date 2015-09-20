@@ -24,23 +24,25 @@ This is in place to keep you from being flooded with spam from Earthquakes too s
 
 ### Legal
 ```text
-Copyright (c) 2015 Lumios - All Rights Reserved.
+Copyright (c) 2015 Lumios – All Rights Reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this
-software, to deal this software within the following limitations. You may copy,
-modify, contribute, and/or sublicense this Software, so long as you are subject
-to the following conditions:
+Permission is hereby granted, free of charge, to any persons obtaining 
+a copy of this software, to deal this software within the agreed guidelines.
 
-The above copyright notice and this permission notice shall be included in all copies
-or substantial portions of the Software.
+Copying, modification, contribution, non-commercial distribution and/or 
+sub-licensing this software are allowed, so long as you are subject to the 
+following conditions:
 
-You do not remove any licensing or security checks.
-You do not republish this Software.
+The above copyright notice and this permission notice will be included in all 
+copies, un-modified, within the Software.
+Licensing and security checks may not be removed.
+Republication of this software for personal or commercial gain is prohibited.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
-PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
-CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
-OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
