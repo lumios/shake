@@ -1,0 +1,27 @@
+language: node_js
+
+node_js:
+- '0.12'
+
+addons:
+  ssh_known_hosts: eew.p-gn.xyz
+  apt:
+    packages:
+    - sshpass
+
+env:
+  global:
+    secure: 2mV+MTYov111QEmXPIv3lCXT7o37Ryog9zV0z9LTPjQrvOlctoXUxUq9cwxd6pDhtQeIoLtEllxG1FwToz5u63Y0quintsMzUVIIK4wxXj+jHmW7B5qsitx/ZlXK8KFMzeA1UFnge/QJFLA3SG+5vSMv89HT4c1bJMDYgo2ziXnEkfItgnajbHF/bX9YcGaVxnkhBbyooZVGZnT1z3Rnn5mAK9iNEkfvOGvkrr0LCiWrrmokw2PGPFzpBjtMXqgQDmFtRNyh1rUGVuV3ojHltCwdItTO69o9g5UPDFvfb1YrLYEhmasyBu+EVUSysnYgKUDApa8Yhwei6Nx1GAhKmUmYs5yUxWz700KaJlQZcJDrrseKp6R/rhJKxSQrXZNVVPDuku3xj8pKCOvdg5/XPw6oXCqv66x2wTasdRSOxYzyGwdqcRNjNN/I6+3EE5xuFBsTz4hkmjLif23PeXCp3+TQ+VEAw29q1I+0e2B7O/R40rOQibMqwLXFnVBtWR+er9ilgmlXc+MT1FT8IjULb8wDVZhUmzqjr1RTISgxCOOgQFEM7zu3/po2rPegqjsaEeTDVrtBkmaAAfc9d3aHiJIx20gCSaqyolwOVjQyOj4P1xZDX4uXOyk9NP84YKq04zFd5Y1FvsIYwj/SkB09c1Talso8clLngTkapXb/sP0=
+
+install:
+- export SSHPASS=$PASSWORD
+- npm i
+
+script:
+- "./node_modules/.bin/electron-packager ./ EEW --platform=all --arch=all --out=../bin  --version=0.33.0"
+- cd ..
+- mkdir ./out/
+- find ./bin/ -mindepth 1 -maxdepth 1 -exec tar -czf {}.tar.gz {} \;
+- ls ./bin/
+after_success:
+- sshpass -e rsync -zrp ./bin/*.tar.gz travis@eew.p-gn.xyz:/home/travis/eew/$TRAVIS_JOB_ID/
