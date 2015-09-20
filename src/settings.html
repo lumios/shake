@@ -7,20 +7,23 @@
 
     <style>
         body {
-            font-family: "Helvetica", "Arial", "Verdana", sans-serif;
-            padding: 10px 20px;
-            color: #424242;
-            margin: 0;
+			font-family: "Arial", "Helvetica", sans-serif;
+			font-size: 14px;
+			font-weight: 400;
+			line-height: 1.4;
+			background-color: #FFF;
+			padding: 10px 20px;
+			color: #525252;
+			margin: 0;
         }
 
         h2 {
-            font-weight: 200;
+            font-weight: 300;
             font-size: 28px;
             margin: 5px 0 20px;
         }
 
         h4 {
-            margin: 0;
             margin-top: 25px;
 		}
 
@@ -65,28 +68,22 @@
         	outline: none;
         }
 
-        button {
-            font-family: inherit;
-            width: 100%;
-            height: 35px;
-            font-size: 14px;
-            line-height: 1.4;
-            padding: 5px 14px 4px;
-            margin-top: 5px;
-            color: white;
-			cursor: pointer;
-            border: 1px solid #ededed;
-            background-color: #5CB85C;
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            -ms-border-radius: 4px;
-            border-radius: 4px;
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            -ms-border-radius: 4px;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
+		button {
+			position: absolute;
+			top: 10px;
+			right: 20px;
+			font: inherit;
+		    padding: 5px 14px 4px;
+		    margin: 10px 0 10px;
+			color: #FFF;
+			border: 1px solid #4cae4c;
+			background: #5CB85C;
+		    text-align: center;
+		    cursor: pointer;
+		    -webkit-border-radius: 4px;
+		    border-radius: 4px;
+		    display: inline-block;
+		}
     </style>
     <script>
         var fs = require("fs");
@@ -97,7 +94,7 @@
         try {
             settingsFile = JSON.parse(require(settingsPath));
         } catch(e) {
-            settingsFile = {"lang": "en", "minMagnitude": "35", "modeNight": true};
+            settingsFile = {"lang": "en", "min_alert": "35", "night_mode": true, "dev_mode": false};
             fs.writeFile(settingsPath, JSON.stringify(settingsFile), function(err) {
                 if(err) {
                     alert("There was an error saving your settings.");
@@ -110,8 +107,9 @@
                 var form = document.getElementById("settings");
                 var settings = {};
                 settings["lang"] = form["lang"].value;
-                settings["minMagnitude"] = form["minMagnitude"].value;
-                settings["modeNight"] = form["modeNight"].checked;
+                settings["min_alert"] = form["min_alert"].value;
+                settings["night_mode"] = form["night_mode"].checked;
+				settings["dev_mode"] = form["dev_mode"].checked;
                 fs.writeFile(settingsPath, JSON.stringify(settings));
             } catch(e) {
                 alert("There was an error saving your settings.");
@@ -148,7 +146,7 @@
 		<p>Choose a Minimum Magnitude Size to be notified of.<br>
         (You will only be notified of Earthquakes of this size and higher.)</p>
 
-        <select name="minMagnitude">
+        <select name="min_alert">
             <option value="35" selected>3.5</option>
             <option value="40">4.0</option>
             <option value="45">4.5</option>
@@ -165,9 +163,17 @@
         <p>If enabled, Notification Sounds will be muted between Midnight and 7am.<br>
         (This setting is ignored if an Earthquake is above Magnitude 6)</p>
 
-        <label><input type="checkbox" name="modeNight" checked disabled> Enable</label>
+        <label><input type="checkbox" name="night_mode" checked disabled> Enable</label>
 
-        <br><br>
+        <br>
+
+		<h4>Development Mode</h4>
+		<p>If enabled, you will receive fake quakes regularly, in order to test the program.<br>
+		(Please do not enable this option if you are not a developer.)</p>
+
+		<label><input type="checkbox" name="dev_mode"> Enable</label>
+
+		<br><br>
 
         <button value="submit">Save</button>
     </form>
