@@ -28,9 +28,9 @@ script:
 - tar -czf  EEW-linux-x64.tar.gz EEW-linux-x64
 - tar -czf  EEW-linux-ia32.tar.gz EEW-linux-ia32
 
-- zip -r EEW-win32-x64.zip EEW-win32-x64
-- zip -r EEW-win32-ia32.zip EEW-win32-ia32
+- zip -q -r EEW-win32-x64.zip EEW-win32-x64
+- zip -q -r EEW-win32-ia32.zip EEW-win32-ia32
 
-- sshpass -e rsync -zrp ./*.tar.gz travis@eew.p-gn.xyz:/home/travis/eew/drone/$TRAVIS_JOB_ID/
-- sshpass -e rsync -zrp ./*.zip travis@eew.p-gn.xyz:/home/travis/eew/drone/$TRAVIS_JOB_ID/
+- sshpass -e rsync -zrp ./*.tar.gz travis@eew.p-gn.xyz:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
+- sshpass -e rsync -zrp ./*.zip travis@eew.p-gn.xyz:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
 
