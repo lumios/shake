@@ -1,27 +1,36 @@
 language: node_js
-
 node_js:
 - '0.12'
-
 addons:
   ssh_known_hosts: eew.p-gn.xyz
   apt:
     packages:
     - sshpass
-
+    - zip
 env:
   global:
-    secure: 2mV+MTYov111QEmXPIv3lCXT7o37Ryog9zV0z9LTPjQrvOlctoXUxUq9cwxd6pDhtQeIoLtEllxG1FwToz5u63Y0quintsMzUVIIK4wxXj+jHmW7B5qsitx/ZlXK8KFMzeA1UFnge/QJFLA3SG+5vSMv89HT4c1bJMDYgo2ziXnEkfItgnajbHF/bX9YcGaVxnkhBbyooZVGZnT1z3Rnn5mAK9iNEkfvOGvkrr0LCiWrrmokw2PGPFzpBjtMXqgQDmFtRNyh1rUGVuV3ojHltCwdItTO69o9g5UPDFvfb1YrLYEhmasyBu+EVUSysnYgKUDApa8Yhwei6Nx1GAhKmUmYs5yUxWz700KaJlQZcJDrrseKp6R/rhJKxSQrXZNVVPDuku3xj8pKCOvdg5/XPw6oXCqv66x2wTasdRSOxYzyGwdqcRNjNN/I6+3EE5xuFBsTz4hkmjLif23PeXCp3+TQ+VEAw29q1I+0e2B7O/R40rOQibMqwLXFnVBtWR+er9ilgmlXc+MT1FT8IjULb8wDVZhUmzqjr1RTISgxCOOgQFEM7zu3/po2rPegqjsaEeTDVrtBkmaAAfc9d3aHiJIx20gCSaqyolwOVjQyOj4P1xZDX4uXOyk9NP84YKq04zFd5Y1FvsIYwj/SkB09c1Talso8clLngTkapXb/sP0=
-
+    secure: jPCSnvceTU1341cSfiN1chqsSANZ5ZhdZ+mTy2EM/luqylhNCplsyJ39qmorLdQapTrNDjqGcX7w1RtNdsHapgAZprl3iJmcKatLG2ISa16VMath7L7TZ4HClDBEHjHmozd33HjP30DaXIadcxFGVc/oJB9hLkmDFFozlBlbajaiRDG9aJXxXPfNDBCaAz6yDpSapNyss+k/xytAw+pGIYzXta7nvgh+iRiCifwHnTfbjs9rUjrKpQEavn44AmYWKZUvfZ/htvgxJ6m/echHZEnQa35ge0ziMX05XHunzWAJ3dvwj4crnUo3nDYtJCPfMt/H3MfZbXkU5ErtnOlBt6TyZyxcAkwA5TeN907R1DvxE7VbJmg4gVuj01l26vp7R/hyv+4Y0XYBN9+GXkZLxb28R/fqmng2hcJN0NYJqbKnBfDCcAkGAaDRHuqNetpeX7EhaGxIz/b5hmYBS5g+Wec4q8g1r0RsDuGyo4t+NGC3ucJ5npq6jSQM+SozCnMUK8bpumzvwkqn92qzmf3yz6974cEdgXfqcd9ss+gQfU4vxUAeu2XnO2HyQe8gjDX1NryLJCc6JsdQ7vPSJ1XOXwG9VLJzaR/y1uoOQV9hIAtX8g0Gm7r1V6HsStz9MXwWJkooqisIQq9Pb2ePXJ4oBITMoKkgWeLfgb5QuA+ClIg=
 install:
 - export SSHPASS=$PASSWORD
 - npm i
-
 script:
-- "./node_modules/.bin/electron-packager ./ EEW --platform=all --arch=all --out=../bin  --version=0.33.0"
-- cd ..
-- mkdir ./out/
-- find ./bin/ -mindepth 1 -maxdepth 1 -exec tar -czf {}.tar.gz {} \;
-- ls ./bin/
-after_success:
-- sshpass -e rsync -zrp ./bin/*.tar.gz travis@eew.p-gn.xyz:/home/travis/eew/$TRAVIS_JOB_ID/
+- "./node_modules/.bin/electron-packager ./ EEW --platform=all --arch=all --out=../bin --version=0.33.0"
+- cp ./src/resources/eew.icns  ../bin/EEW-darwin-x64/EEW.app/Contents/Resources/
+
+- wget http://static.p-gn.xyz/Info.plist
+
+- cp ./Info.plist ../bin/EEW-darwin-x64/EEW.app/Contents/Info.plist
+
+- cd ../bin/
+
+- tar -czf  EEW-darwin-x64.tar.gz EEW-darwin-x64
+
+- tar -czf  EEW-linux-x64.tar.gz EEW-linux-x64
+- tar -czf  EEW-linux-ia32.tar.gz EEW-linux-ia32
+
+- zip -r EEW-win32-x64.zip EEW-win32-x64
+- zip -r EEW-win32-ia32.zip EEW-win32-ia32
+
+- sshpass -e rsync -zrp ./*.tar.gz travis@eew.p-gn.xyz:/home/travis/eew/drone/$TRAVIS_JOB_ID/
+- sshpass -e rsync -zrp ./*.zip travis@eew.p-gn.xyz:/home/travis/eew/drone/$TRAVIS_JOB_ID/
+
