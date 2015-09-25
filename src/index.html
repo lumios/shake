@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title>Earthquake Early Warning</title>
     <link rel="shortcut icon" type="image/png" href="resources/icon.png"/>
-
     <script src="https://maps.googleapis.com/maps/api/js"></script>
 
     <script>
@@ -51,11 +50,11 @@
 				position: epicenter,
                 map: map
             });
-			var marker2 = new google.maps.Marker({
+			/*var marker2 = new google.maps.Marker({
 				position: new google.maps.LatLng(35.41, 139.41),
 				map: map,
-				label: 'H'
-			})
+				label: '家'
+			});*/
 			var styles = [
 			  {
 			    "featureType": "water",
@@ -107,14 +106,6 @@
             background-color: darkgrey;
         }
 
-		/*.logo {
-			position: absolute;
-			opacity: 0.1;
-			z-index: 10;
-			bottom: 6px;
-			right: 10px;
-		}*/
-
         .alert {
             position: absolute;
             z-index: 10;
@@ -140,14 +131,6 @@
         td {
             margin: 0;
         }
-
-        /*div {
-            display: inline-block;
-        }*/
-
-        /*div > a > div > img, .gmnoprint {
-            display: none;
-        }*/
     </style>
 </head>
 <body>
@@ -160,8 +143,8 @@
                         <img src="resources/eew-icon.png" height="40px" width="40px">
                     </td>
                     <td>
-                        <b><div id="location">?</div></b>
-                        <div align="left"><div id="magnitudeseismic">?</div></div>
+                        <b><div id="location">...</div></b>
+                        <div align="left"><div id="magnitudeseismic">...</div></div>
                     </td>
                 </tr>
             </tbody>
