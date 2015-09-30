@@ -55,6 +55,7 @@
 				map: map,
 				label: '家'
 			});*/
+			var styledMap = new google.maps.StyledMapType(styles,{name: "Styled Map"});
 			var styles = [
 			  {
 			    "featureType": "water",
@@ -86,7 +87,7 @@
 			]
         }
 
-		if (process.platform == 'win32') {
+		if (process.platform != 'darwin') {
 			document.write('<audio hidden autoplay preload="auto"><source src="resources/audio/nhk.mp3" type="audio/mp3"></audio>');
 		}
     </script>
