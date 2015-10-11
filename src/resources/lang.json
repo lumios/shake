@@ -8,6 +8,7 @@
 		"help": "Support",
 		"contribute": "Contribute",
 		"bug": "Report a bug",
+		"test": "Trigger Quake",
 		"settings": "Settings",
 		"quit": "Quit",
 		"setup": {
@@ -46,6 +47,7 @@
 		"help": "サポート",
 		"contribute": "貢献",
 		"bug": "バグを報告",
+		"test": "テスト地震",
 		"settings": "設定",
 		"quit": "終了",
 		"setup": {
