@@ -32,10 +32,6 @@ try {
 	});
 }
 
-// DEBUG
-console.log('NOTIFY PATH' + path.join(__dirname, '../lib', 'node-notifier'));
-console.log('DIRNAME:' + __dirname);
-
 var parser = require('./parser.js'); // Quake Data Parsing
 var trigger = require('./trigger.js'); // Quake Testing Trigger
 var lang = settings.lang; // Import Language Settings
