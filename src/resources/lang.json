@@ -2,13 +2,14 @@
 	"en": {
 		"title": "Earthquake Early Warning",
 		"connect": "Connected to Server.",
-		"disconnect": "Connection to server lost. We'll keep trying.",
+		"disconnect": "Failed to Connect to Server. Retrying...",
 		"cancelled": "This Earthquake Warning has been cancelled.",
 		"error": "Error",
 		"help": "Support",
 		"contribute": "Contribute",
 		"bug": "Report a bug",
 		"test": "Trigger Quake",
+		"devtools": "Dev Tools",
 		"settings": "Settings",
 		"quit": "Quit",
 		"setup": {
@@ -48,6 +49,7 @@
 		"contribute": "貢献",
 		"bug": "バグを報告",
 		"test": "テスト地震",
+		"devtools": "開発者ツール",
 		"settings": "設定",
 		"quit": "終了",
 		"setup": {
