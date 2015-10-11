@@ -231,6 +231,15 @@ app.on('ready', function() {
 		type: 'separator'
 	},
 	{
+		label: locale[lang].test,
+		click: function() {
+			parse('{"type":"0","drill":false,"announce_time":"2015/10/11 07:17:46","earthquake_time":"2015/10/11 07:16:32","earthquake_id":"20151011071640","situation":"0","revision":"1","latitude":"43.1","longitude":"145.8","depth":"50km","epicenter_en":"Offshore South Eastern Nemuro Peninsula","epicenter_ja":"根室半島南東沖","magnitude":"3.8","seismic_en":"2","seismic_ja":"2","geography":"sea","alarm":"0"}');
+		}
+	},
+	{
+		type: 'separator'
+	},
+	{
 		label: locale[lang].contribute,
 		click: function() {
 			open('https://github.com/lumios/eew');
