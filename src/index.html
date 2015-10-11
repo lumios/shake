@@ -22,6 +22,10 @@
 			}
 			loadMap(data.latitude, data.longitude, data.magnitude);
 		});
+
+		if (process.platform != 'darwin') {
+			document.write('<audio hidden autoplay preload="auto"><source src="resources/audio/nhk.mp3" type="audio/mp3"></audio>');
+		}
 	</script>
 
 	<script>
@@ -88,9 +92,6 @@
 				}]
 			}]
 		}
-		if (process.platform != 'darwin') {
-			document.write('<audio hidden autoplay preload="auto"><source src="resources/audio/nhk.mp3" type="audio/mp3"></audio>');
-		}
 	</script>
 
 	<style>
@@ -98,7 +99,7 @@
 			font-family: Arial, Helvetica, Verdana, sans-serif;
 			margin: 0;
 		}
-		
+
 		#map {
 			overflow: hidden;
 			position: absolute;
@@ -107,7 +108,7 @@
 			width: 100%;
 			background-color: darkgrey;
 		}
-		
+
 		.alert {
 			position: absolute;
 			z-index: 10;
@@ -120,16 +121,16 @@
 			padding: 5px 25px 5px 10px;
 			border-bottom-right-radius: 4px;
 		}
-		
+
 		.alert p {
 			margin: 0;
 		}
-		
+
 		.alert b {
 			display: block;
 			margin-bottom: 3px;
 		}
-		
+
 		td {
 			margin: 0;
 		}
