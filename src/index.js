@@ -4,8 +4,8 @@ var colors = require('colors'); // Terminal Text Formatting
 var fse = require('fs-extra'); // File System Extras
 var osenv = require('osenv'); // OS Specific Globals
 var path = require('path'); // File System Paths
-var fs = require('fs'); // File System
 var open = require('open'); // Opens Web Browsers
+var fs = require('fs'); // File System
 
 var BrowserWindow = require('browser-window'); // Electron Windows
 var app = require('app'); // Electron GUI
@@ -18,8 +18,8 @@ if (process.platform === 'darwin') var notifier = require(path.join(__dirname, '
 else var notifier = require('node-notifier');
 
 var date = new Date();
-var getLang = JSON.parse(fs.readFileSync(path.join(__dirname, 'settings.json')) + '');
-var lang = getLang.lang;
+var lang1 = require('./settings.json');
+var lang = lang1.lang;
 var locale = JSON.parse(fs.readFileSync(path.join(__dirname, 'resources', 'lang.json')) + '');
 var copy = path.join(__dirname, 'resources', 'audio');
 var paste = osenv.home() + '/Library/Sounds/';
