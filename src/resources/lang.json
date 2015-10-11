@@ -5,6 +5,9 @@
 		"disconnect": "Connection to server lost. We'll keep trying.",
 		"cancelled": "This Earthquake Warning has been cancelled.",
 		"error": "Error",
+		"help": "Support",
+		"contribute": "Contribute",
+		"bug": "Report a bug",
 		"settings": "Settings",
 		"quit": "Quit",
 		"setup": {
