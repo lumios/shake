@@ -1,10 +1,9 @@
 var socket = require('socket.io-client')('http://eew.kurisubrooks.com:3080');
-var parser = require('./parser.js'); // Quake Data Parsing
-var colors = require('colors'); // Terminal Text Formatting
-var fse = require('fs-extra'); // File System Extras
+var colors = require('colors'); // Console Text Formatting
 var osenv = require('osenv'); // OS Specific Globals
+var open = require('open'); // Opens URLs in Web Browsers
+var fse = require('fs-extra'); // File System Extras
 var path = require('path'); // File System Paths
-var open = require('open'); // Opens Web Browsers
 var fs = require('fs'); // File System
 
 var BrowserWindow = require('browser-window'); // Electron Windows
@@ -13,13 +12,30 @@ var Menu = require('menu'); // Electron Menu API
 var Tray = require('tray'); // Electron Tray API
 var ipc = require('ipc'); // Electron inter-process comm
 require('crash-reporter').start(); // Electron Crash Reporter
+colors.setTheme({tweet: 'cyan',success: 'green',error: ['red', 'bold'],warn: 'yellow',info: 'blue'});
 
-if (process.platform === 'darwin') var notifier = require(path.join(__dirname, '../lib', 'node-notifier'));
-else var notifier = require('node-notifier');
+var settings, notifier, settingsPath, settingsFile;
+if (process.platform === 'darwin') notifier = require(path.join(__dirname, '../lib', 'node-notifier'));
+else notifier = require('node-notifier');
 
-var date = new Date();
-var lang1 = require('./settings.json');
-var lang = lang1.lang;
+try {
+	settings = require('./settings.json');
+	console.log(('[*] Loaded Settings.').success);
+} catch (error) {
+	console.log(('[!] ' + error).error);
+	settingsPath = path.join(__dirname, 'settings.json');
+	settingsFile = {"lang": "en", "min_alert": "35", "night_mode": true, "dev_mode": false};
+	settings = settingsFile;
+
+	fs.writeFile(settingsPath, JSON.stringify(settingsFile), function(error) {
+		if (error) alert("[!] There was an error saving the file.");
+	});
+}
+
+var parser = require('./parser.js'); // Quake Data Parsing
+var trigger = require('./trigger.js'); // Quake Testing Trigger
+var lang = settings.lang; // Import Language Settings
+var date = new Date(); // Gets Date/Time
 var locale = JSON.parse(fs.readFileSync(path.join(__dirname, 'resources', 'lang.json')) + '');
 var copy = path.join(__dirname, 'resources', 'audio');
 var paste = osenv.home() + '/Library/Sounds/';
@@ -60,29 +76,22 @@ function newSettings() {
 	settingsWindow.loadUrl('file://' + __dirname + '/settings.html');
 }
 
-colors.setTheme({
-	tweet: 'cyan',
-	success: 'green',
-	error: ['red', 'bold'],
-	warn: 'yellow',
-	info: 'blue'
-});
-
 if (process.platform === 'darwin') {
 	fse.copy(copy, paste, function(error) {
-		console.log(("[*] Installed Audio Files to " + paste).success);
-		if (error) throw console.error(error.error);
+		console.log(("[*] Installed Sounds. [" + paste + "]").success);
+		if (error) console.log(error.error);
 	});
 }
 
 socket.on('connect', function() {
-	console.log(('[*] Connected to Server').success);
+	console.log(('[*] Connected to Socket.').success);
 
 	if (process.platform == 'darwin') notifier.notify({
 		'title': locale[lang].title,
 		'message': locale[lang].connect,
 		'sound': false
 	});
+
 	else notifier.notify({
 		'title': locale[lang].title,
 		'message': locale[lang].connect,
@@ -104,6 +113,7 @@ socket.on('disconnect', function() {
 		'message': locale[lang].disconnect,
 		'sound': false
 	});
+
 	else notifier.notify({
 		'title': locale[lang].title,
 		'message': locale[lang].disconnect,
@@ -122,6 +132,7 @@ function parse(input) {
 		var subtitle_template = template[0];
 		var message_template = template[1];
 
+		if (data.drill) console.log(('[>] Test Quake triggered by user.').yellow);
 		console.log(('[~] ' + data.earthquake_time + ' - ' + data.epicenter_en).yellow);
 		console.log(('[~] ' + locale[lang].units.update + ' ' + situation_string + ', ' + locale[lang].units.magnitude + ': ' + data.magnitude + ', ' + locale[lang].units.seismic + ': ' + data.seismic_en).yellow);
 
@@ -137,7 +148,7 @@ function parse(input) {
 					'time': 10000,
 					'wait': true
 				});
-				// Linux & Windows Day Notification
+			// Linux & Windows Day Notification
 			} else {
 				notifier.notify({
 					'title': locale[lang].title,
@@ -160,7 +171,7 @@ function parse(input) {
 					'time': 10000,
 					'wait': true
 				});
-				// Linux & Windows Night Notification
+			// Linux & Windows Night Notification
 			} else {
 				notifier.notify({
 					'title': locale[lang].title,
@@ -173,6 +184,7 @@ function parse(input) {
 				});
 			}
 		}
+
 		if (data.revision == 1 && (alertRevision[data.earthquake_id] === undefined || data.revision > alertRevision[data.earthquake_id]) && electronReady === true) {
 			newWindow(data);
 			var alertWindow = alertWindows[data.earthquake_id];
@@ -191,6 +203,7 @@ function parse(input) {
 				webContent2.on('did-finish-load', function() {
 					webContent2.send('data', [data, template, locale]);
 				});
+
 			} else if (alertRevision[data.earthquake_id] !== undefined && data.revision > alertRevision[data.earthquake_id]) {
 				var webContents = alertWindows[data.earthquake_id].webContents;
 				webContents.send('data', [data, template, locale]);
@@ -198,18 +211,21 @@ function parse(input) {
 			}
 		}
 
-	} catch (err) {
+	} catch (error) {
 		if (process.platform == 'darwin') notifier.notify({
 			'title': locale[lang].title,
-			'message': locale[lang].error + ': ' + err.message,
+			'message': locale[lang].error + ': ' + error.message,
 			'sound': false
 		});
+
 		else notifier.notify({
 			'title': locale[lang].title,
-			'message': locale[lang].error + ': ' + err.message,
+			'message': locale[lang].error + ': ' + error.message,
 			'sound': false,
 			'icon': path.join(__dirname, 'resources', 'icon.png')
 		});
+
+		console.log(('[!] ' + error).error);
 	}
 }
 
@@ -221,53 +237,31 @@ app.on('ready', function() {
 	appIcon = new Tray(path.join(__dirname, 'resources', 'IconTemplate.png'));
 	appIcon.setPressedImage(path.join(__dirname, 'resources', 'IconPressed.png'));
 
-	var contextMenu = Menu.buildFromTemplate([
-	{
-		label: locale[lang].help,
-		click: function() {
-			open('http://lumios.xyz/support.html');
-		}
-	},
-	{
-		type: 'separator'
-	},
-	{
-		label: locale[lang].test,
-		click: function() {
-			parse('{"type":"0","drill":false,"announce_time":"2015/10/11 07:17:46","earthquake_time":"2015/10/11 07:16:32","earthquake_id":"20151011071640","situation":"0","revision":"1","latitude":"43.1","longitude":"145.8","depth":"50km","epicenter_en":"Offshore South Eastern Nemuro Peninsula","epicenter_ja":"根室半島南東沖","magnitude":"3.8","seismic_en":"2","seismic_ja":"2","geography":"sea","alarm":"0"}');
-		}
-	},
-	{
-		type: 'separator'
-	},
-	{
-		label: locale[lang].contribute,
-		click: function() {
-			open('https://github.com/lumios/eew');
-		}
-	},
-	{
-		label: locale[lang].bug,
-		click: function() {
-			open('https://github.com/lumios/eew/issues');
-		}
-	},
-	{
-		type: 'separator'
-	},
-	{
-		label: locale[lang].settings,
-		click: function() {
-			newSettings();
-		}
-	},
-	{
-		label: locale[lang].quit,
-		click: function() {
-			console.log(('[!] Closed due to user request.').error);
-			process.exit(0);
-		}
-	}]);
+	var nodev_template = [
+		{label: locale[lang].contribute,click: function(){open('https://github.com/lumios/eew');}},
+		{label: locale[lang].bug,click: function(){open('https://github.com/lumios/eew/issues');}},
+		{type: 'separator'},
+		{label: locale[lang].settings,click: function(){newSettings();}},
+		{label: locale[lang].help,click: function(){open('http://lumios.xyz/support.html');}},
+		{label: locale[lang].quit,click: function(){console.log(('[!] Closing Program due to User Request').error);process.exit(0);}}
+	];
+
+	var dev_template = [
+		{label: locale[lang].devtools, submenu:[
+			{label: locale[lang].test,click: function(){parse(trigger.quake());}},
+		]},
+		{type: 'separator'},
+		{label: locale[lang].contribute,click: function(){open('https://github.com/lumios/eew');}},
+		{label: locale[lang].bug,click: function(){open('https://github.com/lumios/eew/issues');}},
+		{type: 'separator'},
+		{label: locale[lang].settings,click: function(){newSettings();}},
+		{label: locale[lang].help,click: function(){open('http://lumios.xyz/support.html');}},
+		{label: locale[lang].quit,click: function(){console.log(('[!] Closing Program due to User Request').error);process.exit(0);}}
+	];
+
+	var contextMenu;
+	if (settings.dev_mode) contextMenu = Menu.buildFromTemplate(dev_template);
+	else contextMenu = Menu.buildFromTemplate(nodev_template);
 
 	appIcon.setToolTip('EEW');
 	appIcon.setContextMenu(contextMenu);
@@ -275,12 +269,6 @@ app.on('ready', function() {
 	appIcon.on('clicked', function(event) {
 		console.log(event);
 	});
-
-	try {
-		var setting = require('./settings.json');
-	} catch (e) {
-		newSettings();
-	}
 
 });
 
