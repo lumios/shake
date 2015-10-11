@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - '0.12'
 addons:
-  ssh_known_hosts: eew.p-gn.xyz
+  ssh_known_hosts: eew.kurisubrooks.com
   apt:
     packages:
     - sshpass
@@ -14,23 +14,22 @@ install:
 - export SSHPASS=$PASSWORD
 - npm i
 script:
-- "./node_modules/.bin/electron-packager ./ EEW --platform=all --arch=all --out=../bin --version=0.33.0"
-- cp ./src/resources/eew.icns  ../bin/EEW-darwin-x64/EEW.app/Contents/Resources/
+- "./node_modules/.bin/electron-packager ./ eew --platform=all --arch=all --out=../bin --version=0.33.0"
+- cp ./src/resources/eew.icns  ../bin/eew-darwin-x64/eew.app/Contents/Resources/
 
-- wget http://static.p-gn.xyz/Info.plist
+- wget http://kurisubrooks.com/static/eew/Info.plist
 
-- cp ./Info.plist ../bin/EEW-darwin-x64/EEW.app/Contents/Info.plist
+- cp ./Info.plist ../bin/eew-darwin-x64/eew.app/Contents/Info.plist
 
 - cd ../bin/
 
-- tar -czf  EEW-darwin-x64.tar.gz EEW-darwin-x64
+- tar -czf  eew-darwin-x64.tar.gz eew-darwin-x64
 
-- tar -czf  EEW-linux-x64.tar.gz EEW-linux-x64
-- tar -czf  EEW-linux-ia32.tar.gz EEW-linux-ia32
+- tar -czf  eew-linux-x64.tar.gz eew-linux-x64
+- tar -czf  eew-linux-ia32.tar.gz eew-linux-ia32
 
-- zip -q -r EEW-win32-x64.zip EEW-win32-x64
-- zip -q -r EEW-win32-ia32.zip EEW-win32-ia32
+- zip -q -r eew-win32-x64.zip eew-win32-x64
+- zip -q -r eew-win32-ia32.zip eew-win32-ia32
 
-- sshpass -e rsync -zrp ./*.tar.gz travis@eew.p-gn.xyz:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
-- sshpass -e rsync -zrp ./*.zip travis@eew.p-gn.xyz:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
-
+- sshpass -e rsync -zrp ./*.tar.gz travis@eew.kurisubrooks.com:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
+- sshpass -e rsync -zrp ./*.zip travis@eew.kurisubrooks.com:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
