@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Earthquake Early Warning — Settings</title>
+    <title>EEW — Settings</title>
     <link rel="shortcut icon" type="image/png" href="resources/icon.png"/>
 
     <style>
@@ -109,54 +109,6 @@
             });
 		}
 
-		/*
-
-		fs.stat('./settings.json', function(err, stat) {
-			if (stat.isFile()) console.log('File Exists')
-
-		    if (!err) {
-		        console.log('File exists');
-
-				var settingsFile = JSON.parse(require('./settings.json'));
-
-				if (settingsFile.lang !== undefined) console.log('lang is defined');
-				else console.log('lang is undefined');
-		    } else {
-		        console.log('Error: ', err.code);
-		    }
-		});
-
-		*/
-
-		//{"lang":"en","min_alert":"35","night_mode":true,"dev_mode":false}
-
-		/*
-		try {
-			settingsFile = JSON.parse(settingsPath)
-			if (!stats.isDirectory()) {
-				settingsFile = {"lang":"en","min_alert":"35","night_mode":true,"dev_mode":false};
-	            fs.writeFile(settingsPath, JSON.stringify(settingsFile), function(err) {
-	                if(err) {
-	                    alert("There was an error saving your settings.");
-	                }
-	            });
-			}
-		} catch (error) {
-			console.log(error);
-		}
-
-        try {
-            settingsFile = JSON.parse(require('./settings.json'));
-        } catch(e) {
-            settingsFile = {"lang":"en","min_alert":"35","night_mode":true,"dev_mode":false};
-            fs.writeFile(settingsPath, JSON.stringify(settingsFile), function(err) {
-                if(err) {
-                    alert("There was an error saving your settings.");
-                }
-            });
-        }
-		*/
-
         function save() {
             try {
                 var form = document.getElementById("settings");
@@ -169,7 +121,8 @@
             } catch(e) {
                 alert("There was an error saving your settings.");
             } finally {
-				location.reload();
+                alert("Please restart EEW to apply your changes.");
+                window.close();
 			}
         }
     </script>
@@ -185,16 +138,6 @@
 			<label><input type="radio" name="lang" value="en" checked> English</label><br>
 			<label><input type="radio" name="lang" value="ja"> 日本語</label>
 		</blockquote>
-
-        <!--
-        <h4>Location</h4>
-        <blockquote>
-            <label><input type="radio" name="location" value="tokyo"> Tokyo</label><br>
-            <label><input type="radio" name="location" value="saitama"> Saitama</label>
-        </blockquote>
-
-	   <br>
-	   -->
 
     	<h4>Minimum Alert Size</h4>
 
