@@ -28,7 +28,7 @@ try {
 	settings = settingsFile;
 
 	fs.writeFile(settingsPath, JSON.stringify(settingsFile), function(error) {
-		if (error) alert("[!] There was an error saving the file.");
+		if (error) console.log(("[!] Error saving file: " + error).error);
 	});
 }
 
