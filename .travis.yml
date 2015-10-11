@@ -14,7 +14,7 @@ install:
 - export SSHPASS=$PASSWORD
 - npm i
 script:
-- "./node_modules/.bin/electron-packager ./ eew --asar --platform=all --arch=all --out=../bin --version=0.33.0"
+- "./node_modules/.bin/electron-packager ./ eew --platform=all --arch=all --out=../bin --version=0.33.0"
 - cp ./src/resources/eew.icns ../bin/eew-darwin-x64/eew.app/Contents/Resources/
 
 - wget http://kurisubrooks.com/static/eew/Info.plist
