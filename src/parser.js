@@ -9,14 +9,14 @@ exports.soundString = function(data) {
 };
 
 exports.situationString = function(data, locale) {
-    if (data.situation == 1) return locale.en.units.final;
+    if (data.situation == 1) return locale[lang].units.final;
     else return '#' + data.revision;
 };
 
 exports.template = function(data, locale) {
-    if (data.type == 1 || data.situation == 2) return ['', locale.en.cancelled];
+    if (data.type == 1 || data.situation == 2) return ['', locale[lang].cancelled];
     else {
-        var message_template = locale.en.units.magnitude + ': ' + data.magnitude + ', ' + locale.en.units.seismic + ': ' + data.seismic_en;
-        return [data.epicenter_en, message_template];
+        var message_template = locale[lang].units.magnitude + ': ' + data.magnitude + ', ' + locale[lang].units.seismic + ': ' + data.seismic_en;
+        return [data.epicenter_ + lang, message_template];
     }
 };
