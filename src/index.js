@@ -1,35 +1,36 @@
 var socket = require('socket.io-client')('http://eew.kurisubrooks.com:3080');
-var colors = require('colors'); // Console Text Formatting
+var tools = require('lumios-toolkit'); // Lumios Proprietary Tools
 var osenv = require('osenv'); // OS Specific Globals
 var open = require('open'); // Opens URLs in Web Browsers
 var fse = require('fs-extra'); // File System Extras
 var path = require('path'); // File System Paths
 var fs = require('fs'); // File System
 
-var BrowserWindow = require('browser-window'); // Electron Windows
+var BrowserWindow = require('browser-window'); // Electron Window Manager
 var app = require('app'); // Electron GUI
 var Menu = require('menu'); // Electron Menu API
 var Tray = require('tray'); // Electron Tray API
 var ipc = require('ipc'); // Electron inter-process comm
 require('crash-reporter').start(); // Electron Crash Reporter
-colors.setTheme({tweet: 'cyan',success: 'green',error: ['red', 'bold'],warn: 'yellow',info: 'blue'});
 
 var settings, notifier, settingsPath, settingsFile;
 if (process.platform === 'darwin') notifier = require(path.join(__dirname, '../lib', 'node-notifier'));
 else notifier = require('node-notifier');
 
-try {
-	settings = require('./settings.json');
-	console.log(('[*] Loaded Settings.').success);
-} catch (error) {
-	console.log(('[!] ' + error).error);
-	settingsPath = path.join(__dirname, 'settings.json');
-	settingsFile = {"lang": "en", "min_alert": "35", "night_mode": true, "dev_mode": false};
+settingsPath = path.join(__dirname, 'settings.json');
+settingsFile = {"lang": "en", "min_alert": "35", "first_run": true, "night_mode": true, "dev_mode": true};
+
+if (!fs.existsSync(settingsPath)) {
+	tools.warn('Settings File does not exist, using tempoary file...');
+	tools.warn('Generating new settings file');
 	settings = settingsFile;
 
 	fs.writeFile(settingsPath, JSON.stringify(settingsFile), function(error) {
-		if (error) console.log(("[!] Error saving file: " + error).error);
-	});
+		if (error) tools.error('Could not generate file: ' + error);
+	}, tools.success('Settings File generated.'));
+} else {
+	settings = require('./settings.json');
+	tools.success('Loaded Settings.');
 }
 
 var parser = require('./parser.js'); // Quake Data Parsing
@@ -63,7 +64,7 @@ function newWindow(data) {
 
 function newSettings() {
 	var settingsWindow = new BrowserWindow({
-		'title': locale[lang].title + ' — ' + locale[lang].settings,
+		'title': 'Settings',
 		'icon': path.join(__dirname, 'resources', 'icon.png'),
 		'width': 500,
 		'height': 550,
@@ -78,13 +79,13 @@ function newSettings() {
 
 if (process.platform === 'darwin') {
 	fse.copy(copy, paste, function(error) {
-		console.log(("[*] Installed Sounds. [" + paste + "]").success);
-		if (error) console.log(error.error);
+		tools.success('Installed Sounds to [' + paste + ']');
+		if (error) tools.error('Error: ' + error);
 	});
 }
 
 socket.on('connect', function() {
-	console.log(('[*] Connected to Socket.').success);
+	tools.success('Connected to Server.');
 
 	if (process.platform == 'darwin') notifier.notify({
 		'title': locale[lang].title,
@@ -101,12 +102,12 @@ socket.on('connect', function() {
 });
 
 socket.on('data', function(data) {
-	console.log(('[>] Received New Data from Server').info);
+	tools.debug('New Data from Server, Triggering Quake...');
 	parse(data);
 });
 
 socket.on('disconnect', function() {
-	console.log(('[!] Socket Dropped').error);
+	tools.error('Socket Dropped, Trying to reconnect...');
 
 	if (process.platform == 'darwin') notifier.notify({
 		'title': locale[lang].title,
@@ -132,9 +133,9 @@ function parse(input) {
 		var subtitle_template = template[0];
 		var message_template = template[1];
 
-		if (data.drill) console.log(('[>] Test Quake triggered by user.').yellow);
-		console.log(('[~] ' + data.earthquake_time + ' - ' + data.epicenter_en).yellow);
-		console.log(('[~] ' + locale[lang].units.update + ' ' + situation_string + ', ' + locale[lang].units.magnitude + ': ' + data.magnitude + ', ' + locale[lang].units.seismic + ': ' + data.seismic_en).yellow);
+		if (data.drill) tools.debug('Test Quake triggered by user');
+		tools.info(data.earthquake_time + ' - ' + data.epicenter_en);
+		tools.info(locale.en.units.update + ' ' + situation_string + ', ' + locale.en.units.magnitude + ': ' + data.magnitude + ', ' + locale.en.units.seismic + ': ' + data.seismic_en);
 
 		// Night Mode Check
 		if (date.getHours() >= '07' || data.magnitude >= 6) {
@@ -161,6 +162,8 @@ function parse(input) {
 				});
 			}
 		} else {
+			tools.debug('Night Mode Enabled, Triggering silent quake...');
+
 			// Mac Night Notifiction
 			if (process.platform === 'darwin') {
 				notifier.notify({
@@ -225,7 +228,7 @@ function parse(input) {
 			'icon': path.join(__dirname, 'resources', 'icon.png')
 		});
 
-		console.log(('[!] ' + error).error);
+		tools.error('Error: ' + error);
 	}
 }
 
@@ -233,6 +236,11 @@ if (process.platform == 'darwin') app.dock.hide();
 
 app.on('ready', function() {
 	electronReady = true;
+
+	if (settings.first_run) {
+		newSettings();
+		tools.debug('First run, opening settings window...');
+	}
 
 	appIcon = new Tray(path.join(__dirname, 'resources', 'IconTemplate.png'));
 	appIcon.setPressedImage(path.join(__dirname, 'resources', 'IconPressed.png'));
@@ -243,7 +251,7 @@ app.on('ready', function() {
 		{type: 'separator'},
 		{label: locale[lang].settings,click: function(){newSettings();}},
 		{label: locale[lang].help,click: function(){open('http://lumios.xyz/support.html');}},
-		{label: locale[lang].quit,click: function(){console.log(('[!] Closing Program due to User Request').error);process.exit(0);}}
+		{label: locale[lang].quit,click: function(){tools.debug('Closing Program due to User Request');process.exit(0);}}
 	];
 
 	var dev_template = [
@@ -256,7 +264,7 @@ app.on('ready', function() {
 		{type: 'separator'},
 		{label: locale[lang].settings,click: function(){newSettings();}},
 		{label: locale[lang].help,click: function(){open('http://lumios.xyz/support.html');}},
-		{label: locale[lang].quit,click: function(){console.log(('[!] Closing Program due to User Request').error);process.exit(0);}}
+		{label: locale[lang].quit,click: function(){tools.debug('Closing Program due to User Request');process.exit(0);}}
 	];
 
 	var contextMenu;
@@ -267,7 +275,7 @@ app.on('ready', function() {
 	appIcon.setContextMenu(contextMenu);
 
 	appIcon.on('clicked', function(event) {
-		console.log(event);
+		tools.debuf(event);
 	});
 
 });
