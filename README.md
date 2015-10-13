@@ -12,8 +12,8 @@ This is in place to keep you from being flooded with spam from Earthquakes too s
 ##### Prerequisites
 - Windows 7 (or newer)
 - Mac OS X 10.8 (or newer)
-- Linux _(Ubuntu, Debian, Arch)_
-- NodeJS v0.10.2 +
+- Linux _(Requires notify-send)_
+- NodeJS v0.12 +
 
 ##### Install
 1. `cd ~/.../eew`
@@ -22,7 +22,7 @@ This is in place to keep you from being flooded with spam from Earthquakes too s
 
 ##### Run
 1. `cd ~/.../eew`
-2. `electron .`
+2. `npm start`
 
 ### Legal
 ```text
