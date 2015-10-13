@@ -109,6 +109,7 @@
                 var settings = {};
                 settings["lang"] = form["lang"].value;
                 settings["min_alert"] = form["min_alert"].value;
+                settings["first_run"] = false;
                 settings["night_mode"] = form["night_mode"].checked;
 				settings["dev_mode"] = form["dev_mode"].checked;
                 fs.writeFile(settingsPath, JSON.stringify(settings));
