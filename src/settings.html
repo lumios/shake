@@ -90,24 +90,18 @@
 		    background: #63bb63;
 		}
     </style>
+    <script src="resources/web/jquery.js"></script>
     <script>
         var fs = require('fs');
         var path = require('path');
+        var tools = require('lumios-toolkit');
+        var locale = require('./resources/lang.json');
+        var settings = JSON.parse(fs.readFileSync(path.join(__dirname, 'settings.json')) + '');
+        var lang = settings.lang;
 		var settingsPath = path.join(__dirname, 'settings.json');
-        var settingsFile;
+        var settingsFile = {"lang": "en", "min_alert": "35", "first_run": false, "night_mode": true, "dev_mode": true};
 
-		try {
-			settingsFile = require('./settings.json');
-			console.log('Read settings successfully')
-		} catch (err) {
-			console.log('Error' + err)
-			settingsFile = {"lang":"en","min_alert":"35","night_mode":true,"dev_mode":false};
-			fs.writeFile(settingsPath, JSON.stringify(settingsFile), function(err) {
-                if(err) {
-                    alert("There was an error saving your settings.");
-                }
-            });
-		}
+        $('#lang').text(locale.ja.setup.language);
 
         function save() {
             try {
@@ -118,10 +112,12 @@
                 settings["night_mode"] = form["night_mode"].checked;
 				settings["dev_mode"] = form["dev_mode"].checked;
                 fs.writeFile(settingsPath, JSON.stringify(settings));
-            } catch(e) {
-                alert("There was an error saving your settings.");
+            } catch(err) {
+                alert("There was an error saving your settings: " + err);
+                tools.error('Error: ' + err);
             } finally {
                 alert("Please restart EEW to apply your changes.");
+                tools.success('Saved settings.');
                 window.close();
 			}
         }
@@ -133,7 +129,7 @@
     <hr>
 
     <form action="javascript:save()" id="settings">
-		<h4>Language</h4>
+		<h4><span id="lang">Language</a></h4>
 		<blockquote>
 			<label><input type="radio" name="lang" value="en" checked> English</label><br>
 			<label><input type="radio" name="lang" value="ja"> 日本語</label>
