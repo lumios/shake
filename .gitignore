@@ -2,5 +2,8 @@
 node_modules
 npm-debug.log
 keys.js
+settings.json
+logs
+.log
 *.iml
 .idea/
