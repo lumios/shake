@@ -8,15 +8,16 @@ exports.soundString = function(data) {
     else return 'nhk';
 };
 
-exports.situationString = function(data, locale) {
+exports.situationString = function(data, locale, lang) {
     if (data.situation == 1) return locale[lang].units.final;
     else return '#' + data.revision;
 };
 
-exports.template = function(data, locale) {
+exports.template = function(data, locale, lang) {
     if (data.type == 1 || data.situation == 2) return ['', locale[lang].cancelled];
     else {
         var message_template = locale[lang].units.magnitude + ': ' + data.magnitude + ', ' + locale[lang].units.seismic + ': ' + data.seismic_en;
-        return [data.epicenter_ + lang, message_template];
+        if (lang == 'ja') return [data.epicenter_ja, message_template];
+        else return [data.epicenter_en, message_template];
     }
 };

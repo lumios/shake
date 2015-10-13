@@ -128,8 +128,8 @@ function parse(input) {
 
 	try {
 		var sound_string = parser.soundString(data);
-		var situation_string = parser.situationString(data, locale);
-		var template = parser.template(data, locale);
+		var situation_string = parser.situationString(data, locale, lang);
+		var template = parser.template(data, locale, lang);
 		var subtitle_template = template[0];
 		var message_template = template[1];
 
