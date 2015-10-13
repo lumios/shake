@@ -1,4 +1,4 @@
-# EEW [![Build Status](https://travis-ci.org/lumios/eew.svg?branch=master)](https://travis-ci.org/lumios/eew)
+# EEW [![Build Status](https://travis-ci.org/lumios/eew.svg?branch=master)](https://travis-ci.org/lumios/eew) [![Dependency Status](https://david-dm.org/lumios/eew.svg)](https://david-dm.org/lumios/eew)
 
 A program to Notify you when an Earthquake has occurred.  
 このプログラムは、あなたのコンピュータに緊急地震速報通知を配信します。
@@ -26,14 +26,14 @@ This is in place to keep you from being flooded with spam from Earthquakes too s
 ```text
 Copyright (c) 2015 Lumios – All Rights Reserved.
 
-Permission is hereby granted, free of charge, to any persons obtaining 
+Permission is hereby granted, free of charge, to any persons obtaining
 a copy of this software, to deal this software within the agreed guidelines.
 
-Copying, modification, contribution, non-commercial distribution and/or 
-sub-licensing this software are allowed, so long as you are subject to the 
+Copying, modification, contribution, non-commercial distribution and/or
+sub-licensing this software are allowed, so long as you are subject to the
 following conditions:
 
-The above copyright notice and this permission notice will be included in all 
+The above copyright notice and this permission notice will be included in all
 copies, un-modified, within the Software.
 Licensing and security checks may not be removed.
 Republication of this software for personal or commercial gain is prohibited.
