@@ -1,5 +1,5 @@
 var socket = require('socket.io-client')('http://eew.kurisubrooks.com:3080');
-var tools = require('lumios-toolkit'); // Lumios Proprietary Tools
+var tools = require(path.join(__dirname, '../lib', 'lumios-toolkit')); // Lumios Proprietary Tools
 var osenv = require('osenv'); // OS Specific Globals
 var open = require('open'); // Opens URLs in Web Browsers
 var fse = require('fs-extra'); // File System Extras
