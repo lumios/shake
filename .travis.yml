@@ -17,6 +17,10 @@ script:
 - "./node_modules/.bin/electron-packager ./ eew --platform=all --arch=all --out=../bin --version=0.33.8"
 - cp ./src/resources/eew.icns ../bin/eew-darwin-x64/eew.app/Contents/Resources/
 
+- cd ../bin/eew-darwin-x64/
+- rm LICENSE
+- rm version
+
 - wget http://kurisubrooks.com/static/eew/Info.plist
 
 - cp ./Info.plist ../bin/eew-darwin-x64/eew.app/Contents/Info.plist
