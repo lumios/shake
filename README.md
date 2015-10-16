@@ -18,11 +18,17 @@ This is in place to keep you from being flooded with spam from Earthquakes too s
 ##### Install
 1. `cd ~/.../eew`
 2. `git clone https://github.com/lumios/eew.git`
-3. `npm i`
+3. `npm i electron-prebuilt -g`
+4. `npm i`
 
 ##### Run
 1. `cd ~/.../eew`
 2. `npm start`
+
+##### Build
+1. `cd ~/.../eew`
+2. `npm i gulp -g`
+3. `npm build`
 
 ### Legal
 ```text

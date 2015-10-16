@@ -1,25 +1,10 @@
-/*
-// String Prototypes
-*/
-
-String.prototype.contains = function(str) {
-    return this.indexOf(str) >= 0;
-};
-
-String.prototype.startsWith = function(str) {
-    return this.indexOf(str) === 0;
-};
-
-/*
-// Console + Log to file
-*/
-
 var color = require('colors');
 var moment = require('moment');
+var path = require('path');
 var fs = require('fs');
 
-var dir = __dirname + './logs';
-var log = __dirname + './logs/output.log';
+var dir = path.join(__dirname, '../logs');
+var log = path.join(__dirname, '../logs/output.log');
 
 color.setTheme({
     success: ['green', 'bold'], info: ['blue', 'bold'],
