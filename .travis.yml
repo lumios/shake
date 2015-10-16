@@ -1,12 +1,15 @@
 language: node_js
 node_js:
-- '0.12.7'
+- 0.12.7
 addons:
   ssh_known_hosts: eew.kurisubrooks.com
   apt:
     packages:
     - sshpass
     - zip
+notifications:
+  slack:
+    secure: dedhMifMMRnN8P77Zbr3ZdhhroiildBPPGSru9par1rbLe4rCF73H+y/YdrSTxezTvdL7vtYaHep3/ybwaTPBDxr9azFqgBS/L6SJtltUQiNQWvBv52Xu00MuZajLehmJUtPD0y8719NIJoYOl4Tt04m0cstT+qTB7zbIUGgEz3016BuFVAv7SDorzlgC2SjuWYxazj8nCpVKxdo5pOZ1o5WxRdAcvdd1Vt3J3/ZOjPr4IvgCIUFH2+ALl0fkPqQ0wNhDLeDtx3qnUZyxoiW4MUBPwyPMIPDL1PI2K4r4RsH/WUCCfv02ZAuu9N+fM34wLCrnUu4mFQWy3OcQgLqw3ryUDfAfeazPt/LjrLc6XuKe2KjNuf8W29pxd1BJPCy65kNKTN8KK2BDMAyU4toCuDUYFIk/2F0Rzl3f4vOh8Voo45rBgp2Tdt672/gG+uSVB6q5f55c03GFmcE/7PxhLjkTcs0OuNjCTctuZNIdJ7FZZCEh2yGelVPYEzKY3qaMrdTxLWn4P3EW/qxQo4iiWvXF24sYLEGkbuw0kGS9vOc/5YX1Y+G+0poZwpgFA/Oq5mYgIOd1KbEuA7c2dHzo5l1+AMKwhiVQFTuyfg+itDYk9uLNeCgDsCPqux38kfMK68zikxkrgqYzR/rtHUhF65KpSLxmt/m9egnP0XM19I=
 env:
   global:
     secure: jPCSnvceTU1341cSfiN1chqsSANZ5ZhdZ+mTy2EM/luqylhNCplsyJ39qmorLdQapTrNDjqGcX7w1RtNdsHapgAZprl3iJmcKatLG2ISa16VMath7L7TZ4HClDBEHjHmozd33HjP30DaXIadcxFGVc/oJB9hLkmDFFozlBlbajaiRDG9aJXxXPfNDBCaAz6yDpSapNyss+k/xytAw+pGIYzXta7nvgh+iRiCifwHnTfbjs9rUjrKpQEavn44AmYWKZUvfZ/htvgxJ6m/echHZEnQa35ge0ziMX05XHunzWAJ3dvwj4crnUo3nDYtJCPfMt/H3MfZbXkU5ErtnOlBt6TyZyxcAkwA5TeN907R1DvxE7VbJmg4gVuj01l26vp7R/hyv+4Y0XYBN9+GXkZLxb28R/fqmng2hcJN0NYJqbKnBfDCcAkGAaDRHuqNetpeX7EhaGxIz/b5hmYBS5g+Wec4q8g1r0RsDuGyo4t+NGC3ucJ5npq6jSQM+SozCnMUK8bpumzvwkqn92qzmf3yz6974cEdgXfqcd9ss+gQfU4vxUAeu2XnO2HyQe8gjDX1NryLJCc6JsdQ7vPSJ1XOXwG9VLJzaR/y1uoOQV9hIAtX8g0Gm7r1V6HsStz9MXwWJkooqisIQq9Pb2ePXJ4oBITMoKkgWeLfgb5QuA+ClIg=
@@ -14,20 +17,17 @@ install:
 - export SSHPASS=$PASSWORD
 - cd ./src && npm i
 script:
-- "./node_modules/.bin/electron-packager ./ eew --platform=all --arch=all --out=../bin --version=0.33.8"
-- cp ./src/resources/eew.icns ../bin/eew-darwin-x64/eew.app/Contents/Resources/
+- ./node_modules/.bin/electron-packager ./ eew --platform=all --arch=all --out=../bin
+  --version=0.33.8
+- cp ./resources/eew.icns ../bin/eew-darwin-x64/eew.app/Contents/Resources/
 
 - wget http://kurisubrooks.com/static/eew/Info.plist
-
 - cp ./Info.plist ../bin/eew-darwin-x64/eew.app/Contents/Info.plist
 
 - cd ../bin/
-
 - tar -czf  eew-osx-x64.tar.gz eew-darwin-x64/eew.app
-
 - tar -czf  eew-linux-x64.tar.gz eew-linux-x64
 - tar -czf  eew-linux-x32.tar.gz eew-linux-ia32
-
 - zip -q -r eew-windows-x64.zip eew-win32-x64
 - zip -q -r eew-windows-x32.zip eew-win32-ia32
 

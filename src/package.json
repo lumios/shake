@@ -27,6 +27,7 @@
   "dependencies": {
     "cli-usage": "^0.1.1",
     "colors": "^1.1.2",
+    "electron-packager": "^5.1.0",
     "electron-prebuilt": "^0.33.8",
     "fs-extra": "^0.24.0",
     "growly": "^1.2.0",
