@@ -1,42 +1,45 @@
 var socket = require('socket.io-client')('http://eew.kurisubrooks.com:3080');
 var path = require('path');
 var osenv = require('osenv');
-var fse = require('fs-extra');
+var fs = require('fs-extra');
 var open = require('open');
-var fs = require('fs');
 
-var app = require('app');
-var Menu = require('menu');
-var Tray = require('tray');
-require('crash-reporter').start();
-
-var electron = require('./electron.js');
 var logger = require('./logger.js');
-var notifier = require('./notifier.js');
-var trigger = require('./trigger.js');
-var quake = require('./quake.js');
-var locale = require('./resources/lang.json');
 
 /*
 // Loads / Generates Settings
 */
 
 var settingsPath = path.join(__dirname, 'settings.json');
-var settingsFile = {"lang": "en", "min_alert": "35", "first_run": true, "night_mode": true, "dev_mode": true};
 
 if (!fs.existsSync(settingsPath)) {
-	logger.warn('Settings File doesn\'t exist, using temp file...');
-	logger.warn('Generating new settings file...');
-	var settings = settingsFile;
+	var settingsFile = {"lang": "en","min_alert": "35","first_run": true,"night_mode": true,"dev_mode": true};
+	logger.warn('Settings File does not exist, generating...');
 
-	fs.writeFile(settingsPath, JSON.stringify(settingsFile), function(error) {
-		if (error) tools.error('Could not generate file: ' + error);
-	}, logger.success('Settings File generated.'));
+	try {fs.writeFileSync(settingsPath, JSON.stringify(settingsFile));}
+	catch(error) {logger.error(error);}
+
+	var settings = require('./settings.json');
+	logger.success('Generated Settings File');
 } else {
 	var settings = require('./settings.json');
 	logger.success('Loaded Settings.');
 }
 
+/*
+// Import Modules
+*/
+
+require('crash-reporter').start();
+var app = require('app');
+var Menu = require('menu');
+var Tray = require('tray');
+
+var electron = require('./electron.js');
+var notifier = require('./notifier.js');
+var trigger = require('./trigger.js');
+var locale = require('./resources/lang.json');
+var quake = require('./quake.js');
 var lang = settings.lang;
 
 /*
@@ -47,8 +50,8 @@ if (process.platform === 'darwin') {
 	var copy = path.join(__dirname, 'resources', 'audio');
 	var paste = osenv.home() + '/Library/Sounds/';
 
-	fse.copy(copy, paste, function(error) {
-		if (error) tools.error('Error: ' + error);
+	fs.copy(copy, paste, function(error) {
+		if (error) notifier.error('Error: ' + error);
 		logger.success('Installed Sounds to [' + paste + ']');
 	});
 }
@@ -91,7 +94,7 @@ app.on('ready', function() {
 
 	if (settings.first_run) {
 		electron.newSettings();
-		tools.debug('First run, opening settings window...');
+		notifier.debug('First run, opening settings window...');
 	}
 
 	var appIcon = new Tray(path.join(__dirname, 'resources', 'IconTemplate.png'));
