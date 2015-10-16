@@ -45,7 +45,7 @@ exports.parse = function(input) {
         // Night Notification
         } else {
             logger.debug('Night Mode Enabled, Muting Notification...');
-            notifier.notify(locale[lang].title, subtitle_template, message_template, false);
+            notifier.notify(locale[lang].title, subtitle, message, false);
         }
 
         if (data.revision == 1 && electron.electronReady === true) {
