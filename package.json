@@ -21,7 +21,7 @@
     "url": "https://github.com/lumios/eew/issues"
   },
   "scripts": {
-    "start": "electron .",
+    "start": "electron ./src/index.js",
     "build": "gulp"
   },
   "dependencies": {
