@@ -12,7 +12,7 @@ env:
     secure: jPCSnvceTU1341cSfiN1chqsSANZ5ZhdZ+mTy2EM/luqylhNCplsyJ39qmorLdQapTrNDjqGcX7w1RtNdsHapgAZprl3iJmcKatLG2ISa16VMath7L7TZ4HClDBEHjHmozd33HjP30DaXIadcxFGVc/oJB9hLkmDFFozlBlbajaiRDG9aJXxXPfNDBCaAz6yDpSapNyss+k/xytAw+pGIYzXta7nvgh+iRiCifwHnTfbjs9rUjrKpQEavn44AmYWKZUvfZ/htvgxJ6m/echHZEnQa35ge0ziMX05XHunzWAJ3dvwj4crnUo3nDYtJCPfMt/H3MfZbXkU5ErtnOlBt6TyZyxcAkwA5TeN907R1DvxE7VbJmg4gVuj01l26vp7R/hyv+4Y0XYBN9+GXkZLxb28R/fqmng2hcJN0NYJqbKnBfDCcAkGAaDRHuqNetpeX7EhaGxIz/b5hmYBS5g+Wec4q8g1r0RsDuGyo4t+NGC3ucJ5npq6jSQM+SozCnMUK8bpumzvwkqn92qzmf3yz6974cEdgXfqcd9ss+gQfU4vxUAeu2XnO2HyQe8gjDX1NryLJCc6JsdQ7vPSJ1XOXwG9VLJzaR/y1uoOQV9hIAtX8g0Gm7r1V6HsStz9MXwWJkooqisIQq9Pb2ePXJ4oBITMoKkgWeLfgb5QuA+ClIg=
 install:
 - export SSHPASS=$PASSWORD
-- npm i
+- cd ./src && npm i
 script:
 - "./node_modules/.bin/electron-packager ./ eew --platform=all --arch=all --out=../bin --version=0.33.8"
 - cp ./src/resources/eew.icns ../bin/eew-darwin-x64/eew.app/Contents/Resources/
