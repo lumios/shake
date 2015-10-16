@@ -1,7 +1,7 @@
 var path = require('path');
 var logger = require('./logger.js');
 if (process.platform === 'darwin') {
-	var notifier = require(path.join(__dirname, './lib', 'node-notifier'));
+	var notifier = require(path.join(__dirname, '../lib', 'node-notifier'));
 } else var notifier = require('node-notifier');
 
 exports.notify = function(title, subtitle, message, sound) {
