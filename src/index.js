@@ -4,6 +4,14 @@ var osenv = require('osenv');
 var fs = require('fs-extra');
 var open = require('open');
 
+require('crash-reporter').start();
+var BrowserWindow = require('browser-window');
+var app = require('app');
+var Menu = require('menu');
+var Tray = require('tray');
+var ipc = require('ipc');
+var electronReady = false;
+
 var logger = require('./logger.js');
 
 /*
@@ -29,11 +37,6 @@ if (!fs.existsSync(settingsPath)) {
 /*
 // Import Modules
 */
-
-require('crash-reporter').start();
-var app = require('app');
-var Menu = require('menu');
-var Tray = require('tray');
 
 var electron = require('./electron.js');
 var notifier = require('./notifier.js');
@@ -90,15 +93,18 @@ socket.on('disconnect', function(){
 if (process.platform == 'darwin') app.dock.hide();
 
 app.on('ready', function() {
-	electron.electronReady = true;
+	electronReady = true;
 
 	if (settings.first_run) {
 		electron.newSettings();
 		notifier.debug('First run, opening settings window...');
 	}
 
-	var appIcon = new Tray(path.join(__dirname, 'resources', 'IconTemplate.png'));
-	appIcon.setPressedImage(path.join(__dirname, 'resources', 'IconPressed.png'));
+	var appIcon, contextMenu;
+	if (process.platform == 'darwin') {
+		appIcon = new Tray(path.join(__dirname, 'resources', 'IconTemplate.png'));
+		appIcon.setPressedImage(path.join(__dirname, 'resources', 'IconPressed.png'));
+	} else appIcon = new Tray(path.join(__dirname, 'resources', 'IconWindows.ico'));
 
 	var nodev_template = [
 		{label: locale[lang].contribute,click: function(){open('https://github.com/lumios/eew');}},
@@ -122,7 +128,6 @@ app.on('ready', function() {
 		{label: locale[lang].quit,click: function(){notifier.debug('Closing Program due to User Request');process.exit(0);}}
 	];
 
-	var contextMenu;
 	if (settings.dev_mode) contextMenu = Menu.buildFromTemplate(dev_template);
 	else contextMenu = Menu.buildFromTemplate(nodev_template);
 
