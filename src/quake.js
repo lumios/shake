@@ -36,6 +36,7 @@ exports.parse = function(input) {
         var message = template[1];
 
         if (data.drill) logger.debug('Developer Quake Triggered, Parsing Fake Quake...');
+        if (!date.getHours() >= '07') logger.debug('Night Mode Enabled, Muting Notification...');
         logger.info(data.earthquake_time + ' - ' + data.epicenter_en);
         logger.info(locale.en.units.update + ' ' + situation_string + ', ' + locale.en.units.magnitude + ': ' + data.magnitude + ', ' + locale.en.units.seismic + ': ' + data.seismic_en);
 
@@ -44,11 +45,10 @@ exports.parse = function(input) {
             notifier.notify(locale[lang].title, subtitle, message, sound_string);
         // Night Notification
         } else {
-            logger.debug('Night Mode Enabled, Muting Notification...');
             notifier.notify(locale[lang].title, subtitle, message, false);
         }
 
-        if (data.revision == 1 && electron.electronReady === true) {
+        if (data.revision == 1) {
             var webContent = alertWindow.webContents;
             webContent.on('did-finish-load', function() {
                 webContent.send('data', [data, template, locale]);
