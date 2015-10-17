@@ -6,8 +6,8 @@ var settings = require('./settings.json');
 var lang = settings.lang;
 
 function sound(data) {
-    if (data.type == 1 || data.situation == 2) return 'simple';
-    else return 'nhk';
+    if (data.type == 1 || data.situation == 2) return 'Submarine';
+    else return 'alert';
 }
 
 function situation(data) {
