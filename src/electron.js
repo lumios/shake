@@ -3,6 +3,7 @@ var app = require('app');
 var Menu = require('menu');
 var Tray = require('tray');
 var ipc = require('ipc');
+var path = require('path');
 
 var locale = require('./resources/lang.json');
 var settings = require('./settings.json');
@@ -12,14 +13,14 @@ var alertWindows = {};
 var alertRevision = {};
 var electronReady = false;
 
-module.exports = BrowserWindow;
-module.exports = app;
-module.exports = Menu;
-module.exports = Tray;
-module.exports = ipc;
-module.exports = alertWindows;
-module.exports = alertRevision;
-module.exports = electronReady;
+exports.BrowserWindow = BrowserWindow;
+exports.app = app;
+exports.Menu = Menu;
+exports.Tray = Tray;
+exports.ipc = ipc;
+exports.alertWindows = alertWindows;
+exports.alertRevision = alertRevision;
+exports.electronReady = electronReady;
 
 exports.newWindow = function(data) {
     var alertWindow = new BrowserWindow({
