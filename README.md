@@ -1,32 +1,27 @@
-# EEW for PC
-[![Build Status](https://travis-ci.org/lumios/eew.svg?branch=master)](https://travis-ci.org/lumios/eew)
-[![Dependency Status](https://david-dm.org/lumios/eew.svg)](https://david-dm.org/lumios/eew)
+# Shake
+[![Build Status](https://travis-ci.org/lumios/shake.svg?branch=master)](https://travis-ci.org/lumios/shake)
+[![Dependency Status](https://david-dm.org/lumios/shake.svg)](https://david-dm.org/lumios/shake)
 
-A program to Notify you when an Earthquake has occurred.  
-このプログラムは、あなたのコンピュータに緊急地震速報通知を配信します。
-
-You will only be notified for Earthquakes larger than Magnitude 3.5.
-This is in place to keep you from being flooded with spam from Earthquakes too small to feel/be noticed.
+An Earthquake Early Warning program for your computer.
+あなたのコンピュータの為の緊急地震速報
 
 ### Installation
 ##### Prerequisites
-- Windows 7 (or newer)
-- Mac OS X 10.8 (or newer)
-- Linux _(Requires notify-send)_
-- NodeJS v0.12 +
+- Windows 7+ or Mac OS X 10.8+
+- Node JS v0.12.7+
 
 ##### Install
-1. `cd ~/.../eew`
-2. `git clone https://github.com/lumios/eew.git`
+1. `cd ~/.../shake`
+2. `git clone https://github.com/lumios/shake.git`
 3. `npm i electron-prebuilt -g`
 4. `npm i`
 
 ##### Run
-1. `cd ~/.../eew`
+1. `cd ~/.../shake`
 2. `npm start`
 
 ##### Build
-1. `cd ~/.../eew`
+1. `cd ~/.../shake`
 2. `npm i gulp -g`
 3. `npm build`
 

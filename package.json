@@ -1,8 +1,8 @@
 {
-  "name": "EEW",
-  "version": "0.2.0",
-  "description": "Get Alerted for impending Earthquakes in Japan through the use of Earthquake Early Warnings.",
-  "homepage": "http://lumios.xyz/eew.html",
+  "name": "Shake",
+  "version": "1.0.0",
+  "description": "Earthquake Early Warning program for your computer.",
+  "homepage": "http://lumios.xyz/shake",
   "author": "lumios",
   "main": "./src/index.js",
   "keywords": [
@@ -15,10 +15,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lumios/eew.git"
+    "url": "git+https://github.com/lumios/shake.git"
   },
   "bugs": {
-    "url": "https://github.com/lumios/eew/issues"
+    "url": "https://github.com/lumios/shake/issues"
   },
   "scripts": {
     "start": "electron ./src/index.js",
@@ -28,7 +28,7 @@
     "cli-usage": "^0.1.1",
     "colors": "^1.1.2",
     "electron-packager": "^5.1.0",
-    "electron-prebuilt": "^0.33.8",
+    "electron-prebuilt": "^0.34.0",
     "fs-extra": "^0.24.0",
     "growly": "^1.2.0",
     "lodash.clonedeep": "^3.0.0",
