@@ -19,17 +19,17 @@ install:
 script:
 - ./node_modules/.bin/electron-packager ./ Shake --platform=all --arch=all --asar=true --out=../bin
   --version=0.34.0
-- cp ./src/resources/IconMac.icns ../bin/shake-darwin-x64/shake.app/Contents/Resources/
+- cp ./src/resources/IconMac.icns ../bin/Shake-darwin-x64/Shake.app/Contents/Resources/
 
 - wget http://kurisubrooks.com/static/shake/Info.plist
-- cp ./Info.plist ../bin/shake-darwin-x64/shake.app/Contents/Info.plist
+- cp ./Info.plist ../bin/Shake-darwin-x64/Shake.app/Contents/Info.plist
 
 - cd ../bin/
-- tar -czf  shake-osx-x64.tar.gz shake-darwin-x64/shake.app
-- tar -czf  shake-linux-x64.tar.gz shake-linux-x64
-- tar -czf  shake-linux-x32.tar.gz shake-linux-ia32
-- zip -q -r shake-windows-x64.zip shake-win32-x64
-- zip -q -r shake-windows-x32.zip shake-win32-ia32
+- tar -czf  Shake-OSX-x64.tar.gz Shake-darwin-x64/Shake.app
+- tar -czf  Shake-Linux-x64.tar.gz Shake-linux-x64
+- tar -czf  Shake-Linux-x32.tar.gz Shake-linux-ia32
+- zip -q -r Shake-Windows-x64.zip Shake-win32-x64
+- zip -q -r Shake-Windows-x32.zip Shake-win32-ia32
 
 - sshpass -e rsync -zrp ./*.tar.gz travis@eew.kurisubrooks.com:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
 - sshpass -e rsync -zrp ./*.zip travis@eew.kurisubrooks.com:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
