@@ -48,7 +48,7 @@ if (process.platform === 'darwin') {
 	var paste = osenv.home() + '/Library/Sounds/';
 
 	fs.copy(copy, paste, function(error) {
-		if (error) notifier.error('Error: ' + error);
+		if (error) logger.error('Error: ' + error);
 		logger.success('Installed Sounds to [' + paste + ']');
 	});
 }
@@ -106,7 +106,7 @@ electron.app.on('ready', function() {
 		{type: 'separator'},
 		{label: locale[lang].settings,click: function(){electron.newSettings();}},
 		{label: locale[lang].help,click: function(){open('http://lumios.xyz/support.html');}},
-		{label: locale[lang].quit,click: function(){notifier.debug('Closing Program due to User Request');process.exit(0);}}
+		{label: locale[lang].quit,click: function(){logger.debug('Closing Program due to User Request');process.exit(0);}}
 	];
 
 	var dev_template = [
@@ -119,7 +119,7 @@ electron.app.on('ready', function() {
 		{type: 'separator'},
 		{label: locale[lang].settings,click: function(){electron.newSettings();}},
 		{label: locale[lang].help,click: function(){open('http://lumios.xyz/support.html');}},
-		{label: locale[lang].quit,click: function(){notifier.debug('Closing Program due to User Request');process.exit(0);}}
+		{label: locale[lang].quit,click: function(){logger.debug('Closing Program due to User Request');process.exit(0);}}
 	];
 
 	if (settings.dev_mode) contextMenu = electron.Menu.buildFromTemplate(dev_template);
@@ -129,7 +129,7 @@ electron.app.on('ready', function() {
 	appIcon.setContextMenu(contextMenu);
 
 	appIcon.on('clicked', function(event) {
-		notifier.debug(event);
+		logger.debug(event);
 	});
 
 });
