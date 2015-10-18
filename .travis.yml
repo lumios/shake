@@ -17,19 +17,19 @@ install:
 - export SSHPASS=$PASSWORD
 - npm i
 script:
-- ./node_modules/.bin/electron-packager ./ eew --platform=all --arch=all --out=../bin
-  --version=0.33.8
-- cp ./src/resources/eew.icns ../bin/eew-darwin-x64/eew.app/Contents/Resources/
+- ./node_modules/.bin/electron-packager ./ shake --platform=all --arch=all --asar=true --out=../bin
+  --version=0.34.0
+- cp ./src/resources/IconMac.icns ../bin/shake-darwin-x64/shake.app/Contents/Resources/
 
 - wget http://kurisubrooks.com/static/eew/Info.plist
-- cp ./Info.plist ../bin/eew-darwin-x64/eew.app/Contents/Info.plist
+- cp ./Info.plist ../bin/shake-darwin-x64/shake.app/Contents/Info.plist
 
 - cd ../bin/
-- tar -czf  eew-osx-x64.tar.gz eew-darwin-x64/eew.app
-- tar -czf  eew-linux-x64.tar.gz eew-linux-x64
-- tar -czf  eew-linux-x32.tar.gz eew-linux-ia32
-- zip -q -r eew-windows-x64.zip eew-win32-x64
-- zip -q -r eew-windows-x32.zip eew-win32-ia32
+- tar -czf  shake-osx-x64.tar.gz shake-darwin-x64/shake.app
+- tar -czf  shake-linux-x64.tar.gz shake-linux-x64
+- tar -czf  shake-linux-x32.tar.gz shake-linux-ia32
+- zip -q -r shake-windows-x64.zip shake-win32-x64
+- zip -q -r shake-windows-x32.zip shake-win32-ia32
 
 - sshpass -e rsync -zrp ./*.tar.gz travis@eew.kurisubrooks.com:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
 - sshpass -e rsync -zrp ./*.zip travis@eew.kurisubrooks.com:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
