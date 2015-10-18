@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>EEW — Settings</title>
-    <link rel="shortcut icon" type="image/png" href="resources/icon.png"/>
+    <link rel="shortcut icon" type="image/png" href="../resources/icon.png"/>
 
     <style>
         body {
@@ -90,18 +90,15 @@
 		    background: #63bb63;
 		}
     </style>
-    <script src="resources/web/jquery.js"></script>
     <script>
         var fs = require('fs');
         var path = require('path');
-        var tools = require('lumios-toolkit');
-        var locale = require('./resources/lang.json');
-        var settings = JSON.parse(fs.readFileSync(path.join(__dirname, 'settings.json')) + '');
+        var logger = require('../logger.js');
+        var locale = require('../resources/lang.json');
+        var settings = require('../settings.json');
         var lang = settings.lang;
-		var settingsPath = path.join(__dirname, 'settings.json');
+		var settingsPath = path.join(__dirname, '../', 'settings.json');
         var settingsFile = {"lang": "en", "min_alert": "35", "first_run": false, "night_mode": true, "dev_mode": true};
-
-        $('#lang').text(locale.ja.setup.language);
 
         function save() {
             try {
@@ -115,10 +112,10 @@
                 fs.writeFile(settingsPath, JSON.stringify(settings));
             } catch(err) {
                 alert("There was an error saving your settings: " + err);
-                tools.error('Error: ' + err);
+                logger.error('Error: ' + err);
             } finally {
                 alert("Please restart EEW to apply your changes.");
-                tools.success('Saved settings.');
+                logger.success('Saved settings.');
                 window.close();
 			}
         }
