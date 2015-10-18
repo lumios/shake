@@ -36,7 +36,7 @@ exports.parse = function(input) {
         var message = template[1];
 
         if (data.drill) logger.debug('Developer Quake Triggered, Parsing Fake Quake...');
-        if (date.getHours() >= '07') logger.debug('Night Mode Enabled, Muting Notification...');
+        if (date.getHours() <= '07') logger.debug('Night Mode Enabled, Muting Notification...');
         logger.info(data.earthquake_time + ' - ' + data.epicenter_en);
         logger.info(locale.en.units.update + ' ' + situation_string + ', ' + locale.en.units.magnitude + ': ' + data.magnitude + ', ' + locale.en.units.seismic + ': ' + data.seismic_en);
 
@@ -48,24 +48,18 @@ exports.parse = function(input) {
             notifier.notify(locale[lang].title, subtitle, message, false);
         }
 
-        if (data.revision == 1) {
-			electron.newWindow(data);
-
+        if (data.revision == 1 && (electron.alertRevision[data.earthquake_id] === undefined || data.revision > electron.alertRevision[data.earthquake_id]) && electron.electronReady === true) {
+            electron.newWindow(data);
+            var alertWindow = electron.alertWindows[data.earthquake_id];
             var webContent = electron.alertWindows[data.earthquake_id].webContents;
             webContent.on('did-finish-load', function() {
                 webContent.send('data', [data, template, locale]);
             });
-        }
 
-        if (data.revision == 1 && (electron.alertRevision[data.earthquake_id] === undefined || data.revision > electron.alertRevision[data.earthquake_id]) && electron.electronReady === true) {
-            electron.newWindow(data);
-            var alertWindow = electron.alertWindows[data.earthquake_id];
-
-
-            electron.alertWindow.on('closed', function() {
+            alertWindow.on('closed', function() {
                 alertWindow = null;
             });
-        } else if (electronReady === true) {
+        } else if (electron.electronReady === true) {
             if (electron.alertWindows[data.earthquake_id] === undefined) {
                 electron.newWindow(data);
                 var webContent2 = electron.alertWindows[data.earthquake_id].webContents;

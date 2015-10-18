@@ -87,9 +87,11 @@ socket.on('disconnect', function(){
 if (process.platform == 'darwin') electron.app.dock.hide();
 
 electron.app.on('ready', function() {
+	electron.electronReady = true;
+
 	if (settings.first_run) {
 		electron.newSettings();
-		notifier.debug('First run, opening settings window...');
+		logger.debug('First run, opening settings window...');
 	}
 
 	var appIcon, contextMenu;
