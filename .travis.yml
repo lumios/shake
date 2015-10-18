@@ -17,11 +17,11 @@ install:
 - export SSHPASS=$PASSWORD
 - npm i
 script:
-- ./node_modules/.bin/electron-packager ./ shake --platform=all --arch=all --asar=true --out=../bin
+- ./node_modules/.bin/electron-packager ./ Shake --platform=all --arch=all --asar=true --out=../bin
   --version=0.34.0
 - cp ./src/resources/IconMac.icns ../bin/shake-darwin-x64/shake.app/Contents/Resources/
 
-- wget http://kurisubrooks.com/static/eew/Info.plist
+- wget http://kurisubrooks.com/static/shake/Info.plist
 - cp ./Info.plist ../bin/shake-darwin-x64/shake.app/Contents/Info.plist
 
 - cd ../bin/
