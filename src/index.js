@@ -101,25 +101,33 @@ electron.app.on('ready', function() {
 	} else appIcon = new electron.Tray(path.join(__dirname, 'resources', 'IconWindows.ico'));
 
 	var nodev_template = [
+		{label: locale[lang].about,click: function(){}},
+		{type: 'separator'},
+		{label: locale[lang].help,click: function(){open('http://lumios.xyz/support.html');}},
+		{label: locale[lang].settings,click: function(){electron.newSettings();}},
+		{type: 'separator'},
 		{label: locale[lang].contribute,click: function(){open('https://github.com/lumios/eew');}},
 		{label: locale[lang].bug,click: function(){open('https://github.com/lumios/eew/issues');}},
+		{label: locale[lang].updates,click: function(){}},
 		{type: 'separator'},
-		{label: locale[lang].settings,click: function(){electron.newSettings();}},
-		{label: locale[lang].help,click: function(){open('http://lumios.xyz/support.html');}},
-		{label: locale[lang].quit,click: function(){logger.debug('Closing Program due to User Request');process.exit(0);}}
+		{label: locale[lang].quit,click: function(){logger.debug('Closed via Tray Menu');process.exit(0);}}
 	];
 
 	var dev_template = [
+		{label: locale[lang].about,click: function(){}},
+		{type: 'separator'},
+		{label: locale[lang].help,click: function(){open('http://lumios.xyz/support.html');}},
+		{label: locale[lang].settings,click: function(){electron.newSettings();}},
+		{type: 'separator'},
+		{label: locale[lang].contribute,click: function(){open('https://github.com/lumios/eew');}},
+		{label: locale[lang].bug,click: function(){open('https://github.com/lumios/eew/issues');}},
+		{label: locale[lang].updates,click: function(){}},
+		{type: 'separator'},
 		{label: locale[lang].devtools, submenu:[
 			{label: locale[lang].test,click: function(){quake.parse(trigger.quake());}},
 		]},
 		{type: 'separator'},
-		{label: locale[lang].contribute,click: function(){open('https://github.com/lumios/eew');}},
-		{label: locale[lang].bug,click: function(){open('https://github.com/lumios/eew/issues');}},
-		{type: 'separator'},
-		{label: locale[lang].settings,click: function(){electron.newSettings();}},
-		{label: locale[lang].help,click: function(){open('http://lumios.xyz/support.html');}},
-		{label: locale[lang].quit,click: function(){logger.debug('Closing Program due to User Request');process.exit(0);}}
+		{label: locale[lang].quit,click: function(){logger.debug('Closed via Tray Menu');process.exit(0);}}
 	];
 
 	if (settings.dev_mode) contextMenu = electron.Menu.buildFromTemplate(dev_template);
@@ -127,11 +135,6 @@ electron.app.on('ready', function() {
 
 	appIcon.setToolTip('EEW');
 	appIcon.setContextMenu(contextMenu);
-
-	appIcon.on('clicked', function(event) {
-		logger.debug(event);
-	});
-
 });
 
 electron.app.on('window-all-closed', function() {
