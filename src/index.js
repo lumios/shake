@@ -99,6 +99,11 @@ electron.app.on('ready', function() {
 		appIcon = new electron.Tray(path.join(__dirname, 'resources', 'IconTemplate.png'));
 		appIcon.setPressedImage(path.join(__dirname, 'resources', 'IconPressed.png'));
 	} else appIcon = new electron.Tray(path.join(__dirname, 'resources', 'IconWindows.ico'));
+	if (settings.dev_mode) contextMenu = electron.Menu.buildFromTemplate(dev_template);
+	else contextMenu = electron.Menu.buildFromTemplate(nodev_template);
+
+	appIcon.setToolTip('EEW');
+	appIcon.setContextMenu(contextMenu);
 
 	var nodev_template = [
 		{label: locale[lang].about,click: function(){}},
@@ -129,12 +134,6 @@ electron.app.on('ready', function() {
 		{type: 'separator'},
 		{label: locale[lang].quit,click: function(){logger.debug('Closed via Tray Menu');process.exit(0);}}
 	];
-
-	if (settings.dev_mode) contextMenu = electron.Menu.buildFromTemplate(dev_template);
-	else contextMenu = electron.Menu.buildFromTemplate(nodev_template);
-
-	appIcon.setToolTip('EEW');
-	appIcon.setContextMenu(contextMenu);
 });
 
 electron.app.on('window-all-closed', function() {
