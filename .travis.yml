@@ -25,11 +25,11 @@ script:
 - cp ./Info.plist ../bin/Shake-darwin-x64/Shake.app/Contents/Info.plist
 
 - cd ../bin/
-- tar -czf  Shake-OSX-x64.tar.gz Shake-darwin-x64/Shake.app
-- tar -czf  Shake-Linux-x64.tar.gz Shake-linux-x64
-- tar -czf  Shake-Linux-x32.tar.gz Shake-linux-ia32
-- zip -q -r Shake-Windows-x64.zip Shake-win32-x64
-- zip -q -r Shake-Windows-x32.zip Shake-win32-ia32
+- tar -czf  shake-osx-x64.tar.gz Shake-darwin-x64/Shake.app
+- tar -czf  shake-linux-x64.tar.gz Shake-linux-x64
+- tar -czf  shake-linux-x32.tar.gz Shake-linux-ia32
+- zip -q -r shake-windows-x64.zip Shake-win32-x64
+- zip -q -r shake-windows-x32.zip Shake-win32-ia32
 
 - sshpass -e rsync -zrp ./*.tar.gz travis@eew.kurisubrooks.com:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
 - sshpass -e rsync -zrp ./*.zip travis@eew.kurisubrooks.com:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
