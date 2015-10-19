@@ -1,7 +1,8 @@
 var BrowserWindow = require('browser-window');
 var app = require('app');
 var Menu = require('menu');
-var Tray = require('tray');
+var Tray = null;
+Tray = require('tray');
 var ipc = require('ipc');
 var path = require('path');
 
