@@ -64,7 +64,7 @@ exports.parse = function(input) {
                 electron.newWindow(data);
                 var webContent2 = electron.alertWindows[data.earthquake_id].webContents;
                 webContent2.on('did-finish-load', function() {
-                    webContent2.send('data', [data, template_date(), locale]);
+                    webContent2.send('data', [data, template_data(data), locale]);
                 });
             } else if (electron.alertRevision[data.earthquake_id] !== undefined && data.revision > electron.alertRevision[data.earthquake_id]) {
                 var webContents = electron.alertWindows[data.earthquake_id].webContents;
