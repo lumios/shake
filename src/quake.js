@@ -68,7 +68,7 @@ exports.parse = function(input) {
                 });
             } else if (electron.alertRevision[data.earthquake_id] !== undefined && data.revision > electron.alertRevision[data.earthquake_id]) {
                 var webContents = electron.alertWindows[data.earthquake_id].webContents;
-                webContents.send('data', [data, template_date(), locale]);
+                webContents.send('data', [data, template_data(data), locale]);
                 electron.alertRevision[data.earthquake_id] = data.revision;
             }
         }
