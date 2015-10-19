@@ -21,7 +21,7 @@
     "url": "https://github.com/lumios/shake/issues"
   },
   "scripts": {
-    "start": "electron ./src/index.js",
+    "start": "./node_modules/electron-prebuilt/dist/Electron.app/Contents/MacOS/Electron ./src/index.js",
     "build": "gulp"
   },
   "dependencies": {
