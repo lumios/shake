@@ -4,7 +4,7 @@ if (process.platform === 'darwin') {
 	var notifier = require(path.join(__dirname, '../lib', 'node-notifier'));
 } else var notifier = require('node-notifier');
 
-exports.notify = function(title, subtitle, message, sound) {
+exports.notify = function(title, subtitle, message, sound, callback) {
 	if (process.platform === 'darwin') {
 		return notifier.notify({
 			'title': title,
@@ -15,6 +15,7 @@ exports.notify = function(title, subtitle, message, sound) {
 			'wait': true
 		}, function (error, response) {
 			if (error) logger.error('Error: ' + error);
+			callback;
 		});
 	} else {
 		return notifier.notify({
@@ -25,9 +26,10 @@ exports.notify = function(title, subtitle, message, sound) {
 			'urgency': 'critical',
 			'time': 10000,
 			'wait': true,
-			'icon': path.join(__dirname, 'resources', 'eew-logo.png')
+			'icon': path.join(__dirname, 'resources', 'IconLogo.png')
 		}, function (error, response) {
 			if (error) logger.error('Error: ' + error);
+			callback;
 		});
 	}
 };
