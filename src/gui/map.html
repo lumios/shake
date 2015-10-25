@@ -3,9 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<title>Shake - Earthquake Warning</title>
-	<link rel="shortcut icon" type="image/png" href="../resources/IconLogo.png" />
+	<link rel="shortcut icon" type="image/png" href="../resources/IconLogo.png">
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
-
 	<script>
 		var ipc = require('ipc');
 		ipc.on('data', function(all) {
@@ -26,7 +25,6 @@
 			document.write('<audio hidden autoplay preload="auto"><source src="../resources/audio/alert.mp3" type="audio/mp3"></audio>');
 		}
 	</script>
-
 	<script>
 		function loadMap(latitude, longitude, magnitude) {
 			var epicenter = new google.maps.LatLng(latitude, longitude);
@@ -92,10 +90,9 @@
 			}]
 		}
 	</script>
-
 	<style>
 		body {
-			font-family: Arial, Helvetica, Verdana, sans-serif;
+			font-family: "Arial", "Helvetica", sans-serif;
 			margin: 0;
 		}
 
@@ -135,9 +132,7 @@
 		}
 	</style>
 </head>
-
 <body>
-
 	<div class="alert">
 		<table>
 			<tbody>
@@ -157,7 +152,5 @@
 	</div>
 
 	<div id="map"></div>
-
 </body>
-
 </html>
