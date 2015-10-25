@@ -15,7 +15,7 @@ var logger = require('./logger.js');
 var settingsPath = path.join(__dirname, 'settings.json');
 
 if (!fs.existsSync(settingsPath)) {
-	var settingsFile = {"lang": "en","min_alert": "35","first_run": true,"night_mode": true,"dev_mode": true};
+	var settingsFile = {"lang": "en","min_alert": "35","first_run": true,"night_mode": false,"dev_mode": true};
 	logger.warn('Settings File does not exist, generating...');
 
 	try {fs.writeFileSync(settingsPath, JSON.stringify(settingsFile));}
