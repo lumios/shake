@@ -24,6 +24,33 @@ function template_data(data) {
     }
 }
 
+function spawnMap(data, template) {
+    if (data.revision == 1 && (electron.alertRevision[data.earthquake_id] === undefined || data.revision > electron.alertRevision[data.earthquake_id]) && electron.electronReady === true) {
+        electron.newWindow(data);
+        var alertWindow = electron.alertWindows[data.earthquake_id];
+        var webContent = electron.alertWindows[data.earthquake_id].webContents;
+        webContent.on('did-finish-load', function() {
+            webContent.send('data', [data, template, locale]);
+        });
+
+        alertWindow.on('closed', function() {
+            alertWindow = null;
+        });
+    } else if (electron.electronReady === true) {
+        if (electron.alertWindows[data.earthquake_id] === undefined) {
+            electron.newWindow(data);
+            var webContent2 = electron.alertWindows[data.earthquake_id].webContents;
+            webContent2.on('did-finish-load', function() {
+                webContent2.send('data', [data, template, locale]);
+            });
+        } else if (electron.alertRevision[data.earthquake_id] !== undefined && data.revision > electron.alertRevision[data.earthquake_id]) {
+            var webContents = electron.alertWindows[data.earthquake_id].webContents;
+            webContents.send('data', [data, template, locale]);
+                electron.alertRevision[data.earthquake_id] = data.revision;
+        }
+    }
+}
+
 exports.parse = function(input) {
     var date = new Date();
     var data = JSON.parse(input);
@@ -36,41 +63,18 @@ exports.parse = function(input) {
         var message = template[1];
 
         if (data.drill) logger.debug('Developer Quake Triggered, Parsing Fake Quake...');
-        if (date.getHours() <= '07') logger.debug('Night Mode Enabled, Muting Notification...');
+        if (settings.night_mode && date.getHours() < '06' && data.magnitude <= '5.2') logger.debug('Night Mode Enabled, Muting Notification...');
         logger.info(data.earthquake_time + ' - ' + data.epicenter_en);
         logger.info(locale.en.units.update + ' ' + situation_string + ', ' + locale.en.units.magnitude + ': ' + data.magnitude + ', ' + locale.en.units.seismic + ': ' + data.seismic_en);
 
-        // Day Notification
-        if (date.getHours() >= '07' || data.magnitude >= 6) {
-            notifier.notify(locale[lang].title, subtitle, message, sound_string);
         // Night Notification
-        } else {
-            notifier.notify(locale[lang].title, subtitle, message, false);
+        if (settings.night_mode && date.getHours() < '06' && data.magnitude <= '5.2') {
+            notifier.notify(locale[lang].title, subtitle, message, false, spawnMap(data, template));
         }
 
-        if (data.revision == 1 && (electron.alertRevision[data.earthquake_id] === undefined || data.revision > electron.alertRevision[data.earthquake_id]) && electron.electronReady === true) {
-            electron.newWindow(data);
-            var alertWindow = electron.alertWindows[data.earthquake_id];
-            var webContent = electron.alertWindows[data.earthquake_id].webContents;
-            webContent.on('did-finish-load', function() {
-                webContent.send('data', [data, template, locale]);
-            });
-
-            alertWindow.on('closed', function() {
-                alertWindow = null;
-            });
-        } else if (electron.electronReady === true) {
-            if (electron.alertWindows[data.earthquake_id] === undefined) {
-                electron.newWindow(data);
-                var webContent2 = electron.alertWindows[data.earthquake_id].webContents;
-                webContent2.on('did-finish-load', function() {
-                    webContent2.send('data', [data, template_data(data), locale]);
-                });
-            } else if (electron.alertRevision[data.earthquake_id] !== undefined && data.revision > electron.alertRevision[data.earthquake_id]) {
-                var webContents = electron.alertWindows[data.earthquake_id].webContents;
-                webContents.send('data', [data, template_data(data), locale]);
-                electron.alertRevision[data.earthquake_id] = data.revision;
-            }
+        // Day Notification
+        else {
+            notifier.notify(locale[lang].title, subtitle, message, sound_string, spawnMap(data, template));
         }
     } catch (error) {
         notifier.notify(locale[lang].title, '', locale[lang].error + ': ' + error.message, false);
