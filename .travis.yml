@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - 0.12.7
 addons:
-  ssh_known_hosts: http://eew.p-gn.xyz/
+  ssh_known_hosts: eew.p-gn.xyz
   apt:
     packages:
     - sshpass
