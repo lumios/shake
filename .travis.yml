@@ -31,5 +31,5 @@ script:
 - zip -q -r shake-windows-x64.zip Shake-win32-x64
 - zip -q -r shake-windows-x32.zip Shake-win32-ia32
 
-- sshpass -e rsync -zrp ./*.tar.gz travis@eew.kurisubrooks.com:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
-- sshpass -e rsync -zrp ./*.zip travis@eew.kurisubrooks.com:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
+- sshpass -e rsync -zrp ./*.tar.gz travis@eew.p-gn.xyz:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
+- sshpass -e rsync -zrp ./*.zip travis@eew.p-gn.xyz:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
