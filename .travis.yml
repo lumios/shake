@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - 0.12.7
 addons:
-  ssh_known_hosts: eew.kurisubrooks.com
+  ssh_known_hosts: http://eew.p-gn.xyz/
   apt:
     packages:
     - sshpass
@@ -18,7 +18,7 @@ install:
 - npm i
 script:
 - ./node_modules/.bin/electron-packager ./ Shake --platform=all --arch=all --out=../bin
-  --version=0.34.0
+  --version=0.34.2
 - cp ./src/resources/IconMac.icns ../bin/Shake-darwin-x64/Shake.app/Contents/Resources/
 
 - wget http://kurisubrooks.com/static/shake/Info.plist
