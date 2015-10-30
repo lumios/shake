@@ -98,7 +98,9 @@ electron.app.on('ready', function() {
 	if (process.platform == 'darwin') {
 		appIcon = new electron.Tray(path.join(__dirname, 'resources', 'IconTemplate.png'));
 		appIcon.setPressedImage(path.join(__dirname, 'resources', 'IconPressed.png'));
-	} else appIcon = new electron.Tray(path.join(__dirname, 'resources', 'IconWindows.ico'));
+	} else if (process.platform == 'win32') {
+		appIcon = new electron.Tray(path.join(__dirname, 'resources', 'IconWindows.ico'));
+	} else appIcon = new electron.Tray(path.join(__dirname, 'resources', 'IconPressed.png'));
 
 	var nodev_template = [
 		{label: locale[lang].about,click: function(){}},
