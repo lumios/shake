@@ -3,9 +3,6 @@ node_modules
 app.asar
 app.asar.unpacked
 npm-debug.log
-keys.js
 settings.json
 logs
 .log
-*.iml
-.idea/
