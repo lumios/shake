@@ -1,4 +1,5 @@
-var socket = require('socket.io-client')('http://eew.kurisubrooks.com:3080');
+var keys = require('../keys.js');
+var socket = require('socket.io-client')(keys.socket);
 var path = require('path');
 var osenv = require('osenv');
 var fs = require('fs-extra');
