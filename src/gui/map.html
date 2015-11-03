@@ -2,11 +2,17 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Shake - Earthquake Warning</title>
+	<title>Shake - Earthquake Alert</title>
 	<link rel="shortcut icon" type="image/png" href="../resources/IconLogo.png">
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script>
 		var ipc = require('ipc');
+		var audio = new Audio('../resources/audio/alert.mp3');
+
+		if (process.platform != 'darwin') {
+			audio.play();
+		}
+
 		ipc.on('data', function(all) {
 			var data = all[0];
 			var template = all[1];
@@ -18,14 +24,10 @@
 				document.getElementById("location").textContent = template[0];
 				document.getElementById("magnitudeseismic").textContent = template[1];
 			}
+
 			loadMap(data.latitude, data.longitude, data.magnitude);
 		});
 
-		if (process.platform != 'darwin') {
-			document.write('<audio hidden autoplay preload="auto"><source src="../resources/audio/alert.mp3" type="audio/mp3"></audio>');
-		}
-	</script>
-	<script>
 		function loadMap(latitude, longitude, magnitude) {
 			var epicenter = new google.maps.LatLng(latitude, longitude);
 			var mapCanvas = document.getElementById('map');
@@ -52,102 +54,31 @@
 				position: epicenter,
 				map: map
 			});
-			var styledMap = new google.maps.StyledMapType(styles, {
-				name: "Styled Map"
-			});
-			var styles = [{
-				"featureType": "water",
-				"stylers": [{
-					"gamma": 0.52
-				}, {
-					"hue": "#0091ff"
-				}, {
-					"saturation": 100
-				}, {
-					"lightness": 42
-				}]
-			}, {
-				"featureType": "road.highway",
-				"stylers": [{
-					"hue": "#ff9900"
-				}, {
-					"visibility": "simplified"
-				}]
-			}, {
-				"featureType": "landscape",
-				"stylers": [{
-					"visibility": "simplified"
-				}, {
-					"saturation": -30
-				}, {
-					"lightness": 62
-				}]
-			}, {
-				"featureType": "landscape.natural.terrain",
-				"stylers": [{
-					"visibility": "off"
-				}]
-			}]
 		}
 	</script>
 	<style>
-		body {
-			font-family: "Arial", "Helvetica", sans-serif;
-			margin: 0;
-		}
-
-		#map {
-			overflow: hidden;
-			position: absolute;
-			z-index: 0;
-			height: 100%;
-			width: 100%;
-			background-color: darkgrey;
-		}
-
-		.alert {
-			position: absolute;
-			z-index: 10;
-			top: 0;
-			left: 0;
-			width: inherit;
-			display: inline-block;
-			background-color: #DC4A47;
-			color: white;
-			padding: 5px 25px 5px 10px;
-			border-bottom-right-radius: 4px;
-		}
-
-		.alert p {
-			margin: 0;
-		}
-
-		.alert b {
-			display: block;
-			margin-bottom: 3px;
-		}
-
-		td {
-			margin: 0;
-		}
+		body {font-family:"Arial","Helvetica",sans-serif;margin:0;}
+		#map {overflow: hidden;position: absolute;z-index: 0;height: 100%;width: 100%;background-color: #DDD;}
+		.alert {position: absolute;z-index: 10;top: 0;left: 0;width: inherit;display: inline-block;background-color: #DC4A47;color: white;padding: 5px 25px 5px 10px;border-bottom-right-radius: 4px;}
+		.alert p {margin: 0;}
+		.alert b {display: block;margin-bottom: 3px;}
+		td {margin: 0;}
 	</style>
 </head>
 <body>
 	<div class="alert">
 		<table>
-			<tbody>
-				<tr>
-					<td style="width:50px">
-						<img src="../resources/IconLogo.png" height="40px" width="40px">
-					</td>
-					<td>
-						<b><div id="location">...</div></b>
-						<div align="left">
-							<div id="magnitudeseismic">...</div>
-						</div>
-					</td>
-				</tr>
-			</tbody>
+			<tr>
+				<td style="width:50px">
+					<img src="../resources/IconWhite.png" height="40px" width="40px" style="padding-top:4px;">
+				</td>
+				<td>
+					<b><div id="location">...</div></b>
+					<div align="left">
+						<div id="magnitudeseismic">...</div>
+					</div>
+				</td>
+			</tr>
 		</table>
 	</div>
 
