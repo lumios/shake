@@ -11,7 +11,7 @@ exports.notify = function(title, subtitle, message, sound, callback) {
 			'subtitle': subtitle,
 			'message': message,
 			'sound': sound,
-			'time': 10000,
+			'time': 8000,
 			'wait': true
 		}, function (error, response) {
 			if (error) logger.error('Error: ' + error);
@@ -24,8 +24,7 @@ exports.notify = function(title, subtitle, message, sound, callback) {
 			'message': message,
 			'sound': sound,
 			'urgency': 'critical',
-			'time': 10000,
-			'wait': true,
+			'time': 8000,
 			'icon': path.join(__dirname, 'resources', 'IconLogo.png')
 		}, function (error, response) {
 			if (error) logger.error('Error: ' + error);
