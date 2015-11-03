@@ -21,7 +21,7 @@ script:
   --version=0.34.2
 - cp ./src/resources/IconMac.icns ../bin/Shake-darwin-x64/Shake.app/Contents/Resources/
 
-- wget http://kurisubrooks.com/static/shake/Info.plist
+- wget https://kurisubrooks.com/static/shake/Info.plist
 - cp ./Info.plist ../bin/Shake-darwin-x64/Shake.app/Contents/Info.plist
 
 - cd ../bin/
