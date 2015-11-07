@@ -22,6 +22,22 @@ exports.alertWindows = alertWindows;
 exports.alertRevision = alertRevision;
 exports.electronReady = electronReady;
 
+exports.newAbout = function(data) {
+    var alertWindow = new BrowserWindow({
+        'title': locale[lang].title,
+        'icon': path.join(__dirname, 'resources', 'icon.png'),
+        'width': 420,
+        'height': 355,
+        'resizable': false,
+		'fullscreen': false,
+        'auto-hide-menu-bar': true,
+        'skip-taskbar': false
+    });
+
+    if (process.platform == 'darwin') app.dock.show();
+    alertWindow.loadUrl('file://' + __dirname + '/gui/about.html');
+};
+
 exports.newWindow = function(data) {
     var alertWindow = new BrowserWindow({
         'title': locale[lang].title,
@@ -29,6 +45,7 @@ exports.newWindow = function(data) {
         'width': 600,
         'height': 625,
         'resizable': false,
+		'fullscreen': false,
         'auto-hide-menu-bar': true,
         'skip-taskbar': true
     });
@@ -46,6 +63,7 @@ exports.newSettings = function() {
 		'width': 500,
 		'height': 550,
 		'resizable': false,
+		'fullscreen': false,
 		'auto-hide-menu-bar': true,
 		'skip-taskbar': false
 	});
