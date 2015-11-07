@@ -4,6 +4,7 @@
   "description": "Earthquake Early Warning program for your computer.",
   "homepage": "http://lumios.xyz/shake",
   "author": "lumios",
+  "license": "PRIVATE",
   "main": "./src/index.js",
   "keywords": [
     "earthquake",
@@ -32,6 +33,7 @@
     "fs-extra": "^0.24.0",
     "growly": "^1.2.0",
     "lodash.clonedeep": "^3.0.0",
+    "lumios-toolkit": "0.0.6",
     "minimist": "^1.1.1",
     "moment": "^2.10.6",
     "node-notifier": "^4.2.3",
