@@ -1,13 +1,11 @@
-var keys = require('../keys.js');
+var keys = require('../keys');
 var socket = require('socket.io-client')(keys.socket);
 var path = require('path');
 var osenv = require('osenv');
 var fs = require('fs-extra');
 var open = require('open');
-
+var logger = require('lumios-toolkit');
 require('crash-reporter').start();
-
-var logger = require('./logger.js');
 
 /*
 // Loads / Generates Settings
@@ -33,11 +31,11 @@ if (!fs.existsSync(settingsPath)) {
 // Import Modules
 */
 
-var electron = require('./electron.js');
-var notifier = require('./notifier.js');
-var trigger = require('./trigger.js');
+var electron = require('./electron');
+var notifier = require('./notifier');
+var trigger = require('./trigger');
 var locale = require('./resources/lang.json');
-var quake = require('./quake.js');
+var quake = require('./quake');
 var lang = settings.lang;
 
 /*
@@ -104,7 +102,7 @@ electron.app.on('ready', function() {
 	} else appIcon = new electron.Tray(path.join(__dirname, 'resources', 'IconPressed.png'));
 
 	var nodev_template = [
-		{label: locale[lang].about,click: function(){}},
+		{label: locale[lang].about,click: function(){electron.newAbout();}},
 		{type: 'separator'},
 		{label: locale[lang].help,click: function(){open('http://lumios.xyz/support.html');}},
 		{label: locale[lang].settings,click: function(){electron.newSettings();}},
@@ -117,7 +115,7 @@ electron.app.on('ready', function() {
 	];
 
 	var dev_template = [
-		{label: locale[lang].about,click: function(){}},
+		{label: locale[lang].about,click: function(){electron.newAbout();}},
 		{type: 'separator'},
 		{label: locale[lang].help,click: function(){open('http://lumios.xyz/support.html');}},
 		{label: locale[lang].settings,click: function(){electron.newSettings();}},
@@ -136,7 +134,7 @@ electron.app.on('ready', function() {
 	if (settings.dev_mode) contextMenu = electron.Menu.buildFromTemplate(dev_template);
 	else contextMenu = electron.Menu.buildFromTemplate(nodev_template);
 
-	appIcon.setToolTip('EEW');
+	appIcon.setToolTip('Shake');
 	appIcon.setContextMenu(contextMenu);
 });
 

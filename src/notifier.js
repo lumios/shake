@@ -1,5 +1,5 @@
 var path = require('path');
-var logger = require('./logger.js');
+var logger = require('lumios-toolkit');
 if (process.platform === 'darwin') {
 	var notifier = require(path.join(__dirname, '../lib', 'node-notifier'));
 } else var notifier = require('node-notifier');

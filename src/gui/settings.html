@@ -19,7 +19,7 @@
     <script>
         var fs = require('fs');
         var path = require('path');
-        var logger = require('../logger.js');
+        var logger = require('lumios-toolkit');
         var locale = require('../resources/lang.json');
         var settings = require('../settings.json');
         var lang = settings.lang;
@@ -41,7 +41,7 @@
                 logger.error('Error: ' + err);
             } finally {
                 alert("Please restart Shake to apply your changes.");
-                logger.success('Saved settings.');
+                logger.success('Web > Saved settings');
                 window.close();
 			}
         }
