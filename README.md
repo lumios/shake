@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/lumios/shake.svg?branch=master)](https://travis-ci.org/lumios/shake)
 [![Dependency Status](https://david-dm.org/lumios/shake.svg)](https://david-dm.org/lumios/shake)
 
-An Earthquake Early Warning program for your computer.
+An Earthquake Early Warning program for your computer.  
 あなたのコンピュータの為の緊急地震速報
 
 ### Installation
@@ -13,8 +13,7 @@ An Earthquake Early Warning program for your computer.
 ##### Install
 1. `cd ~/.../shake`
 2. `git clone https://github.com/lumios/shake.git`
-3. `npm i electron-prebuilt -g`
-4. `npm i`
+3. `npm i`
 
 ##### Run
 1. `cd ~/.../shake`
