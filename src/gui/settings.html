@@ -45,6 +45,14 @@
                 window.close();
 			}
         }
+
+		document.addEventListener('DOMContentLoaded', function() {
+			if (lang === 'en') document.getElementById("lang_en").checked = true;
+			if (lang === 'ja') document.getElementById("lang_ja").checked = true;
+			document.getElementById('min_alert').value = settings.min_alert;
+			if (settings.night_mode) document.getElementById("night_mode").checked = true;
+			if (settings.dev_mode) document.getElementById("dev_mode").checked = true;
+		});
     </script>
 </head>
 <body>
@@ -54,8 +62,8 @@
     <form action="javascript:save()" id="settings">
 		<h4><span id="lang">Language</a></h4>
 		<blockquote>
-			<label><input type="radio" name="lang" value="en" checked> English</label><br>
-			<label><input type="radio" name="lang" value="ja"> 日本語</label>
+			<label><input type="radio" name="lang" id="lang_en" value="en"> English</label><br>
+			<label><input type="radio" name="lang" id="lang_ja" value="ja"> 日本語</label>
 		</blockquote>
 
     	<h4>Minimum Alert Size</h4>
@@ -63,8 +71,8 @@
 		<p>Choose a Minimum Magnitude Size to be notified of.<br>
         (You will only be notified of Earthquakes of this size and higher.)</p>
 
-        <select name="min_alert">
-            <option value="35" selected>3.5</option>
+        <select name="min_alert" id="min_alert">
+            <option value="35">3.5</option>
             <option value="40">4.0</option>
             <option value="45">4.5</option>
             <option value="50">5.0</option>
@@ -80,7 +88,7 @@
         <p>If enabled, Notification Sounds will be muted between Midnight and 7am.<br>
         (This setting is ignored if an Earthquake is above Magnitude 6)</p>
 
-        <label><input type="checkbox" name="night_mode"> Enable</label>
+        <label><input type="checkbox" name="night_mode" id="night_mode"> Enable</label>
 
         <br>
 
@@ -88,7 +96,7 @@
 		<p>If enabled, you will receive fake quakes regularly, in order to test the program.<br>
 		(Please do not enable this option if you are not a developer.)</p>
 
-		<label><input type="checkbox" name="dev_mode"> Enable</label>
+		<label><input type="checkbox" name="dev_mode" id="dev_mode"> Enable</label>
 
 		<br><br>
 
