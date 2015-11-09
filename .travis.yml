@@ -2,14 +2,14 @@ language: node_js
 node_js:
 - 0.12.7
 addons:
-  ssh_known_hosts: eew.p-gn.xyz
+  ssh_known_hosts: lumios.kurisubrooks.com
   apt:
     packages:
     - sshpass
     - zip
 notifications:
   slack:
-    secure: dedhMifMMRnN8P77Zbr3ZdhhroiildBPPGSru9par1rbLe4rCF73H+y/YdrSTxezTvdL7vtYaHep3/ybwaTPBDxr9azFqgBS/L6SJtltUQiNQWvBv52Xu00MuZajLehmJUtPD0y8719NIJoYOl4Tt04m0cstT+qTB7zbIUGgEz3016BuFVAv7SDorzlgC2SjuWYxazj8nCpVKxdo5pOZ1o5WxRdAcvdd1Vt3J3/ZOjPr4IvgCIUFH2+ALl0fkPqQ0wNhDLeDtx3qnUZyxoiW4MUBPwyPMIPDL1PI2K4r4RsH/WUCCfv02ZAuu9N+fM34wLCrnUu4mFQWy3OcQgLqw3ryUDfAfeazPt/LjrLc6XuKe2KjNuf8W29pxd1BJPCy65kNKTN8KK2BDMAyU4toCuDUYFIk/2F0Rzl3f4vOh8Voo45rBgp2Tdt672/gG+uSVB6q5f55c03GFmcE/7PxhLjkTcs0OuNjCTctuZNIdJ7FZZCEh2yGelVPYEzKY3qaMrdTxLWn4P3EW/qxQo4iiWvXF24sYLEGkbuw0kGS9vOc/5YX1Y+G+0poZwpgFA/Oq5mYgIOd1KbEuA7c2dHzo5l1+AMKwhiVQFTuyfg+itDYk9uLNeCgDsCPqux38kfMK68zikxkrgqYzR/rtHUhF65KpSLxmt/m9egnP0XM19I=
+    secure: SRoMgfToIjj6r4a9Zv158GVqwj2zWIU8YaLyAXH23jAhSfrtU4l16dBM0H4Cii5wkUZg+9A8s6it32iQjlAJZd/zbsVIQ79jP4QBy+SoIr7NxZ1lk/nUfNPjJ0AAHaGQA0Lu/FVURqzil5ZGDpkvLhKWtN4tFD8GUzQ3RfKNnjDwuEmxiPbyVe76pED8yXJiX7cCfWrRzGvQ7L4VzQmOhyM3KqOODGiSMVYnAqkgVKk9V+tCyoiLZhoiWKlxT/3sC13xXMnFLF+Tby9uFWDwCclq2KZrJqtHTLBEidReXAtv///JZx2M72wvQ4FEzmbhebFHsmx4j1Bmd1bAmcrncUYEcdY6eT1gU7hQhTlGXkP+XPliwds+AJL04bsA0mgWKoSoUL79zkIJw5jXCbEgjduAEMMO2Uofkzna5Y3p++WYcKVcdhWSm4mkwVMvwBU0SCjxnss+CeIxLUUm9N9MmcMH7NsDKfOi0lSNqAffsNqKnNcvOOMl5EECRIBBM6YuRfre7NU/85gQ1ART2MguH7FiJ99cDgFt4+4NNad/ccUhh2E9DHAfgeMQA1XL4EthfSdT/c7FB6lgnMnYGZ+fPISKmRUI1RMJHX6z3CRloTIpvRLMDtPwf5eI2AZUVrVEXZcPa08vpLC+unTyV+669R7uqbm6oIBmIXIaatqC5yw=
 env:
   global:
     secure: jPCSnvceTU1341cSfiN1chqsSANZ5ZhdZ+mTy2EM/luqylhNCplsyJ39qmorLdQapTrNDjqGcX7w1RtNdsHapgAZprl3iJmcKatLG2ISa16VMath7L7TZ4HClDBEHjHmozd33HjP30DaXIadcxFGVc/oJB9hLkmDFFozlBlbajaiRDG9aJXxXPfNDBCaAz6yDpSapNyss+k/xytAw+pGIYzXta7nvgh+iRiCifwHnTfbjs9rUjrKpQEavn44AmYWKZUvfZ/htvgxJ6m/echHZEnQa35ge0ziMX05XHunzWAJ3dvwj4crnUo3nDYtJCPfMt/H3MfZbXkU5ErtnOlBt6TyZyxcAkwA5TeN907R1DvxE7VbJmg4gVuj01l26vp7R/hyv+4Y0XYBN9+GXkZLxb28R/fqmng2hcJN0NYJqbKnBfDCcAkGAaDRHuqNetpeX7EhaGxIz/b5hmYBS5g+Wec4q8g1r0RsDuGyo4t+NGC3ucJ5npq6jSQM+SozCnMUK8bpumzvwkqn92qzmf3yz6974cEdgXfqcd9ss+gQfU4vxUAeu2XnO2HyQe8gjDX1NryLJCc6JsdQ7vPSJ1XOXwG9VLJzaR/y1uoOQV9hIAtX8g0Gm7r1V6HsStz9MXwWJkooqisIQq9Pb2ePXJ4oBITMoKkgWeLfgb5QuA+ClIg=
@@ -20,16 +20,13 @@ script:
 - ./node_modules/.bin/electron-packager ./ Shake --platform=all --arch=all --out=../bin
   --version=0.34.2
 - cp ./src/resources/IconMac.icns ../bin/Shake-darwin-x64/Shake.app/Contents/Resources/
-
 - wget https://gist.githubusercontent.com/kurisubrooks/2a9206a148adb7039c4b/raw/4b716f33937827035ed005ba09af54639ed2cda2/Info.plist
 - cp ./Info.plist ../bin/Shake-darwin-x64/Shake.app/Contents/Info.plist
-
 - cd ../bin/
 - tar -czf  shake-osx-x64.tar.gz Shake-darwin-x64/Shake.app
 - tar -czf  shake-linux-x64.tar.gz Shake-linux-x64
 - tar -czf  shake-linux-x32.tar.gz Shake-linux-ia32
 - zip -q -r shake-windows-x64.zip Shake-win32-x64
 - zip -q -r shake-windows-x32.zip Shake-win32-ia32
-
-- sshpass -e rsync -zrp ./*.tar.gz travis@eew.p-gn.xyz:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
-- sshpass -e rsync -zrp ./*.zip travis@eew.p-gn.xyz:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
+- sshpass -e rsync -zrp ./*.tar.gz travis@lumios.kurisubrooks.com:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
+- sshpass -e rsync -zrp ./*.zip travis@lumios.kurisubrooks.com:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
