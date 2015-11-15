@@ -18,7 +18,7 @@ function situation(data) {
 function template_data(data) {
     if (data.type == 1 || data.situation == 2) return ['', locale[lang].cancelled];
     else {
-        var message_template = locale[lang].units.magnitude + ': ' + data.magnitude + ', ' + locale[lang].units.seismic + ': ' + data.seismic_en;
+        var message_template = locale[lang].units.magnitude + ': ' + data.magnitude + ', ' + locale[lang].units.seismic + ': ' + data.seismic_en + ', ' + locale[lang].units.depth + ': ' + data.depth;
         if (lang == 'ja') return [data.epicenter_ja, message_template];
         else return [data.epicenter_en, message_template];
     }
