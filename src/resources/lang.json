@@ -36,13 +36,14 @@
 			"epicenter": "Epicenter",
 			"magnitude": "Magnitude",
 			"seismic": "Max Seismic",
+			"depth": "Depth",
 			"update": "Update",
 			"final": "Final"
 		}
 	},
 
 	"ja": {
-		"title": "シェーキ",
+		"title": "Shake",
 		"connect": "サーバー接続完了！",
 		"disconnect": "サーバーに接続出来ません。接続を継続します。",
 		"cancelled": "先ほどの地震速報は誤報です。",
@@ -78,6 +79,7 @@
 			"epicenter": "震源",
 			"magnitude": "マグニチュード",
 			"seismic": "最大震度",
+			"depth": "深さ",
 			"update": "更新",
 			"final": "最後"
 		}
