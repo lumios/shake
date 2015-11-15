@@ -2,16 +2,16 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Shake - Earthquake Alert</title>
 	<link rel="shortcut icon" type="image/png" href="../resources/IconLogo.png">
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script>
 		var ipc = require('ipc');
 		var audio = new Audio('../resources/audio/alert.mp3');
+		var settings = require('../settings.json');
+		var date = new Date();
 
-		if (process.platform != 'darwin') {
-			audio.play();
-		}
+		//settings.night_mode && date.getHours() < '06' && data.magnitude <= '5.2'
+		if (process.platform != 'darwin') audio.play();
 
 		ipc.on('data', function(all) {
 			var data = all[0];
@@ -57,6 +57,7 @@
 		}
 	</script>
 	<style>
+		* {-webkit-touch-callout:none;-webkit-user-select: none;-khtml-user-select: none;user-select: none;}
 		body {font-family:"Arial","Helvetica",sans-serif;margin:0;}
 		#map {overflow: hidden;position: absolute;z-index: 0;height: 100%;width: 100%;background-color: #DDD;}
 		.alert {position: absolute;z-index: 10;top: 0;left: 0;width: inherit;display: inline-block;background-color: #DC4A47;color: white;padding: 5px 25px 5px 10px;border-bottom-right-radius: 4px;}
