@@ -1,5 +1,4 @@
-var keys = require('../keys');
-var socket = require('socket.io-client')(keys.socket);
+var socket = require('socket.io-client')('http://shakeserv.kurisubrooks.com:1190');
 var path = require('path');
 var osenv = require('osenv');
 var fs = require('fs-extra');
