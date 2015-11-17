@@ -1,10 +1,20 @@
 var socket = require('socket.io-client')('http://shakeserv.kurisubrooks.com:1190');
 var path = require('path');
-var osenv = require('osenv');
 var fs = require('fs-extra');
 var open = require('open');
 var logger = require('lumios-toolkit');
 require('crash-reporter').start();
+
+/*
+// Setting App Directories
+*/
+
+var appDir;
+if (process.platform === 'win32') appDir = path.join(process.env.APPDATA, 'Shake', 'App');
+else if (process.platform === 'darwin') appDir = path.join(process.env.HOME, 'Library', 'Application Support', 'Shake', 'App');
+else if (process.platform === 'linux') appDir = path.join(process.env.PWD, 'shake', 'app');
+console.log(appDir);
+
 
 /*
 // Loads / Generates Settings
@@ -13,7 +23,7 @@ require('crash-reporter').start();
 var settingsPath = path.join(__dirname, 'settings.json');
 
 if (!fs.existsSync(settingsPath)) {
-	var settingsFile = {"lang": "en","min_alert": "35","first_run": true,"night_mode": false,"dev_mode": true};
+	var settingsFile = {"lang":"en","min_alert":"35","first_run":true,"night_mode":false,"dev_mode":true};
 	logger.warn('Settings File does not exist, generating...');
 
 	try {fs.writeFileSync(settingsPath, JSON.stringify(settingsFile));}
@@ -43,7 +53,7 @@ var lang = settings.lang;
 
 if (process.platform === 'darwin') {
 	var copy = path.join(__dirname, 'resources', 'audio');
-	var paste = osenv.home() + '/Library/Sounds/';
+	var paste = path.join(process.env.HOME, 'Library', 'Sounds');
 
 	fs.copy(copy, paste, function(error) {
 		if (error) logger.error('Error: ' + error);
@@ -101,33 +111,33 @@ electron.app.on('ready', function() {
 	} else appIcon = new electron.Tray(path.join(__dirname, 'resources', 'IconPressed.png'));
 
 	var nodev_template = [
-		{label: locale[lang].about,click: function(){electron.newAbout();}},
+		{label: locale[lang].menu.about,click: function(){electron.newAbout();}},
 		{type: 'separator'},
-		{label: locale[lang].help,click: function(){open('http://lumios.xyz/support.html');}},
-		{label: locale[lang].settings,click: function(){electron.newSettings();}},
+		{label: locale[lang].menu.help,click: function(){open('http://lumios.xyz/support.html');}},
+		{label: locale[lang].menu.settings,click: function(){electron.newSettings();}},
 		{type: 'separator'},
-		{label: locale[lang].contribute,click: function(){open('https://github.com/lumios/eew');}},
-		{label: locale[lang].bug,click: function(){open('https://github.com/lumios/eew/issues');}},
-		{label: locale[lang].updates,click: function(){}},
+		{label: locale[lang].menu.contribute,click: function(){open('https://github.com/lumios/eew');}},
+		{label: locale[lang].menu.bug,click: function(){open('https://github.com/lumios/eew/issues');}},
+		//{label: locale[lang].menu.updates,click: function(){}},
 		{type: 'separator'},
-		{label: locale[lang].quit,click: function(){logger.debug('Closed via Tray Menu');process.exit(0);}}
+		{label: locale[lang].menu.quit,click: function(){logger.debug('Closed via Tray Menu');process.exit(0);}}
 	];
 
 	var dev_template = [
-		{label: locale[lang].about,click: function(){electron.newAbout();}},
+		{label: locale[lang].menu.about,click: function(){electron.newAbout();}},
 		{type: 'separator'},
-		{label: locale[lang].help,click: function(){open('http://lumios.xyz/support.html');}},
-		{label: locale[lang].settings,click: function(){electron.newSettings();}},
+		{label: locale[lang].menu.help,click: function(){open('http://lumios.xyz/support.html');}},
+		{label: locale[lang].menu.settings,click: function(){electron.newSettings();}},
 		{type: 'separator'},
-		{label: locale[lang].contribute,click: function(){open('https://github.com/lumios/eew');}},
-		{label: locale[lang].bug,click: function(){open('https://github.com/lumios/eew/issues');}},
-		{label: locale[lang].updates,click: function(){}},
+		{label: locale[lang].menu.contribute,click: function(){open('https://github.com/lumios/eew');}},
+		{label: locale[lang].menu.bug,click: function(){open('https://github.com/lumios/eew/issues');}},
+		//{label: locale[lang].menu.updates,click: function(){}},
 		{type: 'separator'},
-		{label: locale[lang].devtools, submenu:[
-			{label: locale[lang].test,click: function(){quake.parse(trigger.quake());}},
+		{label: locale[lang].menu.devtools, submenu:[
+			{label: locale[lang].menu.test,click: function(){quake.parse(trigger.quake());}},
 		]},
 		{type: 'separator'},
-		{label: locale[lang].quit,click: function(){logger.debug('Closed via Tray Menu');process.exit(0);}}
+		{label: locale[lang].menu.quit,click: function(){logger.debug('Closed via Tray Menu');process.exit(0);}}
 	];
 
 	if (settings.dev_mode) contextMenu = electron.Menu.buildFromTemplate(dev_template);
