@@ -10,23 +10,33 @@
 		.info{padding:3px 0;}
 		a{color:inherit!important;text-decoration:none;}
 		p{margin:0;padding:0;}
-		.foot{color:#AAA;}
+		.copy{color:#AAA;margin-top:10px;}
     </style>
     <script>
-		var pkg = require('../../package.json');
-		document.getElementById('version').innerHTML = pkg.version;
+		var pkg = require("../../package.json");
+        var date = new Date();
+        var version = pkg.version;
+
+        var settings = require("../settings.json");
+
+        var locale = require("../resources/lang.json");
+        var lang = settings.lang;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("title").innerHTML = locale[lang].title;
+            document.getElementById("desc").innerHTML = locale[lang].description;
+		    document.getElementById("version").innerHTML = version;
+            document.getElementById("year").innerHTML = date.getFullYear();
+        });
     </script>
 </head>
 <body>
-	<div align="center" style="margin-top:15px;">
+	<div align="center" style="margin-top:2px;">
 		<img src="../resources/IconMacLogo.png" height="60px" width="60px">
-		<h2>Shake</h2>
-		<div class="info"><b>Earthquake Early Warning Notifier</b></div>
-		<div class="vers">Version <span id="version">1.0.0</span></div>
-		<br>
-		<p>This program was developed by Lumios,<br>with help of the open-source community on GitHub.</p>
-		<br><br>
-		<p class="foot">Special thanks: kurisubrooks, justin97530, and kaorioka</p>
+		<h2 id="title">Shake</h2>
+		<div class="info"><b id="desc">Earthquake Early Warning Notifier</b></div>
+		<div class="vers">Version <span id="version">ERR</span></div>
+		<div class="copy">&copy; <span id="year"></span> Lumios</div>
 	</div>
 </body>
 </html>
