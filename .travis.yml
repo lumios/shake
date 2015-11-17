@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - 0.12.7
 addons:
-  ssh_known_hosts: lumios.kurisubrooks.com
+  ssh_known_hosts: ssh.lumios.xyz
   apt:
     packages:
     - sshpass
@@ -28,5 +28,5 @@ script:
 - tar -czf  shake-linux-x32.tar.gz Shake-linux-ia32
 - zip -q -r shake-windows-x64.zip Shake-win32-x64
 - zip -q -r shake-windows-x32.zip Shake-win32-ia32
-- sshpass -e rsync -zrp ./*.tar.gz travis@lumios.kurisubrooks.com:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
-- sshpass -e rsync -zrp ./*.zip travis@lumios.kurisubrooks.com:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
+- sshpass -e rsync -zrp ./*.tar.gz travis@ssh.lumios.xyz:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
+- sshpass -e rsync -zrp ./*.zip travis@ssh.lumios.xyz:/home/travis/eew/drone/$TRAVIS_BUILD_NUMBER/
