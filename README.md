@@ -3,12 +3,25 @@
 [![Dependency Status](https://david-dm.org/lumios/shake.svg)](https://david-dm.org/lumios/shake)
 
 An Earthquake Early Warning program for your computer.  
-あなたのコンピュータの為の緊急地震速報
+あなたのコンピュータのための緊急地震速報
 
 ### Installation
 ##### Prerequisites
-- Windows 7+ or Mac OS X 10.8+
-- Node JS v0.12.7+
+- [Node.js](http://nodejs.org/) v0.12.7 (or newer)
+
+
+- OS
+    - Windows 7, 8, 10 (32-bit, 64-bit)
+    - Mac OS X 10.8 (or newer)
+    - Linux (Ubuntu, or Debian based)
+
+
+- Specs
+    - 1.2GHz Dual Core CPU (minimum)
+    - 1 GB RAM (minimum)
+
+
+- Stable Internet Connection
 
 ##### Install
 1. `cd ~/.../shake`
