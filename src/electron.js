@@ -1,8 +1,9 @@
 var BrowserWindow = require('browser-window');
+var electron = require('electron');
 var app = require('app');
 var Menu = require('menu');
 var Tray = require('tray');
-var ipc = require('ipc');
+var ipc = electron.ipcMain;
 var path = require('path');
 
 var locale = require('./resources/lang.json');
@@ -26,8 +27,8 @@ exports.newAbout = function(data) {
     var alertWindow = new BrowserWindow({
         'title': locale[lang].title,
         'icon': path.join(__dirname, 'resources', 'icon.png'),
-        'width': 420,
-        'height': 355,
+        'width': 320,
+        'height': 210,
         'resizable': false,
 		'fullscreen': false,
         'auto-hide-menu-bar': true,
@@ -35,7 +36,7 @@ exports.newAbout = function(data) {
     });
 
     if (process.platform == 'darwin') app.dock.show();
-    alertWindow.loadUrl('file://' + __dirname + '/gui/about.html');
+    alertWindow.loadURL('file://' + __dirname + '/gui/about.html');
 };
 
 exports.newWindow = function(data) {
@@ -53,7 +54,7 @@ exports.newWindow = function(data) {
     if (process.platform == 'darwin') app.dock.show();
     alertWindows[data.earthquake_id] = alertWindow;
     alertRevision[data.earthquake_id] = data.revision;
-    alertWindow.loadUrl('file://' + __dirname + '/gui/map.html');
+    alertWindow.loadURL('file://' + __dirname + '/gui/map.html');
 };
 
 exports.newSettings = function() {
@@ -69,5 +70,5 @@ exports.newSettings = function() {
 	});
 
 	if (process.platform == 'darwin') app.dock.show();
-	settingsWindow.loadUrl('file://' + __dirname + '/gui/settings.html');
+	settingsWindow.loadURL('file://' + __dirname + '/gui/settings.html');
 };
