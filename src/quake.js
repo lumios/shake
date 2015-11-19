@@ -1,9 +1,9 @@
-var notifier = require('./notifier');
-var logger = require('lumios-toolkit');
-var electron = require('./electron');
-var locale = require('./resources/lang.json');
-var settings = require('./settings.json');
-var lang = settings.lang;
+const notifier = require('./notifier');
+const logger = require('lumios-toolkit');
+const electron = require('./electron');
+const locale = require('./resources/lang.json');
+const settings = require('./settings.json');
+const lang = settings.lang;
 
 function sound(data) {
     if (data.type == 1 || data.situation == 2) return 'Submarine';
@@ -52,7 +52,7 @@ function spawnMap(data, template) {
 }
 
 exports.parse = function(input) {
-    var date = new Date();
+    const date = new Date();
     var data = JSON.parse(input);
 
     try {

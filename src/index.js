@@ -1,9 +1,18 @@
-var socket = require('socket.io-client')('http://shakeserv.kurisubrooks.com:1190');
-var path = require('path');
-var fs = require('fs-extra');
-var open = require('open');
-var logger = require('lumios-toolkit');
-require('crash-reporter').start();
+const socket = require('socket.io-client')('http://shakeserv.kurisubrooks.com:1190');
+const path = require('path');
+const fs = require('fs-extra');
+const open = require('open');
+const logger = require('lumios-toolkit');
+const crashReporter = require('electron').crashReporter;
+
+/*
+crashReporter.start({
+	productName: 'Shake',
+	companyName: 'Lumios',
+	submitURL: 'https://lumios.xyz/crash',
+	autoSubmit: true
+});
+*/
 
 /*
 // Setting App Directories
@@ -13,7 +22,6 @@ var appDir;
 if (process.platform === 'win32') appDir = path.join(process.env.APPDATA, 'Shake', 'App');
 else if (process.platform === 'darwin') appDir = path.join(process.env.HOME, 'Library', 'Application Support', 'Shake', 'App');
 else if (process.platform === 'linux') appDir = path.join(process.env.PWD, 'shake', 'app');
-console.log(appDir);
 
 
 /*
@@ -21,7 +29,6 @@ console.log(appDir);
 */
 
 var settingsPath = path.join(__dirname, 'settings.json');
-
 if (!fs.existsSync(settingsPath)) {
 	var settingsFile = {"lang":"en","min_alert":"35","first_run":true,"night_mode":false,"dev_mode":true};
 	logger.warn('Settings File does not exist, generating...');
@@ -40,20 +47,20 @@ if (!fs.existsSync(settingsPath)) {
 // Import Modules
 */
 
-var electron = require('./electron');
-var notifier = require('./notifier');
-var trigger = require('./trigger');
-var locale = require('./resources/lang.json');
-var quake = require('./quake');
-var lang = settings.lang;
+const electron = require('./electron');
+const notifier = require('./notifier');
+const trigger = require('./trigger');
+const locale = require('./resources/lang.json');
+const quake = require('./quake');
+const lang = settings.lang;
 
 /*
 // Installs Notification Sounds for OS X
 */
 
 if (process.platform === 'darwin') {
-	var copy = path.join(__dirname, 'resources', 'audio');
-	var paste = path.join(process.env.HOME, 'Library', 'Sounds');
+	const copy = path.join(__dirname, 'resources', 'audio');
+	const paste = path.join(process.env.HOME, 'Library', 'Sounds');
 
 	fs.copy(copy, paste, function(error) {
 		if (error) logger.error('Error: ' + error);
@@ -93,7 +100,7 @@ socket.on('disconnect', function(){
 */
 
 if (process.platform == 'darwin') electron.app.dock.hide();
-var appIcon, contextMenu = null;
+var appTray, contextMenu = null;
 
 electron.app.on('ready', function() {
 	electron.electronReady = true;
@@ -104,11 +111,11 @@ electron.app.on('ready', function() {
 	}
 
 	if (process.platform == 'darwin') {
-		appIcon = new electron.Tray(path.join(__dirname, 'resources', 'IconTemplate.png'));
-		appIcon.setPressedImage(path.join(__dirname, 'resources', 'IconPressed.png'));
+		appTray = new electron.Tray(path.join(__dirname, 'resources', 'IconTemplate.png'));
+		appTray.setPressedImage(path.join(__dirname, 'resources', 'IconPressed.png'));
 	} else if (process.platform == 'win32') {
-		appIcon = new electron.Tray(path.join(__dirname, 'resources', 'IconWindows.ico'));
-	} else appIcon = new electron.Tray(path.join(__dirname, 'resources', 'IconPressed.png'));
+		appTray = new electron.Tray(path.join(__dirname, 'resources', 'IconWindows.ico'));
+	} else appTray = new electron.Tray(path.join(__dirname, 'resources', 'IconPressed.png'));
 
 	var nodev_template = [
 		{label: locale[lang].menu.about,click: function(){electron.newAbout();}},
@@ -143,8 +150,8 @@ electron.app.on('ready', function() {
 	if (settings.dev_mode) contextMenu = electron.Menu.buildFromTemplate(dev_template);
 	else contextMenu = electron.Menu.buildFromTemplate(nodev_template);
 
-	appIcon.setToolTip('Shake');
-	appIcon.setContextMenu(contextMenu);
+	appTray.setToolTip('Shake');
+	appTray.setContextMenu(contextMenu);
 });
 
 electron.app.on('window-all-closed', function() {
