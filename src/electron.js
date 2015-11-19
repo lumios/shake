@@ -1,14 +1,14 @@
-var BrowserWindow = require('browser-window');
-var electron = require('electron');
-var app = require('app');
-var Menu = require('menu');
-var Tray = require('tray');
-var ipc = electron.ipcMain;
-var path = require('path');
+const electron = require('electron');
+const BrowserWindow = electron.BrowserWindow;
+const app = electron.app;
+const Menu = electron.Menu;
+const Tray = electron.Tray;
+const ipc = electron.ipcMain;
+const path = require('path');
 
-var locale = require('./resources/lang.json');
-var settings = require('./settings.json');
-var lang = settings.lang;
+const locale = require('./resources/lang.json');
+const settings = require('./settings.json');
+const lang = settings.lang;
 
 var alertWindows = {};
 var alertRevision = {};
@@ -45,10 +45,12 @@ exports.newWindow = function(data) {
         'icon': path.join(__dirname, 'resources', 'icon.png'),
         'width': 600,
         'height': 625,
-        'resizable': false,
-		'fullscreen': false,
+        'resizable': true,
         'auto-hide-menu-bar': true,
-        'skip-taskbar': true
+        'skip-taskbar': true,
+        'webPreferences': {
+            'preload': 'https://maps.googleapis.com/maps/api/js'
+        }
     });
 
     if (process.platform == 'darwin') app.dock.show();
