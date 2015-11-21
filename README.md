@@ -41,6 +41,7 @@ An Earthquake Early Warning program for your computer.
 <div align="center">
 
     <img src="https://cloud.githubusercontent.com/assets/6291467/11278149/c3090390-8f3d-11e5-8f06-422d5ec0f395.png">
+    <br>
     <img src="https://cloud.githubusercontent.com/assets/6291467/11278428/053b470e-8f3f-11e5-8d76-adf8dc67a22c.png">
 
 </div>
