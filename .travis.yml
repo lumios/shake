@@ -18,7 +18,7 @@ install:
 - npm i
 script:
 - ./node_modules/.bin/electron-packager ./ Shake --platform=all --arch=all --out=../bin
-  --version=0.35.0
+  --version=0.36.1
 - cp ./src/resources/IconMac.icns ../bin/Shake-darwin-x64/Shake.app/Contents/Resources/
 - wget https://gist.githubusercontent.com/kurisubrooks/2a9206a148adb7039c4b/raw/4b716f33937827035ed005ba09af54639ed2cda2/Info.plist
 - cp ./Info.plist ../bin/Shake-darwin-x64/Shake.app/Contents/Info.plist
