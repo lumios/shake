@@ -6,15 +6,6 @@ const logger = require('lumios-toolkit');
 const crashReporter = require('electron').crashReporter;
 
 /*
-crashReporter.start({
-	productName: 'Shake',
-	companyName: 'Lumios',
-	submitURL: 'https://lumios.xyz/crash',
-	autoSubmit: true
-});
-*/
-
-/*
 // Setting App Directories
 */
 
@@ -127,7 +118,7 @@ electron.app.on('ready', function() {
 		{label: locale[lang].menu.bug,click: function(){open('https://github.com/lumios/eew/issues');}},
 		//{label: locale[lang].menu.updates,click: function(){}},
 		{type: 'separator'},
-		{label: locale[lang].menu.quit,click: function(){logger.debug('Closed via Tray Menu');process.exit(0);}}
+		{label: locale[lang].menu.quit,click: function(){logger.debug('Closed via Tray Menu');app.quit;}}
 	];
 
 	var dev_template = [
@@ -144,7 +135,7 @@ electron.app.on('ready', function() {
 			{label: locale[lang].menu.test,click: function(){quake.parse(trigger.quake());}},
 		]},
 		{type: 'separator'},
-		{label: locale[lang].menu.quit,click: function(){logger.debug('Closed via Tray Menu');process.exit(0);}}
+		{label: locale[lang].menu.quit,click: function(){logger.debug('Closed via Tray Menu')app.quit();}}
 	];
 
 	if (settings.dev_mode) contextMenu = electron.Menu.buildFromTemplate(dev_template);
