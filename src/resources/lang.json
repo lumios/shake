@@ -1,111 +1,111 @@
 {
-	"en": {
-		"title": "Shake",
-		"description": "An Earthquake Early Warning Notifier",
-		"connect": "Connected to Server.",
-		"disconnect": "Failed to Connect to Server. Retrying...",
-		"cancelled": "This Earthquake Warning has been cancelled.",
-		"settings": "Settings",
-		"error": "Error",
-		"menu": {
-			"about": "About",
-			"help": "Support",
-			"contribute": "Contribute",
-			"bug": "Report a Bug",
-			"updates": "Check for Updates",
-			"test": "Trigger Earthquake Event",
-			"devtools": "Debug Tools",
-			"settings": "Preferences",
-			"quit": "Quit"
-		},
+    "en": {
+        "title": "Shake",
+        "description": "Earthquake Early Warning Notifier",
+        "connect": "Connected to Server.",
+        "disconnect": "Failed to Connect to Server. Retrying...",
+        "cancelled": "This Earthquake Warning has been cancelled.",
+        "settings": "Settings",
+        "error": "Error",
+        "menu": {
+            "about": "About",
+            "help": "Support",
+            "contribute": "Contribute",
+            "bug": "Report a Bug",
+            "updates": "Check for Updates",
+            "test": "Trigger Earthquake Event",
+            "devtools": "Debug Tools",
+            "settings": "Preferences",
+            "quit": "Quit"
+        },
 
-		"setup": {
-			"settings": "Settings",
-			"restart": "Please restart Shake to apply your changes.",
-			"language": "Language",
-			"english": "English",
-			"japanese": "日本語",
-			"enable": "Enable",
-			"save": "Save",
-			"min_alert": {
-				"title": "Minimum Alert Magnitude",
-				"line1": "Choose a Minimum Magnitude Size to be notified of.",
-				"line2": "(You will only be notified of Earthquakes of this size and higher.)"
-			},
-			"night_mode": {
-				"title": "Night Mode",
-				"line1": "If enabled, Notification Sounds will be muted between Midnight and 6am.",
-				"line2": "(This setting is ignored if an Earthquake is above Magnitude 6)"
-			},
-			"dev_mode": {
-				"title": "Development Mode",
-				"line1": "If enabled, you will have access to debug tools that are using during development.",
-				"line2": "(Only enable this option if you know what you're doing!)"
-			}
-		},
+        "setup": {
+            "settings": "Settings",
+            "restart": "Please restart Shake to apply your changes.",
+            "language": "Language",
+            "english": "English",
+            "japanese": "日本語",
+            "enable": "Enable",
+            "save": "Save",
+            "min_alert": {
+                "title": "Minimum Alert Magnitude",
+                "line1": "Choose a Minimum Magnitude Size to be notified of.",
+                "line2": "(You will only be notified of Earthquakes of this size and higher.)"
+            },
+            "night_mode": {
+                "title": "Night Mode",
+                "line1": "If enabled, Notification Sounds will be muted between Midnight and 6am.",
+                "line2": "(This setting is ignored if an Earthquake is above Magnitude 6)"
+            },
+            "dev_mode": {
+                "title": "Development Mode",
+                "line1": "If enabled, you will have access to debug tools that are using during development.",
+                "line2": "(Only enable this option if you know what you're doing!)"
+            }
+        },
 
-		"units": {
-			"epicenter": "Epicenter",
-			"magnitude": "Magnitude",
-			"seismic": "Max Seismic",
-			"depth": "Depth",
-			"update": "Update",
-			"final": "Final"
-		}
-	},
+        "units": {
+            "epicenter": "Epicenter",
+            "magnitude": "Magnitude",
+            "seismic": "Max Seismic",
+            "depth": "Depth",
+            "update": "Update",
+            "final": "Final"
+        }
+    },
 
-	"ja": {
-		"title": "Shake",
-		"description": "",
-		"connect": "サーバー接続完了！",
-		"disconnect": "サーバーに接続出来ません。接続を継続します。",
-		"cancelled": "先ほどの地震速報は誤報です。",
-		"settings": "設定",
-		"error": "エラー",
-		"menu": {
-			"about": "について",
-			"help": "サポート",
-			"contribute": "貢献",
-			"bug": "バグを報告",
-			"updates": "アップデートを確認",
-			"test": "テスト地震",
-			"devtools": "開発者ツール",
-			"settings": "設定",
-			"quit": "終了"
-		},
+    "ja": {
+        "title": "Shake",
+        "description": "",
+        "connect": "サーバー接続完了！",
+        "disconnect": "サーバーに接続出来ません。接続を継続します。",
+        "cancelled": "先ほどの地震速報は誤報です。",
+        "settings": "設定",
+        "error": "エラー",
+        "menu": {
+            "about": "について",
+            "help": "サポート",
+            "contribute": "貢献",
+            "bug": "バグを報告",
+            "updates": "アップデートを確認",
+            "test": "テスト地震",
+            "devtools": "開発者ツール",
+            "settings": "設定",
+            "quit": "終了"
+        },
 
-		"setup": {
-			"settings": "設定",
-			"restart": "新しい設定を有効にするために、プログラムを再起動してください。",
-			"language": "言語",
-			"english": "English",
-			"japanese": "日本語",
-			"enable": "有効にして",
-			"save": "セーブ",
-			"min_alert": {
-				"title": "最小マグニチュードを選択",
-				"line1": "通知を受ける最低マグニチュードを選んでください。",
-				"line2": ""
-			},
-			"night_mode": {
-				"title": "ナイトモード",
-				"line1": "通知音は真夜中の間には鳴りません",
-				"line2": "(地震の規模がマグニチュード6.0以上である場合を除く)"
-			},
-			"dev_mode": {
-				"title": "開発者モード",
-				"line1": "デバッグツールへのアクセスを得るために有効にします。",
-				"line2": "(あなたは何をやっている知っている場合にのみ有効します！)"
-			}
-		},
+        "setup": {
+            "settings": "設定",
+            "restart": "新しい設定を有効にするために、プログラムを再起動してください。",
+            "language": "言語",
+            "english": "English",
+            "japanese": "日本語",
+            "enable": "有効にして",
+            "save": "セーブ",
+            "min_alert": {
+                "title": "最小マグニチュードを選択",
+                "line1": "通知を受ける最低マグニチュードを選んでください。",
+                "line2": ""
+            },
+            "night_mode": {
+                "title": "ナイトモード",
+                "line1": "通知音は真夜中の間には鳴りません",
+                "line2": "(地震の規模がマグニチュード6.0以上である場合を除く)"
+            },
+            "dev_mode": {
+                "title": "開発者モード",
+                "line1": "デバッグツールへのアクセスを得るために有効にします。",
+                "line2": "(あなたは何をやっている知っている場合にのみ有効します！)"
+            }
+        },
 
-		"units": {
-			"epicenter": "震源",
-			"magnitude": "マグニチュード",
-			"seismic": "最大震度",
-			"depth": "深さ",
-			"update": "更新",
-			"final": "最後"
-		}
-	}
+        "units": {
+            "epicenter": "震源",
+            "magnitude": "マグニチュード",
+            "seismic": "最大震度",
+            "depth": "深さ",
+            "update": "更新",
+            "final": "最後"
+        }
+    }
 }

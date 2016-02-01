@@ -21,7 +21,7 @@
         var locale = require("../resources/lang.json");
         var settings = require("../settings.json");
         var lang = settings.lang;
-		var settingsPath = path.join(__dirname, "../", "settings.json");
+        var settingsPath = path.join(__dirname, "../", "settings.json");
         var settingsFile = {"lang": "en", "min_alert": "35", "first_run": false, "night_mode": true, "dev_mode": true};
 
         function save() {
@@ -32,7 +32,7 @@
                 settings["min_alert"] = form["min_alert"].value;
                 settings["first_run"] = false;
                 settings["night_mode"] = form["night_mode"].checked;
-				settings["dev_mode"] = form["dev_mode"].checked;
+                settings["dev_mode"] = form["dev_mode"].checked;
                 fs.writeFile(settingsPath, JSON.stringify(settings));
             } catch(err) {
                 alert("There was an error saving your settings: " + err);
@@ -41,15 +41,15 @@
                 alert(locale[lang].setup.restart);
                 console.log("Success: Settings Saved.")
                 window.close();
-			}
+            }
         }
 
-		document.addEventListener("DOMContentLoaded", function() {
-			if (lang === "en") document.getElementById("lang_en").checked = true;
-			else if (lang === "ja") document.getElementById("lang_ja").checked = true;
-			document.getElementById("min_alert").value = settings.min_alert;
-			if (settings.night_mode) document.getElementById("night_mode").checked = true;
-			if (settings.dev_mode) document.getElementById("dev_mode").checked = true;
+        document.addEventListener("DOMContentLoaded", function() {
+            if (lang === "en") document.getElementById("lang_en").checked = true;
+            else if (lang === "ja") document.getElementById("lang_ja").checked = true;
+            document.getElementById("min_alert").value = settings.min_alert;
+            if (settings.night_mode) document.getElementById("night_mode").checked = true;
+            if (settings.dev_mode) document.getElementById("dev_mode").checked = true;
 
             document.getElementById("title").innerHTML = locale[lang].setup.settings;
             document.getElementById("save").innerHTML = locale[lang].setup.save;
@@ -67,7 +67,7 @@
             document.getElementById("dev_title").innerHTML = locale[lang].setup.dev_mode.title;
             document.getElementById("dev_line1").innerHTML = locale[lang].setup.dev_mode.line1;
             document.getElementById("dev_line2").innerHTML = locale[lang].setup.dev_mode.line2;
-		});
+        });
     </script>
 </head>
 <body>
@@ -75,15 +75,15 @@
     <hr>
 
     <form action="javascript:save()" id="settings">
-		<h4><span id="lang_title">Language</a></h4>
-		<blockquote>
-			<label><input type="radio" name="lang" id="lang_en" value="en"> <span id="lang_eng">English</span></label><br>
-			<label><input type="radio" name="lang" id="lang_ja" value="ja"> <span id="lang_jpn">日本語</span></label>
-		</blockquote>
+        <h4><span id="lang_title">Language</a></h4>
+            <blockquote>
+                <label><input type="radio" name="lang" id="lang_en" value="en"> <span id="lang_eng">English</span></label><br>
+                <label><input type="radio" name="lang" id="lang_ja" value="ja"> <span id="lang_jpn">日本語</span></label>
+            </blockquote>
 
-    	<h4 id="min_title">{min_title}</h4>
+            <h4 id="min_title">{min_title}</h4>
 
-		<p><span id="min_line1">{min_line1}</span><br>
+            <p><span id="min_line1">{min_line1}</span><br>
         <span id="min_line2">{min_line2}</span></p>
 
         <select name="min_alert" id="min_alert">
@@ -107,11 +107,11 @@
 
         <br>
 
-		<h4 id="dev_title">{dev_title}}</h4>
+        <h4 id="dev_title">{dev_title}}</h4>
         <p><span id="dev_line1">{dev_line1}</span><br>
         <span id="dev_line2">{dev_line2}</span></p>
 
-		<label><input type="checkbox" name="dev_mode" id="dev_mode"> <span id="enable2">Enable</span></label>
+        <label><input type="checkbox" name="dev_mode" id="dev_mode"> <span id="enable2">Enable</span></label>
 
         <button value="submit" id="save">Save</button>
     </form>

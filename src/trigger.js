@@ -1,4 +1,4 @@
-exports.quake = function() {
+exports.quake = () => {
     function calc(input) {
         return input[Math.floor(Math.random() * input.length)];
     }
@@ -18,8 +18,8 @@ exports.quake = function() {
     return JSON.stringify({
         "type": "0",
         "drill": true,
-        "announce_time": "2015/10/11 07:17:46",
-        "earthquake_time": "2015/10/11 07:16:32",
+        "announce_time": "2011/03/11 07:17:46",
+        "earthquake_time": "2011/03/11 07:16:32",
         "earthquake_id": Math.random(),
         "situation": "0",
         "revision": "1",
