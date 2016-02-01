@@ -23,14 +23,14 @@ exports.alertWindows = alertWindows;
 exports.alertRevision = alertRevision;
 exports.electronReady = electronReady;
 
-exports.newAbout = function(data) {
+exports.newAbout = (data) => {
     var alertWindow = new BrowserWindow({
         'title': locale[lang].title,
         'icon': path.join(__dirname, 'resources', 'icon.png'),
-        'width': 320,
-        'height': 210,
+        'width': 330,
+        'height': 240,
         'resizable': false,
-		'fullscreen': false,
+        'fullscreen': false,
         'auto-hide-menu-bar': true,
         'skip-taskbar': false
     });
@@ -39,7 +39,7 @@ exports.newAbout = function(data) {
     alertWindow.loadURL('file://' + __dirname + '/gui/about.html');
 };
 
-exports.newWindow = function(data) {
+exports.newWindow = (data) => {
     var alertWindow = new BrowserWindow({
         'title': locale[lang].title,
         'icon': path.join(__dirname, 'resources', 'icon.png'),
@@ -59,18 +59,18 @@ exports.newWindow = function(data) {
     alertWindow.loadURL('file://' + __dirname + '/gui/map.html');
 };
 
-exports.newSettings = function() {
+exports.newSettings = () => {
     var settingsWindow = new BrowserWindow({
-		'title': locale[lang].settings,
-		'icon': path.join(__dirname, 'resources', 'icon.png'),
-		'width': 500,
-		'height': 550,
-		'resizable': false,
-		'fullscreen': false,
-		'auto-hide-menu-bar': true,
-		'skip-taskbar': false
-	});
+        'title': locale[lang].settings,
+        'icon': path.join(__dirname, 'resources', 'icon.png'),
+        'width': 500,
+        'height': 550,
+        'resizable': false,
+        'fullscreen': false,
+        'auto-hide-menu-bar': true,
+        'skip-taskbar': false
+    });
 
-	if (process.platform == 'darwin') app.dock.show();
-	settingsWindow.loadURL('file://' + __dirname + '/gui/settings.html');
+    if (process.platform == 'darwin') app.dock.show();
+    settingsWindow.loadURL('file://' + __dirname + '/gui/settings.html');
 };
