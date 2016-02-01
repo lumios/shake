@@ -1,5 +1,5 @@
 const notifier = require('./notifier');
-const logger = require('lumios-toolkit');
+const crimson = require('crimson');
 const electron = require('./electron');
 const locale = require('./resources/lang.json');
 const settings = require('./settings.json');
@@ -62,10 +62,10 @@ exports.parse = function(input) {
         var subtitle = template[0];
         var message = template[1];
 
-        if (data.drill) logger.debug('Developer Quake Triggered, Parsing Fake Quake...');
-        if (settings.night_mode && date.getHours() < '06' && data.magnitude <= '6') logger.debug('Night Mode Enabled, Muting Notification...');
-        logger.info(data.earthquake_time + ' - ' + data.epicenter_en);
-        logger.info(locale.en.units.update + ' ' + situation_string + ', ' + locale.en.units.magnitude + ': ' + data.magnitude + ', ' + locale.en.units.seismic + ': ' + data.seismic_en);
+        if (data.drill) crimson.debug('Developer Quake Triggered, Parsing Fake Quake...');
+        if (settings.night_mode && date.getHours() < '06' && data.magnitude <= '6') crimson.debug('Night Mode Enabled, Muting Notification...');
+        crimson.info(data.earthquake_time + ' - ' + data.epicenter_en);
+        crimson.info(locale.en.units.update + ' ' + situation_string + ', ' + locale.en.units.magnitude + ': ' + data.magnitude + ', ' + locale.en.units.seismic + ': ' + data.seismic_en);
 
         // Night Notification
         if (settings.night_mode && date.getHours() < '06' && data.magnitude <= '6') {
@@ -76,7 +76,7 @@ exports.parse = function(input) {
         else notifier.notify(locale[lang].title, subtitle, message, sound_string, spawnMap(data, template));
     } catch (error) {
         notifier.notify(locale[lang].title, '', locale[lang].error + ': ' + error.message, false);
-		logger.error(error);
+        crimson.error(error);
         throw error;
-	}
+    }
 };
