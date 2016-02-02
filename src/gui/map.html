@@ -10,7 +10,8 @@
         var settings = require('../settings.json');
         var date = new Date();
 
-        if (settings.night_mode && date.getHours() < '06' && data.magnitude <= '6' && process.platform != 'darwin') audio.play();
+        //if (settings.night_mode && date.getHours() < '06' && data.magnitude <= '6' && process.platform != 'darwin') audio.play();
+        if (process.platform != 'darwin') audio.play();
 
         ipc.on('data', function(all) {
             var data = all[0];

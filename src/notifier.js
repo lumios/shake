@@ -23,8 +23,7 @@ exports.notify = (title, subtitle, message, sound, callback) => {
     } else {
         return notifier.notify({
             'title': title,
-            'subtitle': subtitle,
-            'message': message,
+            'message': subtitle + '\n' + message,
             'sound': sound,
             'urgency': 'critical',
             'time': 8000,

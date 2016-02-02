@@ -108,10 +108,12 @@ electron.app.on('ready', () => {
 
     if (process.platform == 'darwin') {
         appTray = new electron.Tray(path.join(__dirname, 'resources', 'IconTemplate.png'));
-        appTray.setPressedImage(path.join(__dirname, 'resources', 'IconPressed.png'));
+        appTray.setPressedImage(    path.join(__dirname, 'resources', 'IconPressed.png'));
     } else if (process.platform == 'win32') {
-        appTray = new electron.Tray(path.join(__dirname, 'resources', 'IconWindows.ico'));
-    } else appTray = new electron.Tray(path.join(__dirname, 'resources', 'IconPressed.png'));
+        appTray = new electron.Tray(path.join(__dirname, 'resources', 'IconTest.png'));
+    } else {
+        appTray = new electron.Tray(path.join(__dirname, 'resources', 'IconPressed.png'));
+    }
 
     var nodev_template = [
         {label: locale[lang].menu.about,click: () => electron.newAbout()},
