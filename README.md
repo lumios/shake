@@ -7,35 +7,18 @@ An Earthquake Early Warning program for your computer.
 
 ### Installation
 ##### Prerequisites
-- [Node.js](http://nodejs.org/) v0.12.7 (or newer)
-
-
-- OS
-    - Windows 7, 8, 10 (32-bit, 64-bit)
-    - Mac OS X 10.8 (or newer)
-    - Linux (Ubuntu, or Debian based)
-
-
-- Specs
-    - 1.2GHz Dual Core CPU (minimum)
-    - 1 GB RAM (minimum)
-
-
-- Stable Internet Connection
+[Node.js](http://nodejs.org/) v4.0 or higher is required, and 2GB of RAM is recommended.  
+Shake supports Mac OS X 10.8 (or newer) and Ubuntu or Debian based Linux distributions.  
+Windows 7+ is some-what supported, with no guarantee of working.
 
 ##### Install
 1. `cd ~/.../shake`
 2. `git clone https://github.com/lumios/shake.git`
-3. `npm i`
+3. `npm install`
 
 ##### Run
 1. `cd ~/.../shake`
 2. `npm start`
-
-##### Build
-1. `cd ~/.../shake`
-2. `npm i gulp -g`
-3. `npm build`
 
 ### Screenshots
 <div align="center">
@@ -47,26 +30,17 @@ An Earthquake Early Warning program for your computer.
 </div>
 
 ### Legal
+
 ```text
-Copyright (c) 2015 Lumios – All Rights Reserved.
+Copyright (c) 2016 Lumios – All Rights Reserved.
 
-Permission is hereby granted, free of charge, to any persons obtaining
-a copy of this software, to deal this software within the agreed guidelines.
+You can use, modify, or copy this software, so long
+as you don't redistribute it without explicit permission.
 
-Copying, modification, contribution, non-commercial distribution and/or
-sub-licensing this software are allowed, so long as you are subject to the
-following conditions:
+This software is provided "as is", without warranty of any kind.
+The authors or copyright holders of this software cannot be held
+liable for any claim, damages, or other liability arising from
+the use of this software.
 
-The above copyright notice and this permission notice will be included in all
-copies, un-modified, within the Software.
-Licensing and security checks may not be removed.
-Republication of this software for personal or commercial gain is prohibited.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Thanks! (^o^//
 ```
