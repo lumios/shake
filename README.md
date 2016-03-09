@@ -11,6 +11,10 @@ An Earthquake Early Warning program for your computer.
 Shake supports Mac OS X 10.8 (or newer) and Ubuntu or Debian based Linux distributions.  
 Windows 7+ is some-what supported, with no guarantee of working.
 
+##### Download a Binary
+Nightly beta builds are available [here](http://eew.kurisubrooks.com).  
+All builds are stable to an extent, this software is still in beta.
+
 ##### Install
 1. `cd ~/.../shake`
 2. `git clone https://github.com/lumios/shake.git`
