@@ -1,9 +1,22 @@
-# Shake
-[![Build Status](https://travis-ci.org/lumios/shake.svg?branch=master)](https://travis-ci.org/lumios/shake)
-[![Dependency Status](https://david-dm.org/lumios/shake.svg)](https://david-dm.org/lumios/shake)
+<h1 align="center">
+    <br>
+    <img src="https://cloud.githubusercontent.com/assets/6291467/13650527/33b9cb46-e697-11e5-963f-af5cb9bac1f6.png">
+    <br>
+    Shake
+    <br>
+    <br>
+</h1>
 
-An Earthquake Early Warning program for your computer.  
-あなたのコンピュータのための緊急地震速報
+<p align="center">
+    <br>
+    <a href="https://travis-ci.org/lumios/shake"><img src="https://travis-ci.org/lumios/shake.svg?branch=master"></a>
+    <a href="https://david-dm.org/lumios/shake"><img src="https://david-dm.org/lumios/shake.svg"></a>
+    <br>
+
+    An Earthquake Early Warning program for your computer.<br>
+    あなたのコンピュータのための緊急地震速報
+</p>
+<h1></h1>
 
 ### Installation
 ##### Prerequisites
@@ -15,7 +28,7 @@ Windows 7+ is some-what supported, with no guarantee of working.
 Nightly beta builds are available [here](http://eew.kurisubrooks.com).  
 All builds are stable to an extent, this software is still in beta.
 
-##### Install
+##### Manual Install
 1. `cd ~/.../shake`
 2. `git clone https://github.com/lumios/shake.git`
 3. `npm install`
@@ -25,13 +38,11 @@ All builds are stable to an extent, this software is still in beta.
 2. `npm start`
 
 ### Screenshots
-<div align="center">
-
+<h1 align="center">
     <img src="https://cloud.githubusercontent.com/assets/6291467/11278149/c3090390-8f3d-11e5-8f06-422d5ec0f395.png">
     <br>
     <img src="https://cloud.githubusercontent.com/assets/6291467/11278428/053b470e-8f3f-11e5-8d76-adf8dc67a22c.png">
-
-</div>
+</h1>
 
 ### Legal
 
