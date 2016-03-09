@@ -17,8 +17,8 @@ if (process.platform === 'win32') {
 } else if (process.platform === 'darwin') {
     appDir = path.join(process.env.HOME, 'Library', 'Application Support', 'Shake', 'App');
 } else if (process.platform === 'linux') {
-    appDir = path.join(process.env.PWD, 'shake', 'app');
-}
+    appDir = path.join('/', 'usr', 'share', 'shake', 'app');
+} else crimson.fatal('Unknown Operating System, can\'t create/find settings');
 
 /*
 // Loads / Generates Settings
@@ -59,7 +59,7 @@ if (process.platform === 'darwin') {
     const paste = path.join(process.env.HOME, 'Library', 'Sounds');
 
     fs.copy(copy, paste, (error) => {
-        if (error) crimson.error('Error: ' + error);
+        if (error) crimson.fatal(error);
         crimson.success('Installed Sounds to [' + paste + ']');
     });
 }
@@ -108,7 +108,7 @@ electron.app.on('ready', () => {
 
     if (process.platform == 'darwin') {
         appTray = new electron.Tray(path.join(__dirname, 'resources', 'IconTemplate.png'));
-        appTray.setPressedImage(    path.join(__dirname, 'resources', 'IconPressed.png'));
+        appTray.setPressedImage(path.join(__dirname, 'resources', 'IconPressed.png'));
     } else if (process.platform == 'win32') {
         appTray = new electron.Tray(path.join(__dirname, 'resources', 'IconTest.png'));
     } else {
