@@ -11,12 +11,12 @@
         var date = new Date();
 
         //if (settings.night_mode && date.getHours() < '06' && data.magnitude <= '6' && process.platform != 'darwin') audio.play();
-        if (process.platform != 'darwin') audio.play();
 
-        ipc.on('data', function(all) {
-            var data = all[0];
-            var template = all[1];
-            var locale = all[2];
+        ipc.on('data', function(incoming) {
+            var data = incoming[0];
+            var template = incoming[1];
+            var locale = incoming[2];
+            if (process.platform !== 'darwin') audio.play();
             if (data.type == 1 || data.situation == 2) {
                 document.getElementById("location").textContent = locale.en.cancelled;
                 document.getElementById("magnitudeseismic").textContent = "";
@@ -57,13 +57,45 @@
         }
     </script>
     <style>
-        * {-webkit-touch-callout:none;-webkit-user-select: none;-khtml-user-select: none;user-select: none;}
-        body {font-family:"Arial","Helvetica",sans-serif;margin:0;}
-        #map {overflow: hidden;position: absolute;z-index: 0;height: 100%;width: 100%;background-color: #DDD;}
-        .alert {position: absolute;z-index: 10;top: 0;left: 0;width: inherit;display: inline-block;background-color: #DC4A47;color: white;padding: 5px 25px 5px 10px;border-bottom-right-radius: 4px;cursor: default;}
-        .alert p {margin: 0;}
-        .alert b {display: block;margin-bottom: 3px;}
-        td {margin: 0;}
+        * {
+            -webkit-touch-callout:none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            font-family: "Arial", "Helvetica", sans-serif;
+            margin: 0;
+        }
+
+        #map {
+            overflow: hidden;
+            position: absolute;
+            z-index: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #DDD;
+        }
+
+        .alert {
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            width: inherit;
+            display: inline-block;
+            background-color: #DC4A47;
+            color: white;
+            padding: 5px 25px 5px 10px;
+            border-bottom-right-radius: 4px;
+            cursor: default;
+            line-height: 20px;
+        }
+
+        .alert p { margin: 0; }
+        .alert b { display: block; margin-bottom: 3px; }
+        td { margin: 0; }
     </style>
 </head>
 <body>
