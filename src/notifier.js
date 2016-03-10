@@ -23,9 +23,9 @@ exports.notify = (title, subtitle, message, sound, callback) => {
     } else {
         return notifier.notify({
             'title': title,
-            'message': subtitle + (!subtitle ? '\n' : '') + message,
+            'message': subtitle + (subtitle ? '\n' : '') + message,
             'sound': sound,
-            'urgency': 'critical',
+            'urgency': 'normal',
             'time': 8000,
             'icon': path.join(__dirname, 'resources', 'IconLogo.png')
         }, (error, response) => {
