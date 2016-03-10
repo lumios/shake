@@ -30,7 +30,7 @@ if (!fs.existsSync(settingsPath)) {
 
     try {
         fs.writeFileSync(settingsPath, JSON.stringify(settingsFile));
-    } catch(error) {crimson.error(error);}
+    } catch(error) {crimson.fatal(error);}
 
     var settings = require('./settings.json');
     crimson.success('Generated Settings File');
