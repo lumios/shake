@@ -1,4 +1,6 @@
-const socket = require('socket.io-client')('http://shakeserv.kurisubrooks.com:1190');
+//const socket_url = 'http://0.0.0.0:1190';
+const socket_url = 'http://shakeserv.kurisubrooks.com:1190';
+const socket = require('socket.io-client')(socket_url);
 const path = require('path');
 const fs = require('fs-extra');
 const open = require('open');
@@ -69,6 +71,7 @@ if (process.platform === 'darwin') {
 */
 
 socket.on('connect', () => {
+    socket.emit('connection', { hello: true });
     crimson.success('Connected to Server.');
     notifier.notify(locale[lang].title, '', locale[lang].connect, false);
 });
@@ -78,7 +81,7 @@ socket.on('connect', () => {
 */
 
 socket.on('data', (data) => {
-    crimson.debug('Earthquake Occurred, Triggering Event...');
+    crimson.debug('Earthquake Occurred, Triggering Parser...');
     quake.parse(data);
 });
 
@@ -140,7 +143,7 @@ electron.app.on('ready', () => {
         {label: locale[lang].menu.bug,click: () => open('https://github.com/lumios/eew/issues')},
         {type: 'separator'},
         {label: locale[lang].menu.devtools, submenu:[
-            {label: locale[lang].menu.test,click: () => quake.parse(trigger.quake())},
+            {label: locale[lang].menu.test,click: () => quake.parse(trigger.quake())}
         ]},
         {type: 'separator'},
         {label: locale[lang].menu.quit,click: () => {
