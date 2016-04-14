@@ -24,30 +24,33 @@ exports.alertRevision = alertRevision;
 exports.electronReady = electronReady;
 
 exports.newAbout = (data) => {
-    var alertWindow = new BrowserWindow({
+    var aboutWindow = new BrowserWindow({
         'title': locale[lang].title,
         'icon': path.join(__dirname, 'resources', 'icon.png'),
         'width': 330,
         'height': 240,
         'resizable': false,
         'fullscreen': false,
-        'auto-hide-menu-bar': true,
-        'skip-taskbar': false
+        'autoHideMenuBar': true,
+        'skipTaskbar': false
     });
 
     if (process.platform == 'darwin') app.dock.show();
-    alertWindow.loadURL('file://' + __dirname + '/gui/about.html');
+    aboutWindow.focus();
+    aboutWindow.loadURL('file://' + __dirname + '/gui/about.html');
 };
 
 exports.newWindow = (data) => {
     var alertWindow = new BrowserWindow({
         'title': locale[lang].title,
         'icon': path.join(__dirname, 'resources', 'icon.png'),
+        'minWidth': 600,
         'width': 600,
+        'minHeight': 625,
         'height': 625,
-        'resizable': true,
-        'auto-hide-menu-bar': true,
-        'skip-taskbar': true,
+        'resizable': false,
+        'autoHideMenuBar': true,
+        'skipTaskbar': false,
         'webPreferences': {
             'preload': 'https://maps.googleapis.com/maps/api/js'
         }
@@ -56,6 +59,7 @@ exports.newWindow = (data) => {
     if (process.platform == 'darwin') app.dock.show();
     alertWindows[data.earthquake_id] = alertWindow;
     alertRevision[data.earthquake_id] = data.revision;
+    alertWindow.focus();
     alertWindow.loadURL('file://' + __dirname + '/gui/map.html');
 };
 
@@ -67,8 +71,8 @@ exports.newSettings = () => {
         'height': 550,
         'resizable': false,
         'fullscreen': false,
-        'auto-hide-menu-bar': true,
-        'skip-taskbar': false
+        'autoHideMenuBar': true,
+        'skipTaskbar': false
     });
 
     if (process.platform == 'darwin') app.dock.show();
