@@ -5,6 +5,7 @@
         "connect": "Connected to Server.",
         "disconnect": "Failed to Connect to Server. Retrying...",
         "cancelled": "This Earthquake Warning has been cancelled.",
+        "conn_refused": "Server Connection Denied. Try updating Shake.",
         "settings": "Settings",
         "error": "Error",
         "menu": {
@@ -58,8 +59,9 @@
         "title": "Shake",
         "description": "",
         "connect": "サーバー接続完了！",
-        "disconnect": "サーバーに接続出来ません。接続を継続します。",
+        "disconnect": "サーバーに接続できません。接続を継続します。",
         "cancelled": "先ほどの地震速報は誤報です。",
+        "conn_refused": "サーバーに接続が拒否されました。",
         "settings": "設定",
         "error": "エラー",
         "menu": {
