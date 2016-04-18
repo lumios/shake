@@ -20,19 +20,23 @@ if (process.platform === 'win32') {
     appDir = path.join(process.env.HOME, 'Library', 'Application Support', 'Shake', 'App');
 } else if (process.platform === 'linux') {
     appDir = path.join('/', 'usr', 'share', 'shake', 'app');
-} else crimson.fatal('Unknown Operating System, can\'t create/find settings');
+} else {
+    crimson.fatal('Unknown Operating System, can\'t create/find settings');
+}
 
 /*
 // Loads / Generates Settings
 */
 
 if (!fs.existsSync(settingsPath)) {
-    var settingsFile = {"lang":"en","min_alert":"35","first_run":true,"night_mode":false,"dev_mode":true};
+    var settingsFile = { "lang": "en", "min_alert": "35", "first_run": true, "night_mode": false, "dev_mode": true };
     crimson.warn('Settings File does not exist, generating...');
 
     try {
         fs.writeFileSync(settingsPath, JSON.stringify(settingsFile));
-    } catch(error) {crimson.fatal(error);}
+    } catch (error) {
+        crimson.fatal(error);
+    }
 
     var settings = require('./settings.json');
     crimson.success('Generated Settings File');
@@ -67,27 +71,27 @@ if (process.platform === 'darwin') {
 }
 
 /*
-// Connects to Socket
+// Server Connection
 */
 
 socket.on('connect', () => {
-    socket.emit('connection', { hello: true });
-    crimson.success('Connected to Server.');
-    notifier.notify(locale[lang].title, '', locale[lang].connect, false);
+    socket.emit('open', { version: '1.2' });
 });
 
-/*
-// Receives Data from Socket
-*/
+socket.on('auth', (data) => {
+    if (data.ok) {
+        crimson.success('Connected to Server.');
+        notifier.notify(locale[lang].title, '', locale[lang].connect, false);
+    } else {
+        notifier.notify(locale[lang].title, '', locale[lang].conn_refused, false);
+        crimson.fatal('Connected to Server Refused, Crashing.');
+    }
+});
 
 socket.on('data', (data) => {
     crimson.debug('Earthquake Occurred, Triggering Parser...');
     quake.parse(data);
 });
-
-/*
-// Catches Dropped Socket
-*/
 
 socket.on('disconnect', () => {
     crimson.error('Socket Dropped, Trying to reconnect...');
