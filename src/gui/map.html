@@ -7,6 +7,7 @@
     <script>
         var ipc = require('ipc');
         var audio = new Audio('../resources/audio/alert.mp3');
+        var priority = new Audio('../resources/audio/denwa.mp3');
         var settings = require('../settings.json');
         var date = new Date();
 
@@ -14,8 +15,16 @@
             var data = incoming[0];
             var template = incoming[1];
             var locale = incoming[2];
-
-            if (settings.night_mode && date.getHours() < '06' && data.magnitude <= '6' && process.platform != 'darwin') audio.play();
+            
+            if (process.platform !== 'darwin') {
+                if (data.alarm) {
+                    priority.play();
+                } else if (setting.night_mode && date.getHours() < '06') {
+                    return;
+                } else {
+                    audio.play();
+                }
+            }
 
             if (data.type == 1 || data.situation == 2) {
                 document.getElementById("location").textContent = locale.en.cancelled;
