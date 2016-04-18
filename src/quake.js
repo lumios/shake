@@ -7,6 +7,7 @@ const lang = settings.lang;
 
 function sound(data) {
     if (data.type == 1 || data.situation == 2) return 'Submarine';
+    else if (data.alarm) return 'denwa';
     else return 'alert';
 }
 
@@ -46,7 +47,7 @@ function spawnMap(data, template) {
         } else if (electron.alertRevision[data.earthquake_id] !== undefined && data.revision > electron.alertRevision[data.earthquake_id]) {
             var webContents = electron.alertWindows[data.earthquake_id].webContents;
             webContents.send('data', [data, template, locale]);
-                electron.alertRevision[data.earthquake_id] = data.revision;
+            electron.alertRevision[data.earthquake_id] = data.revision;
         }
     }
 }
@@ -63,17 +64,17 @@ exports.parse = function(input) {
         var message = template[1];
 
         if (data.drill) crimson.debug('Developer Quake Triggered, Parsing Fake Quake...');
-        if (settings.night_mode && date.getHours() < '06' && data.magnitude <= '6') crimson.debug('Night Mode Enabled, Muting Notification...');
         crimson.info(data.earthquake_time + ' - ' + data.epicenter_en);
         crimson.info(locale.en.units.update + ' ' + situation_string + ', ' + locale.en.units.magnitude + ': ' + data.magnitude + ', ' + locale.en.units.seismic + ': ' + data.seismic_en);
 
-        // Night Notification
-        if (settings.night_mode && date.getHours() < '06' && data.magnitude <= '6') {
+        // Night / Day Notification
+        if (settings.night_mode && date.getHours() < '06' && !data.alarm) {
+            crimson.debug('Night Mode Enabled, Muting Notification...');
             notifier.notify(locale[lang].title, subtitle, message, false, spawnMap(data, template));
+        } else {
+            if (settings.night_mode && date.getHours() < '06' && data.alarm) crimson.debug('Public Alarm Issued, Triggering Un-silenced Notification...');
+            notifier.notify(locale[lang].title, subtitle, message, sound_string, spawnMap(data, template));
         }
-
-        // Day Notification
-        else notifier.notify(locale[lang].title, subtitle, message, sound_string, spawnMap(data, template));
     } catch (error) {
         notifier.notify(locale[lang].title, '', locale[lang].error + ': ' + error.message, false);
         crimson.error(error);
