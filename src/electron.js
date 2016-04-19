@@ -59,6 +59,9 @@ exports.newWindow = (data) => {
     if (process.platform == 'darwin') app.dock.show();
     alertWindows[data.earthquake_id] = alertWindow;
     alertRevision[data.earthquake_id] = data.revision;
+    alertWindow.on("closed", () => {
+        alertWindows[data.earthquake_id] = undefined;
+    });
     alertWindow.focus();
     alertWindow.loadURL('file://' + __dirname + '/gui/map.html');
 };
