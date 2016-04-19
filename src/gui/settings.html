@@ -101,7 +101,7 @@
                 var form = document.getElementById("settings");
                 var settings = {};
                 settings["lang"] = form["lang"].value;
-                settings["min_alert"] = form["min_alert"].value;
+                //settings["min_alert"] = form["min_alert"].value;
                 settings["first_run"] = false;
                 settings["night_mode"] = form["night_mode"].checked;
                 settings["dev_mode"] = form["dev_mode"].checked;
@@ -119,7 +119,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             if (lang === "en") document.getElementById("lang_en").checked = true;
             else if (lang === "ja") document.getElementById("lang_ja").checked = true;
-            document.getElementById("min_alert").value = settings.min_alert;
+            //document.getElementById("min_alert").value = settings.min_alert;
             if (settings.night_mode) document.getElementById("night_mode").checked = true;
             if (settings.dev_mode) document.getElementById("dev_mode").checked = true;
 
@@ -130,9 +130,9 @@
             document.getElementById("lang_title").innerHTML = locale[lang].setup.language;
             document.getElementById("lang_eng").innerHTML = locale[lang].setup.english;
             document.getElementById("lang_jpn").innerHTML = locale[lang].setup.japanese;
-            document.getElementById("min_title").innerHTML = locale[lang].setup.min_alert.title;
+            /*document.getElementById("min_title").innerHTML = locale[lang].setup.min_alert.title;
             document.getElementById("min_line1").innerHTML = locale[lang].setup.min_alert.line1;
-            document.getElementById("min_line2").innerHTML = locale[lang].setup.min_alert.line2;
+            document.getElementById("min_line2").innerHTML = locale[lang].setup.min_alert.line2;*/
             document.getElementById("night_title").innerHTML = locale[lang].setup.night_mode.title;
             document.getElementById("night_line1").innerHTML = locale[lang].setup.night_mode.line1;
             document.getElementById("night_line2").innerHTML = locale[lang].setup.night_mode.line2;
@@ -148,15 +148,15 @@
 
     <form action="javascript:save()" id="settings">
         <h4><span id="lang_title">Language</a></h4>
-            <blockquote>
-                <label><input type="radio" name="lang" id="lang_en" value="en"> <span id="lang_eng">English</span></label><br>
-                <label><input type="radio" name="lang" id="lang_ja" value="ja"> <span id="lang_jpn">日本語</span></label>
-            </blockquote>
+        <blockquote>
+            <label><input type="radio" name="lang" id="lang_en" value="en"> <span id="lang_eng">English</span></label><br>
+            <label><input type="radio" name="lang" id="lang_ja" value="ja"> <span id="lang_jpn">日本語</span></label>
+        </blockquote>
 
-            <h4 id="min_title">{min_title}</h4>
+        <!-- <h4 id="min_title">{min_title}</h4>
 
-            <p><span id="min_line1">{min_line1}</span><br>
-        <span id="min_line2">{min_line2}</span></p>
+        <p><span id="min_line1">{min_line1}</span><br>
+            <span id="min_line2">{min_line2}</span></p>
 
         <select name="min_alert" id="min_alert">
             <option value="35">3.5</option>
@@ -167,9 +167,9 @@
             <option value="60">6.0</option>
             <option value="65">6.5</option>
             <option value="70">7.0</option>
-        </select>
+        </select> -->
 
-        <br><br><hr>
+        <br><hr>
 
         <h4 id="night_title">{night_title}</h4>
         <p><span id="night_line1">{night_line1}</span><br>
