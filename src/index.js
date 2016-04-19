@@ -4,7 +4,8 @@ const socket = require('socket.io-client')(socket_url);
 const path = require('path');
 const fs = require('fs-extra');
 const open = require('open');
-const crimson = require('crimson');
+const Crimson = require('crimson');
+const crimson = new Crimson({ path: path.join(__dirname, '../', 'logs') });
 const crashReporter = require('electron').crashReporter;
 
 var appDir;

@@ -1,5 +1,6 @@
 const path = require('path');
-const crimson = require('crimson');
+const Crimson = require('crimson');
+const crimson = new Crimson({ path: path.join(__dirname, '../', 'logs') });
 const macifier = require('node-notifier').NotificationCenter;
 const notifier = require('node-notifier');
 
@@ -33,4 +34,6 @@ exports.notify = (title, subtitle, message, sound, callback) => {
             if (callback) callback();
         });
     }
+
+    crimson.debug('Spawning Notification');
 };
