@@ -29,27 +29,23 @@ function spawnMap(data, template) {
     if (data.revision == 1 && (electron.alertRevision[data.earthquake_id] === undefined || data.revision > electron.alertRevision[data.earthquake_id]) && electron.electronReady === true) {
         electron.newWindow(data);
         var alertWindow = electron.alertWindows[data.earthquake_id];
-        var webContent = electron.alertWindows[data.earthquake_id].webContents;
-        webContent.on('did-finish-load', function() {
-            webContent.send('data', [data, template, locale]);
-        });
-
+        
         alertWindow.on('closed', function() {
             alertWindow = null;
         });
     } else if (electron.electronReady === true) {
         if (electron.alertWindows[data.earthquake_id] === undefined) {
             electron.newWindow(data);
-            var webContent2 = electron.alertWindows[data.earthquake_id].webContents;
-            webContent2.on('did-finish-load', function() {
-                webContent2.send('data', [data, template, locale]);
-            });
         } else if (electron.alertRevision[data.earthquake_id] !== undefined && data.revision > electron.alertRevision[data.earthquake_id]) {
-            var webContents = electron.alertWindows[data.earthquake_id].webContents;
-            webContents.send('data', [data, template, locale]);
             electron.alertRevision[data.earthquake_id] = data.revision;
         }
     }
+    
+    var webContent = electron.alertWindows[data.earthquake_id].webContents;
+    
+    webContent.on('did-finish-load', function() {
+        webContent.send('data', [data, template, locale]);
+    });
 }
 
 exports.parse = function(input) {
