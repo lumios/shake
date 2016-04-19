@@ -20,24 +20,34 @@
 
 ### Installation
 ##### Prerequisites
-[Node.js](http://nodejs.org/) v4.0 or higher is required, and 2GB of RAM is recommended.  
-Shake supports Mac OS X 10.8 (or newer) and Ubuntu or Debian based Linux distributions.  
-Windows 7+ is some-what supported, with no guarantee of working.
+[Node.js](http://nodejs.org/) >= v4 is required. Minimum 2GB of System Memory is also recommended.  
+Shake supports Mac OS X >= 10.8 and Ubuntu >= 14.04 based Linux distributions.  
+Windows >= 7 is some-what supported, with no guarantee of working.
 
 ##### Download a Binary
 ~~Nightly beta builds are available [here](http://eew.kurisubrooks.com).  
 All builds are stable to an extent, this software is still in beta.~~
 
-Nightly Builds have been removed due to cost of the archive server. We'll instead be releasing new versions through [GitHub Releases](https://github.com/lumios/shake/releases) as per Stable update. For now, please refer to the Manual Install section below.
+Nightly Builds have been removed due to cost of the archive server. We'll instead be releasing new versions through [GitHub Releases](https://github.com/lumios/shake/releases) as per Stable update. For now, please refer to the Manual Install or Build sections below.
 
 ##### Manual Install
 1. `cd ~/.../shake`
 2. `git clone https://github.com/lumios/shake.git`
+3. `cd ~/.../shake/src`
 3. `npm install`
 
 ##### Run
-1. `cd ~/.../shake`
+1. `cd ~/.../shake/src`
 2. `npm start`
+
+##### Build
+1. `cd ~/.../shake`
+2. `npm install`
+3. `npm install gulp -g`
+4. `gulp build:{platform}`
+
+Platforms: ['all', 'mac', 'win32', 'win64', 'linux32', 'linux64']
+
 
 ### Screenshots
 <h1 align="center">
