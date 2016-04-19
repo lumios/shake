@@ -123,34 +123,34 @@ electron.app.on('ready', () => {
     }
 
     var nodev_template = [
-        {label: locale[lang].menu.about,click: () => electron.newAbout()},
-        {type: 'separator'},
-        {label: locale[lang].menu.help,click: () => open('http://lumios.xyz/support.html')},
-        {label: locale[lang].menu.settings,click: () => electron.newSettings()},
-        {type: 'separator'},
-        {label: locale[lang].menu.contribute,click: () => open('https://github.com/lumios/eew')},
-        {label: locale[lang].menu.bug,click: () => open('https://github.com/lumios/eew/issues')},
-        {type: 'separator'},
-        {label: locale[lang].menu.quit,click: () => {
+        { label: locale[lang].menu.about, click: () => electron.newAbout() },
+        { type: 'separator' },
+        { label: locale[lang].menu.help, click: () => open('http://lumios.xyz/support.html') },
+        { label: locale[lang].menu.settings, click: () => electron.newSettings() },
+        { type: 'separator' },
+        { label: locale[lang].menu.contribute, click: () => open('https://github.com/lumios/shake') },
+        { label: locale[lang].menu.bug, click: () => open('https://github.com/lumios/shake/issues') },
+        { type: 'separator' },
+        { label: locale[lang].menu.quit, click: () => {
             crimson.debug('Closed via Tray Menu');
             electron.app.quit();
         }}
     ];
 
     var dev_template = [
-        {label: locale[lang].menu.about,click: () => electron.newAbout()},
-        {type: 'separator'},
-        {label: locale[lang].menu.help,click: () => open('http://lumios.xyz/support.html')},
-        {label: locale[lang].menu.settings,click: () => electron.newSettings()},
-        {type: 'separator'},
-        {label: locale[lang].menu.contribute,click: () => open('https://github.com/lumios/eew')},
-        {label: locale[lang].menu.bug,click: () => open('https://github.com/lumios/eew/issues')},
-        {type: 'separator'},
-        {label: locale[lang].menu.devtools, submenu:[
-            {label: locale[lang].menu.test,click: () => quake.parse(trigger.quake())}
+        { label: locale[lang].menu.about, click: () => electron.newAbout() },
+        { type: 'separator' },
+        { label: locale[lang].menu.help, click: () => open('http://lumios.xyz/support.html') },
+        { label: locale[lang].menu.settings, click: () => electron.newSettings() },
+        { type: 'separator' },
+        { label: locale[lang].menu.contribute, click: () => open('https://github.com/lumios/shake') },
+        { label: locale[lang].menu.bug, click: () => open('https://github.com/lumios/shake/issues') },
+        { type: 'separator' },
+        { label: locale[lang].menu.devtools, submenu: [
+            { label: locale[lang].menu.test, click: () => trigger.main() }
         ]},
-        {type: 'separator'},
-        {label: locale[lang].menu.quit,click: () => {
+        { type: 'separator' },
+        { label: locale[lang].menu.quit, click: () => {
             crimson.debug('Closed via Tray Menu');
             electron.app.quit();
         }}

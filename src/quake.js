@@ -50,7 +50,10 @@ function spawnMap(data, template) {
 
 exports.parse = function(input) {
     const date = new Date();
-    var data = JSON.parse(input);
+    var data;
+
+    if (typeof input === 'object') data = input;
+    else data = JSON.parse(input);
 
     try {
         var sound_string = sound(data);
