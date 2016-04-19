@@ -7,3 +7,7 @@ settings.json
 logs
 .log
 .vscode
+build
+cache
+out
+release
