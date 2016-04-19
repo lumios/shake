@@ -25,8 +25,10 @@ Shake supports Mac OS X 10.8 (or newer) and Ubuntu or Debian based Linux distrib
 Windows 7+ is some-what supported, with no guarantee of working.
 
 ##### Download a Binary
-Nightly beta builds are available [here](http://eew.kurisubrooks.com).  
-All builds are stable to an extent, this software is still in beta.
+~~Nightly beta builds are available [here](http://eew.kurisubrooks.com).  
+All builds are stable to an extent, this software is still in beta.~~
+
+Nightly Builds have been removed due to cost of the archive server. We'll instead be releasing new versions through [GitHub Releases](https://github.com/lumios/shake/releases) as per Stable update. For now, please refer to the Manual Install section below.
 
 ##### Manual Install
 1. `cd ~/.../shake`
