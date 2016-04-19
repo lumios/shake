@@ -19,7 +19,6 @@
             "settings": "Preferences",
             "quit": "Quit"
         },
-
         "setup": {
             "settings": "Settings",
             "restart": "Please restart Shake to apply your changes.",
@@ -31,12 +30,12 @@
             "min_alert": {
                 "title": "Minimum Alert Magnitude",
                 "line1": "Choose a Minimum Magnitude Size to be notified of.",
-                "line2": "(You will only be notified of Earthquakes of this size and higher.)"
+                "line2": ""
             },
             "night_mode": {
                 "title": "Night Mode",
                 "line1": "If enabled, Notification Sounds will be muted between Midnight and 6am.",
-                "line2": "(This setting is ignored if an Earthquake is above Magnitude 6)"
+                "line2": "(This setting is ignored if an Earthquake is Seismic 5- or higher)"
             },
             "dev_mode": {
                 "title": "Development Mode",
@@ -44,7 +43,6 @@
                 "line2": "(Only enable this option if you know what you're doing!)"
             }
         },
-
         "units": {
             "epicenter": "Epicenter",
             "magnitude": "Magnitude",
@@ -75,7 +73,6 @@
             "settings": "設定",
             "quit": "終了"
         },
-
         "setup": {
             "settings": "設定",
             "restart": "新しい設定を有効にするために、プログラムを再起動してください。",
@@ -92,7 +89,7 @@
             "night_mode": {
                 "title": "ナイトモード",
                 "line1": "通知音は真夜中の間には鳴りません",
-                "line2": "(地震の規模がマグニチュード6.0以上である場合を除く)"
+                "line2": "(地震の規模が震度５弱以上である場合を除く)"
             },
             "dev_mode": {
                 "title": "開発者モード",
@@ -100,7 +97,6 @@
                 "line2": "(あなたは何をやっている知っている場合にのみ有効します！)"
             }
         },
-
         "units": {
             "epicenter": "震源",
             "magnitude": "マグニチュード",
