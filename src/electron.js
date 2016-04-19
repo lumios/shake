@@ -5,6 +5,8 @@ const Menu = electron.Menu;
 const Tray = electron.Tray;
 const ipc = electron.ipcMain;
 const path = require('path');
+const Crimson = require('crimson');
+const crimson = new Crimson({ path: path.join(__dirname, '../', 'logs') });
 
 const locale = require('./resources/lang.json');
 const settings = require('./settings.json');
@@ -35,9 +37,14 @@ exports.newAbout = (data) => {
         'skipTaskbar': false
     });
 
-    if (process.platform == 'darwin') app.dock.show();
+    if (process.platform === 'darwin') app.dock.show();
     aboutWindow.focus();
     aboutWindow.loadURL('file://' + __dirname + '/gui/about.html');
+
+    crimson.debug('Spawning About Window');
+    aboutWindow.on('closed', () => {
+        crimson.debug('About Window Closed');
+    });
 };
 
 exports.newWindow = (data) => {
@@ -56,11 +63,13 @@ exports.newWindow = (data) => {
         }
     });
 
-    if (process.platform == 'darwin') app.dock.show();
+    if (process.platform === 'darwin') app.dock.show();
+    crimson.debug('Spawning Alert Window');
     alertWindows[data.earthquake_id] = alertWindow;
     alertRevision[data.earthquake_id] = data.revision;
-    alertWindow.on("closed", () => {
+    alertWindow.on('closed', () => {
         alertWindows[data.earthquake_id] = undefined;
+        crimson.debug('Closed Alert Window [' + data.earthquake_id + ']');
     });
     alertWindow.focus();
     alertWindow.loadURL('file://' + __dirname + '/gui/map.html');
@@ -78,6 +87,10 @@ exports.newSettings = () => {
         'skipTaskbar': false
     });
 
-    if (process.platform == 'darwin') app.dock.show();
+    if (process.platform === 'darwin') app.dock.show();
+    crimson.debug('Spawning Settings Window');
     settingsWindow.loadURL('file://' + __dirname + '/gui/settings.html');
+    settingsWindow.on('closed', () => {
+        crimson.debug('Closed Settings Window');
+    });
 };
