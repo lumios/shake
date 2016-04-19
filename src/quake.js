@@ -1,5 +1,7 @@
+const path = require('path');
 const notifier = require('./notifier');
-const crimson = require('crimson');
+const Crimson = require('crimson');
+const crimson = new Crimson({ path: path.join(__dirname, '../', 'logs') });
 const electron = require('./electron');
 const locale = require('./resources/lang.json');
 const settings = require('./settings.json');
@@ -30,7 +32,7 @@ function spawnMap(data, template) {
         electron.newWindow(data);
         var alertWindow = electron.alertWindows[data.earthquake_id];
         
-        alertWindow.on('closed', function() {
+        alertWindow.on('closed', () => {
             alertWindow = null;
         });
     } else if (electron.electronReady === true) {
@@ -43,17 +45,18 @@ function spawnMap(data, template) {
     
     var webContent = electron.alertWindows[data.earthquake_id].webContents;
     
-    webContent.on('did-finish-load', function() {
+    webContent.on('did-finish-load', () => {
         webContent.send('data', [data, template, locale]);
     });
 }
 
 exports.parse = function(input) {
     const date = new Date();
-    var data;
 
-    if (typeof input === 'object') data = input;
-    else data = JSON.parse(input);
+    if (typeof input === 'object') 
+        var data = input;
+    else 
+        var data = JSON.parse(input);
 
     try {
         var sound_string = sound(data);
@@ -74,7 +77,7 @@ exports.parse = function(input) {
             if (settings.night_mode && date.getHours() < '06' && data.alarm) crimson.debug('Public Alarm Issued, Triggering Un-silenced Notification...');
             notifier.notify(locale[lang].title, subtitle, message, sound_string, spawnMap(data, template));
         }
-    } catch (error) {
+    } catch(error) {
         notifier.notify(locale[lang].title, '', locale[lang].error + ': ' + error.message, false);
         crimson.error(error);
         throw error;
