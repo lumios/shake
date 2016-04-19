@@ -1,7 +1,7 @@
 const path = require('path');
 const notifier = require('./notifier');
 const Crimson = require('crimson');
-const crimson = new Crimson({ path: path.join(__dirname, '../', 'logs') });
+const crimson = new Crimson({ path: path.join(__dirname, 'logs') });
 const electron = require('./electron');
 const locale = require('./resources/lang.json');
 const settings = require('./settings.json');

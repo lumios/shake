@@ -6,7 +6,7 @@ const Tray = electron.Tray;
 const ipc = electron.ipcMain;
 const path = require('path');
 const Crimson = require('crimson');
-const crimson = new Crimson({ path: path.join(__dirname, '../', 'logs') });
+const crimson = new Crimson({ path: path.join(__dirname, 'logs') });
 
 const locale = require('./resources/lang.json');
 const settings = require('./settings.json');

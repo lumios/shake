@@ -1,11 +1,11 @@
 const path = require('path');
 const Crimson = require('crimson');
-const crimson = new Crimson({ path: path.join(__dirname, '../', 'logs') });
+const crimson = new Crimson({ path: path.join(__dirname, 'logs') });
 const macifier = require('node-notifier').NotificationCenter;
 const notifier = require('node-notifier');
 
 var notifier_mac = new macifier({
-    customPath: path.join(__dirname, '../', 'lib', 'notifier.app', 'Contents', 'MacOS', 'terminal-notifier')
+    customPath: path.join(__dirname, 'lib', 'notifier.app', 'Contents', 'MacOS', 'terminal-notifier')
 });
 
 exports.notify = (title, subtitle, message, sound, callback) => {

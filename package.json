@@ -1,38 +1,20 @@
 {
   "name": "Shake",
-  "version": "0.3.0",
-  "description": "緊急地震速報のプログラム",
-  "homepage": "http://lumios.xyz/shake",
+  "version": "0.0.0",
+  "description": "",
   "author": "lumios",
-  "license": "UNLICENSED",
   "private": true,
+  "license": "UNLICENSED",
   "main": "./src/index.js",
-  "keywords": [
-    "earthquake",
-    "client",
-    "socket",
-    "warning",
-    "earthquake warning",
-    "japan"
-  ],
+  "scripts": {
+    "start": "./src/node_modules/.bin/electron index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lumios/shake.git"
   },
   "bugs": {
     "url": "https://github.com/lumios/shake/issues"
-  },
-  "scripts": {
-    "start": "./node_modules/.bin/electron ./src/index.js",
-    "build": "gulp"
-  },
-  "dependencies": {
-    "crimson": "^1.0.0",
-    "electron-prebuilt": "^0.37.6",
-    "fs-extra": "^0.28.0",
-    "node-notifier": "^4.5.0",
-    "open": "^0.0.5",
-    "socket.io-client": "^1.4.5"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
