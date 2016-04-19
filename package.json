@@ -27,12 +27,15 @@
     "build": "gulp"
   },
   "dependencies": {
-    "crimson": "^0.0.2",
-    "electron-packager": "^5.2.1",
-    "electron-prebuilt": "^0.37.5",
-    "fs-extra": "^0.26.7",
+    "crimson": "^1.0.0",
+    "electron-prebuilt": "^0.37.6",
+    "fs-extra": "^0.28.0",
     "node-notifier": "^4.5.0",
     "open": "^0.0.5",
     "socket.io-client": "^1.4.5"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-electron": "0.0.17"
   }
 }
