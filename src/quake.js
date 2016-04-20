@@ -37,15 +37,13 @@ function spawnMap(data, template) {
             electron.alertRevision[data.earthquake_id] = data.revision;
         }
     }
-    
-    if(electron.alertWindows[data.earthquake_id] === "closed") return;
-    
+
+    if (electron.alertWindows[data.earthquake_id] == 'closed') return;
+
     var webContent = electron.alertWindows[data.earthquake_id].webContents;
-    
-    if(webContent.isLoading())
-        webContent.on('did-finish-load', () => {
-            webContent.send('data', [data, template, locale]);
-        });
+
+    if (webContent.isLoading())
+        webContent.on('did-finish-load', () => webContent.send('data', [data, template, locale]));
     else
         webContent.send('data', [data, template, locale]);
 }
@@ -53,7 +51,7 @@ function spawnMap(data, template) {
 exports.parse = function(input) {
     const date = new Date();
 
-    var data = typeof input === "object" ? input : JSON.parse(input);
+    var data = typeof input === 'object' ? input : JSON.parse(input);
 
     try {
         var sound_string = sound(data);
