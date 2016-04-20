@@ -30,11 +30,6 @@ function template_data(data) {
 function spawnMap(data, template) {
     if (data.revision == 1 && (electron.alertRevision[data.earthquake_id] === undefined || data.revision > electron.alertRevision[data.earthquake_id]) && electron.electronReady === true) {
         electron.newWindow(data);
-        var alertWindow = electron.alertWindows[data.earthquake_id];
-        
-        alertWindow.on('closed', () => {
-            alertWindow = null;
-        });
     } else if (electron.electronReady === true) {
         if (electron.alertWindows[data.earthquake_id] === undefined) {
             electron.newWindow(data);
@@ -42,6 +37,8 @@ function spawnMap(data, template) {
             electron.alertRevision[data.earthquake_id] = data.revision;
         }
     }
+    
+    if(electron.alertWindows[data.earthquake_id] === "closed") return;
     
     var webContent = electron.alertWindows[data.earthquake_id].webContents;
     

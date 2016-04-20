@@ -68,7 +68,7 @@ exports.newWindow = (data) => {
     alertWindows[data.earthquake_id] = alertWindow;
     alertRevision[data.earthquake_id] = data.revision;
     alertWindow.on('closed', () => {
-        alertWindows[data.earthquake_id] = undefined;
+        alertWindows[data.earthquake_id] = "closed";
         crimson.debug('Closed Alert Window [' + data.earthquake_id + ']');
     });
     alertWindow.focus();
