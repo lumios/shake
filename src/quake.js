@@ -42,9 +42,12 @@ function spawnMap(data, template) {
     
     var webContent = electron.alertWindows[data.earthquake_id].webContents;
     
-    webContent.on('did-finish-load', () => {
+    if(webContent.isLoading())
+        webContent.on('did-finish-load', () => {
+            webContent.send('data', [data, template, locale]);
+        });
+    else
         webContent.send('data', [data, template, locale]);
-    });
 }
 
 exports.parse = function(input) {
