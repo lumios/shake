@@ -38,10 +38,9 @@ exports.newAbout = (data) => {
     });
 
     if (process.platform === 'darwin') app.dock.show();
+    crimson.debug('Spawning About Window');
     aboutWindow.focus();
     aboutWindow.loadURL('file://' + __dirname + '/gui/about.html');
-
-    crimson.debug('Spawning About Window');
     aboutWindow.on('closed', () => {
         crimson.debug('About Window Closed');
     });
@@ -51,9 +50,7 @@ exports.newWindow = (data) => {
     var alertWindow = new BrowserWindow({
         'title': locale[lang].title,
         'icon': path.join(__dirname, 'resources', 'icon.png'),
-        'minWidth': 600,
         'width': 600,
-        'minHeight': 625,
         'height': 625,
         'resizable': false,
         'autoHideMenuBar': true,
@@ -64,15 +61,15 @@ exports.newWindow = (data) => {
     });
 
     if (process.platform === 'darwin') app.dock.show();
-    crimson.debug('Spawning Alert Window');
+    crimson.debug('Spawning Alert Window [' + data.earthquake_id + ']');
     alertWindows[data.earthquake_id] = alertWindow;
     alertRevision[data.earthquake_id] = data.revision;
+    alertWindow.loadURL('file://' + __dirname + '/gui/map.html');
+    alertWindow.focus();
     alertWindow.on('closed', () => {
-        alertWindows[data.earthquake_id] = "closed";
+        alertWindows[data.earthquake_id] = 'closed';
         crimson.debug('Closed Alert Window [' + data.earthquake_id + ']');
     });
-    alertWindow.focus();
-    alertWindow.loadURL('file://' + __dirname + '/gui/map.html');
 };
 
 exports.newSettings = () => {
