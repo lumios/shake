@@ -40,10 +40,10 @@ gulp.task('build:win32', () => {
         platforms: [ 'win32-ia32' ],
         platformResources: {
             win: {
-                "version-string": pkg.version,
-                "file-version": pkg.version,
-                "product-version": pkg.version,
-                "icon": './src/resources/IconWindows.ico'
+                'version-string': pkg.version,
+                'file-version': pkg.version,
+                'product-version': pkg.version,
+                'icon': './src/resources/IconWindows.ico'
             }
         }
     }));
@@ -61,10 +61,10 @@ gulp.task('build:win64', () => {
         platforms: [ 'win32-x64' ],
         platformResources: {
             win: {
-                "version-string": pkg.version,
-                "file-version": pkg.version,
-                "product-version": pkg.version,
-                "icon": './src/resources/IconWindows.ico'
+                'version-string': pkg.version,
+                'file-version': pkg.version,
+                'product-version': pkg.version,
+                'icon': './src/resources/IconWindows.ico'
             }
         }
     }));
