@@ -8,34 +8,42 @@ const settings = require('./settings.json');
 const lang = settings.lang;
 
 function sound(data) {
-    if (data.type == 1 || data.situation == 2) return 'Submarine';
-    else if (data.alarm) return 'denwa';
-    else return 'alert';
+    if (data.type == 1 || data.situation == 2)
+        return 'Submarine';
+    else if (data.alarm)
+        return 'denwa';
+    else
+        return 'alert';
 }
 
 function situation(data) {
-    if (data.situation == 1) return locale[lang].units.final;
-    else return '#' + data.revision;
+    if (data.situation == 1)
+        return locale[lang].units.final;
+    else
+        return '#' + data.revision;
 }
 
 function template_data(data) {
-    if (data.type == 1 || data.situation == 2) return ['', locale[lang].cancelled];
+    if (data.type == 1 || data.situation == 2)
+        return ['', locale[lang].cancelled];
     else {
         var message_template = locale[lang].units.magnitude + ': ' + data.magnitude + ', ' + locale[lang].units.seismic + ': ' + data.seismic_en + ', ' + locale[lang].units.depth + ': ' + data.depth;
-        if (lang == 'ja') return [data.epicenter_ja + ' (' + data.update + ')', message_template];
-        else return [data.epicenter_en + ' (' + data.update + ')', message_template];
+
+        if (lang == 'ja')
+            return [data.epicenter_ja + ' (' + data.update + ')', message_template];
+        else
+            return [data.epicenter_en + ' (' + data.update + ')', message_template];
     }
 }
 
 function spawnMap(data, template) {
-    if (data.revision == 1 && (electron.alertRevision[data.earthquake_id] === undefined || data.revision > electron.alertRevision[data.earthquake_id]) && electron.electronReady === true) {
+    if (data.revision == 1 && (electron.alertRevision[data.earthquake_id] === undefined || data.revision > electron.alertRevision[data.earthquake_id]) && electron.electronReady === true)
         electron.newWindow(data);
-    } else if (electron.electronReady === true) {
-        if (electron.alertWindows[data.earthquake_id] === undefined) {
+    else if (electron.electronReady === true) {
+        if (electron.alertWindows[data.earthquake_id] === undefined)
             electron.newWindow(data);
-        } else if (electron.alertRevision[data.earthquake_id] !== undefined && data.revision > electron.alertRevision[data.earthquake_id]) {
+        else if (electron.alertRevision[data.earthquake_id] !== undefined && data.revision > electron.alertRevision[data.earthquake_id])
             electron.alertRevision[data.earthquake_id] = data.revision;
-        }
     }
 
     if (electron.alertWindows[data.earthquake_id] == 'closed') return;
@@ -49,8 +57,7 @@ function spawnMap(data, template) {
 }
 
 exports.parse = function(input) {
-    const date = new Date();
-
+    var date = new Date();
     var data = typeof input === 'object' ? input : JSON.parse(input);
 
     try {
@@ -67,10 +74,12 @@ exports.parse = function(input) {
         // Night / Day Notification
         if (settings.night_mode && date.getHours() < '06' && !data.alarm) {
             crimson.debug('Night Mode Enabled, Muting Notification...');
-            notifier.notify(locale[lang].title, subtitle, message, false, spawnMap(data, template));
+            notifier.notify(locale[lang].title, subtitle, message, false);
+            spawnMap(data, template);
         } else {
             if (settings.night_mode && date.getHours() < '06' && data.alarm) crimson.debug('Public Alarm Issued, Triggering Un-silenced Notification...');
-            notifier.notify(locale[lang].title, subtitle, message, sound_string, spawnMap(data, template));
+            notifier.notify(locale[lang].title, subtitle, message, sound_string);
+            spawnMap(data, template);
         }
     } catch(error) {
         notifier.notify(locale[lang].title, '', locale[lang].error + ': ' + error.message, false);
