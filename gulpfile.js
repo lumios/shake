@@ -2,10 +2,10 @@ var gulp = require('gulp');
 var electron = require('gulp-electron');
 var pkg = require('./src/package.json');
 
-var version = pkg['dependencies']['electron-prebuilt'].replace('^', 'v');
+var version = pkg.dependencies['electron-prebuilt'].replace('^', 'v');
 
-gulp.task('build:all', function() {
-    gulp.src("")
+gulp.task('build:all', () => {
+    gulp.src('')
     .pipe(electron({
         src: './src/',
         packageJson: pkg,
@@ -13,13 +13,7 @@ gulp.task('build:all', function() {
         cache: './build/cache',
         version: version,
         packaging: true,
-        platforms: [
-            'darwin-x64', 
-            'win32-ia32',
-            'win32-x64', 
-            'linux-ia32',
-            'linux-x64'
-        ],
+        platforms: [ 'darwin-x64', 'win32-ia32', 'win32-x64', 'linux-ia32', 'linux-x64', 'linux-arm' ],
         platformResources: {
             darwin: {
                 CFBundleDisplayName: pkg.name,
@@ -35,11 +29,11 @@ gulp.task('build:all', function() {
                 "icon": './src/resources/IconWindows.ico'
             }
         }
-    }))
+    }));
 });
 
-gulp.task('build:mac', function() {
-    gulp.src("")
+gulp.task('build:mac', () => {
+    gulp.src('')
     .pipe(electron({
         src: './src/',
         packageJson: pkg,
@@ -47,9 +41,7 @@ gulp.task('build:mac', function() {
         cache: './build/cache',
         version: version,
         packaging: true,
-        platforms: [
-            'darwin-x64'
-        ],
+        platforms: [ 'darwin-x64' ],
         platformResources: {
             darwin: {
                 CFBundleDisplayName: pkg.name,
@@ -59,11 +51,11 @@ gulp.task('build:mac', function() {
                 icon: './src/resources/IconMac.icns'
             }
         }
-    }))
+    }));
 });
 
-gulp.task('build:win32', function() {
-    gulp.src("")
+gulp.task('build:win32', () => {
+    gulp.src('')
     .pipe(electron({
         src: './src/',
         packageJson: pkg,
@@ -71,9 +63,7 @@ gulp.task('build:win32', function() {
         cache: './build/cache',
         version: version,
         packaging: true,
-        platforms: [
-            'win32-ia32'
-        ],
+        platforms: [ 'win32-ia32' ],
         platformResources: {
             win: {
                 "version-string": pkg.version,
@@ -82,11 +72,11 @@ gulp.task('build:win32', function() {
                 "icon": './src/resources/IconWindows.ico'
             }
         }
-    }))
+    }));
 });
 
-gulp.task('build:win64', function() {
-    gulp.src("")
+gulp.task('build:win64', () => {
+    gulp.src('')
     .pipe(electron({
         src: './src/',
         packageJson: pkg,
@@ -94,9 +84,7 @@ gulp.task('build:win64', function() {
         cache: './build/cache',
         version: version,
         packaging: true,
-        platforms: [
-            'win32-x64'
-        ],
+        platforms: [ 'win32-x64' ],
         platformResources: {
             win: {
                 "version-string": pkg.version,
@@ -105,11 +93,11 @@ gulp.task('build:win64', function() {
                 "icon": './src/resources/IconWindows.ico'
             }
         }
-    }))
+    }));
 });
 
-gulp.task('build:linux32', function() {
-    gulp.src("")
+gulp.task('build:linux32', () => {
+    gulp.src('')
     .pipe(electron({
         src: './src/',
         packageJson: pkg,
@@ -117,14 +105,12 @@ gulp.task('build:linux32', function() {
         cache: './build/cache',
         version: version,
         packaging: true,
-        platforms: [
-            'linux-ia32'
-        ]
-    }))
+        platforms: [ 'linux-ia32' ]
+    }));
 });
 
-gulp.task('build:linux64', function() {
-    gulp.src("")
+gulp.task('build:linux64', () => {
+    gulp.src('')
     .pipe(electron({
         src: './src/',
         packageJson: pkg,
@@ -132,8 +118,19 @@ gulp.task('build:linux64', function() {
         cache: './build/cache',
         version: version,
         packaging: true,
-        platforms: [
-            'linux-x64'
-        ]
-    }))
+        platforms: [ 'linux-x64' ]
+    }));
+});
+
+gulp.task('build:arm', () => {
+    gulp.src('')
+    .pipe(electron({
+        src: './src/',
+        packageJson: pkg,
+        release: './build/release',
+        cache: './build/cache',
+        version: version,
+        packaging: true,
+        platforms: [ 'linux-arm' ]
+    }));
 });
