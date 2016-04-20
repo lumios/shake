@@ -4,33 +4,7 @@ var pkg = require('./src/package.json');
 
 var version = pkg.dependencies['electron-prebuilt'].replace('^', 'v');
 
-gulp.task('build:all', () => {
-    gulp.src('')
-    .pipe(electron({
-        src: './src/',
-        packageJson: pkg,
-        release: './build/release',
-        cache: './build/cache',
-        version: version,
-        packaging: true,
-        platforms: [ 'darwin-x64', 'win32-ia32', 'win32-x64', 'linux-ia32', 'linux-x64', 'linux-arm' ],
-        platformResources: {
-            darwin: {
-                CFBundleDisplayName: pkg.name,
-                CFBundleIdentifier: 'xyz.lumios.shake',
-                CFBundleName: pkg.name,
-                CFBundleVersion: pkg.version,
-                icon: './src/resources/IconMac.icns'
-            },
-            win: {
-                "version-string": pkg.version,
-                "file-version": pkg.version,
-                "product-version": pkg.version,
-                "icon": './src/resources/IconWindows.ico'
-            }
-        }
-    }));
-});
+gulp.task('default', ['build:mac', 'build:win32', 'build:win64', 'build:linux32', 'build:linux64', 'build:arm']);
 
 gulp.task('build:mac', () => {
     gulp.src('')

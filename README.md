@@ -28,7 +28,7 @@ Windows >= 7 is some-what supported, with no guarantee of working.
 ~~Nightly beta builds are available [here](http://eew.kurisubrooks.com).  
 All builds are stable to an extent, this software is still in beta.~~
 
-Nightly Builds have been removed due to cost of the archive server. We'll instead be releasing new versions through [GitHub Releases](https://github.com/lumios/shake/releases) as per Stable update. For now, please refer to the Manual Install or Build sections below.
+Nightly Builds have been removed due to financial constraints, we'll instead be releasing new versions through [GitHub Releases](https://github.com/lumios/shake/releases) as per each Stable update. For now, please refer to the Manual Install or Build sections below.
 
 ##### Manual Install
 1. `cd ~/.../shake`
@@ -44,9 +44,11 @@ Nightly Builds have been removed due to cost of the archive server. We'll instea
 1. `cd ~/.../shake`
 2. `npm install`
 3. `npm install gulp -g`
-4. `gulp build:{platform}`
+4. `gulp build:[platform]`
 
-Platforms: ['all', 'mac', 'win32', 'win64', 'linux32', 'linux64']
+Platforms: ['mac', 'win32', 'win64', 'linux32', 'linux64', 'arm']
+
+Running `gulp` without specifying a build-type will build for all the platforms listed above.
 
 
 ### Screenshots
