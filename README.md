@@ -13,7 +13,7 @@
     <a href="https://david-dm.org/lumios/shake"><img src="https://david-dm.org/lumios/shake.svg"></a>
     <br>
 
-    An Earthquake Early Warning program for your computer.<br>
+    An Earthquake Early Warning program for your computer.  
     あなたのコンピュータのための緊急地震速報
 </p>
 <h1></h1>
